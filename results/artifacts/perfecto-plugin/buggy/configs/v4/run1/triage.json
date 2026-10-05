@@ -1,0 +1,112 @@
+{
+  "prompt_version": "e5fc00c6",
+  "decisions": [
+    {
+      "flow_id": "21ba189d7d",
+      "flow_key": "DRIVER => <io.plugins.perfecto.PerfectoBuildWrapper: java.lang.String getTunnelId(java.lang.String,java.lang.String,java.lang.String,hudson.model.BuildListener)>@L164/0[*]",
+      "verdict": "vulnerable",
+      "reason": "exploitable",
+      "kept": true,
+      "v3_ok": null,
+      "v3_problems": [],
+      "evidence": [
+        {
+          "file": "io/plugins/perfecto/PerfectoBuildWrapper.java",
+          "line": 283,
+          "note": "setPerfectoConnectLocation accepts a String parameter directly from the caller (NesyDriver) without validation."
+        },
+        {
+          "file": "io/plugins/perfecto/PerfectoBuildWrapper.java",
+          "line": 155,
+          "note": "perfectoConnectLocation is used in string concatenation to form pcLocation."
+        },
+        {
+          "file": "io/plugins/perfecto/PerfectoBuildWrapper.java",
+          "line": 160,
+          "note": "baseCommand is constructed using pcLocation, which contains the tainted input."
+        },
+        {
+          "file": "io/plugins/perfecto/PerfectoBuildWrapper.java",
+          "line": 166,
+          "note": "On non-Windows systems, the tainted baseCommand is passed to bash -c via Runtime.exec, allowing command injection."
+        }
+      ],
+      "explanation": "The tainted input `perfectoConnectLocation` is passed directly into a shell command (`bash -c`) without sanitization or allow-listing. An attacker controlling the input can inject arbitrary commands via shell metacharacters (e.g., `;`, `|`, `&&`) within the path string, leading to OS command injection.",
+      "samples": [
+        "vulnerable"
+      ],
+      "methods_shown": [
+        "<io.plugins.perfecto.PerfectoBuildWrapper: void setPerfectoConnectLocation(java.lang.String)>",
+        "<io.plugins.perfecto.PerfectoBuildWrapper: hudson.tasks.BuildWrapper$Environment setUp(hudson.model.AbstractBuild,hudson.Launcher,hudson.model.BuildListener)>",
+        "<io.plugins.perfecto.PerfectoBuildWrapper: java.lang.String getTunnelId(java.lang.String,java.lang.String,java.lang.String,hudson.model.BuildListener)>"
+      ],
+      "override": ""
+    },
+    {
+      "flow_id": "05a565b1c4",
+      "flow_key": "DRIVER => <io.plugins.perfecto.PerfectoBuildWrapper: java.lang.String getTunnelId(java.lang.String,java.lang.String,java.lang.String,hudson.model.BuildListener)>@L167/0[*]",
+      "verdict": "vulnerable",
+      "reason": "exploitable",
+      "kept": true,
+      "v3_ok": null,
+      "v3_problems": [],
+      "evidence": [
+        {
+          "file": "io/plugins/perfecto/PerfectoBuildWrapper.java",
+          "line": 166,
+          "note": "User-controlled `perfectoConnectLocation` is concatenated directly into a shell command string passed to `Runtime.exec`."
+        },
+        {
+          "file": "io/plugins/perfecto/PerfectoBuildWrapper.java",
+          "line": 155,
+          "note": "Input validation only checks for trailing slashes, which does not prevent command injection via characters like `;`, `|`, or `&`."
+        },
+        {
+          "file": "io/plugins/perfecto/PerfectoBuildWrapper.java",
+          "line": 219,
+          "note": "The tainted field `perfectoConnectLocation` is passed to `getTunnelId` which constructs the OS command."
+        }
+      ],
+      "explanation": "The variable `perfectoConnectLocation` is set via a setter method and subsequently used in `getTunnelId` to construct a shell command string. On line 166, this string is concatenated directly into a bash command executed via `Runtime.exec`, allowing an attacker to inject arbitrary OS commands if they control the `perfectoConnectLocation` value. The existing check on line 155 only validates trailing slashes and does not sanitize shell metacharacters.",
+      "samples": [
+        "vulnerable"
+      ],
+      "methods_shown": [
+        "<io.plugins.perfecto.PerfectoBuildWrapper: void setPerfectoConnectLocation(java.lang.String)>",
+        "<io.plugins.perfecto.PerfectoBuildWrapper: hudson.tasks.BuildWrapper$Environment setUp(hudson.model.AbstractBuild,hudson.Launcher,hudson.model.BuildListener)>",
+        "<io.plugins.perfecto.PerfectoBuildWrapper: java.lang.String getTunnelId(java.lang.String,java.lang.String,java.lang.String,hudson.model.BuildListener)>"
+      ],
+      "override": ""
+    },
+    {
+      "flow_id": "20278dfc29",
+      "flow_key": "DRIVER => <io.plugins.perfecto.credentials.PerfectoCredentials: hudson.util.FormValidation testAuthentication(java.lang.String,java.lang.String,java.lang.String)>@L111/0",
+      "verdict": "not_vulnerable",
+      "reason": "not_dangerous_sink",
+      "kept": false,
+      "v3_ok": true,
+      "v3_problems": [],
+      "evidence": [
+        {
+          "file": "io/plugins/perfecto/credentials/PerfectoCredentials.java",
+          "line": 111,
+          "note": "Sink is java.net.URL constructor, which parses a URI string. It does not execute OS commands."
+        },
+        {
+          "file": "io/plugins/perfecto/credentials/PerfectoCredentials.java",
+          "line": 107,
+          "note": "User input is interpolated into a URL string. While this allows for Open Redirect or SSRF if the target is controlled, it does not constitute OS Command Injection (CWE-078) as no shell or process execution occurs."
+        }
+      ],
+      "explanation": "The reported sink is the `java.net.URL` constructor, which parses a string into a URL object. This is not an OS command execution sink (like `Runtime.exec` or `ProcessBuilder`), so CWE-078 does not apply. The vulnerability class is misidentified; the code might be susceptible to SSRF or Open Redirect, but not command injection.",
+      "samples": [
+        "not_vulnerable"
+      ],
+      "methods_shown": [
+        "<io.plugins.perfecto.credentials.PerfectoCredentials$DescriptorImpl: hudson.util.FormValidation doAuthenticate(java.lang.String,java.lang.String,java.lang.String)>",
+        "<io.plugins.perfecto.credentials.PerfectoCredentials: hudson.util.FormValidation testAuthentication(java.lang.String,java.lang.String,java.lang.String)>"
+      ],
+      "override": ""
+    }
+  ]
+}

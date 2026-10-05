@@ -1,0 +1,979 @@
+{
+  "prompt_version": "e5fc00c6",
+  "decisions": [
+    {
+      "flow_id": "91186459a9",
+      "flow_key": "DRIVER => <org.eclipse.jetty.util.Loader: java.net.URL getResource(java.lang.Class,java.lang.String)>@L54/0",
+      "verdict": "uncertain",
+      "reason": "insufficient_context",
+      "kept": true,
+      "v3_ok": null,
+      "v3_problems": [],
+      "evidence": [],
+      "explanation": "The provided report indicates that the taint flow passes through library code (org.eclipse.jetty.util.Loader) and explicitly states that no complete application-code path is available in the taint flow graph. Without seeing the application code or the specific library implementation details between the source and sink, it is impossible to verify if path normalization or prefix checks are performed. Therefore, the context is insufficient to determine if the vulnerability is real.",
+      "samples": [
+        "uncertain"
+      ],
+      "methods_shown": [],
+      "override": ""
+    },
+    {
+      "flow_id": "b62650655b",
+      "flow_key": "DRIVER => <org.eclipse.jetty.util.Loader: java.net.URL getResource(java.lang.Class,java.lang.String)>@L60/0",
+      "verdict": "uncertain",
+      "reason": "insufficient_context",
+      "kept": true,
+      "v3_ok": null,
+      "v3_problems": [],
+      "evidence": [],
+      "explanation": "The provided report indicates that the taint flow passes exclusively through library code (org.eclipse.jetty.util.Loader) and that no application code is available in the propagation path. Without seeing the application code that constructs the 'name' argument passed to the sink, or understanding how the Jetty library handles the input (e.g., whether it performs internal normalization or security checks), it is impossible to verify if the path traversal is exploitable or if sanitization occurs within the library.",
+      "samples": [
+        "uncertain"
+      ],
+      "methods_shown": [],
+      "override": ""
+    },
+    {
+      "flow_id": "da2f4c2deb",
+      "flow_key": "DRIVER => <org.slf4j.impl.SimpleLogger: java.io.PrintStream computeTargetStream(java.lang.String)>@L219/0",
+      "verdict": "uncertain",
+      "reason": "insufficient_context",
+      "kept": true,
+      "v3_ok": null,
+      "v3_problems": [],
+      "evidence": [],
+      "explanation": "The provided report indicates that the taint flow passes through library code (org.slf4j.impl.SimpleLogger) and explicitly states that no complete application-code path is available in the taint flow graph. Without access to the source code of the library methods or the specific configuration of the NesyDriver entry point, it is impossible to verify if the attacker-controlled input is properly sanitized or if the sink is reached in a dangerous manner. Therefore, the analysis is insufficient to confirm the vulnerability.",
+      "samples": [
+        "uncertain"
+      ],
+      "methods_shown": [],
+      "override": ""
+    },
+    {
+      "flow_id": "c43a43deba",
+      "flow_key": "DRIVER => <spark.utils.ResourceUtils: java.io.File getFile(java.net.URL,java.lang.String)>@L219/0",
+      "verdict": "not_vulnerable",
+      "reason": "not_dangerous_sink",
+      "kept": false,
+      "v3_ok": null,
+      "v3_problems": [],
+      "evidence": [
+        {
+          "file": "spark/utils/ResourceUtils.java",
+          "line": 212,
+          "note": "Protocol check ensures only 'file' protocol URLs are processed"
+        },
+        {
+          "file": "spark/utils/ResourceUtils.java",
+          "line": 219,
+          "note": "File constructed from URL scheme-specific part, not raw user input"
+        }
+      ],
+      "explanation": "The sink `ResourceUtils.getFile` constructs a `java.io.File` object from a `java.net.URL` object, not directly from the attacker-controlled string. The method enforces that the URL protocol must be 'file' (line 212), which prevents arbitrary protocol handlers. Furthermore, `java.io.File` constructed from a URL's scheme-specific part does not inherently execute file operations or write to disk; it merely represents a path. Without a subsequent dangerous sink (like `FileInputStream`, `FileOutputStream`, or `Files.readAllBytes`) that uses this `File` object in a way that allows path traversal to affect sensitive files, the taint flow is not exploitable for CWE-022 in this isolated context. The report lacks evidence of a dangerous sink consuming this `File` object.",
+      "samples": [
+        "not_vulnerable"
+      ],
+      "methods_shown": [
+        "<spark.utils.ResourceUtils: java.io.File getFile(java.net.URL,java.lang.String)>"
+      ],
+      "override": ""
+    },
+    {
+      "flow_id": "00b5a94768",
+      "flow_key": "DRIVER => <spark.utils.ResourceUtils: java.io.File getFile(java.net.URL,java.lang.String)>@L222/0",
+      "verdict": "vulnerable",
+      "reason": "exploitable",
+      "kept": true,
+      "v3_ok": null,
+      "v3_problems": [],
+      "evidence": [
+        {
+          "file": "spark/utils/ResourceUtils.java",
+          "line": 182,
+          "note": "Direct instantiation of File with unvalidated string input"
+        },
+        {
+          "file": "spark/utils/ResourceUtils.java",
+          "line": 222,
+          "note": "Fallback path instantiation using URL.getFile() without normalization"
+        }
+      ],
+      "explanation": "The source is attacker-controlled via the main driver, and the taint flows into `ResourceUtils.getFile(String)`. At line 182, if the input is not a valid URL, it is passed directly to `new File(resourceLocation)` without any path normalization or prefix checking, allowing arbitrary file access. Even if it is a valid URL, line 222 uses `resourceUrl.getFile()` which may not resolve `..` sequences safely depending on the URL implementation, but the direct string path at line 182 is a clear vulnerability.",
+      "samples": [
+        "vulnerable"
+      ],
+      "methods_shown": [
+        "<spark.utils.ResourceUtils: java.io.File getFile(java.lang.String)>",
+        "<spark.utils.ResourceUtils: java.io.File getFile(java.net.URL)>",
+        "<spark.utils.ResourceUtils: java.io.File getFile(java.net.URL,java.lang.String)>"
+      ],
+      "override": ""
+    },
+    {
+      "flow_id": "f4cfd3c44b",
+      "flow_key": "DRIVER => <spark.utils.ResourceUtils: java.io.File getFile(java.net.URI,java.lang.String)>@L258/0",
+      "verdict": "vulnerable",
+      "reason": "exploitable",
+      "kept": true,
+      "v3_ok": null,
+      "v3_problems": [],
+      "evidence": [
+        {
+          "file": "spark/utils/ResourceUtils.java",
+          "line": 252,
+          "note": "Check ensures URI scheme is 'file', but does not validate the path content."
+        },
+        {
+          "file": "spark/utils/ResourceUtils.java",
+          "line": 258,
+          "note": "Direct instantiation of java.io.File using resourceUri.getSchemeSpecificPart() without path normalization or prefix checking, allowing '../' traversal."
+        }
+      ],
+      "explanation": "The sink at ResourceUtils.java:258 constructs a File object directly from the URI's scheme-specific part without normalizing the path or verifying it stays within a safe directory. Since the source is modeled as attacker-controlled input, an attacker can supply a URI like 'file:///etc/passwd' or 'file:///../../../etc/passwd' to read arbitrary files, constituting a CWE-022 Path Traversal vulnerability.",
+      "samples": [
+        "vulnerable"
+      ],
+      "methods_shown": [
+        "<spark.utils.ResourceUtils: java.io.File getFile(java.net.URI,java.lang.String)>"
+      ],
+      "override": ""
+    },
+    {
+      "flow_id": "5832b1d98e",
+      "flow_key": "DRIVER => <spark.utils.ResourceUtils: java.io.File getFile(java.lang.String)>@L168/0",
+      "verdict": "vulnerable",
+      "reason": "exploitable",
+      "kept": true,
+      "v3_ok": null,
+      "v3_problems": [],
+      "evidence": [
+        {
+          "file": "spark/utils/ResourceUtils.java",
+          "line": 182,
+          "note": "Direct instantiation of java.io.File with unvalidated user input"
+        },
+        {
+          "file": "spark/utils/ResourceUtils.java",
+          "line": 168,
+          "note": "Class.getResource() called with unvalidated path, though less dangerous than direct file access"
+        }
+      ],
+      "explanation": "The source `nesy.NesyDriver.main` accepts attacker-controlled input which flows into `ResourceUtils.getFile`. In the `getFile` method, if the input does not start with the classpath prefix and is not a valid URL, it falls through to line 182 where `new File(resourceLocation)` is executed. This creates a File object using the raw, unnormalized input string without any path traversal checks or canonicalization, allowing an attacker to access arbitrary files on the system.",
+      "samples": [
+        "vulnerable"
+      ],
+      "methods_shown": [
+        "<spark.utils.ResourceUtils: java.io.File getFile(java.lang.String)>"
+      ],
+      "override": ""
+    },
+    {
+      "flow_id": "6d50443088",
+      "flow_key": "DRIVER => <spark.utils.ResourceUtils: java.io.File getFile(java.lang.String)>@L182/0",
+      "verdict": "vulnerable",
+      "reason": "exploitable",
+      "kept": true,
+      "v3_ok": null,
+      "v3_problems": [],
+      "evidence": [
+        {
+          "file": "spark/utils/ResourceUtils.java",
+          "line": 182,
+          "note": "Direct instantiation of File with unvalidated resourceLocation string"
+        },
+        {
+          "file": "spark/utils/ResourceUtils.java",
+          "line": 165,
+          "note": "Check only handles classpath prefix, does not sanitize file paths"
+        }
+      ],
+      "explanation": "The sink at ResourceUtils.java:182 creates a File object directly from the input parameter without any path normalization or prefix validation. Since the source is modeled as attacker-controlled input, an attacker can supply a path containing '../' sequences to traverse outside the intended directory, leading to a CWE-022 Path Traversal vulnerability.",
+      "samples": [
+        "vulnerable"
+      ],
+      "methods_shown": [
+        "<spark.utils.ResourceUtils: java.io.File getFile(java.lang.String)>"
+      ],
+      "override": ""
+    },
+    {
+      "flow_id": "2ab7b4dc72",
+      "flow_key": "<org.eclipse.jetty.server.session.HashSessionIdManager: void addSession(javax.servlet.http.HttpSession)>@L121/result => <org.eclipse.jetty.util.Loader: java.net.URL getResource(java.lang.Class,java.lang.String)>@L54/0",
+      "verdict": "uncertain",
+      "reason": "insufficient_context",
+      "kept": true,
+      "v3_ok": null,
+      "v3_problems": [],
+      "evidence": [],
+      "explanation": "The provided report indicates that the taint flow occurs entirely within library code (Jetty) with no application code available for analysis. Without access to the application code or the specific Jetty source files, it is impossible to verify if the session ID (source) is directly used in a path traversal context or if internal Jetty sanitization prevents exploitation. Therefore, the context is insufficient to determine if this is a real vulnerability.",
+      "samples": [
+        "uncertain"
+      ],
+      "methods_shown": [],
+      "override": ""
+    },
+    {
+      "flow_id": "05916c9b55",
+      "flow_key": "<org.eclipse.jetty.server.session.HashSessionIdManager: void addSession(javax.servlet.http.HttpSession)>@L121/result => <org.eclipse.jetty.util.Loader: java.net.URL getResource(java.lang.Class,java.lang.String)>@L60/0",
+      "verdict": "uncertain",
+      "reason": "insufficient_context",
+      "kept": true,
+      "v3_ok": null,
+      "v3_problems": [],
+      "evidence": [],
+      "explanation": "The provided report explicitly states that there is no complete application-code path and no application code is available for the methods involved (HashSessionIdManager and Loader). Without access to the source code of these Jetty library methods, it is impossible to verify if the session ID (source) is properly sanitized or if the getResource method (sink) performs path traversal checks. Therefore, the validity of the taint flow cannot be determined from the given information.",
+      "samples": [
+        "uncertain"
+      ],
+      "methods_shown": [],
+      "override": ""
+    },
+    {
+      "flow_id": "5d622ee177",
+      "flow_key": "<org.eclipse.jetty.server.session.HashSessionIdManager: void addSession(javax.servlet.http.HttpSession)>@L121/result => <org.slf4j.impl.SimpleLogger: java.io.PrintStream computeTargetStream(java.lang.String)>@L219/0",
+      "verdict": "uncertain",
+      "reason": "insufficient_context",
+      "kept": true,
+      "v3_ok": null,
+      "v3_problems": [],
+      "evidence": [],
+      "explanation": "The provided report explicitly states that there is no complete application-code path in the taint flow graph and that the flow passes through library code (Jetty and SLF4J). Without access to the source code of these libraries or the specific application code that bridges them, it is impossible to verify if the session ID is properly sanitized before being passed to the logger, or if the logger's internal logic handles path traversal safely. Therefore, the analysis cannot confirm the vulnerability.",
+      "samples": [
+        "uncertain"
+      ],
+      "methods_shown": [],
+      "override": ""
+    },
+    {
+      "flow_id": "d4c0a6c40e",
+      "flow_key": "<org.eclipse.jetty.server.session.HashSessionIdManager: void addSession(javax.servlet.http.HttpSession)>@L121/result => <spark.utils.ResourceUtils: java.io.File getFile(java.net.URL,java.lang.String)>@L219/0",
+      "verdict": "uncertain",
+      "reason": "insufficient_context",
+      "kept": true,
+      "v3_ok": null,
+      "v3_problems": [],
+      "evidence": [
+        {
+          "file": "spark/utils/ResourceUtils.java",
+          "line": 219,
+          "note": "Sink invocation uses URL scheme-specific part, not directly the tainted string"
+        },
+        {
+          "file": "spark/utils/ResourceUtils.java",
+          "line": 222,
+          "note": "Fallback uses resourceUrl.getFile()"
+        }
+      ],
+      "explanation": "The reported taint flow originates from a Jetty session ID, which is typically a random, opaque string generated by the server, not a user-controllable path component like a URL parameter or file upload name. Furthermore, the sink `ResourceUtils.getFile` constructs a `java.io.File` from a `URL` object's scheme-specific part or file property, which involves URL decoding and parsing, not direct concatenation of a raw user string. Without evidence that the session ID is attacker-controlled or that the URL passed to `getFile` is derived from attacker input in a way that preserves traversal sequences, the path is infeasible or the source is not attacker-controlled. The static analysis tool likely flagged a library method without sufficient context on the data origin.",
+      "samples": [
+        "uncertain"
+      ],
+      "methods_shown": [
+        "<spark.utils.ResourceUtils: java.io.File getFile(java.net.URL,java.lang.String)>"
+      ],
+      "override": ""
+    },
+    {
+      "flow_id": "41125e039e",
+      "flow_key": "<org.eclipse.jetty.server.session.HashSessionIdManager: void addSession(javax.servlet.http.HttpSession)>@L121/result => <spark.utils.ResourceUtils: java.io.File getFile(java.net.URL,java.lang.String)>@L222/0",
+      "verdict": "uncertain",
+      "reason": "insufficient_context",
+      "kept": true,
+      "v3_ok": null,
+      "v3_problems": [],
+      "evidence": [
+        {
+          "file": "spark/utils/ResourceUtils.java",
+          "line": 182,
+          "note": "Direct instantiation of File from string without normalization"
+        },
+        {
+          "file": "spark/utils/ResourceUtils.java",
+          "line": 222,
+          "note": "Direct instantiation of File from URL file component without normalization"
+        }
+      ],
+      "explanation": "The static analysis report identifies a taint flow from a Jetty session ID to a File constructor, but the propagation path relies entirely on library code (Spark Utils) without showing the application-level code that passes the session ID to these methods. While the sink methods in ResourceUtils.java (lines 182, 222) do not normalize paths or check for traversal sequences, it is impossible to verify if the source (session ID) is actually attacker-controlled in a way that reaches this specific sink in the application context. The session ID is typically a random string, not a user-supplied path, making the exploitability uncertain without more context on how the session ID is used as a resource location.",
+      "samples": [
+        "uncertain"
+      ],
+      "methods_shown": [
+        "<spark.utils.ResourceUtils: java.io.File getFile(java.lang.String)>",
+        "<spark.utils.ResourceUtils: java.io.File getFile(java.net.URL)>",
+        "<spark.utils.ResourceUtils: java.io.File getFile(java.net.URL,java.lang.String)>"
+      ],
+      "override": ""
+    },
+    {
+      "flow_id": "a51b4eef2d",
+      "flow_key": "<org.eclipse.jetty.server.session.HashSessionIdManager: void addSession(javax.servlet.http.HttpSession)>@L121/result => <spark.utils.ResourceUtils: java.io.File getFile(java.net.URI,java.lang.String)>@L258/0",
+      "verdict": "uncertain",
+      "reason": "insufficient_context",
+      "kept": true,
+      "v3_ok": null,
+      "v3_problems": [],
+      "evidence": [
+        {
+          "file": "spark/utils/ResourceUtils.java",
+          "line": 258,
+          "note": "Sink creates File from URI scheme-specific part without explicit traversal check"
+        }
+      ],
+      "explanation": "The reported flow relies on library code (Jetty and Spark) which is not fully visible in the provided snippet. While ResourceUtils.java line 258 creates a File object from a URI, it is unclear if the URI's scheme-specific part is validated against a base directory or if the resulting File is used in a dangerous context (e.g., read/write) without further checks. The source (Jetty session ID) is likely not directly attacker-controlled in a way that allows arbitrary path traversal, as session IDs are typically generated securely. Without seeing the caller of ResourceUtils.getFile and how the returned File is used, the exploitability cannot be confirmed.",
+      "samples": [
+        "uncertain"
+      ],
+      "methods_shown": [
+        "<spark.utils.ResourceUtils: java.io.File getFile(java.net.URI,java.lang.String)>"
+      ],
+      "override": ""
+    },
+    {
+      "flow_id": "9ac3743ab8",
+      "flow_key": "<org.eclipse.jetty.server.session.HashSessionIdManager: void removeSession(javax.servlet.http.HttpSession)>@L143/result => <org.eclipse.jetty.util.Loader: java.net.URL getResource(java.lang.Class,java.lang.String)>@L54/0",
+      "verdict": "uncertain",
+      "reason": "insufficient_context",
+      "kept": true,
+      "v3_ok": null,
+      "v3_problems": [],
+      "evidence": [],
+      "explanation": "The provided report indicates that the taint flow occurs entirely within library code (Jetty) with no application code path available for analysis. While the source is a session ID (which is attacker-controlled in the sense that the attacker provides the cookie) and the sink is a resource lookup, determining if this constitutes a real CWE-022 vulnerability requires inspecting the internal implementation of `HashSessionIdManager.removeSession` and `Loader.getResource` to see if path traversal sequences are normalized or restricted. Without the source code of these library methods, it is impossible to verify if the path is sanitized or if the sink is dangerous in this specific context.",
+      "samples": [
+        "uncertain"
+      ],
+      "methods_shown": [],
+      "override": ""
+    },
+    {
+      "flow_id": "606118500a",
+      "flow_key": "<org.eclipse.jetty.server.session.HashSessionIdManager: void removeSession(javax.servlet.http.HttpSession)>@L143/result => <org.eclipse.jetty.util.Loader: java.net.URL getResource(java.lang.Class,java.lang.String)>@L60/0",
+      "verdict": "uncertain",
+      "reason": "insufficient_context",
+      "kept": true,
+      "v3_ok": null,
+      "v3_problems": [],
+      "evidence": [],
+      "explanation": "The provided report indicates that the taint flow occurs entirely within library code (Jetty) and explicitly states that no application code is available in the taint flow graph. Without access to the application code that invokes `HashSessionIdManager.removeSession` or the context in which `Loader.getResource` is called, it is impossible to determine if the session ID (source) is attacker-controlled in a way that leads to a dangerous file read via the sink. The vulnerability depends on how the application manages session IDs and whether the `getResource` call is used to load sensitive configuration files based on that ID.",
+      "samples": [
+        "uncertain"
+      ],
+      "methods_shown": [],
+      "override": ""
+    },
+    {
+      "flow_id": "023215c1c6",
+      "flow_key": "<org.eclipse.jetty.server.session.HashSessionIdManager: void removeSession(javax.servlet.http.HttpSession)>@L143/result => <org.slf4j.impl.SimpleLogger: java.io.PrintStream computeTargetStream(java.lang.String)>@L219/0",
+      "verdict": "uncertain",
+      "reason": "insufficient_context",
+      "kept": true,
+      "v3_ok": null,
+      "v3_problems": [],
+      "evidence": [],
+      "explanation": "The provided report indicates that the taint flow passes entirely through library code (Jetty and SLF4J) with no application code available for analysis. Without the application code, it is impossible to determine if the session ID is attacker-controlled in a way that reaches the logger, or if there are intermediate sanitization steps in the application layer. Therefore, the context is insufficient to validate the vulnerability.",
+      "samples": [
+        "uncertain"
+      ],
+      "methods_shown": [],
+      "override": ""
+    },
+    {
+      "flow_id": "96e19b1746",
+      "flow_key": "<org.eclipse.jetty.server.session.HashSessionIdManager: void removeSession(javax.servlet.http.HttpSession)>@L143/result => <spark.utils.ResourceUtils: java.io.File getFile(java.net.URL,java.lang.String)>@L219/0",
+      "verdict": "uncertain",
+      "reason": "insufficient_context",
+      "kept": true,
+      "v3_ok": null,
+      "v3_problems": [],
+      "evidence": [
+        {
+          "file": "spark/utils/ResourceUtils.java",
+          "line": 219,
+          "note": "Sink uses new File(String) with URL scheme-specific part"
+        },
+        {
+          "file": "spark/utils/ResourceUtils.java",
+          "line": 222,
+          "note": "Fallback sink uses new File(String) with URL.getFile()"
+        }
+      ],
+      "explanation": "The reported taint flow originates from a Jetty session ID manager method, which is library code, and the propagation path through application code is explicitly stated as missing. The sink in ResourceUtils.java constructs a File object from a URL's scheme-specific part or file component. While URL.getFile() can contain path traversal sequences, the context of how the URL was constructed (attacker-controlled vs. internal) is missing. Without knowing if the URL passed to ResourceUtils.getFile() is derived from attacker input, we cannot confirm the source is attacker-controlled in this specific flow. Additionally, the lack of an application-code path makes it impossible to verify if sanitization occurs before the sink.",
+      "samples": [
+        "uncertain"
+      ],
+      "methods_shown": [
+        "<spark.utils.ResourceUtils: java.io.File getFile(java.net.URL,java.lang.String)>"
+      ],
+      "override": ""
+    },
+    {
+      "flow_id": "43124cd193",
+      "flow_key": "<org.eclipse.jetty.server.session.HashSessionIdManager: void removeSession(javax.servlet.http.HttpSession)>@L143/result => <spark.utils.ResourceUtils: java.io.File getFile(java.net.URL,java.lang.String)>@L222/0",
+      "verdict": "uncertain",
+      "reason": "insufficient_context",
+      "kept": true,
+      "v3_ok": null,
+      "v3_problems": [],
+      "evidence": [
+        {
+          "file": "spark/utils/ResourceUtils.java",
+          "line": 182,
+          "note": "Direct instantiation of File from string without normalization"
+        },
+        {
+          "file": "spark/utils/ResourceUtils.java",
+          "line": 222,
+          "note": "Direct instantiation of File from URL file component without normalization"
+        }
+      ],
+      "explanation": "The static analysis report identifies a taint flow from a Jetty session ID manager to ResourceUtils.getFile, but explicitly states there is no complete application-code path in the taint flow graph. While ResourceUtils.getFile (lines 182, 222) does create File objects from unnormalized inputs, it is impossible to verify if the source (session ID) is actually attacker-controlled in a way that allows path traversal (e.g., session IDs are typically alphanumeric hashes) or if the sink is reachable via a user-controllable input path in the application logic. Without the application code connecting the source to the sink, the exploitability cannot be confirmed.",
+      "samples": [
+        "uncertain"
+      ],
+      "methods_shown": [
+        "<spark.utils.ResourceUtils: java.io.File getFile(java.lang.String)>",
+        "<spark.utils.ResourceUtils: java.io.File getFile(java.net.URL)>",
+        "<spark.utils.ResourceUtils: java.io.File getFile(java.net.URL,java.lang.String)>"
+      ],
+      "override": ""
+    },
+    {
+      "flow_id": "b0bbf1fad4",
+      "flow_key": "<org.eclipse.jetty.server.session.HashSessionIdManager: void removeSession(javax.servlet.http.HttpSession)>@L143/result => <spark.utils.ResourceUtils: java.io.File getFile(java.net.URI,java.lang.String)>@L258/0",
+      "verdict": "uncertain",
+      "reason": "insufficient_context",
+      "kept": true,
+      "v3_ok": null,
+      "v3_problems": [],
+      "evidence": [
+        {
+          "file": "spark/utils/ResourceUtils.java",
+          "line": 258,
+          "note": "Sink creates File from URI scheme-specific part without explicit traversal check"
+        }
+      ],
+      "explanation": "The reported flow relies on library code (Jetty and Spark) not shown in the snippet. While ResourceUtils.java line 258 creates a File from a URI without explicit path normalization or prefix checking, it is unclear if the URI passed to it is attacker-controlled or if the URI constructor itself normalizes the path. Without seeing the caller of ResourceUtils.getFile or the Jetty session ID generation logic, we cannot confirm if an attacker can inject '../' sequences that survive URI parsing and reach this sink dangerously.",
+      "samples": [
+        "uncertain"
+      ],
+      "methods_shown": [
+        "<spark.utils.ResourceUtils: java.io.File getFile(java.net.URI,java.lang.String)>"
+      ],
+      "override": ""
+    },
+    {
+      "flow_id": "d6430a11a6",
+      "flow_key": "<org.eclipse.jetty.server.session.HashSessionManager: org.eclipse.jetty.server.session.HashedSession restoreSession(java.io.InputStream,org.eclipse.jetty.server.session.HashedSession)>@L644/result => <org.eclipse.jetty.util.Loader: java.net.URL getResource(java.lang.Class,java.lang.String)>@L54/0",
+      "verdict": "uncertain",
+      "reason": "insufficient_context",
+      "kept": true,
+      "v3_ok": null,
+      "v3_problems": [],
+      "evidence": [],
+      "explanation": "The provided report indicates that the taint flow occurs entirely within library code (Jetty) and explicitly states that no application code is available in the taint flow graph. Without access to the application code, it is impossible to determine if the `clusterId` source is actually attacker-controlled (e.g., via a specific configuration or request parameter) or if the application imposes any constraints on the session data. Furthermore, the specific behavior of `HashedSession.restoreSession` and `Loader.getResource` regarding path traversal risks cannot be fully validated without inspecting the library source or knowing the deployment context.",
+      "samples": [
+        "uncertain"
+      ],
+      "methods_shown": [],
+      "override": ""
+    },
+    {
+      "flow_id": "29d3cdfaf0",
+      "flow_key": "<org.eclipse.jetty.server.session.HashSessionManager: org.eclipse.jetty.server.session.HashedSession restoreSession(java.io.InputStream,org.eclipse.jetty.server.session.HashedSession)>@L644/result => <org.eclipse.jetty.util.Loader: java.net.URL getResource(java.lang.Class,java.lang.String)>@L60/0",
+      "verdict": "uncertain",
+      "reason": "insufficient_context",
+      "kept": true,
+      "v3_ok": null,
+      "v3_problems": [],
+      "evidence": [],
+      "explanation": "The provided report indicates that the taint flow occurs entirely within library code (Jetty) and explicitly states that no application code is available on the path. Without access to the application code, it is impossible to determine if the `InputStream` passed to `restoreSession` is derived from an attacker-controlled source (e.g., a malicious session ID or uploaded file) or if the application performs any pre-processing or validation on the session data before it reaches this method. Therefore, the attacker control of the source cannot be verified.",
+      "samples": [
+        "uncertain"
+      ],
+      "methods_shown": [],
+      "override": ""
+    },
+    {
+      "flow_id": "76671c4548",
+      "flow_key": "<org.eclipse.jetty.server.session.HashSessionManager: org.eclipse.jetty.server.session.HashedSession restoreSession(java.io.InputStream,org.eclipse.jetty.server.session.HashedSession)>@L644/result => <org.slf4j.impl.SimpleLogger: java.io.PrintStream computeTargetStream(java.lang.String)>@L219/0",
+      "verdict": "uncertain",
+      "reason": "insufficient_context",
+      "kept": true,
+      "v3_ok": null,
+      "v3_problems": [],
+      "evidence": [],
+      "explanation": "The provided report indicates that the taint flow occurs entirely within library code (Jetty and SLF4J) with no application code available for analysis. Without the application code, it is impossible to determine if the Jetty session restoration is triggered by attacker-controlled input in a way that propagates to the SLF4J logger, or if the specific configuration of the logger makes the path traversal exploitable. The static analysis tool cannot validate the reachability or context of this cross-library flow without the surrounding application logic.",
+      "samples": [
+        "uncertain"
+      ],
+      "methods_shown": [],
+      "override": ""
+    },
+    {
+      "flow_id": "4902e1c22e",
+      "flow_key": "<org.eclipse.jetty.server.session.HashSessionManager: org.eclipse.jetty.server.session.HashedSession restoreSession(java.io.InputStream,org.eclipse.jetty.server.session.HashedSession)>@L644/result => <spark.utils.ResourceUtils: java.io.File getFile(java.net.URL,java.lang.String)>@L219/0",
+      "verdict": "uncertain",
+      "reason": "insufficient_context",
+      "kept": true,
+      "v3_ok": null,
+      "v3_problems": [],
+      "evidence": [
+        {
+          "file": "spark/utils/ResourceUtils.java",
+          "line": 219,
+          "note": "Sink uses new File(String) with URL scheme-specific part"
+        },
+        {
+          "file": "spark/utils/ResourceUtils.java",
+          "line": 222,
+          "note": "Fallback sink uses new File(String) with URL.getFile()"
+        }
+      ],
+      "explanation": "The reported flow originates from Jetty's session restoration (library code) and passes to Spark's ResourceUtils. The source (clusterId from session file) is likely not directly attacker-controlled in a way that allows injecting arbitrary path traversal sequences into the session file format without prior authentication or other constraints. Furthermore, the sink `new File(String)` does not immediately perform a file operation (like read/write/delete); it only creates a File object. Without evidence that this File object is subsequently used in a dangerous operation (e.g., `new FileInputStream(file)`) with attacker-controlled content, the path is incomplete. Additionally, the input `clusterId` is a session identifier, typically a hash or random string, making path traversal via `../` highly unlikely unless the session storage mechanism itself is compromised or misconfigured in a specific way not shown here.",
+      "samples": [
+        "uncertain"
+      ],
+      "methods_shown": [
+        "<spark.utils.ResourceUtils: java.io.File getFile(java.net.URL,java.lang.String)>"
+      ],
+      "override": ""
+    },
+    {
+      "flow_id": "ab7da7fe6f",
+      "flow_key": "<org.eclipse.jetty.server.session.HashSessionManager: org.eclipse.jetty.server.session.HashedSession restoreSession(java.io.InputStream,org.eclipse.jetty.server.session.HashedSession)>@L644/result => <spark.utils.ResourceUtils: java.io.File getFile(java.net.URL,java.lang.String)>@L222/0",
+      "verdict": "uncertain",
+      "reason": "insufficient_context",
+      "kept": true,
+      "v3_ok": null,
+      "v3_problems": [],
+      "evidence": [
+        {
+          "file": "spark/utils/ResourceUtils.java",
+          "line": 182,
+          "note": "Sink: new File(resourceLocation) accepts raw string input"
+        },
+        {
+          "file": "spark/utils/ResourceUtils.java",
+          "line": 222,
+          "note": "Sink: new File(resourceUrl.getFile()) accepts URL path input"
+        }
+      ],
+      "explanation": "The reported taint flow originates from Jetty's session restoration (library code) and passes through Spark's ResourceUtils. While ResourceUtils.getFile(String) at line 182 creates a File from a raw string without path traversal checks, the source of the taint is identified as Jetty's internal session management, not a direct user-controlled input like a request parameter. The report states there is 'no complete application-code path', meaning we cannot verify if the attacker-controlled data actually reaches this sink via a user-facing endpoint. Without evidence of a user-controllable source reaching this sink, the vulnerability is uncertain.",
+      "samples": [
+        "uncertain"
+      ],
+      "methods_shown": [
+        "<spark.utils.ResourceUtils: java.io.File getFile(java.lang.String)>",
+        "<spark.utils.ResourceUtils: java.io.File getFile(java.net.URL)>",
+        "<spark.utils.ResourceUtils: java.io.File getFile(java.net.URL,java.lang.String)>"
+      ],
+      "override": ""
+    },
+    {
+      "flow_id": "95761e2cc6",
+      "flow_key": "<org.eclipse.jetty.server.session.HashSessionManager: org.eclipse.jetty.server.session.HashedSession restoreSession(java.io.InputStream,org.eclipse.jetty.server.session.HashedSession)>@L644/result => <spark.utils.ResourceUtils: java.io.File getFile(java.net.URI,java.lang.String)>@L258/0",
+      "verdict": "uncertain",
+      "reason": "insufficient_context",
+      "kept": true,
+      "v3_ok": null,
+      "v3_problems": [],
+      "evidence": [
+        {
+          "file": "spark/utils/ResourceUtils.java",
+          "line": 258,
+          "note": "Sink uses resourceUri.getSchemeSpecificPart() directly in File constructor"
+        }
+      ],
+      "explanation": "The reported flow originates from Jetty's session restoration library, which is internal infrastructure code. It is unclear if an attacker can control the InputStream content or the resulting clusterId in a way that propagates to ResourceUtils.getFile. Furthermore, the taint flow graph indicates no complete application-code path, making it impossible to verify if the tainted data reaches the sink through a user-controllable entry point. Without evidence of an attacker-controllable source reaching this sink, the vulnerability cannot be confirmed.",
+      "samples": [
+        "uncertain"
+      ],
+      "methods_shown": [
+        "<spark.utils.ResourceUtils: java.io.File getFile(java.net.URI,java.lang.String)>"
+      ],
+      "override": ""
+    },
+    {
+      "flow_id": "bf1f9cc89a",
+      "flow_key": "<spark.http.matching.MatcherFilter: java.lang.String getHttpMethodFrom(javax.servlet.http.HttpServletRequest)>@L166/result => <org.eclipse.jetty.util.Loader: java.net.URL getResource(java.lang.Class,java.lang.String)>@L54/0",
+      "verdict": "not_vulnerable",
+      "reason": "not_dangerous_sink",
+      "kept": false,
+      "v3_ok": null,
+      "v3_problems": [],
+      "evidence": [
+        {
+          "file": "spark/http/matching/MatcherFilter.java",
+          "line": 166,
+          "note": "Source: HTTP header value used as HTTP method string"
+        },
+        {
+          "file": "org/eclipse/jetty/util/Loader.java",
+          "line": 54,
+          "note": "Sink: getResource() loads a resource from classpath, not a file system path for execution or writing"
+        }
+      ],
+      "explanation": "The reported taint flow involves an HTTP header value being passed to `ClassLoader.getResource()`. This method resolves resources from the classpath (e.g., inside JARs or class directories) and returns a URL, not a file system path that allows arbitrary file read/write or execution. CWE-022 (Path Traversal) requires the path to be used in a context where the attacker can access or modify files outside the intended directory, which is not the case for classpath resource loading. Furthermore, the value is used as an HTTP method identifier, not a file path.",
+      "samples": [
+        "not_vulnerable"
+      ],
+      "methods_shown": [
+        "<spark.http.matching.MatcherFilter: java.lang.String getHttpMethodFrom(javax.servlet.http.HttpServletRequest)>"
+      ],
+      "override": ""
+    },
+    {
+      "flow_id": "6b578906d2",
+      "flow_key": "<spark.http.matching.MatcherFilter: java.lang.String getHttpMethodFrom(javax.servlet.http.HttpServletRequest)>@L166/result => <org.eclipse.jetty.util.Loader: java.net.URL getResource(java.lang.Class,java.lang.String)>@L60/0",
+      "verdict": "not_vulnerable",
+      "reason": "not_dangerous_sink",
+      "kept": false,
+      "v3_ok": null,
+      "v3_problems": [],
+      "evidence": [
+        {
+          "file": "spark/http/matching/MatcherFilter.java",
+          "line": 166,
+          "note": "Source: HTTP header value used as HTTP method string"
+        },
+        {
+          "file": "org/eclipse/jetty/util/Loader.java",
+          "line": 60,
+          "note": "Sink: getResource() expects a resource path, not a file system path for traversal"
+        }
+      ],
+      "explanation": "The reported taint flow is a false positive because the source data (HTTP method header) is semantically a string like 'GET' or 'POST', not a file path. The sink `getResource` is a classpath resource loader, not a file system path resolver that allows directory traversal via `../`. Even if the value were malicious, it would not result in reading arbitrary files outside the intended directory structure.",
+      "samples": [
+        "not_vulnerable"
+      ],
+      "methods_shown": [
+        "<spark.http.matching.MatcherFilter: java.lang.String getHttpMethodFrom(javax.servlet.http.HttpServletRequest)>"
+      ],
+      "override": ""
+    },
+    {
+      "flow_id": "e932093453",
+      "flow_key": "<spark.http.matching.MatcherFilter: java.lang.String getHttpMethodFrom(javax.servlet.http.HttpServletRequest)>@L166/result => <org.slf4j.impl.SimpleLogger: java.io.PrintStream computeTargetStream(java.lang.String)>@L219/0",
+      "verdict": "not_vulnerable",
+      "reason": "not_dangerous_sink",
+      "kept": false,
+      "v3_ok": null,
+      "v3_problems": [],
+      "evidence": [
+        {
+          "file": "spark/http/matching/MatcherFilter.java",
+          "line": 166,
+          "note": "Source: HTTP header value used as HTTP method string"
+        },
+        {
+          "file": "org/slf4j/impl/SimpleLogger.java",
+          "line": 219,
+          "note": "Sink: File path constructed for log file initialization, not derived from the tainted source"
+        }
+      ],
+      "explanation": "The reported taint flow is infeasible because the source (HTTP method header) and the sink (log file path construction) are unrelated in the application logic. The HTTP method is used for request routing/processing, while the log file path is typically configured statically or via system properties, not derived from request headers. There is no code path shown where the HTTP method string is used to construct a file system path.",
+      "samples": [
+        "not_vulnerable"
+      ],
+      "methods_shown": [
+        "<spark.http.matching.MatcherFilter: java.lang.String getHttpMethodFrom(javax.servlet.http.HttpServletRequest)>"
+      ],
+      "override": ""
+    },
+    {
+      "flow_id": "e7f49032cf",
+      "flow_key": "<spark.http.matching.MatcherFilter: java.lang.String getHttpMethodFrom(javax.servlet.http.HttpServletRequest)>@L166/result => <spark.utils.ResourceUtils: java.io.File getFile(java.net.URL,java.lang.String)>@L219/0",
+      "verdict": "not_vulnerable",
+      "reason": "not_dangerous_sink",
+      "kept": false,
+      "v3_ok": null,
+      "v3_problems": [],
+      "evidence": [
+        {
+          "file": "spark/http/matching/MatcherFilter.java",
+          "line": 166,
+          "note": "Source: HTTP header 'X-HTTP-Method-Override' is read into variable 'method'."
+        },
+        {
+          "file": "spark/utils/ResourceUtils.java",
+          "line": 219,
+          "note": "Sink: File constructor is called with a string derived from a URL's scheme-specific part, not the tainted 'method' variable."
+        }
+      ],
+      "explanation": "The reported taint flow is infeasible because the source variable 'method' (containing the HTTP method override) is never passed to the sink function 'ResourceUtils.getFile'. The sink expects a URL and a description string, whereas the source is a simple string representing an HTTP verb (e.g., 'POST', 'PUT'). There is no code path connecting the HTTP method header to the file resource loading logic, so path traversal via this specific flow is impossible.",
+      "samples": [
+        "not_vulnerable"
+      ],
+      "methods_shown": [
+        "<spark.http.matching.MatcherFilter: java.lang.String getHttpMethodFrom(javax.servlet.http.HttpServletRequest)>",
+        "<spark.utils.ResourceUtils: java.io.File getFile(java.net.URL,java.lang.String)>"
+      ],
+      "override": ""
+    },
+    {
+      "flow_id": "2dcd3f7d56",
+      "flow_key": "<spark.http.matching.MatcherFilter: java.lang.String getHttpMethodFrom(javax.servlet.http.HttpServletRequest)>@L166/result => <spark.utils.ResourceUtils: java.io.File getFile(java.net.URL,java.lang.String)>@L222/0",
+      "verdict": "not_vulnerable",
+      "reason": "not_dangerous_sink",
+      "kept": false,
+      "v3_ok": null,
+      "v3_problems": [],
+      "evidence": [
+        {
+          "file": "spark/http/matching/MatcherFilter.java",
+          "line": 166,
+          "note": "Source: HTTP header 'X-HTTP-Method-Override' is read here."
+        },
+        {
+          "file": "spark/utils/ResourceUtils.java",
+          "line": 222,
+          "note": "Sink: File object constructed from URL path."
+        }
+      ],
+      "explanation": "The reported taint flow is semantically invalid because the source (`getHttpMethodFrom`) returns an HTTP method string (e.g., 'GET', 'POST'), which is logically unrelated to the sink (`ResourceUtils.getFile`) that expects a file resource location. There is no code path in the provided snippets where the HTTP method string is passed as the `resourceLocation` argument to `getFile`. Therefore, the attacker-controlled data cannot reach the file system operation in the manner described.",
+      "samples": [
+        "not_vulnerable"
+      ],
+      "methods_shown": [
+        "<spark.http.matching.MatcherFilter: java.lang.String getHttpMethodFrom(javax.servlet.http.HttpServletRequest)>",
+        "<spark.utils.ResourceUtils: java.io.File getFile(java.lang.String)>",
+        "<spark.utils.ResourceUtils: java.io.File getFile(java.net.URL)>",
+        "<spark.utils.ResourceUtils: java.io.File getFile(java.net.URL,java.lang.String)>"
+      ],
+      "override": ""
+    },
+    {
+      "flow_id": "06481ae603",
+      "flow_key": "<spark.http.matching.MatcherFilter: java.lang.String getHttpMethodFrom(javax.servlet.http.HttpServletRequest)>@L166/result => <spark.utils.ResourceUtils: java.io.File getFile(java.net.URI,java.lang.String)>@L258/0",
+      "verdict": "not_vulnerable",
+      "reason": "not_dangerous_sink",
+      "kept": false,
+      "v3_ok": null,
+      "v3_problems": [],
+      "evidence": [
+        {
+          "file": "spark/http/matching/MatcherFilter.java",
+          "line": 166,
+          "note": "Source: HTTP header 'X-Http-Method-Override' is read into a String variable."
+        },
+        {
+          "file": "spark/utils/ResourceUtils.java",
+          "line": 258,
+          "note": "Sink: A File object is constructed using resourceUri.getSchemeSpecificPart(), not the tainted string from the source."
+        }
+      ],
+      "explanation": "The reported taint flow is infeasible because the source (HTTP method header) and the sink (File construction in ResourceUtils) operate on completely different data types and contexts. The source extracts an HTTP method string (e.g., 'GET', 'POST'), while the sink constructs a file path from a URI's scheme-specific part. There is no logical connection where an HTTP method string would be used as a file path component in this specific flow, making the path traversal exploit impossible via this route.",
+      "samples": [
+        "not_vulnerable"
+      ],
+      "methods_shown": [
+        "<spark.http.matching.MatcherFilter: java.lang.String getHttpMethodFrom(javax.servlet.http.HttpServletRequest)>",
+        "<spark.utils.ResourceUtils: java.io.File getFile(java.net.URI,java.lang.String)>"
+      ],
+      "override": ""
+    },
+    {
+      "flow_id": "018d985539",
+      "flow_key": "<spark.servlet.FilterTools: java.lang.String getRelativePath(javax.servlet.http.HttpServletRequest,java.lang.String)>@L34/result => <org.eclipse.jetty.util.Loader: java.net.URL getResource(java.lang.Class,java.lang.String)>@L54/0",
+      "verdict": "uncertain",
+      "reason": "insufficient_context",
+      "kept": true,
+      "v3_ok": null,
+      "v3_problems": [],
+      "evidence": [
+        {
+          "file": "spark/servlet/FilterTools.java",
+          "line": 34,
+          "note": "Source: request.getRequestURI() is attacker-controlled"
+        },
+        {
+          "file": "spark/servlet/FilterTools.java",
+          "line": 55,
+          "note": "URL decoding occurs, but no path traversal normalization (e.g., canonicalization) or prefix check is visible in this method"
+        }
+      ],
+      "explanation": "The provided code shows that `getRelativePath` extracts a path from the request URI and decodes it, but it does not perform path normalization (resolving `..` sequences) or verify that the resulting path stays within a safe base directory. However, the sink `org.eclipse.jetty.util.Loader.getResource` is a library method, and the report explicitly states there is 'no complete application-code path' connecting this source to a dangerous sink in the taint flow graph. Without seeing the caller of `getRelativePath` and how its return value is used (e.g., passed to `getResource` or a file I/O operation), it is impossible to confirm if the tainted path reaches a vulnerable sink in a dangerous way.",
+      "samples": [
+        "uncertain"
+      ],
+      "methods_shown": [
+        "<spark.servlet.FilterTools: java.lang.String getRelativePath(javax.servlet.http.HttpServletRequest,java.lang.String)>"
+      ],
+      "override": ""
+    },
+    {
+      "flow_id": "bad03f3dff",
+      "flow_key": "<spark.servlet.FilterTools: java.lang.String getRelativePath(javax.servlet.http.HttpServletRequest,java.lang.String)>@L34/result => <org.eclipse.jetty.util.Loader: java.net.URL getResource(java.lang.Class,java.lang.String)>@L60/0",
+      "verdict": "vulnerable",
+      "reason": "exploitable",
+      "kept": true,
+      "v3_ok": null,
+      "v3_problems": [],
+      "evidence": [
+        {
+          "file": "spark/servlet/FilterTools.java",
+          "line": 34,
+          "note": "Source: request.getRequestURI() is attacker-controlled input from the HTTP request."
+        },
+        {
+          "file": "spark/servlet/FilterTools.java",
+          "line": 55,
+          "note": "Decoding occurs after substring operations, but URLDecoder.decode(path, \"UTF-8\") on line 55 decodes the path. If the input contains encoded traversal sequences like %2e%2e%2f, they are decoded to ../. However, the critical issue is that the method returns the path relative to the filter, but does not validate that the resulting path is safe for file system access."
+        },
+        {
+          "file": "spark/servlet/FilterTools.java",
+          "line": 59,
+          "note": "Sink: The method returns the path. In the context of Spark Java, this path is often used to locate resources. The report indicates the sink is `org.eclipse.jetty.util.Loader.getResource`. If the returned path from `getRelativePath` is passed directly to `getResource` without further sanitization (like checking for `..` or canonicalizing against a base directory), it allows path traversal."
+        }
+      ],
+      "explanation": "The source `request.getRequestURI()` is attacker-controlled. The method `getRelativePath` processes this URI but does not perform any security checks to ensure the resulting path does not contain traversal sequences (`../`) that escape the intended directory. The decoded path is returned and used in a sink (`getResource`) that resolves file system paths, allowing an attacker to read arbitrary files if the sink implementation does not internally sanitize the input.",
+      "samples": [
+        "vulnerable"
+      ],
+      "methods_shown": [
+        "<spark.servlet.FilterTools: java.lang.String getRelativePath(javax.servlet.http.HttpServletRequest,java.lang.String)>"
+      ],
+      "override": ""
+    },
+    {
+      "flow_id": "834d87688f",
+      "flow_key": "<spark.servlet.FilterTools: java.lang.String getRelativePath(javax.servlet.http.HttpServletRequest,java.lang.String)>@L34/result => <org.slf4j.impl.SimpleLogger: java.io.PrintStream computeTargetStream(java.lang.String)>@L219/0",
+      "verdict": "vulnerable",
+      "reason": "exploitable",
+      "kept": true,
+      "v3_ok": null,
+      "v3_problems": [],
+      "evidence": [
+        {
+          "file": "spark/servlet/FilterTools.java",
+          "line": 34,
+          "note": "Source: request.getRequestURI() is attacker-controlled input."
+        },
+        {
+          "file": "spark/servlet/FilterTools.java",
+          "line": 55,
+          "note": "Decoding occurs after substring operations, allowing encoded traversal sequences like %2e%2e%2f to bypass initial substring logic and remain in the final path."
+        },
+        {
+          "file": "spark/servlet/FilterTools.java",
+          "line": 59,
+          "note": "Return value is the raw, decoded path string without any canonicalization or prefix validation against a base directory."
+        }
+      ],
+      "explanation": "The source `request.getRequestURI()` is attacker-controlled. The method performs substring operations and URL decoding but fails to normalize the path (e.g., using `Path.normalize()`) or verify that the resulting path stays within a specific base directory. This allows an attacker to use encoded `../` sequences to traverse outside the intended directory, leading to a CWE-022 Path Traversal vulnerability when the returned path is used to access files.",
+      "samples": [
+        "vulnerable"
+      ],
+      "methods_shown": [
+        "<spark.servlet.FilterTools: java.lang.String getRelativePath(javax.servlet.http.HttpServletRequest,java.lang.String)>"
+      ],
+      "override": ""
+    },
+    {
+      "flow_id": "180c31a8ef",
+      "flow_key": "<spark.servlet.FilterTools: java.lang.String getRelativePath(javax.servlet.http.HttpServletRequest,java.lang.String)>@L34/result => <spark.utils.ResourceUtils: java.io.File getFile(java.net.URL,java.lang.String)>@L219/0",
+      "verdict": "vulnerable",
+      "reason": "exploitable",
+      "kept": true,
+      "v3_ok": null,
+      "v3_problems": [],
+      "evidence": [
+        {
+          "file": "spark/servlet/FilterTools.java",
+          "line": 34,
+          "note": "Source: request.getRequestURI() is attacker-controlled input."
+        },
+        {
+          "file": "spark/servlet/FilterTools.java",
+          "line": 55,
+          "note": "URLDecoder.decode is applied, but does not prevent traversal sequences like '../'."
+        },
+        {
+          "file": "spark/utils/ResourceUtils.java",
+          "line": 219,
+          "note": "Sink: new File(...) creates a file object from the path without checking if it escapes the intended resource directory."
+        }
+      ],
+      "explanation": "The source `request.getRequestURI()` in FilterTools.java is directly attacker-controlled and passed through URL decoding without any normalization or prefix validation to ensure it stays within a safe directory. The tainted path is eventually used in ResourceUtils.java to instantiate a `java.io.File` object, which allows access to arbitrary files on the filesystem if the resulting path contains traversal sequences like `../`.",
+      "samples": [
+        "vulnerable"
+      ],
+      "methods_shown": [
+        "<spark.servlet.FilterTools: java.lang.String getRelativePath(javax.servlet.http.HttpServletRequest,java.lang.String)>",
+        "<spark.utils.ResourceUtils: java.io.File getFile(java.net.URL,java.lang.String)>"
+      ],
+      "override": ""
+    },
+    {
+      "flow_id": "372ac6f207",
+      "flow_key": "<spark.servlet.FilterTools: java.lang.String getRelativePath(javax.servlet.http.HttpServletRequest,java.lang.String)>@L34/result => <spark.utils.ResourceUtils: java.io.File getFile(java.net.URL,java.lang.String)>@L222/0",
+      "verdict": "vulnerable",
+      "reason": "exploitable",
+      "kept": true,
+      "v3_ok": null,
+      "v3_problems": [],
+      "evidence": [
+        {
+          "file": "spark/servlet/FilterTools.java",
+          "line": 34,
+          "note": "Source: request.getRequestURI() is attacker-controlled input from the HTTP request."
+        },
+        {
+          "file": "spark/servlet/FilterTools.java",
+          "line": 55,
+          "note": "The path is URL-decoded, which can resolve encoded traversal sequences like %2e%2e, but does not prevent logical traversal if the input is not normalized against a base directory."
+        },
+        {
+          "file": "spark/utils/ResourceUtils.java",
+          "line": 182,
+          "note": "Sink: If the path is not a classpath resource or valid URL, it is passed directly to new File(resourceLocation) without any path normalization or prefix checking to ensure it stays within a safe directory."
+        }
+      ],
+      "explanation": "The source `request.getRequestURI()` is directly attacker-controlled. The `getRelativePath` method processes the URI but does not validate that the resulting path remains within a specific base directory (e.g., a web root or resource folder). The tainted path is eventually passed to `new File(resourceLocation)` in `ResourceUtils.java`, which allows arbitrary file system access via path traversal sequences like `../`.",
+      "samples": [
+        "vulnerable"
+      ],
+      "methods_shown": [
+        "<spark.servlet.FilterTools: java.lang.String getRelativePath(javax.servlet.http.HttpServletRequest,java.lang.String)>",
+        "<spark.utils.ResourceUtils: java.io.File getFile(java.lang.String)>",
+        "<spark.utils.ResourceUtils: java.io.File getFile(java.net.URL)>",
+        "<spark.utils.ResourceUtils: java.io.File getFile(java.net.URL,java.lang.String)>"
+      ],
+      "override": ""
+    },
+    {
+      "flow_id": "ef16108f02",
+      "flow_key": "<spark.servlet.FilterTools: java.lang.String getRelativePath(javax.servlet.http.HttpServletRequest,java.lang.String)>@L34/result => <spark.utils.ResourceUtils: java.io.File getFile(java.net.URI,java.lang.String)>@L258/0",
+      "verdict": "vulnerable",
+      "reason": "exploitable",
+      "kept": true,
+      "v3_ok": null,
+      "v3_problems": [],
+      "evidence": [
+        {
+          "file": "spark/servlet/FilterTools.java",
+          "line": 34,
+          "note": "Source: request.getRequestURI() is attacker-controlled input."
+        },
+        {
+          "file": "spark/servlet/FilterTools.java",
+          "line": 55,
+          "note": "Path is URL-decoded, which can resolve encoded traversal sequences like %2e%2e."
+        },
+        {
+          "file": "spark/utils/ResourceUtils.java",
+          "line": 258,
+          "note": "Sink: new File(...) creates a file object from the string without validating it stays within a base directory."
+        }
+      ],
+      "explanation": "The source `request.getRequestURI()` is directly attacker-controlled. The `getRelativePath` method performs URL decoding but does not normalize the path or verify that the resulting path remains within a safe base directory, allowing `../` sequences to escape. The sink `new File(...)` in `ResourceUtils` uses this unvalidated path directly, creating a classic path traversal vulnerability.",
+      "samples": [
+        "vulnerable"
+      ],
+      "methods_shown": [
+        "<spark.servlet.FilterTools: java.lang.String getRelativePath(javax.servlet.http.HttpServletRequest,java.lang.String)>",
+        "<spark.utils.ResourceUtils: java.io.File getFile(java.net.URI,java.lang.String)>"
+      ],
+      "override": ""
+    }
+  ]
+}

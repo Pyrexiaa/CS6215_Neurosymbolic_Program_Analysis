@@ -1,0 +1,17 @@
+subject,version,config,archived_raw,replay_raw,archived_reported,replay_reported,archived_gt,replay_gt,archived_detected,replay_detected,flowkeys_identical
+cron-utils,buggy,B1,0,0,0,0,0,0,False,False,True
+cron-utils,buggy,B2,31,31,1,1,1,1,True,True,True
+cron-utils,fixed,B1,0,0,0,0,0,0,False,False,True
+cron-utils,fixed,B2,0,0,0,0,0,0,False,False,True
+perfecto-plugin,buggy,B1,0,0,0,0,0,0,False,False,True
+perfecto-plugin,buggy,B2,12,12,2,2,2,2,True,True,True
+perfecto-plugin,fixed,B1,0,0,0,0,0,0,False,False,True
+perfecto-plugin,fixed,B2,0,0,0,0,0,0,False,False,True
+spark,buggy,B1,15610,15610,489,489,0,0,False,False,True
+spark,buggy,B2,24396,24396,974,974,11,11,True,True,True
+spark,fixed,B1,15726,15726,498,498,0,0,False,False,True
+spark,fixed,B2,24574,24574,991,991,11,11,True,True,True
+zt-zip,buggy,B1,7416,7416,7,7,2,2,True,True,True
+zt-zip,buggy,B2,20602,20602,534,534,114,114,True,True,True
+zt-zip,fixed,B1,7980,7980,7,7,2,2,True,True,True
+zt-zip,fixed,B2,21634,21634,534,534,114,114,True,True,True

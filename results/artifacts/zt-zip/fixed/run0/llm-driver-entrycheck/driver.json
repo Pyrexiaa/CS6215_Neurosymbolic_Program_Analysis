@@ -1,0 +1,322 @@
+{
+  "kind": "llm",
+  "ok": true,
+  "classes_dir": "/Users/jiayulim/Documents/GitHub/CS6215_Neurosymbolic_Program_Analysis/work/runs/zt-zip/fixed/run0/llm-driver-entrycheck/classes",
+  "source_path": "/Users/jiayulim/Documents/GitHub/CS6215_Neurosymbolic_Program_Analysis/work/runs/zt-zip/fixed/run0/llm-driver-entrycheck/src/nesy/NesyDriver.java",
+  "entries": [
+    "<org.zeroturnaround.zip.ZipUtil: boolean unpackEntry(java.io.File,java.lang.String,java.io.File)>",
+    "<org.zeroturnaround.zip.ZipUtil: boolean unpackEntry(java.io.File,java.lang.String,java.io.File,java.nio.charset.Charset)>",
+    "<org.zeroturnaround.zip.ZipUtil: boolean unpackEntry(java.io.InputStream,java.lang.String,java.io.File)>",
+    "<org.zeroturnaround.zip.ZipUtil: boolean unpackEntry(java.util.zip.ZipFile,java.lang.String,java.io.File)>",
+    "<org.zeroturnaround.zip.ZipUtil: byte[] unpackEntry(java.io.File,java.lang.String)>",
+    "<org.zeroturnaround.zip.ZipUtil: byte[] unpackEntry(java.io.File,java.lang.String,java.nio.charset.Charset)>",
+    "<org.zeroturnaround.zip.ZipUtil: byte[] unpackEntry(java.io.InputStream,java.lang.String)>",
+    "<org.zeroturnaround.zip.ZipUtil: byte[] unpackEntry(java.util.zip.ZipFile,java.lang.String)>",
+    "<org.zeroturnaround.zip.ZipUtil: void unpack(java.io.File,java.io.File)>",
+    "<org.zeroturnaround.zip.ZipUtil: void unpack(java.io.File,java.io.File,java.nio.charset.Charset)>",
+    "<org.zeroturnaround.zip.ZipUtil: void unpack(java.io.File,java.io.File,org.zeroturnaround.zip.NameMapper)>",
+    "<org.zeroturnaround.zip.ZipUtil: void unpack(java.io.File,java.io.File,org.zeroturnaround.zip.NameMapper,java.nio.charset.Charset)>",
+    "<org.zeroturnaround.zip.ZipUtil: void unpack(java.io.InputStream,java.io.File)>",
+    "<org.zeroturnaround.zip.ZipUtil: void unpack(java.io.InputStream,java.io.File,java.nio.charset.Charset)>",
+    "<org.zeroturnaround.zip.ZipUtil: void unpack(java.io.InputStream,java.io.File,org.zeroturnaround.zip.NameMapper)>",
+    "<org.zeroturnaround.zip.ZipUtil: void unpack(java.io.InputStream,java.io.File,org.zeroturnaround.zip.NameMapper,java.nio.charset.Charset)>",
+    "<org.zeroturnaround.zip.ZipUtil: void unwrap(java.io.File,java.io.File)>",
+    "<org.zeroturnaround.zip.ZipUtil: void unwrap(java.io.File,java.io.File,org.zeroturnaround.zip.NameMapper)>",
+    "<org.zeroturnaround.zip.ZipUtil: void unwrap(java.io.InputStream,java.io.File)>",
+    "<org.zeroturnaround.zip.ZipUtil: void unwrap(java.io.InputStream,java.io.File,org.zeroturnaround.zip.NameMapper)>",
+    "<org.zeroturnaround.zip.ZipUtil: void explode(java.io.File)>",
+    "<org.zeroturnaround.zip.ZipUtil: void unexplode(java.io.File)>",
+    "<org.zeroturnaround.zip.ZipUtil: void unexplode(java.io.File,int)>",
+    "<org.zeroturnaround.zip.ZipUtil: boolean replaceEntry(java.io.File,java.lang.String,byte[])>",
+    "<org.zeroturnaround.zip.ZipUtil: boolean replaceEntry(java.io.File,java.lang.String,byte[],int)>",
+    "<org.zeroturnaround.zip.ZipUtil: boolean replaceEntry(java.io.File,java.lang.String,byte[],java.io.File)>",
+    "<org.zeroturnaround.zip.ZipUtil: boolean replaceEntry(java.io.File,java.lang.String,java.io.File)>",
+    "<org.zeroturnaround.zip.ZipUtil: boolean replaceEntry(java.io.File,java.lang.String,java.io.File,java.io.File)>",
+    "<org.zeroturnaround.zip.ZipUtil: boolean transformEntry(java.io.File,java.lang.String,org.zeroturnaround.zip.transform.ZipEntryTransformer,java.io.File)>",
+    "<org.zeroturnaround.zip.ZipUtil: boolean handle(java.io.File,java.lang.String,org.zeroturnaround.zip.ZipEntryCallback)>",
+    "<org.zeroturnaround.zip.ZipUtil: boolean handle(java.io.InputStream,java.lang.String,org.zeroturnaround.zip.ZipEntryCallback)>",
+    "<org.zeroturnaround.zip.ZipUtil: int getCompressionMethodOfEntry(java.io.File,java.lang.String)>",
+    "<org.zeroturnaround.zip.ZipUtil: boolean entryEquals(java.io.File,java.io.File,java.lang.String)>",
+    "<org.zeroturnaround.zip.ZipUtil: boolean entryEquals(java.io.File,java.io.File,java.lang.String,java.lang.String)>",
+    "<org.zeroturnaround.zip.ZipUtil: boolean entryEquals(java.util.zip.ZipFile,java.util.zip.ZipFile,java.lang.String,java.lang.String)>",
+    "<org.zeroturnaround.zip.ZipUtil: void addOrReplaceEntries(java.io.File,org.zeroturnaround.zip.ZipEntrySource[],java.io.File)>",
+    "<org.zeroturnaround.zip.ZipUtil: void addOrReplaceEntries(java.io.File,org.zeroturnaround.zip.ZipEntrySource[])>",
+    "<org.zeroturnaround.zip.ZipUtil$BackslashUnpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>"
+  ],
+  "attempts": 1,
+  "errors": [],
+  "removed_entries": [],
+  "app_calls": 39,
+  "taint_calls": 44,
+  "llm_entries": [
+    {
+      "signature": "<org.zeroturnaround.zip.ZipUtil: boolean unpackEntry(java.io.File,java.lang.String,java.io.File)>",
+      "tainted_params": [
+        1
+      ],
+      "why": "Entry name is attacker-controlled; path traversal via '../' in entry name can write outside target directory."
+    },
+    {
+      "signature": "<org.zeroturnaround.zip.ZipUtil: boolean unpackEntry(java.io.File,java.lang.String,java.io.File,java.nio.charset.Charset)>",
+      "tainted_params": [
+        1
+      ],
+      "why": "Entry name is attacker-controlled; path traversal via '../' in entry name can write outside target directory."
+    },
+    {
+      "signature": "<org.zeroturnaround.zip.ZipUtil: boolean unpackEntry(java.io.InputStream,java.lang.String,java.io.File)>",
+      "tainted_params": [
+        1
+      ],
+      "why": "Entry name is attacker-controlled; path traversal via '../' in entry name can write outside target directory."
+    },
+    {
+      "signature": "<org.zeroturnaround.zip.ZipUtil: boolean unpackEntry(java.util.zip.ZipFile,java.lang.String,java.io.File)>",
+      "tainted_params": [
+        1
+      ],
+      "why": "Entry name is attacker-controlled; path traversal via '../' in entry name can write outside target directory."
+    },
+    {
+      "signature": "<org.zeroturnaround.zip.ZipUtil: byte[] unpackEntry(java.io.File,java.lang.String)>",
+      "tainted_params": [
+        1
+      ],
+      "why": "Entry name is attacker-controlled; while this returns bytes, the internal path resolution may be vulnerable if used in contexts that write to disk, but primarily this is for reading. However, for taint analysis coverage of the entry point, we mark the entry name as tainted."
+    },
+    {
+      "signature": "<org.zeroturnaround.zip.ZipUtil: byte[] unpackEntry(java.io.File,java.lang.String,java.nio.charset.Charset)>",
+      "tainted_params": [
+        1
+      ],
+      "why": "Entry name is attacker-controlled; path traversal via '../' in entry name can write outside target directory."
+    },
+    {
+      "signature": "<org.zeroturnaround.zip.ZipUtil: byte[] unpackEntry(java.io.InputStream,java.lang.String)>",
+      "tainted_params": [
+        1
+      ],
+      "why": "Entry name is attacker-controlled; path traversal via '../' in entry name can write outside target directory."
+    },
+    {
+      "signature": "<org.zeroturnaround.zip.ZipUtil: byte[] unpackEntry(java.util.zip.ZipFile,java.lang.String)>",
+      "tainted_params": [
+        1
+      ],
+      "why": "Entry name is attacker-controlled; path traversal via '../' in entry name can write outside target directory."
+    },
+    {
+      "signature": "<org.zeroturnaround.zip.ZipUtil: void unpack(java.io.File,java.io.File)>",
+      "tainted_params": [
+        0
+      ],
+      "why": "ZIP file path is attacker-controlled; if the ZIP contains malicious entry names, the unpacking process may write outside the intended directory."
+    },
+    {
+      "signature": "<org.zeroturnaround.zip.ZipUtil: void unpack(java.io.File,java.io.File,java.nio.charset.Charset)>",
+      "tainted_params": [
+        0
+      ],
+      "why": "ZIP file path is attacker-controlled; if the ZIP contains malicious entry names, the unpacking process may write outside the intended directory."
+    },
+    {
+      "signature": "<org.zeroturnaround.zip.ZipUtil: void unpack(java.io.File,java.io.File,org.zeroturnaround.zip.NameMapper)>",
+      "tainted_params": [
+        0
+      ],
+      "why": "ZIP file path is attacker-controlled; if the ZIP contains malicious entry names, the unpacking process may write outside the intended directory."
+    },
+    {
+      "signature": "<org.zeroturnaround.zip.ZipUtil: void unpack(java.io.File,java.io.File,org.zeroturnaround.zip.NameMapper,java.nio.charset.Charset)>",
+      "tainted_params": [
+        0
+      ],
+      "why": "ZIP file path is attacker-controlled; if the ZIP contains malicious entry names, the unpacking process may write outside the intended directory."
+    },
+    {
+      "signature": "<org.zeroturnaround.zip.ZipUtil: void unpack(java.io.InputStream,java.io.File)>",
+      "tainted_params": [
+        0
+      ],
+      "why": "ZIP input stream is attacker-controlled; if the ZIP contains malicious entry names, the unpacking process may write outside the intended directory."
+    },
+    {
+      "signature": "<org.zeroturnaround.zip.ZipUtil: void unpack(java.io.InputStream,java.io.File,java.nio.charset.Charset)>",
+      "tainted_params": [
+        0
+      ],
+      "why": "ZIP input stream is attacker-controlled; if the ZIP contains malicious entry names, the unpacking process may write outside the intended directory."
+    },
+    {
+      "signature": "<org.zeroturnaround.zip.ZipUtil: void unpack(java.io.InputStream,java.io.File,org.zeroturnaround.zip.NameMapper)>",
+      "tainted_params": [
+        0
+      ],
+      "why": "ZIP input stream is attacker-controlled; if the ZIP contains malicious entry names, the unpacking process may write outside the intended directory."
+    },
+    {
+      "signature": "<org.zeroturnaround.zip.ZipUtil: void unpack(java.io.InputStream,java.io.File,org.zeroturnaround.zip.NameMapper,java.nio.charset.Charset)>",
+      "tainted_params": [
+        0
+      ],
+      "why": "ZIP input stream is attacker-controlled; if the ZIP contains malicious entry names, the unpacking process may write outside the intended directory."
+    },
+    {
+      "signature": "<org.zeroturnaround.zip.ZipUtil: void unwrap(java.io.File,java.io.File)>",
+      "tainted_params": [
+        0
+      ],
+      "why": "ZIP file path is attacker-controlled; if the ZIP contains malicious entry names, the unwrap process may write outside the intended directory."
+    },
+    {
+      "signature": "<org.zeroturnaround.zip.ZipUtil: void unwrap(java.io.File,java.io.File,org.zeroturnaround.zip.NameMapper)>",
+      "tainted_params": [
+        0
+      ],
+      "why": "ZIP file path is attacker-controlled; if the ZIP contains malicious entry names, the unwrap process may write outside the intended directory."
+    },
+    {
+      "signature": "<org.zeroturnaround.zip.ZipUtil: void unwrap(java.io.InputStream,java.io.File)>",
+      "tainted_params": [
+        0
+      ],
+      "why": "ZIP input stream is attacker-controlled; if the ZIP contains malicious entry names, the unwrap process may write outside the intended directory."
+    },
+    {
+      "signature": "<org.zeroturnaround.zip.ZipUtil: void unwrap(java.io.InputStream,java.io.File,org.zeroturnaround.zip.NameMapper)>",
+      "tainted_params": [
+        0
+      ],
+      "why": "ZIP input stream is attacker-controlled; if the ZIP contains malicious entry names, the unwrap process may write outside the intended directory."
+    },
+    {
+      "signature": "<org.zeroturnaround.zip.ZipUtil: void explode(java.io.File)>",
+      "tainted_params": [
+        0
+      ],
+      "why": "ZIP file path is attacker-controlled; if the ZIP contains malicious entry names, the explode process may write outside the intended directory."
+    },
+    {
+      "signature": "<org.zeroturnaround.zip.ZipUtil: void unexplode(java.io.File)>",
+      "tainted_params": [
+        0
+      ],
+      "why": "ZIP file path is attacker-controlled; if the ZIP contains malicious entry names, the unexplode process may write outside the intended directory."
+    },
+    {
+      "signature": "<org.zeroturnaround.zip.ZipUtil: void unexplode(java.io.File,int)>",
+      "tainted_params": [
+        0
+      ],
+      "why": "ZIP file path is attacker-controlled; if the ZIP contains malicious entry names, the unexplode process may write outside the intended directory."
+    },
+    {
+      "signature": "<org.zeroturnaround.zip.ZipUtil: boolean replaceEntry(java.io.File,java.lang.String,byte[])>",
+      "tainted_params": [
+        1
+      ],
+      "why": "Entry name is attacker-controlled; path traversal via '../' in entry name can overwrite files outside the intended directory."
+    },
+    {
+      "signature": "<org.zeroturnaround.zip.ZipUtil: boolean replaceEntry(java.io.File,java.lang.String,byte[],int)>",
+      "tainted_params": [
+        1
+      ],
+      "why": "Entry name is attacker-controlled; path traversal via '../' in entry name can overwrite files outside the intended directory."
+    },
+    {
+      "signature": "<org.zeroturnaround.zip.ZipUtil: boolean replaceEntry(java.io.File,java.lang.String,byte[],java.io.File)>",
+      "tainted_params": [
+        1
+      ],
+      "why": "Entry name is attacker-controlled; path traversal via '../' in entry name can overwrite files outside the intended directory."
+    },
+    {
+      "signature": "<org.zeroturnaround.zip.ZipUtil: boolean replaceEntry(java.io.File,java.lang.String,java.io.File)>",
+      "tainted_params": [
+        1
+      ],
+      "why": "Entry name is attacker-controlled; path traversal via '../' in entry name can overwrite files outside the intended directory."
+    },
+    {
+      "signature": "<org.zeroturnaround.zip.ZipUtil: boolean replaceEntry(java.io.File,java.lang.String,java.io.File,java.io.File)>",
+      "tainted_params": [
+        1
+      ],
+      "why": "Entry name is attacker-controlled; path traversal via '../' in entry name can overwrite files outside the intended directory."
+    },
+    {
+      "signature": "<org.zeroturnaround.zip.ZipUtil: boolean transformEntry(java.io.File,java.lang.String,org.zeroturnaround.zip.transform.ZipEntryTransformer,java.io.File)>",
+      "tainted_params": [
+        1
+      ],
+      "why": "Entry name is attacker-controlled; path traversal via '../' in entry name can overwrite files outside the intended directory."
+    },
+    {
+      "signature": "<org.zeroturnaround.zip.ZipUtil: boolean handle(java.io.File,java.lang.String,org.zeroturnaround.zip.ZipEntryCallback)>",
+      "tainted_params": [
+        1
+      ],
+      "why": "Entry name is attacker-controlled; if the callback writes to disk, path traversal via '../' in entry name can write outside the intended directory."
+    },
+    {
+      "signature": "<org.zeroturnaround.zip.ZipUtil: boolean handle(java.io.InputStream,java.lang.String,org.zeroturnaround.zip.ZipEntryCallback)>",
+      "tainted_params": [
+        1
+      ],
+      "why": "Entry name is attacker-controlled; if the callback writes to disk, path traversal via '../' in entry name can write outside the intended directory."
+    },
+    {
+      "signature": "<org.zeroturnaround.zip.ZipUtil: int getCompressionMethodOfEntry(java.io.File,java.lang.String)>",
+      "tainted_params": [
+        1
+      ],
+      "why": "Entry name is attacker-controlled; while this is a read-only operation, it is part of the entry point set for completeness."
+    },
+    {
+      "signature": "<org.zeroturnaround.zip.ZipUtil: boolean entryEquals(java.io.File,java.io.File,java.lang.String)>",
+      "tainted_params": [
+        2
+      ],
+      "why": "Entry name is attacker-controlled; used for comparison, but tainted for analysis coverage."
+    },
+    {
+      "signature": "<org.zeroturnaround.zip.ZipUtil: boolean entryEquals(java.io.File,java.io.File,java.lang.String,java.lang.String)>",
+      "tainted_params": [
+        2
+      ],
+      "why": "Entry name is attacker-controlled; used for comparison, but tainted for analysis coverage."
+    },
+    {
+      "signature": "<org.zeroturnaround.zip.ZipUtil: boolean entryEquals(java.util.zip.ZipFile,java.util.zip.ZipFile,java.lang.String,java.lang.String)>",
+      "tainted_params": [
+        2
+      ],
+      "why": "Entry name is attacker-controlled; used for comparison, but tainted for analysis coverage."
+    },
+    {
+      "signature": "<org.zeroturnaround.zip.ZipUtil: void addOrReplaceEntries(java.io.File,org.zeroturnaround.zip.ZipEntrySource[],java.io.File)>",
+      "tainted_params": [
+        1
+      ],
+      "why": "ZipEntrySource array contains entry names; if attacker-controlled, path traversal via '../' can write outside the intended directory."
+    },
+    {
+      "signature": "<org.zeroturnaround.zip.ZipUtil: void addOrReplaceEntries(java.io.File,org.zeroturnaround.zip.ZipEntrySource[])>",
+      "tainted_params": [
+        1
+      ],
+      "why": "ZipEntrySource array contains entry names; if attacker-controlled, path traversal via '../' can write outside the intended directory."
+    },
+    {
+      "signature": "<org.zeroturnaround.zip.ZipUtil$BackslashUnpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>",
+      "tainted_params": [
+        1
+      ],
+      "why": "ZipEntry contains the entry name; if attacker-controlled, path traversal via '../' can write outside the intended directory."
+    }
+  ],
+  "prompt_version": "3914024e",
+  "entry_mismatches": [],
+  "check_version": 2
+}

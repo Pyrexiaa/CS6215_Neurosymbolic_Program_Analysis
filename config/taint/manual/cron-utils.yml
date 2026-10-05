@@ -1,0 +1,34 @@
+# B2 manual taint specification for cron-utils (CVE-2021-41269).
+# Added on top of the B1 base configuration (Tai-e commonly-used config for CWE-094).
+#
+# Prepared from work/manual-candidates/cron-utils.md (the API list shown to N2)
+# and the buggy-version source. Advisories, fix diffs and fix_info.csv were not
+# consulted during preparation. Each entry records its technical rationale.
+# Preparation details and limitations: report/main_revised2.tex.
+#
+# Format: "<pkg.Cls: retType name(argType1,argType2)>"; index = result | base | 0,1,... | "N[*]" (array elements).
+
+# Specification rationale for expression injection through Bean Validation:
+# * Untrusted input is the cron expression string (public parse/validate API; tainted by the driver).
+# * In Bean Validation the message TEMPLATE passed to buildConstraintViolationWithTemplate is
+#   interpolated by the provider (e.g. Hibernate Validator evaluates ${...} expression language), so
+#   user data inside a template is an expression-injection sink. Interface method: needs call-site
+#   mode, which is on.
+# * MessageFormat.format with a user-influenced pattern is a weaker formatting sink; it is modelled
+#   only as a transfer (its result is a string that may reach the real sink).
+sources: []
+
+sinks:
+  - { method: "<javax.validation.ConstraintValidatorContext: javax.validation.ConstraintValidatorContext$ConstraintViolationBuilder buildConstraintViolationWithTemplate(java.lang.String)>", index: 0 }
+
+transfers:
+  # error messages are assembled with formatting/joining helpers
+  - { method: "<java.text.MessageFormat: java.lang.String format(java.lang.String,java.lang.Object[])>", from: 0, to: result }
+  - { method: "<java.text.MessageFormat: java.lang.String format(java.lang.String,java.lang.Object[])>", from: "1[*]", to: result }
+  - { method: "<java.util.StringJoiner: java.util.StringJoiner add(java.lang.CharSequence)>", from: 0, to: base }
+  - { method: "<java.util.StringJoiner: java.lang.String toString()>", from: base, to: result }
+  # regex helpers used to normalise/inspect the expression
+  - { method: "<java.util.regex.Pattern: java.util.regex.Matcher matcher(java.lang.CharSequence)>", from: 0, to: result }
+  - { method: "<java.util.regex.Matcher: java.lang.String replaceAll(java.lang.String)>", from: base, to: result }
+
+sanitizers: []

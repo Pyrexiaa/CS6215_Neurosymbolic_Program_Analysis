@@ -1,0 +1,174 @@
+{
+  "kind": "llm",
+  "ok": true,
+  "classes_dir": "/Users/jiayulim/Documents/GitHub/CS6215_Neurosymbolic_Program_Analysis/work/runs/perfecto-plugin/fixed/run2/llm-driver/classes",
+  "source_path": "/Users/jiayulim/Documents/GitHub/CS6215_Neurosymbolic_Program_Analysis/work/runs/perfecto-plugin/fixed/run2/llm-driver/src/nesy/NesyDriver.java",
+  "entries": [
+    "io.plugins.perfecto.PerfectoBuildWrapper$DescriptorImpl: hudson.util.FormValidation doCheckPerfectoConnectLocation(java.lang.String,hudson.model.Item)",
+    "io.plugins.perfecto.PerfectoBuildWrapper$DescriptorImpl: hudson.util.FormValidation doCheckPerfectoConnectFile(java.lang.String,hudson.model.Item)",
+    "io.plugins.perfecto.PerfectoBuildWrapper: hudson.tasks.BuildWrapper$Environment setUp(hudson.model.AbstractBuild,hudson.Launcher,hudson.model.BuildListener)",
+    "io.plugins.perfecto.PerfectoBuildWrapper: void setPerfectoConnectLocation(java.lang.String)",
+    "io.plugins.perfecto.PerfectoBuildWrapper: void setPerfectoConnectFile(java.lang.String)",
+    "io.plugins.perfecto.PerfectoBuildWrapper: void setPcParameters(java.lang.String)",
+    "io.plugins.perfecto.PerfectoBuildWrapper: void setTunnelIdCustomName(java.lang.String)",
+    "io.plugins.perfecto.PerfectoBuildWrapper: void setSecurityToken(java.lang.String)",
+    "io.plugins.perfecto.PerfectoBuildWrapper: void setCredentialId(java.lang.String)",
+    "io.plugins.perfecto.credentials.PerfectoCredentials$DescriptorImpl: hudson.util.FormValidation doAuthenticate(java.lang.String,java.lang.String,java.lang.String)",
+    "io.plugins.perfecto.credentials.PerfectoCredentials$DescriptorImpl: hudson.util.FormValidation doCheckApiKey(java.lang.String)",
+    "io.plugins.perfecto.credentials.PerfectoCredentials$DescriptorImpl: hudson.util.FormValidation doCheckCloudName(java.lang.String)",
+    "io.plugins.perfecto.credentials.PerfectoCredentials$DescriptorImpl: hudson.util.FormValidation doCheckUserName(java.lang.String)",
+    "io.plugins.perfecto.PerfectoBuildWrapper$DescriptorImpl: hudson.util.FormValidation doCheckCredentialId(hudson.model.Item,java.lang.String)",
+    "io.plugins.perfecto.PerfectoBuildWrapper$DescriptorImpl: hudson.util.ListBoxModel doFillCredentialIdItems(hudson.model.ItemGroup,java.lang.String)",
+    "io.plugins.perfecto.credentials.PerfectoCredentials: hudson.util.FormValidation testAuthentication(java.lang.String,java.lang.String,java.lang.String)",
+    "io.plugins.perfecto.credentials.PerfectoCredentials: java.lang.String migrateToCredentials(java.lang.String,java.lang.String,java.lang.String,java.lang.String)",
+    "io.plugins.perfecto.credentials.PerfectoCredentials: io.plugins.perfecto.credentials.PerfectoCredentials getCredentialsById(hudson.model.Item,java.lang.String)",
+    "io.plugins.perfecto.PerfectoEnvironmentUtil: void outputEnvironmentVariable(java.util.Map,java.lang.String,java.lang.String,boolean)"
+  ],
+  "attempts": 1,
+  "errors": [],
+  "removed_entries": [],
+  "app_calls": 32,
+  "taint_calls": 26,
+  "llm_entries": [
+    {
+      "signature": "io.plugins.perfecto.PerfectoBuildWrapper$DescriptorImpl: hudson.util.FormValidation doCheckPerfectoConnectLocation(java.lang.String,hudson.model.Item)",
+      "tainted_params": [
+        0
+      ],
+      "why": "Web entry point validating the Perfecto Connect location path; attacker-controlled path string can lead to OS command injection if used in process execution."
+    },
+    {
+      "signature": "io.plugins.perfecto.PerfectoBuildWrapper$DescriptorImpl: hudson.util.FormValidation doCheckPerfectoConnectFile(java.lang.String,hudson.model.Item)",
+      "tainted_params": [
+        0
+      ],
+      "why": "Web entry point validating the Perfecto Connect file name; attacker-controlled filename can lead to OS command injection."
+    },
+    {
+      "signature": "io.plugins.perfecto.PerfectoBuildWrapper: hudson.tasks.BuildWrapper$Environment setUp(hudson.model.AbstractBuild,hudson.Launcher,hudson.model.BuildListener)",
+      "tainted_params": [],
+      "why": "Plugin hook that executes the Perfecto Connect process; while parameters are Jenkins objects, the wrapper's internal state (set via setters) contains the tainted paths/files."
+    },
+    {
+      "signature": "io.plugins.perfecto.PerfectoBuildWrapper: void setPerfectoConnectLocation(java.lang.String)",
+      "tainted_params": [
+        0
+      ],
+      "why": "Setter for the connect location path; directly stores attacker-controlled input used later in process execution."
+    },
+    {
+      "signature": "io.plugins.perfecto.PerfectoBuildWrapper: void setPerfectoConnectFile(java.lang.String)",
+      "tainted_params": [
+        0
+      ],
+      "why": "Setter for the connect file name; directly stores attacker-controlled input used later in process execution."
+    },
+    {
+      "signature": "io.plugins.perfecto.PerfectoBuildWrapper: void setPcParameters(java.lang.String)",
+      "tainted_params": [
+        0
+      ],
+      "why": "Setter for PC parameters which may contain command-line arguments for the Perfecto Connect process."
+    },
+    {
+      "signature": "io.plugins.perfecto.PerfectoBuildWrapper: void setTunnelIdCustomName(java.lang.String)",
+      "tainted_params": [
+        0
+      ],
+      "why": "Setter for tunnel ID custom name; if used in command construction, it could be injected."
+    },
+    {
+      "signature": "io.plugins.perfecto.PerfectoBuildWrapper: void setSecurityToken(java.lang.String)",
+      "tainted_params": [
+        0
+      ],
+      "why": "Setter for security token; while less likely to be executed as code, it is part of the configuration chain."
+    },
+    {
+      "signature": "io.plugins.perfecto.PerfectoBuildWrapper: void setCredentialId(java.lang.String)",
+      "tainted_params": [
+        0
+      ],
+      "why": "Setter for credential ID; part of the configuration chain."
+    },
+    {
+      "signature": "io.plugins.perfecto.credentials.PerfectoCredentials$DescriptorImpl: hudson.util.FormValidation doAuthenticate(java.lang.String,java.lang.String,java.lang.String)",
+      "tainted_params": [
+        0,
+        1,
+        2
+      ],
+      "why": "Web entry point for authentication; receives cloud name, username, and token. While primarily for API auth, it's a key entry point for credential validation."
+    },
+    {
+      "signature": "io.plugins.perfecto.credentials.PerfectoCredentials$DescriptorImpl: hudson.util.FormValidation doCheckApiKey(java.lang.String)",
+      "tainted_params": [
+        0
+      ],
+      "why": "Web entry point validating the API key/token."
+    },
+    {
+      "signature": "io.plugins.perfecto.credentials.PerfectoCredentials$DescriptorImpl: hudson.util.FormValidation doCheckCloudName(java.lang.String)",
+      "tainted_params": [
+        0
+      ],
+      "why": "Web entry point validating the cloud name."
+    },
+    {
+      "signature": "io.plugins.perfecto.credentials.PerfectoCredentials$DescriptorImpl: hudson.util.FormValidation doCheckUserName(java.lang.String)",
+      "tainted_params": [
+        0
+      ],
+      "why": "Web entry point validating the username."
+    },
+    {
+      "signature": "io.plugins.perfecto.PerfectoBuildWrapper$DescriptorImpl: hudson.util.FormValidation doCheckCredentialId(hudson.model.Item,java.lang.String)",
+      "tainted_params": [
+        1
+      ],
+      "why": "Web entry point validating the credential ID selection."
+    },
+    {
+      "signature": "io.plugins.perfecto.PerfectoBuildWrapper$DescriptorImpl: hudson.util.ListBoxModel doFillCredentialIdItems(hudson.model.ItemGroup,java.lang.String)",
+      "tainted_params": [
+        1
+      ],
+      "why": "Web entry point filling credential ID dropdown; receives user input for filtering."
+    },
+    {
+      "signature": "io.plugins.perfecto.credentials.PerfectoCredentials: hudson.util.FormValidation testAuthentication(java.lang.String,java.lang.String,java.lang.String)",
+      "tainted_params": [
+        0,
+        1,
+        2
+      ],
+      "why": "Static utility for testing authentication; receives cloud name, username, and token."
+    },
+    {
+      "signature": "io.plugins.perfecto.credentials.PerfectoCredentials: java.lang.String migrateToCredentials(java.lang.String,java.lang.String,java.lang.String,java.lang.String)",
+      "tainted_params": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "why": "Static utility for migrating credentials; receives cloud name, username, token, and possibly other config."
+    },
+    {
+      "signature": "io.plugins.perfecto.credentials.PerfectoCredentials: io.plugins.perfecto.credentials.PerfectoCredentials getCredentialsById(hudson.model.Item,java.lang.String)",
+      "tainted_params": [
+        1
+      ],
+      "why": "Static utility to retrieve credentials by ID; receives the ID string."
+    },
+    {
+      "signature": "io.plugins.perfecto.PerfectoEnvironmentUtil: void outputEnvironmentVariable(java.util.Map,java.lang.String,java.lang.String,boolean)",
+      "tainted_params": [
+        1,
+        2
+      ],
+      "why": "Static utility for setting environment variables; if environment variables are used in process execution, tainted values here are critical."
+    }
+  ],
+  "prompt_version": "3914024e"
+}

@@ -1,0 +1,23 @@
+{
+  "completed_records": 208,
+  "original_records": 208,
+  "changed_detection_flags": 0,
+  "fresh_calls": 31,
+  "fresh_prompt_tokens": 58689,
+  "fresh_completion_tokens": 9046,
+  "fresh_latency_s": 72.079,
+  "fresh_served_models": [
+    "qwen3.6:35b"
+  ],
+  "elapsed_s": 424.74,
+  "note": "N1/N2 raw responses fixed; N3 fresh answers only where corrected flow sets expose uncached prompts.",
+  "sampling_manifest_sha256": "64b43477dc7a6cd8e0e30f3c9e3acaec82052560b1abf9c3bdb6e39872de4bc7",
+  "changed_count_records": 11,
+  "expected_v2_off_failures": 8,
+  "original_labels_adopted_changes": 0,
+  "original_study_fresh_calls": 4978,
+  "original_study_fresh_tokens": 11758832,
+  "original_study_response_latency_s": 17396.073,
+  "provenance": "Original N1/N2 response draws and prompts/configurations/builds preserved. Only newly needed N3 responses requested from the configured SoCLaaS service with qwen3.6:35b. Count changes confined to zt-zip/fixed/run2 and spark/fixed/run1. Original records and labels archived separately.",
+  "timing_interpretation": "Stored per-stage usage can mix historical generated driver timing with cached-zero replay timing. Use the fresh-call ledger for actual recorded spend; configuration calls/tokens are logical workload with reuse."
+}

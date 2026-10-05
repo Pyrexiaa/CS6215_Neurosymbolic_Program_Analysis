@@ -1,0 +1,6 @@
+# Taint sources for generated drivers (nesy.Taint). Always part of every configuration.
+sources:
+  - { kind: call, method: "<nesy.Taint: java.lang.String src()>", index: result }
+  - { kind: call, method: "<nesy.Taint: byte[] srcBytes()>", index: result }
+  - { kind: call, method: "<nesy.Taint: java.io.InputStream srcStream()>", index: result }
+  - { kind: call, method: "<nesy.Taint: java.io.File srcFile()>", index: result }

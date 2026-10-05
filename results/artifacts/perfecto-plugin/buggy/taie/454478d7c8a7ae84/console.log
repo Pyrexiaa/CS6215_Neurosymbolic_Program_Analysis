@@ -1,0 +1,169 @@
+[Tai-e] starts ...
+Output directory: /Users/jiayulim/Documents/GitHub/CS6215_Neurosymbolic_Program_Analysis/work/runs/perfecto-plugin/buggy/taie/454478d7c8a7ae84
+Writing options to /Users/jiayulim/Documents/GitHub/CS6215_Neurosymbolic_Program_Analysis/work/runs/perfecto-plugin/buggy/taie/454478d7c8a7ae84/options.yml
+Writing log to /Users/jiayulim/Documents/GitHub/CS6215_Neurosymbolic_Program_Analysis/work/runs/perfecto-plugin/buggy/taie/454478d7c8a7ae84/tai-e.log
+java.version: 17.0.12
+java.version.date: 2024-07-16
+java.runtime.version: 17.0.12+8-LTS-286
+java.vendor: Oracle Corporation
+java.vendor.version: null
+os.name: Mac OS X
+os.version: 15.6
+os.arch: aarch64
+Available CPU cores: 10
+Total memory: 16384MB
+Tai-e Version: 0.5.4
+Tai-e Commit: 6474e7da62fb1f3b692331040e66692cbf4d630d
+Writing analysis plan to /Users/jiayulim/Documents/GitHub/CS6215_Neurosymbolic_Program_Analysis/work/runs/perfecto-plugin/buggy/taie/454478d7c8a7ae84/tai-e-plan.yml
+[WorldBuilder] starts ...
+Scanning /Users/jiayulim/Documents/GitHub/CS6215_Neurosymbolic_Program_Analysis/work/subjects/perfecto-plugin/buggy/target/classes ... 10 classes
+Scanning /Users/jiayulim/Documents/GitHub/CS6215_Neurosymbolic_Program_Analysis/work/runs/perfecto-plugin/buggy/run0/llm-driver/classes ... 2 classes
+Duplicate classes (total 6) introduced by jcl-over-slf4j-1.7.25.jar and commons-logging-1.2.jar,
+[org.apache.commons.logging.Log, org.apache.commons.logging.LogFactory, org.apache.commons.logging.LogConfigurationException, org.apache.commons.logging.impl.SimpleLog$1] ... (2 more) is founded in both containers
+Duplicate classes (total 37) introduced by xml-apis-1.4.01.jar and stax-api-1.0.1.jar,
+[javax.xml.stream.util.StreamReaderDelegate, javax.xml.stream.XMLInputFactory, javax.xml.stream.util.XMLEventAllocator, javax.xml.stream.FactoryFinder] ... (33 more) is founded in both containers
+Duplicate classes (total 1) introduced by xml-apis-1.4.01.jar and xpp3-1.1.4c.jar,
+[javax.xml.namespace.QName] is founded in both containers
+Duplicate classes (total 11) introduced by jsr250-api-1.0.jar and javax.annotation-api-1.2.jar,
+[javax.annotation.security.DenyAll, javax.annotation.PreDestroy, javax.annotation.Resources, javax.annotation.Generated] ... (7 more) is founded in both containers
+Duplicate classes (total 6) introduced by jsr250-api-1.0.jar and rt.jar,
+[javax.annotation.Resources, javax.annotation.Resource, javax.annotation.Resource$AuthenticationType, javax.annotation.PreDestroy] ... (2 more) is founded in both containers
+Duplicate classes (total 29) introduced by log4j-1.2.17.jar and log4j-over-slf4j-1.7.25.jar,
+[org.apache.log4j.BasicConfigurator, org.apache.log4j.PropertyConfigurator, org.apache.log4j.AppenderSkeleton, org.apache.log4j.xml.DOMConfigurator] ... (25 more) is founded in both containers
+Duplicate classes (total 4) introduced by annotations-3.0.1.jar and jcip-annotations-1.0.jar,
+[net.jcip.annotations.ThreadSafe, net.jcip.annotations.NotThreadSafe, net.jcip.annotations.Immutable, net.jcip.annotations.GuardedBy] is founded in both containers
+Duplicate classes (total 1) introduced by xml-apis-1.4.01.jar and jaxen-1.1-beta-11.jar,
+[org.w3c.dom.UserDataHandler] is founded in both containers
+Duplicate classes (total 4) introduced by xpp3-1.1.4c.jar and kxml2-2.3.0.jar,
+[org.xmlpull.v1.XmlSerializer, org.xmlpull.v1.XmlPullParserFactory, org.xmlpull.v1.XmlPullParserException, org.xmlpull.v1.XmlPullParser] is founded in both containers
+Duplicate classes (total 330) introduced by xml-apis-1.4.01.jar and rt.jar,
+[org.w3c.dom.DOMImplementationSource, javax.xml.stream.util.StreamReaderDelegate, org.w3c.dom.Text, org.w3c.dom.views.DocumentView] ... (326 more) is founded in both containers
+Duplicate classes (total 28) introduced by jline-2.12.jar and jansi-1.11.jar,
+[org.fusesource.jansi.Ansi, org.fusesource.jansi.AnsiRenderer$Code, org.fusesource.jansi.Ansi$NoAnsi, org.fusesource.jansi.Ansi$Color] ... (24 more) is founded in both containers
+Duplicate classes (total 22) introduced by findbugs-annotations-1.3.9-1.jar and spotbugs-annotations-3.1.11.jar,
+[edu.umd.cs.findbugs.annotations.DesireNoWarning, edu.umd.cs.findbugs.annotations.DefaultAnnotation, edu.umd.cs.findbugs.annotations.Priority, edu.umd.cs.findbugs.annotations.CheckReturnValue] ... (18 more) is founded in both containers
+Duplicate classes (total 3) introduced by stax-api-1.0-2.jar and stax-api-1.0.1.jar,
+[javax.xml.stream.FactoryFinder$1, javax.xml.stream.FactoryFinder$ClassLoaderFinderConcrete, javax.xml.stream.FactoryFinder$ClassLoaderFinder] is founded in both containers
+Duplicate classes (total 19) introduced by antlr4-runtime-4.5.jar and org.abego.treelayout.core-1.0.1.jar,
+[org.abego.treelayout.util.FixedNodeExtentProvider, org.abego.treelayout.internal.util.java.lang.IterableUtil$ReverseIterable, org.abego.treelayout.internal.util.java.util.ListUtil, org.abego.treelayout.internal.util.java.util.IteratorUtil] ... (15 more) is founded in both containers
+Duplicate classes (total 1) introduced by jenkins-test-harness-htmlunit-2.36.0-1.jar and rt.jar,
+[org.w3c.dom.html.HTMLDOMImplementation] is founded in both containers
+Duplicate classes (total 10) introduced by commons-beanutils-1.8.3.jar and commons-collections-3.2.2.jar,
+[org.apache.commons.collections.BufferUnderflowException, org.apache.commons.collections.FastHashMap$CollectionView, org.apache.commons.collections.FastHashMap$Values, org.apache.commons.collections.FastHashMap$CollectionView$CollectionViewIterator] ... (6 more) is founded in both containers
+Duplicate classes (total 71) introduced by remoting-3.29.jar and args4j-2.0.31.jar,
+[org.kohsuke.args4j.spi.MultiValueFieldSetter, org.kohsuke.args4j.spi.SubCommandHandler$1, org.kohsuke.args4j.spi.OptionHandler, org.kohsuke.args4j.OptionHandlerRegistry] ... (67 more) is founded in both containers
+Duplicate classes (total 13) introduced by remoting-3.29.jar and constant-pool-scanner-1.2.jar,
+[org.jenkinsci.constant_pool_scanner.ConstantPool$1$1, org.jenkinsci.constant_pool_scanner.MemberRefConstant, org.jenkinsci.constant_pool_scanner.InterfaceMethodRefConstant, org.jenkinsci.constant_pool_scanner.MethodRefConstant] ... (9 more) is founded in both containers
+Duplicate classes (total 2) introduced by annotations-3.0.1.jar and spotbugs-annotations-3.1.11.jar,
+[edu.umd.cs.findbugs.annotations.SuppressFBWarnings, edu.umd.cs.findbugs.annotations.Confidence] is founded in both containers
+Duplicate classes (total 35) introduced by jsr305-1.3.9.jar and annotations-3.0.1.jar,
+[javax.annotation.Nonnull$Checker, javax.annotation.Nonnegative, javax.annotation.ParametersAreNullableByDefault, javax.annotation.WillClose] ... (31 more) is founded in both containers
+Duplicate classes (total 1) introduced by stax-api-1.0-2.jar and rt.jar,
+[javax.xml.stream.FactoryFinder$1] is founded in both containers
+Duplicate classes (total 34) introduced by activation-1.1.1-hudson-1.jar and rt.jar,
+[javax.activation.DataContentHandlerFactory, com.sun.activation.registries.MailcapParseException, javax.activation.ActivationDataFlavor, com.sun.activation.registries.MailcapTokenizer] ... (30 more) is founded in both containers
+Duplicate classes (total 18) introduced by findbugs-annotations-1.3.9-1.jar and annotations-3.0.1.jar,
+[edu.umd.cs.findbugs.annotations.DefaultAnnotation, edu.umd.cs.findbugs.annotations.Priority, edu.umd.cs.findbugs.annotations.CheckReturnValue, edu.umd.cs.findbugs.annotations.UnknownNullness] ... (14 more) is founded in both containers
+Duplicate classes (total 34) introduced by xml-apis-1.4.01.jar and stax-api-1.0-2.jar,
+[javax.xml.stream.util.StreamReaderDelegate, javax.xml.stream.XMLInputFactory, javax.xml.stream.util.XMLEventAllocator, javax.xml.stream.FactoryFinder] ... (30 more) is founded in both containers
+
+Cannot resolve class org.bouncycastle.openssl.PEMWriter; treating it as phantom class.
+Cannot resolve class org.bouncycastle.openssl.PEMParser; treating it as phantom class.
+Cannot resolve class org.bouncycastle.openssl.jcajce.JcePEMDecryptorProviderBuilder; treating it as phantom class.
+Cannot resolve class org.bouncycastle.openssl.PEMKeyPair; treating it as phantom class.
+Cannot resolve class org.bouncycastle.openssl.jcajce.JcaPEMKeyConverter; treating it as phantom class.
+Cannot resolve class org.bouncycastle.openssl.PEMEncryptedKeyPair; treating it as phantom class.
+Cannot resolve class org.bouncycastle.openssl.PEMDecryptorProvider; treating it as phantom class.
+Cannot resolve class edu.emory.mathcs.backport.java.util.concurrent.ConcurrentHashMap; treating it as phantom class.
+Cannot resolve class edu.emory.mathcs.backport.java.util.concurrent.CopyOnWriteArraySet; treating it as phantom class.
+Cannot resolve class net.sf.cglib.proxy.CallbackFilter; treating it as phantom class.
+Cannot resolve class net.sf.cglib.proxy.Enhancer; treating it as phantom class.
+Cannot resolve class net.sf.cglib.proxy.Callback; treating it as phantom class.
+Cannot resolve class javax.faces.context.FacesContext; treating it as phantom class.
+Cannot resolve class net.sf.cglib.proxy.NoOp; treating it as phantom class.
+Cannot resolve class net.sf.cglib.proxy.MethodProxy; treating it as phantom class.
+Cannot resolve class javax.faces.context.ExternalContext; treating it as phantom class.
+Cannot resolve class net.sf.cglib.proxy.MethodInterceptor; treating it as phantom class.
+Cannot resolve class org.apache.mina.transport.socket.nio.NioProcessor; treating it as phantom class.
+Cannot resolve class org.apache.mina.core.service.SimpleIoProcessorPool; treating it as phantom class.
+Cannot resolve class org.apache.mina.core.service.IoProcessor; treating it as phantom class.
+Cannot resolve class org.apache.mina.core.service.IoService; treating it as phantom class.
+Cannot resolve class org.apache.mina.core.service.IoHandler; treating it as phantom class.
+Cannot resolve class org.apache.mina.transport.socket.nio.NioSocketConnector; treating it as phantom class.
+Cannot resolve class org.apache.mina.core.future.IoFuture; treating it as phantom class.
+Cannot resolve class org.apache.mina.core.session.IoSession; treating it as phantom class.
+Cannot resolve class org.apache.mina.transport.socket.SocketSessionConfig; treating it as phantom class.
+Cannot resolve class org.apache.mina.transport.socket.nio.NioSocketAcceptor; treating it as phantom class.
+Cannot resolve class org.apache.mina.core.service.IoAcceptor; treating it as phantom class.
+Cannot resolve class org.apache.mina.core.future.IoFutureListener; treating it as phantom class.
+Cannot resolve class org.apache.mina.core.service.IoConnector; treating it as phantom class.
+Cannot resolve class org.apache.mina.core.future.ConnectFuture; treating it as phantom class.
+Cannot resolve class org.apache.mina.core.session.IoSessionConfig; treating it as phantom class.
+Cannot resolve class org.apache.mina.core.session.IdleStatus; treating it as phantom class.
+Cannot resolve class org.apache.mina.core.buffer.IoBuffer; treating it as phantom class.
+Cannot resolve class org.apache.mina.core.RuntimeIoException; treating it as phantom class.
+Cannot resolve class org.apache.mina.core.future.CloseFuture; treating it as phantom class.
+Cannot resolve class org.apache.mina.core.future.WriteFuture; treating it as phantom class.
+18957 classes with 171264 methods in the world
+[WorldBuilder] elapsed time: 0.73s; CPU usage: start 21.99%, peak 12.11%, end 70.39%; Memory usage: start 47MB, peak 47MB, end 360MB
+[pta] starts ...
+Loading taint config from /Users/jiayulim/Documents/GitHub/CS6215_Neurosymbolic_Program_Analysis/work/runs/perfecto-plugin/buggy/configs/v3-noV2/run0/taint-config
+Exception in thread "main" java.lang.ArrayIndexOutOfBoundsException: Index 0 out of bounds for length 0
+	at java.base/java.util.ImmutableCollections$ListN.get(ImmutableCollections.java:680)
+	at pascal.taie.language.classes.JMethod.getParamType(JMethod.java:123)
+	at pascal.taie.analysis.pta.plugin.taint.YamlTaintConfigProvider$Deserializer.getMethodType(YamlTaintConfigProvider.java:257)
+	at pascal.taie.analysis.pta.plugin.taint.YamlTaintConfigProvider$Deserializer.toIndexRef(YamlTaintConfigProvider.java:349)
+	at pascal.taie.analysis.pta.plugin.taint.YamlTaintConfigProvider$Deserializer.lambda$deserializeSinks$3(YamlTaintConfigProvider.java:274)
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:197)
+	at java.base/java.util.Iterator.forEachRemaining(Iterator.java:133)
+	at java.base/java.util.Spliterators$IteratorSpliterator.forEachRemaining(Spliterators.java:1845)
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:509)
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:499)
+	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:575)
+	at java.base/java.util.stream.AbstractPipeline.evaluateToArrayNode(AbstractPipeline.java:260)
+	at java.base/java.util.stream.ReferencePipeline.toArray(ReferencePipeline.java:616)
+	at java.base/java.util.stream.ReferencePipeline.toArray(ReferencePipeline.java:622)
+	at java.base/java.util.stream.ReferencePipeline.toList(ReferencePipeline.java:627)
+	at pascal.taie.analysis.pta.plugin.taint.YamlTaintConfigProvider$Deserializer.deserializeSinks(YamlTaintConfigProvider.java:276)
+	at pascal.taie.analysis.pta.plugin.taint.YamlTaintConfigProvider$Deserializer.deserialize(YamlTaintConfigProvider.java:148)
+	at pascal.taie.analysis.pta.plugin.taint.YamlTaintConfigProvider$Deserializer.deserialize(YamlTaintConfigProvider.java:131)
+	at com.fasterxml.jackson.databind.deser.DefaultDeserializationContext.readRootValue(DefaultDeserializationContext.java:342)
+	at com.fasterxml.jackson.databind.ObjectMapper._readMapAndClose(ObjectMapper.java:4971)
+	at com.fasterxml.jackson.databind.ObjectMapper.readValue(ObjectMapper.java:3752)
+	at pascal.taie.analysis.pta.plugin.taint.YamlTaintConfigProvider.loadSingle(YamlTaintConfigProvider.java:117)
+	at pascal.taie.analysis.pta.plugin.taint.YamlTaintConfigProvider.lambda$get$0(YamlTaintConfigProvider.java:101)
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:197)
+	at java.base/java.util.stream.ReferencePipeline$2$1.accept(ReferencePipeline.java:179)
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:197)
+	at java.base/java.util.Iterator.forEachRemaining(Iterator.java:133)
+	at java.base/java.util.Spliterators$IteratorSpliterator.forEachRemaining(Spliterators.java:1845)
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:509)
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:499)
+	at java.base/java.util.stream.ForEachOps$ForEachOp.evaluateSequential(ForEachOps.java:150)
+	at java.base/java.util.stream.ForEachOps$ForEachOp$OfRef.evaluateSequential(ForEachOps.java:173)
+	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+	at java.base/java.util.stream.ReferencePipeline.forEach(ReferencePipeline.java:596)
+	at pascal.taie.analysis.pta.plugin.taint.YamlTaintConfigProvider.get(YamlTaintConfigProvider.java:102)
+	at pascal.taie.analysis.pta.plugin.taint.TaintAnalysis.initialize(TaintAnalysis.java:137)
+	at pascal.taie.analysis.pta.plugin.taint.TaintAnalysis.setSolver(TaintAnalysis.java:112)
+	at pascal.taie.analysis.pta.plugin.CompositePlugin.lambda$setSolver$0(CompositePlugin.java:102)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at pascal.taie.analysis.pta.plugin.CompositePlugin.setSolver(CompositePlugin.java:102)
+	at pascal.taie.analysis.pta.PointerAnalysis.setPlugin(PointerAnalysis.java:171)
+	at pascal.taie.analysis.pta.PointerAnalysis.runAnalysis(PointerAnalysis.java:120)
+	at pascal.taie.analysis.pta.PointerAnalysis.analyze(PointerAnalysis.java:109)
+	at pascal.taie.analysis.pta.PointerAnalysis.analyze(PointerAnalysis.java:66)
+	at pascal.taie.analysis.AnalysisManager.runProgramAnalysis(AnalysisManager.java:148)
+	at pascal.taie.analysis.AnalysisManager.runAnalysis(AnalysisManager.java:135)
+	at pascal.taie.analysis.AnalysisManager.lambda$execute$0(AnalysisManager.java:104)
+	at pascal.taie.util.Monitor.runAndCount(Monitor.java:249)
+	at pascal.taie.analysis.AnalysisManager.lambda$execute$1(AnalysisManager.java:103)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at pascal.taie.analysis.AnalysisManager.execute(AnalysisManager.java:102)
+	at pascal.taie.Main.executePlan(Main.java:155)
+	at pascal.taie.Main.lambda$main$0(Main.java:61)
+	at pascal.taie.util.Monitor.lambda$runAndCount$1(Monitor.java:280)
+	at pascal.taie.util.Monitor.runAndCount(Monitor.java:249)
+	at pascal.taie.util.Monitor.runAndCount(Monitor.java:279)
+	at pascal.taie.util.Monitor.runAndCount(Monitor.java:265)
+	at pascal.taie.Main.main(Main.java:51)

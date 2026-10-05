@@ -1,0 +1,12 @@
+{
+  "N1-driver": {
+    "calls": 1,
+    "cached_calls": 1,
+    "prompt_tokens": 2762,
+    "completion_tokens": 2872,
+    "fresh_prompt_tokens": 0,
+    "fresh_completion_tokens": 0,
+    "latency_s": 0.0,
+    "truncated": 0
+  }
+}

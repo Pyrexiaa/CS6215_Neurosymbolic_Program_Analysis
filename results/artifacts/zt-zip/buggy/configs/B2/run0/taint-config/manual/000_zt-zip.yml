@@ -1,0 +1,44 @@
+# B2 manual taint specification for zt-zip (CVE-2018-1002201).
+# Added on top of the B1 base configuration (Tai-e commonly-used config for CWE-022).
+#
+# PROVENANCE (report this): written by Claude (AI assistant) on date omitted at the student's request,
+# one pass per subject, time box 30 min (actual times in docs/TODO.md). Inputs: the candidate list
+# work/manual-candidates/zt-zip.md (the same API list N2 receives) and the buggy-version source.
+# Not opened: CVE advisory, fix commit/diff, ground truth (fix_info.csv). Caveats: the author (an LLM)
+# may know these public CVEs, and B1 output of some subjects was seen while debugging the pipeline
+# (docs/iterations.md I-19). Each entry says why it was added. Pristine templates: work/b2-original/.
+#
+# Format: "<pkg.Cls: retType name(argType1,argType2)>"; index = result | base | 0,1,... | "N[*]" (array elements).
+
+# Thinking as a Tai-e user hunting path traversal in a ZIP library:
+# * The attacker controls the ARCHIVE, so entry names read from it are untrusted. The destination
+#   directory and the archive file are chosen by the calling application (trusted API arguments).
+# * The commonly-used config marks File(File,String) only on argument 0 (the parent); the child name
+#   (argument 1) is where an entry name like "../../x" ends up.
+# * Files opened for writing are the real impact, so the File object must carry taint to them.
+sources:
+  # entry name stored in the archive
+  - { kind: call, method: "<java.util.zip.ZipEntry: java.lang.String getName()>", index: result }
+
+sinks:
+  # child path component of a new File
+  - { method: "<java.io.File: void <init>(java.io.File,java.lang.String)>", index: 1 }
+  # files created/overwritten from a (possibly) tainted File object
+  - { method: "<java.io.FileOutputStream: void <init>(java.io.File)>", index: 0 }
+  - { method: "<java.io.FileOutputStream: void <init>(java.io.File,boolean)>", index: 0 }
+
+transfers:
+  # a File built from a tainted child name is tainted (parent = trusted destination, not propagated)
+  - { method: "<java.io.File: void <init>(java.io.File,java.lang.String)>", from: 1, to: base }
+  - { method: "<java.io.File: void <init>(java.lang.String)>", from: 0, to: base }
+  # path views of a tainted File
+  - { method: "<java.io.File: java.io.File getParentFile()>", from: base, to: result }
+  - { method: "<java.io.File: java.lang.String getPath()>", from: base, to: result }
+  - { method: "<java.io.File: java.lang.String getAbsolutePath()>", from: base, to: result }
+  - { method: "<java.io.File: java.io.File getAbsoluteFile()>", from: base, to: result }
+  # entry names copied into new ZipEntry objects (name mappers / repacking)
+  - { method: "<java.util.zip.ZipEntry: void <init>(java.lang.String)>", from: 0, to: base }
+
+# No library sanitizer: canonical-path checks are app code and their correctness is what is in
+# question, so they are not declared as sanitizers.
+sanitizers: []

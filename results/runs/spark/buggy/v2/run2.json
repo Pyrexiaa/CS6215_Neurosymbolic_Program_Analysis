@@ -1,0 +1,3088 @@
+{
+  "subject": "spark",
+  "slug": "perwendel__spark_CVE-2016-9177_2.5.1",
+  "cve": "CVE-2016-9177",
+  "cwe": "CWE-022",
+  "version": "buggy",
+  "config": "v2",
+  "run": 2,
+  "config_def": {
+    "driver": "llm",
+    "spec": [
+      "base",
+      "llm"
+    ],
+    "triage": false
+  },
+  "model": "default",
+  "served_models": [
+    "qwen3.6:35b"
+  ],
+  "prompt_versions": {
+    "n1_driver": "3914024e",
+    "n1_repair": "0393a228",
+    "n2_spec": "647ee643",
+    "n3_triage": "e5fc00c6"
+  },
+  "taie_settings": {
+    "jar": "/Users/jiayulim/Documents/GitHub/CS6215_Neurosymbolic_Program_Analysis/tools/tai-e-all-0.5.4.jar",
+    "java_bin": "/Library/Java/JavaVirtualMachines/jdk-17.jdk/Contents/Home/bin/java",
+    "jre_version": "8",
+    "home": "/Users/jiayulim/Documents/GitHub/CS6215_Neurosymbolic_Program_Analysis/work/taie-home",
+    "cs": "1-call",
+    "only_app": "False",
+    "time_limit_s": "1800",
+    "wall_timeout_s": "3600",
+    "xmx": "6g",
+    "extra_pta_options": "{}"
+  },
+  "facts": {
+    "app_classes": 111,
+    "app_methods": 890,
+    "external_apis": 325,
+    "external_apis_jdk": 281,
+    "entry_candidates": 218,
+    "entry_kinds": {
+      "servlet": 2,
+      "library-api": 216
+    }
+  },
+  "subject_stats": {
+    "java_files": 91,
+    "non_blank_loc": 10486,
+    "dependency_jars": 35,
+    "modules_analysed": 1
+  },
+  "gt_methods": [
+    "ClassPathResourceHandler.getResource",
+    "ExternalResourceHandler.getResource",
+    "StaticFilesConfiguration.consumeWithFileResourceHandlers",
+    "StaticFilesConfiguration.configure",
+    "StaticFilesConfiguration.setExpireTimeSeconds",
+    "StaticFilesConfiguration.configureJarCase",
+    "StringUtils.toString"
+  ],
+  "driver": {
+    "kind": "llm",
+    "ok": true,
+    "entries": 12,
+    "attempts": 3,
+    "removed_entries": 0,
+    "app_calls": 16,
+    "taint_calls": 7,
+    "errors": 2,
+    "entry_mismatches": 0
+  },
+  "spec": {
+    "candidates": 286,
+    "batches": 12,
+    "samples": 3,
+    "accepted": 38,
+    "accepted_by_role": {
+      "sink": 10,
+      "transfer": 13,
+      "source": 15
+    },
+    "rejected": 11,
+    "rejected_by_reason": {
+      "to:base-of-static": 3,
+      "from:array-ref-on-non-array": 2,
+      "to:array-ref-on-non-array": 1,
+      "primitive-type": 3,
+      "transfer-to-self": 2
+    },
+    "extra_signatures": 0,
+    "parse_failures": 0,
+    "mean_vote_agreement": 0.928,
+    "validators": true,
+    "vote_version": 2
+  },
+  "manual_spec_entries": null,
+  "taie": {
+    "ok": true,
+    "returncode": 0,
+    "elapsed_s": 13.09,
+    "timed_out": false,
+    "detected_raw": 3198,
+    "reachable_methods": 11227,
+    "out_dir": "/Users/jiayulim/Documents/GitHub/CS6215_Neurosymbolic_Program_Analysis/work/runs/spark/buggy/taie/b890187df9cd4604",
+    "error": "",
+    "invalid_spec_entries": [],
+    "expected_failure": false
+  },
+  "counts": {
+    "raw": 3198,
+    "filtered": 224,
+    "reported": 224,
+    "reported_gt": 5,
+    "reported_gt_weak": 61,
+    "removed_by_triage": 0,
+    "removed_gt_by_triage": 0,
+    "v3_rejected": 0,
+    "trusted_sink_overrides": 0
+  },
+  "detected": true,
+  "usage": {
+    "N1": {
+      "calls": 3,
+      "cached_calls": 0,
+      "prompt_tokens": 4740,
+      "completion_tokens": 2653,
+      "fresh_prompt_tokens": 4740,
+      "fresh_completion_tokens": 2653,
+      "latency_s": 18.9,
+      "truncated": 0
+    },
+    "N2": {
+      "calls": 36,
+      "cached_calls": 36,
+      "prompt_tokens": 77733,
+      "completion_tokens": 49345,
+      "fresh_prompt_tokens": 0,
+      "fresh_completion_tokens": 0,
+      "latency_s": 0.0,
+      "truncated": 0
+    },
+    "N3": {},
+    "total": {
+      "calls": 39,
+      "cached_calls": 36,
+      "prompt_tokens": 82473,
+      "completion_tokens": 51998,
+      "fresh_prompt_tokens": 4740,
+      "fresh_completion_tokens": 2653,
+      "latency_s": 18.9,
+      "truncated": 0
+    }
+  },
+  "timings": {
+    "facts_s": 3.21,
+    "driver_s": 0.0,
+    "spec_s": 0.0,
+    "taie_s": 0.01,
+    "triage_s": 0.0,
+    "total_s": 3.34
+  },
+  "flows": [
+    {
+      "id": "91186459a9",
+      "key": "DRIVER => <org.eclipse.jetty.util.Loader: java.net.URL getResource(java.lang.Class,java.lang.String)>@L54/0",
+      "source": "<nesy.NesyDriver: void main(java.lang.String[])>[20@L42] %v16 = invokestatic nesy.Taint.src()/result",
+      "sink": "<org.eclipse.jetty.util.Loader: java.net.URL getResource(java.lang.Class,java.lang.String)>[4@L54] url = invokevirtual context_loader.getResource(name)/0",
+      "sink_method": "<org.eclipse.jetty.util.Loader: java.net.URL getResource(java.lang.Class,java.lang.String)>",
+      "sink_line": 54,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "b62650655b",
+      "key": "DRIVER => <org.eclipse.jetty.util.Loader: java.net.URL getResource(java.lang.Class,java.lang.String)>@L60/0",
+      "source": "<nesy.NesyDriver: void main(java.lang.String[])>[20@L42] %v16 = invokestatic nesy.Taint.src()/result",
+      "sink": "<org.eclipse.jetty.util.Loader: java.net.URL getResource(java.lang.Class,java.lang.String)>[10@L60] url = invokevirtual load_loader.getResource(name)/0",
+      "sink_method": "<org.eclipse.jetty.util.Loader: java.net.URL getResource(java.lang.Class,java.lang.String)>",
+      "sink_line": 60,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "da2f4c2deb",
+      "key": "DRIVER => <org.slf4j.impl.SimpleLogger: java.io.PrintStream computeTargetStream(java.lang.String)>@L219/0",
+      "source": "<nesy.NesyDriver: void main(java.lang.String[])>[20@L42] %v16 = invokestatic nesy.Taint.src()/result",
+      "sink": "<org.slf4j.impl.SimpleLogger: java.io.PrintStream computeTargetStream(java.lang.String)>[12@L219] invokespecial fos.<init>(logFile)/0",
+      "sink_method": "<org.slf4j.impl.SimpleLogger: java.io.PrintStream computeTargetStream(java.lang.String)>",
+      "sink_line": 219,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "fea0e6db7a",
+      "key": "DRIVER => <spark.resource.ClassPathResource: boolean exists()>@L120/0",
+      "source": "<nesy.NesyDriver: void main(java.lang.String[])>[20@L42] %v16 = invokestatic nesy.Taint.src()/result",
+      "sink": "<spark.resource.ClassPathResource: boolean exists()>[6@L120] url = invokevirtual %v4.getResource(%v5)/0",
+      "sink_method": "<spark.resource.ClassPathResource: boolean exists()>",
+      "sink_line": 120,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "594594303a",
+      "key": "DRIVER => <spark.resource.ClassPathResource: boolean exists()>@L122/0",
+      "source": "<nesy.NesyDriver: void main(java.lang.String[])>[20@L42] %v16 = invokestatic nesy.Taint.src()/result",
+      "sink": "<spark.resource.ClassPathResource: boolean exists()>[10@L122] url = invokevirtual %v6.getResource(%v7)/0",
+      "sink_method": "<spark.resource.ClassPathResource: boolean exists()>",
+      "sink_line": 122,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "e9ffc12644",
+      "key": "DRIVER => <spark.resource.ClassPathResource: java.io.InputStream getInputStream()>@L139/0",
+      "source": "<nesy.NesyDriver: void main(java.lang.String[])>[20@L42] %v16 = invokestatic nesy.Taint.src()/result",
+      "sink": "<spark.resource.ClassPathResource: java.io.InputStream getInputStream()>[4@L139] is = invokevirtual %v4.getResourceAsStream(%v5)/0",
+      "sink_method": "<spark.resource.ClassPathResource: java.io.InputStream getInputStream()>",
+      "sink_line": 139,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "0fa6f8d3cb",
+      "key": "DRIVER => <spark.resource.ClassPathResource: java.io.InputStream getInputStream()>@L141/0",
+      "source": "<nesy.NesyDriver: void main(java.lang.String[])>[20@L42] %v16 = invokestatic nesy.Taint.src()/result",
+      "sink": "<spark.resource.ClassPathResource: java.io.InputStream getInputStream()>[8@L141] is = invokevirtual %v6.getResourceAsStream(%v7)/0",
+      "sink_method": "<spark.resource.ClassPathResource: java.io.InputStream getInputStream()>",
+      "sink_line": 141,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "dcf2402d4c",
+      "key": "DRIVER => <spark.resource.ClassPathResource: java.net.URL getURL()>@L161/0",
+      "source": "<nesy.NesyDriver: void main(java.lang.String[])>[20@L42] %v16 = invokestatic nesy.Taint.src()/result",
+      "sink": "<spark.resource.ClassPathResource: java.net.URL getURL()>[4@L161] url = invokevirtual %v4.getResource(%v5)/0",
+      "sink_method": "<spark.resource.ClassPathResource: java.net.URL getURL()>",
+      "sink_line": 161,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "06a5cf4f0a",
+      "key": "DRIVER => <spark.resource.ClassPathResource: java.net.URL getURL()>@L163/0",
+      "source": "<nesy.NesyDriver: void main(java.lang.String[])>[20@L42] %v16 = invokestatic nesy.Taint.src()/result",
+      "sink": "<spark.resource.ClassPathResource: java.net.URL getURL()>[8@L163] url = invokevirtual %v6.getResource(%v7)/0",
+      "sink_method": "<spark.resource.ClassPathResource: java.net.URL getURL()>",
+      "sink_line": 163,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "b12ddb9bb6",
+      "key": "DRIVER => <spark.resource.ExternalResource: void <init>(java.lang.String)>@L40/0",
+      "source": "<nesy.NesyDriver: void main(java.lang.String[])>[20@L42] %v16 = invokestatic nesy.Taint.src()/result",
+      "sink": "<spark.resource.ExternalResource: void <init>(java.lang.String)>[3@L40] invokespecial %v2.<init>(%v3)/0",
+      "sink_method": "<spark.resource.ExternalResource: void <init>(java.lang.String)>",
+      "sink_line": 40,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "b25dc02f2f",
+      "key": "DRIVER => <spark.resource.JarResourceHandler: java.io.InputStream loadStream(java.lang.String)>@L109/0",
+      "source": "<nesy.NesyDriver: void main(java.lang.String[])>[20@L42] %v16 = invokestatic nesy.Taint.src()/result",
+      "sink": "<spark.resource.JarResourceHandler: java.io.InputStream loadStream(java.lang.String)>[1@L109] %v3 = invokevirtual %c2.getResourceAsStream(path)/0",
+      "sink_method": "<spark.resource.JarResourceHandler: java.io.InputStream loadStream(java.lang.String)>",
+      "sink_line": 109,
+      "gt": [],
+      "gt_weak": [
+        "ClassPathResourceHandler.getResource",
+        "ExternalResourceHandler.getResource",
+        "StaticFilesConfiguration.configureJarCase",
+        "StaticFilesConfiguration.configure"
+      ],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "5832b1d98e",
+      "key": "DRIVER => <spark.utils.ResourceUtils: java.io.File getFile(java.lang.String)>@L168/0",
+      "source": "<nesy.NesyDriver: void main(java.lang.String[])>[20@L42] %v16 = invokestatic nesy.Taint.src()/result",
+      "sink": "<spark.utils.ResourceUtils: java.io.File getFile(java.lang.String)>[18@L168] url = invokevirtual %v18.getResource(path)/0",
+      "sink_method": "<spark.utils.ResourceUtils: java.io.File getFile(java.lang.String)>",
+      "sink_line": 168,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "6d50443088",
+      "key": "DRIVER => <spark.utils.ResourceUtils: java.io.File getFile(java.lang.String)>@L182/0",
+      "source": "<nesy.NesyDriver: void main(java.lang.String[])>[20@L42] %v16 = invokestatic nesy.Taint.src()/result",
+      "sink": "<spark.utils.ResourceUtils: java.io.File getFile(java.lang.String)>[37@L182] invokespecial %v31.<init>(resourceLocation)/0",
+      "sink_method": "<spark.utils.ResourceUtils: java.io.File getFile(java.lang.String)>",
+      "sink_line": 182,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "c43a43deba",
+      "key": "DRIVER => <spark.utils.ResourceUtils: java.io.File getFile(java.net.URL,java.lang.String)>@L219/0",
+      "source": "<nesy.NesyDriver: void main(java.lang.String[])>[20@L42] %v16 = invokestatic nesy.Taint.src()/result",
+      "sink": "<spark.utils.ResourceUtils: java.io.File getFile(java.net.URL,java.lang.String)>[20@L219] invokespecial %v15.<init>(%v17)/0",
+      "sink_method": "<spark.utils.ResourceUtils: java.io.File getFile(java.net.URL,java.lang.String)>",
+      "sink_line": 219,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "00b5a94768",
+      "key": "DRIVER => <spark.utils.ResourceUtils: java.io.File getFile(java.net.URL,java.lang.String)>@L222/0",
+      "source": "<nesy.NesyDriver: void main(java.lang.String[])>[20@L42] %v16 = invokestatic nesy.Taint.src()/result",
+      "sink": "<spark.utils.ResourceUtils: java.io.File getFile(java.net.URL,java.lang.String)>[25@L222] invokespecial %v19.<init>(%v20)/0",
+      "sink_method": "<spark.utils.ResourceUtils: java.io.File getFile(java.net.URL,java.lang.String)>",
+      "sink_line": 222,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "ba411df1cf",
+      "key": "DRIVER => <spark.staticfiles.StaticFilesConfiguration: boolean configureJarCase(java.lang.String,spark.resource.ClassPathResource)>@L183/0",
+      "source": "<nesy.NesyDriver: void main(java.lang.String[])>[56@L74] %v36 = invokestatic nesy.Taint.src()/result",
+      "sink": "<spark.staticfiles.StaticFilesConfiguration: boolean configureJarCase(java.lang.String,spark.resource.ClassPathResource)>[8@L183] stream = invokevirtual %c9.getResourceAsStream(folder)/0",
+      "sink_method": "<spark.staticfiles.StaticFilesConfiguration: boolean configureJarCase(java.lang.String,spark.resource.ClassPathResource)>",
+      "sink_line": 183,
+      "gt": [
+        "StaticFilesConfiguration.configureJarCase",
+        "StaticFilesConfiguration.configure"
+      ],
+      "gt_weak": [],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "2ab7b4dc72",
+      "key": "<org.eclipse.jetty.server.session.HashSessionIdManager: void addSession(javax.servlet.http.HttpSession)>@L121/result => <org.eclipse.jetty.util.Loader: java.net.URL getResource(java.lang.Class,java.lang.String)>@L54/0",
+      "source": "<org.eclipse.jetty.server.session.HashSessionIdManager: void addSession(javax.servlet.http.HttpSession)>[0@L121] %v7 = invokeinterface session.getId()/result",
+      "sink": "<org.eclipse.jetty.util.Loader: java.net.URL getResource(java.lang.Class,java.lang.String)>[4@L54] url = invokevirtual context_loader.getResource(name)/0",
+      "sink_method": "<org.eclipse.jetty.util.Loader: java.net.URL getResource(java.lang.Class,java.lang.String)>",
+      "sink_line": 54,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "05916c9b55",
+      "key": "<org.eclipse.jetty.server.session.HashSessionIdManager: void addSession(javax.servlet.http.HttpSession)>@L121/result => <org.eclipse.jetty.util.Loader: java.net.URL getResource(java.lang.Class,java.lang.String)>@L60/0",
+      "source": "<org.eclipse.jetty.server.session.HashSessionIdManager: void addSession(javax.servlet.http.HttpSession)>[0@L121] %v7 = invokeinterface session.getId()/result",
+      "sink": "<org.eclipse.jetty.util.Loader: java.net.URL getResource(java.lang.Class,java.lang.String)>[10@L60] url = invokevirtual load_loader.getResource(name)/0",
+      "sink_method": "<org.eclipse.jetty.util.Loader: java.net.URL getResource(java.lang.Class,java.lang.String)>",
+      "sink_line": 60,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "5d622ee177",
+      "key": "<org.eclipse.jetty.server.session.HashSessionIdManager: void addSession(javax.servlet.http.HttpSession)>@L121/result => <org.slf4j.impl.SimpleLogger: java.io.PrintStream computeTargetStream(java.lang.String)>@L219/0",
+      "source": "<org.eclipse.jetty.server.session.HashSessionIdManager: void addSession(javax.servlet.http.HttpSession)>[0@L121] %v7 = invokeinterface session.getId()/result",
+      "sink": "<org.slf4j.impl.SimpleLogger: java.io.PrintStream computeTargetStream(java.lang.String)>[12@L219] invokespecial fos.<init>(logFile)/0",
+      "sink_method": "<org.slf4j.impl.SimpleLogger: java.io.PrintStream computeTargetStream(java.lang.String)>",
+      "sink_line": 219,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "b0ff7d7476",
+      "key": "<org.eclipse.jetty.server.session.HashSessionIdManager: void addSession(javax.servlet.http.HttpSession)>@L121/result => <spark.resource.ClassPathResource: boolean exists()>@L120/0",
+      "source": "<org.eclipse.jetty.server.session.HashSessionIdManager: void addSession(javax.servlet.http.HttpSession)>[0@L121] %v7 = invokeinterface session.getId()/result",
+      "sink": "<spark.resource.ClassPathResource: boolean exists()>[6@L120] url = invokevirtual %v4.getResource(%v5)/0",
+      "sink_method": "<spark.resource.ClassPathResource: boolean exists()>",
+      "sink_line": 120,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "298493104a",
+      "key": "<org.eclipse.jetty.server.session.HashSessionIdManager: void addSession(javax.servlet.http.HttpSession)>@L121/result => <spark.resource.ClassPathResource: boolean exists()>@L122/0",
+      "source": "<org.eclipse.jetty.server.session.HashSessionIdManager: void addSession(javax.servlet.http.HttpSession)>[0@L121] %v7 = invokeinterface session.getId()/result",
+      "sink": "<spark.resource.ClassPathResource: boolean exists()>[10@L122] url = invokevirtual %v6.getResource(%v7)/0",
+      "sink_method": "<spark.resource.ClassPathResource: boolean exists()>",
+      "sink_line": 122,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "50f9e3901c",
+      "key": "<org.eclipse.jetty.server.session.HashSessionIdManager: void addSession(javax.servlet.http.HttpSession)>@L121/result => <spark.resource.ClassPathResource: java.io.InputStream getInputStream()>@L139/0",
+      "source": "<org.eclipse.jetty.server.session.HashSessionIdManager: void addSession(javax.servlet.http.HttpSession)>[0@L121] %v7 = invokeinterface session.getId()/result",
+      "sink": "<spark.resource.ClassPathResource: java.io.InputStream getInputStream()>[4@L139] is = invokevirtual %v4.getResourceAsStream(%v5)/0",
+      "sink_method": "<spark.resource.ClassPathResource: java.io.InputStream getInputStream()>",
+      "sink_line": 139,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "991951814f",
+      "key": "<org.eclipse.jetty.server.session.HashSessionIdManager: void addSession(javax.servlet.http.HttpSession)>@L121/result => <spark.resource.ClassPathResource: java.io.InputStream getInputStream()>@L141/0",
+      "source": "<org.eclipse.jetty.server.session.HashSessionIdManager: void addSession(javax.servlet.http.HttpSession)>[0@L121] %v7 = invokeinterface session.getId()/result",
+      "sink": "<spark.resource.ClassPathResource: java.io.InputStream getInputStream()>[8@L141] is = invokevirtual %v6.getResourceAsStream(%v7)/0",
+      "sink_method": "<spark.resource.ClassPathResource: java.io.InputStream getInputStream()>",
+      "sink_line": 141,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "f34293d68e",
+      "key": "<org.eclipse.jetty.server.session.HashSessionIdManager: void addSession(javax.servlet.http.HttpSession)>@L121/result => <spark.resource.ClassPathResource: java.net.URL getURL()>@L161/0",
+      "source": "<org.eclipse.jetty.server.session.HashSessionIdManager: void addSession(javax.servlet.http.HttpSession)>[0@L121] %v7 = invokeinterface session.getId()/result",
+      "sink": "<spark.resource.ClassPathResource: java.net.URL getURL()>[4@L161] url = invokevirtual %v4.getResource(%v5)/0",
+      "sink_method": "<spark.resource.ClassPathResource: java.net.URL getURL()>",
+      "sink_line": 161,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "2e7cda7504",
+      "key": "<org.eclipse.jetty.server.session.HashSessionIdManager: void addSession(javax.servlet.http.HttpSession)>@L121/result => <spark.resource.ClassPathResource: java.net.URL getURL()>@L163/0",
+      "source": "<org.eclipse.jetty.server.session.HashSessionIdManager: void addSession(javax.servlet.http.HttpSession)>[0@L121] %v7 = invokeinterface session.getId()/result",
+      "sink": "<spark.resource.ClassPathResource: java.net.URL getURL()>[8@L163] url = invokevirtual %v6.getResource(%v7)/0",
+      "sink_method": "<spark.resource.ClassPathResource: java.net.URL getURL()>",
+      "sink_line": 163,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "2b254fe1a9",
+      "key": "<org.eclipse.jetty.server.session.HashSessionIdManager: void addSession(javax.servlet.http.HttpSession)>@L121/result => <spark.resource.ExternalResource: void <init>(java.lang.String)>@L40/0",
+      "source": "<org.eclipse.jetty.server.session.HashSessionIdManager: void addSession(javax.servlet.http.HttpSession)>[0@L121] %v7 = invokeinterface session.getId()/result",
+      "sink": "<spark.resource.ExternalResource: void <init>(java.lang.String)>[3@L40] invokespecial %v2.<init>(%v3)/0",
+      "sink_method": "<spark.resource.ExternalResource: void <init>(java.lang.String)>",
+      "sink_line": 40,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "d77abe36d3",
+      "key": "<org.eclipse.jetty.server.session.HashSessionIdManager: void addSession(javax.servlet.http.HttpSession)>@L121/result => <spark.resource.JarResourceHandler: java.io.InputStream loadStream(java.lang.String)>@L109/0",
+      "source": "<org.eclipse.jetty.server.session.HashSessionIdManager: void addSession(javax.servlet.http.HttpSession)>[0@L121] %v7 = invokeinterface session.getId()/result",
+      "sink": "<spark.resource.JarResourceHandler: java.io.InputStream loadStream(java.lang.String)>[1@L109] %v3 = invokevirtual %c2.getResourceAsStream(path)/0",
+      "sink_method": "<spark.resource.JarResourceHandler: java.io.InputStream loadStream(java.lang.String)>",
+      "sink_line": 109,
+      "gt": [],
+      "gt_weak": [
+        "ClassPathResourceHandler.getResource",
+        "ExternalResourceHandler.getResource",
+        "StaticFilesConfiguration.configureJarCase",
+        "StaticFilesConfiguration.configure"
+      ],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "d4c0a6c40e",
+      "key": "<org.eclipse.jetty.server.session.HashSessionIdManager: void addSession(javax.servlet.http.HttpSession)>@L121/result => <spark.utils.ResourceUtils: java.io.File getFile(java.net.URL,java.lang.String)>@L219/0",
+      "source": "<org.eclipse.jetty.server.session.HashSessionIdManager: void addSession(javax.servlet.http.HttpSession)>[0@L121] %v7 = invokeinterface session.getId()/result",
+      "sink": "<spark.utils.ResourceUtils: java.io.File getFile(java.net.URL,java.lang.String)>[20@L219] invokespecial %v15.<init>(%v17)/0",
+      "sink_method": "<spark.utils.ResourceUtils: java.io.File getFile(java.net.URL,java.lang.String)>",
+      "sink_line": 219,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "41125e039e",
+      "key": "<org.eclipse.jetty.server.session.HashSessionIdManager: void addSession(javax.servlet.http.HttpSession)>@L121/result => <spark.utils.ResourceUtils: java.io.File getFile(java.net.URL,java.lang.String)>@L222/0",
+      "source": "<org.eclipse.jetty.server.session.HashSessionIdManager: void addSession(javax.servlet.http.HttpSession)>[0@L121] %v7 = invokeinterface session.getId()/result",
+      "sink": "<spark.utils.ResourceUtils: java.io.File getFile(java.net.URL,java.lang.String)>[25@L222] invokespecial %v19.<init>(%v20)/0",
+      "sink_method": "<spark.utils.ResourceUtils: java.io.File getFile(java.net.URL,java.lang.String)>",
+      "sink_line": 222,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "9ac3743ab8",
+      "key": "<org.eclipse.jetty.server.session.HashSessionIdManager: void removeSession(javax.servlet.http.HttpSession)>@L143/result => <org.eclipse.jetty.util.Loader: java.net.URL getResource(java.lang.Class,java.lang.String)>@L54/0",
+      "source": "<org.eclipse.jetty.server.session.HashSessionIdManager: void removeSession(javax.servlet.http.HttpSession)>[1@L143] %v9 = invokeinterface session.getId()/result",
+      "sink": "<org.eclipse.jetty.util.Loader: java.net.URL getResource(java.lang.Class,java.lang.String)>[4@L54] url = invokevirtual context_loader.getResource(name)/0",
+      "sink_method": "<org.eclipse.jetty.util.Loader: java.net.URL getResource(java.lang.Class,java.lang.String)>",
+      "sink_line": 54,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "606118500a",
+      "key": "<org.eclipse.jetty.server.session.HashSessionIdManager: void removeSession(javax.servlet.http.HttpSession)>@L143/result => <org.eclipse.jetty.util.Loader: java.net.URL getResource(java.lang.Class,java.lang.String)>@L60/0",
+      "source": "<org.eclipse.jetty.server.session.HashSessionIdManager: void removeSession(javax.servlet.http.HttpSession)>[1@L143] %v9 = invokeinterface session.getId()/result",
+      "sink": "<org.eclipse.jetty.util.Loader: java.net.URL getResource(java.lang.Class,java.lang.String)>[10@L60] url = invokevirtual load_loader.getResource(name)/0",
+      "sink_method": "<org.eclipse.jetty.util.Loader: java.net.URL getResource(java.lang.Class,java.lang.String)>",
+      "sink_line": 60,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "023215c1c6",
+      "key": "<org.eclipse.jetty.server.session.HashSessionIdManager: void removeSession(javax.servlet.http.HttpSession)>@L143/result => <org.slf4j.impl.SimpleLogger: java.io.PrintStream computeTargetStream(java.lang.String)>@L219/0",
+      "source": "<org.eclipse.jetty.server.session.HashSessionIdManager: void removeSession(javax.servlet.http.HttpSession)>[1@L143] %v9 = invokeinterface session.getId()/result",
+      "sink": "<org.slf4j.impl.SimpleLogger: java.io.PrintStream computeTargetStream(java.lang.String)>[12@L219] invokespecial fos.<init>(logFile)/0",
+      "sink_method": "<org.slf4j.impl.SimpleLogger: java.io.PrintStream computeTargetStream(java.lang.String)>",
+      "sink_line": 219,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "925c284e1f",
+      "key": "<org.eclipse.jetty.server.session.HashSessionIdManager: void removeSession(javax.servlet.http.HttpSession)>@L143/result => <spark.resource.ClassPathResource: boolean exists()>@L120/0",
+      "source": "<org.eclipse.jetty.server.session.HashSessionIdManager: void removeSession(javax.servlet.http.HttpSession)>[1@L143] %v9 = invokeinterface session.getId()/result",
+      "sink": "<spark.resource.ClassPathResource: boolean exists()>[6@L120] url = invokevirtual %v4.getResource(%v5)/0",
+      "sink_method": "<spark.resource.ClassPathResource: boolean exists()>",
+      "sink_line": 120,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "48232c29f6",
+      "key": "<org.eclipse.jetty.server.session.HashSessionIdManager: void removeSession(javax.servlet.http.HttpSession)>@L143/result => <spark.resource.ClassPathResource: boolean exists()>@L122/0",
+      "source": "<org.eclipse.jetty.server.session.HashSessionIdManager: void removeSession(javax.servlet.http.HttpSession)>[1@L143] %v9 = invokeinterface session.getId()/result",
+      "sink": "<spark.resource.ClassPathResource: boolean exists()>[10@L122] url = invokevirtual %v6.getResource(%v7)/0",
+      "sink_method": "<spark.resource.ClassPathResource: boolean exists()>",
+      "sink_line": 122,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "534cc1ecc8",
+      "key": "<org.eclipse.jetty.server.session.HashSessionIdManager: void removeSession(javax.servlet.http.HttpSession)>@L143/result => <spark.resource.ClassPathResource: java.io.InputStream getInputStream()>@L139/0",
+      "source": "<org.eclipse.jetty.server.session.HashSessionIdManager: void removeSession(javax.servlet.http.HttpSession)>[1@L143] %v9 = invokeinterface session.getId()/result",
+      "sink": "<spark.resource.ClassPathResource: java.io.InputStream getInputStream()>[4@L139] is = invokevirtual %v4.getResourceAsStream(%v5)/0",
+      "sink_method": "<spark.resource.ClassPathResource: java.io.InputStream getInputStream()>",
+      "sink_line": 139,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "2fd2b7123c",
+      "key": "<org.eclipse.jetty.server.session.HashSessionIdManager: void removeSession(javax.servlet.http.HttpSession)>@L143/result => <spark.resource.ClassPathResource: java.io.InputStream getInputStream()>@L141/0",
+      "source": "<org.eclipse.jetty.server.session.HashSessionIdManager: void removeSession(javax.servlet.http.HttpSession)>[1@L143] %v9 = invokeinterface session.getId()/result",
+      "sink": "<spark.resource.ClassPathResource: java.io.InputStream getInputStream()>[8@L141] is = invokevirtual %v6.getResourceAsStream(%v7)/0",
+      "sink_method": "<spark.resource.ClassPathResource: java.io.InputStream getInputStream()>",
+      "sink_line": 141,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "9852d9a19c",
+      "key": "<org.eclipse.jetty.server.session.HashSessionIdManager: void removeSession(javax.servlet.http.HttpSession)>@L143/result => <spark.resource.ClassPathResource: java.net.URL getURL()>@L161/0",
+      "source": "<org.eclipse.jetty.server.session.HashSessionIdManager: void removeSession(javax.servlet.http.HttpSession)>[1@L143] %v9 = invokeinterface session.getId()/result",
+      "sink": "<spark.resource.ClassPathResource: java.net.URL getURL()>[4@L161] url = invokevirtual %v4.getResource(%v5)/0",
+      "sink_method": "<spark.resource.ClassPathResource: java.net.URL getURL()>",
+      "sink_line": 161,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "51975d4017",
+      "key": "<org.eclipse.jetty.server.session.HashSessionIdManager: void removeSession(javax.servlet.http.HttpSession)>@L143/result => <spark.resource.ClassPathResource: java.net.URL getURL()>@L163/0",
+      "source": "<org.eclipse.jetty.server.session.HashSessionIdManager: void removeSession(javax.servlet.http.HttpSession)>[1@L143] %v9 = invokeinterface session.getId()/result",
+      "sink": "<spark.resource.ClassPathResource: java.net.URL getURL()>[8@L163] url = invokevirtual %v6.getResource(%v7)/0",
+      "sink_method": "<spark.resource.ClassPathResource: java.net.URL getURL()>",
+      "sink_line": 163,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "930a88c96c",
+      "key": "<org.eclipse.jetty.server.session.HashSessionIdManager: void removeSession(javax.servlet.http.HttpSession)>@L143/result => <spark.resource.ExternalResource: void <init>(java.lang.String)>@L40/0",
+      "source": "<org.eclipse.jetty.server.session.HashSessionIdManager: void removeSession(javax.servlet.http.HttpSession)>[1@L143] %v9 = invokeinterface session.getId()/result",
+      "sink": "<spark.resource.ExternalResource: void <init>(java.lang.String)>[3@L40] invokespecial %v2.<init>(%v3)/0",
+      "sink_method": "<spark.resource.ExternalResource: void <init>(java.lang.String)>",
+      "sink_line": 40,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "221543d70c",
+      "key": "<org.eclipse.jetty.server.session.HashSessionIdManager: void removeSession(javax.servlet.http.HttpSession)>@L143/result => <spark.resource.JarResourceHandler: java.io.InputStream loadStream(java.lang.String)>@L109/0",
+      "source": "<org.eclipse.jetty.server.session.HashSessionIdManager: void removeSession(javax.servlet.http.HttpSession)>[1@L143] %v9 = invokeinterface session.getId()/result",
+      "sink": "<spark.resource.JarResourceHandler: java.io.InputStream loadStream(java.lang.String)>[1@L109] %v3 = invokevirtual %c2.getResourceAsStream(path)/0",
+      "sink_method": "<spark.resource.JarResourceHandler: java.io.InputStream loadStream(java.lang.String)>",
+      "sink_line": 109,
+      "gt": [],
+      "gt_weak": [
+        "ClassPathResourceHandler.getResource",
+        "ExternalResourceHandler.getResource",
+        "StaticFilesConfiguration.configureJarCase",
+        "StaticFilesConfiguration.configure"
+      ],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "96e19b1746",
+      "key": "<org.eclipse.jetty.server.session.HashSessionIdManager: void removeSession(javax.servlet.http.HttpSession)>@L143/result => <spark.utils.ResourceUtils: java.io.File getFile(java.net.URL,java.lang.String)>@L219/0",
+      "source": "<org.eclipse.jetty.server.session.HashSessionIdManager: void removeSession(javax.servlet.http.HttpSession)>[1@L143] %v9 = invokeinterface session.getId()/result",
+      "sink": "<spark.utils.ResourceUtils: java.io.File getFile(java.net.URL,java.lang.String)>[20@L219] invokespecial %v15.<init>(%v17)/0",
+      "sink_method": "<spark.utils.ResourceUtils: java.io.File getFile(java.net.URL,java.lang.String)>",
+      "sink_line": 219,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "43124cd193",
+      "key": "<org.eclipse.jetty.server.session.HashSessionIdManager: void removeSession(javax.servlet.http.HttpSession)>@L143/result => <spark.utils.ResourceUtils: java.io.File getFile(java.net.URL,java.lang.String)>@L222/0",
+      "source": "<org.eclipse.jetty.server.session.HashSessionIdManager: void removeSession(javax.servlet.http.HttpSession)>[1@L143] %v9 = invokeinterface session.getId()/result",
+      "sink": "<spark.utils.ResourceUtils: java.io.File getFile(java.net.URL,java.lang.String)>[25@L222] invokespecial %v19.<init>(%v20)/0",
+      "sink_method": "<spark.utils.ResourceUtils: java.io.File getFile(java.net.URL,java.lang.String)>",
+      "sink_line": 222,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "d6430a11a6",
+      "key": "<org.eclipse.jetty.server.session.HashSessionManager: org.eclipse.jetty.server.session.HashedSession restoreSession(java.io.InputStream,org.eclipse.jetty.server.session.HashedSession)>@L644/result => <org.eclipse.jetty.util.Loader: java.net.URL getResource(java.lang.Class,java.lang.String)>@L54/0",
+      "source": "<org.eclipse.jetty.server.session.HashSessionManager: org.eclipse.jetty.server.session.HashedSession restoreSession(java.io.InputStream,org.eclipse.jetty.server.session.HashedSession)>[3@L644] clusterId = invokevirtual di.readUTF()/result",
+      "sink": "<org.eclipse.jetty.util.Loader: java.net.URL getResource(java.lang.Class,java.lang.String)>[4@L54] url = invokevirtual context_loader.getResource(name)/0",
+      "sink_method": "<org.eclipse.jetty.util.Loader: java.net.URL getResource(java.lang.Class,java.lang.String)>",
+      "sink_line": 54,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "29d3cdfaf0",
+      "key": "<org.eclipse.jetty.server.session.HashSessionManager: org.eclipse.jetty.server.session.HashedSession restoreSession(java.io.InputStream,org.eclipse.jetty.server.session.HashedSession)>@L644/result => <org.eclipse.jetty.util.Loader: java.net.URL getResource(java.lang.Class,java.lang.String)>@L60/0",
+      "source": "<org.eclipse.jetty.server.session.HashSessionManager: org.eclipse.jetty.server.session.HashedSession restoreSession(java.io.InputStream,org.eclipse.jetty.server.session.HashedSession)>[3@L644] clusterId = invokevirtual di.readUTF()/result",
+      "sink": "<org.eclipse.jetty.util.Loader: java.net.URL getResource(java.lang.Class,java.lang.String)>[10@L60] url = invokevirtual load_loader.getResource(name)/0",
+      "sink_method": "<org.eclipse.jetty.util.Loader: java.net.URL getResource(java.lang.Class,java.lang.String)>",
+      "sink_line": 60,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "76671c4548",
+      "key": "<org.eclipse.jetty.server.session.HashSessionManager: org.eclipse.jetty.server.session.HashedSession restoreSession(java.io.InputStream,org.eclipse.jetty.server.session.HashedSession)>@L644/result => <org.slf4j.impl.SimpleLogger: java.io.PrintStream computeTargetStream(java.lang.String)>@L219/0",
+      "source": "<org.eclipse.jetty.server.session.HashSessionManager: org.eclipse.jetty.server.session.HashedSession restoreSession(java.io.InputStream,org.eclipse.jetty.server.session.HashedSession)>[3@L644] clusterId = invokevirtual di.readUTF()/result",
+      "sink": "<org.slf4j.impl.SimpleLogger: java.io.PrintStream computeTargetStream(java.lang.String)>[12@L219] invokespecial fos.<init>(logFile)/0",
+      "sink_method": "<org.slf4j.impl.SimpleLogger: java.io.PrintStream computeTargetStream(java.lang.String)>",
+      "sink_line": 219,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "406ec94f88",
+      "key": "<org.eclipse.jetty.server.session.HashSessionManager: org.eclipse.jetty.server.session.HashedSession restoreSession(java.io.InputStream,org.eclipse.jetty.server.session.HashedSession)>@L644/result => <spark.resource.ClassPathResource: boolean exists()>@L120/0",
+      "source": "<org.eclipse.jetty.server.session.HashSessionManager: org.eclipse.jetty.server.session.HashedSession restoreSession(java.io.InputStream,org.eclipse.jetty.server.session.HashedSession)>[3@L644] clusterId = invokevirtual di.readUTF()/result",
+      "sink": "<spark.resource.ClassPathResource: boolean exists()>[6@L120] url = invokevirtual %v4.getResource(%v5)/0",
+      "sink_method": "<spark.resource.ClassPathResource: boolean exists()>",
+      "sink_line": 120,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "19bb926044",
+      "key": "<org.eclipse.jetty.server.session.HashSessionManager: org.eclipse.jetty.server.session.HashedSession restoreSession(java.io.InputStream,org.eclipse.jetty.server.session.HashedSession)>@L644/result => <spark.resource.ClassPathResource: boolean exists()>@L122/0",
+      "source": "<org.eclipse.jetty.server.session.HashSessionManager: org.eclipse.jetty.server.session.HashedSession restoreSession(java.io.InputStream,org.eclipse.jetty.server.session.HashedSession)>[3@L644] clusterId = invokevirtual di.readUTF()/result",
+      "sink": "<spark.resource.ClassPathResource: boolean exists()>[10@L122] url = invokevirtual %v6.getResource(%v7)/0",
+      "sink_method": "<spark.resource.ClassPathResource: boolean exists()>",
+      "sink_line": 122,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "1bbadae946",
+      "key": "<org.eclipse.jetty.server.session.HashSessionManager: org.eclipse.jetty.server.session.HashedSession restoreSession(java.io.InputStream,org.eclipse.jetty.server.session.HashedSession)>@L644/result => <spark.resource.ClassPathResource: java.io.InputStream getInputStream()>@L139/0",
+      "source": "<org.eclipse.jetty.server.session.HashSessionManager: org.eclipse.jetty.server.session.HashedSession restoreSession(java.io.InputStream,org.eclipse.jetty.server.session.HashedSession)>[3@L644] clusterId = invokevirtual di.readUTF()/result",
+      "sink": "<spark.resource.ClassPathResource: java.io.InputStream getInputStream()>[4@L139] is = invokevirtual %v4.getResourceAsStream(%v5)/0",
+      "sink_method": "<spark.resource.ClassPathResource: java.io.InputStream getInputStream()>",
+      "sink_line": 139,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "370a92345f",
+      "key": "<org.eclipse.jetty.server.session.HashSessionManager: org.eclipse.jetty.server.session.HashedSession restoreSession(java.io.InputStream,org.eclipse.jetty.server.session.HashedSession)>@L644/result => <spark.resource.ClassPathResource: java.io.InputStream getInputStream()>@L141/0",
+      "source": "<org.eclipse.jetty.server.session.HashSessionManager: org.eclipse.jetty.server.session.HashedSession restoreSession(java.io.InputStream,org.eclipse.jetty.server.session.HashedSession)>[3@L644] clusterId = invokevirtual di.readUTF()/result",
+      "sink": "<spark.resource.ClassPathResource: java.io.InputStream getInputStream()>[8@L141] is = invokevirtual %v6.getResourceAsStream(%v7)/0",
+      "sink_method": "<spark.resource.ClassPathResource: java.io.InputStream getInputStream()>",
+      "sink_line": 141,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "ea3e90e280",
+      "key": "<org.eclipse.jetty.server.session.HashSessionManager: org.eclipse.jetty.server.session.HashedSession restoreSession(java.io.InputStream,org.eclipse.jetty.server.session.HashedSession)>@L644/result => <spark.resource.ClassPathResource: java.net.URL getURL()>@L161/0",
+      "source": "<org.eclipse.jetty.server.session.HashSessionManager: org.eclipse.jetty.server.session.HashedSession restoreSession(java.io.InputStream,org.eclipse.jetty.server.session.HashedSession)>[3@L644] clusterId = invokevirtual di.readUTF()/result",
+      "sink": "<spark.resource.ClassPathResource: java.net.URL getURL()>[4@L161] url = invokevirtual %v4.getResource(%v5)/0",
+      "sink_method": "<spark.resource.ClassPathResource: java.net.URL getURL()>",
+      "sink_line": 161,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "6dd807827f",
+      "key": "<org.eclipse.jetty.server.session.HashSessionManager: org.eclipse.jetty.server.session.HashedSession restoreSession(java.io.InputStream,org.eclipse.jetty.server.session.HashedSession)>@L644/result => <spark.resource.ClassPathResource: java.net.URL getURL()>@L163/0",
+      "source": "<org.eclipse.jetty.server.session.HashSessionManager: org.eclipse.jetty.server.session.HashedSession restoreSession(java.io.InputStream,org.eclipse.jetty.server.session.HashedSession)>[3@L644] clusterId = invokevirtual di.readUTF()/result",
+      "sink": "<spark.resource.ClassPathResource: java.net.URL getURL()>[8@L163] url = invokevirtual %v6.getResource(%v7)/0",
+      "sink_method": "<spark.resource.ClassPathResource: java.net.URL getURL()>",
+      "sink_line": 163,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "cc8f3c89b0",
+      "key": "<org.eclipse.jetty.server.session.HashSessionManager: org.eclipse.jetty.server.session.HashedSession restoreSession(java.io.InputStream,org.eclipse.jetty.server.session.HashedSession)>@L644/result => <spark.resource.ExternalResource: void <init>(java.lang.String)>@L40/0",
+      "source": "<org.eclipse.jetty.server.session.HashSessionManager: org.eclipse.jetty.server.session.HashedSession restoreSession(java.io.InputStream,org.eclipse.jetty.server.session.HashedSession)>[3@L644] clusterId = invokevirtual di.readUTF()/result",
+      "sink": "<spark.resource.ExternalResource: void <init>(java.lang.String)>[3@L40] invokespecial %v2.<init>(%v3)/0",
+      "sink_method": "<spark.resource.ExternalResource: void <init>(java.lang.String)>",
+      "sink_line": 40,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "588567305b",
+      "key": "<org.eclipse.jetty.server.session.HashSessionManager: org.eclipse.jetty.server.session.HashedSession restoreSession(java.io.InputStream,org.eclipse.jetty.server.session.HashedSession)>@L644/result => <spark.resource.JarResourceHandler: java.io.InputStream loadStream(java.lang.String)>@L109/0",
+      "source": "<org.eclipse.jetty.server.session.HashSessionManager: org.eclipse.jetty.server.session.HashedSession restoreSession(java.io.InputStream,org.eclipse.jetty.server.session.HashedSession)>[3@L644] clusterId = invokevirtual di.readUTF()/result",
+      "sink": "<spark.resource.JarResourceHandler: java.io.InputStream loadStream(java.lang.String)>[1@L109] %v3 = invokevirtual %c2.getResourceAsStream(path)/0",
+      "sink_method": "<spark.resource.JarResourceHandler: java.io.InputStream loadStream(java.lang.String)>",
+      "sink_line": 109,
+      "gt": [],
+      "gt_weak": [
+        "ClassPathResourceHandler.getResource",
+        "ExternalResourceHandler.getResource",
+        "StaticFilesConfiguration.configureJarCase",
+        "StaticFilesConfiguration.configure"
+      ],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "4902e1c22e",
+      "key": "<org.eclipse.jetty.server.session.HashSessionManager: org.eclipse.jetty.server.session.HashedSession restoreSession(java.io.InputStream,org.eclipse.jetty.server.session.HashedSession)>@L644/result => <spark.utils.ResourceUtils: java.io.File getFile(java.net.URL,java.lang.String)>@L219/0",
+      "source": "<org.eclipse.jetty.server.session.HashSessionManager: org.eclipse.jetty.server.session.HashedSession restoreSession(java.io.InputStream,org.eclipse.jetty.server.session.HashedSession)>[3@L644] clusterId = invokevirtual di.readUTF()/result",
+      "sink": "<spark.utils.ResourceUtils: java.io.File getFile(java.net.URL,java.lang.String)>[20@L219] invokespecial %v15.<init>(%v17)/0",
+      "sink_method": "<spark.utils.ResourceUtils: java.io.File getFile(java.net.URL,java.lang.String)>",
+      "sink_line": 219,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "ab7da7fe6f",
+      "key": "<org.eclipse.jetty.server.session.HashSessionManager: org.eclipse.jetty.server.session.HashedSession restoreSession(java.io.InputStream,org.eclipse.jetty.server.session.HashedSession)>@L644/result => <spark.utils.ResourceUtils: java.io.File getFile(java.net.URL,java.lang.String)>@L222/0",
+      "source": "<org.eclipse.jetty.server.session.HashSessionManager: org.eclipse.jetty.server.session.HashedSession restoreSession(java.io.InputStream,org.eclipse.jetty.server.session.HashedSession)>[3@L644] clusterId = invokevirtual di.readUTF()/result",
+      "sink": "<spark.utils.ResourceUtils: java.io.File getFile(java.net.URL,java.lang.String)>[25@L222] invokespecial %v19.<init>(%v20)/0",
+      "sink_method": "<spark.utils.ResourceUtils: java.io.File getFile(java.net.URL,java.lang.String)>",
+      "sink_line": 222,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "92070bcbc2",
+      "key": "<org.eclipse.jetty.server.session.MemSession: java.lang.Object doGet(java.lang.String)>@L143/result => <org.eclipse.jetty.util.Loader: java.net.URL getResource(java.lang.Class,java.lang.String)>@L54/0",
+      "source": "<org.eclipse.jetty.server.session.MemSession: java.lang.Object doGet(java.lang.String)>[1@L143] %v3 = invokeinterface %v2.get(name)/result",
+      "sink": "<org.eclipse.jetty.util.Loader: java.net.URL getResource(java.lang.Class,java.lang.String)>[4@L54] url = invokevirtual context_loader.getResource(name)/0",
+      "sink_method": "<org.eclipse.jetty.util.Loader: java.net.URL getResource(java.lang.Class,java.lang.String)>",
+      "sink_line": 54,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "be5b5b37dd",
+      "key": "<org.eclipse.jetty.server.session.MemSession: java.lang.Object doGet(java.lang.String)>@L143/result => <org.eclipse.jetty.util.Loader: java.net.URL getResource(java.lang.Class,java.lang.String)>@L60/0",
+      "source": "<org.eclipse.jetty.server.session.MemSession: java.lang.Object doGet(java.lang.String)>[1@L143] %v3 = invokeinterface %v2.get(name)/result",
+      "sink": "<org.eclipse.jetty.util.Loader: java.net.URL getResource(java.lang.Class,java.lang.String)>[10@L60] url = invokevirtual load_loader.getResource(name)/0",
+      "sink_method": "<org.eclipse.jetty.util.Loader: java.net.URL getResource(java.lang.Class,java.lang.String)>",
+      "sink_line": 60,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "713413e8ec",
+      "key": "<org.eclipse.jetty.server.session.MemSession: java.lang.Object doGet(java.lang.String)>@L143/result => <org.slf4j.impl.SimpleLogger: java.io.PrintStream computeTargetStream(java.lang.String)>@L219/0",
+      "source": "<org.eclipse.jetty.server.session.MemSession: java.lang.Object doGet(java.lang.String)>[1@L143] %v3 = invokeinterface %v2.get(name)/result",
+      "sink": "<org.slf4j.impl.SimpleLogger: java.io.PrintStream computeTargetStream(java.lang.String)>[12@L219] invokespecial fos.<init>(logFile)/0",
+      "sink_method": "<org.slf4j.impl.SimpleLogger: java.io.PrintStream computeTargetStream(java.lang.String)>",
+      "sink_line": 219,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "9528d14d44",
+      "key": "<org.eclipse.jetty.server.session.MemSession: java.lang.Object doGet(java.lang.String)>@L143/result => <spark.resource.ClassPathResource: boolean exists()>@L120/0",
+      "source": "<org.eclipse.jetty.server.session.MemSession: java.lang.Object doGet(java.lang.String)>[1@L143] %v3 = invokeinterface %v2.get(name)/result",
+      "sink": "<spark.resource.ClassPathResource: boolean exists()>[6@L120] url = invokevirtual %v4.getResource(%v5)/0",
+      "sink_method": "<spark.resource.ClassPathResource: boolean exists()>",
+      "sink_line": 120,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "bcef3caa6f",
+      "key": "<org.eclipse.jetty.server.session.MemSession: java.lang.Object doGet(java.lang.String)>@L143/result => <spark.resource.ClassPathResource: boolean exists()>@L122/0",
+      "source": "<org.eclipse.jetty.server.session.MemSession: java.lang.Object doGet(java.lang.String)>[1@L143] %v3 = invokeinterface %v2.get(name)/result",
+      "sink": "<spark.resource.ClassPathResource: boolean exists()>[10@L122] url = invokevirtual %v6.getResource(%v7)/0",
+      "sink_method": "<spark.resource.ClassPathResource: boolean exists()>",
+      "sink_line": 122,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "47626bddf8",
+      "key": "<org.eclipse.jetty.server.session.MemSession: java.lang.Object doGet(java.lang.String)>@L143/result => <spark.resource.ClassPathResource: java.io.InputStream getInputStream()>@L139/0",
+      "source": "<org.eclipse.jetty.server.session.MemSession: java.lang.Object doGet(java.lang.String)>[1@L143] %v3 = invokeinterface %v2.get(name)/result",
+      "sink": "<spark.resource.ClassPathResource: java.io.InputStream getInputStream()>[4@L139] is = invokevirtual %v4.getResourceAsStream(%v5)/0",
+      "sink_method": "<spark.resource.ClassPathResource: java.io.InputStream getInputStream()>",
+      "sink_line": 139,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "cb9e61e0c6",
+      "key": "<org.eclipse.jetty.server.session.MemSession: java.lang.Object doGet(java.lang.String)>@L143/result => <spark.resource.ClassPathResource: java.io.InputStream getInputStream()>@L141/0",
+      "source": "<org.eclipse.jetty.server.session.MemSession: java.lang.Object doGet(java.lang.String)>[1@L143] %v3 = invokeinterface %v2.get(name)/result",
+      "sink": "<spark.resource.ClassPathResource: java.io.InputStream getInputStream()>[8@L141] is = invokevirtual %v6.getResourceAsStream(%v7)/0",
+      "sink_method": "<spark.resource.ClassPathResource: java.io.InputStream getInputStream()>",
+      "sink_line": 141,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "3b51e685d0",
+      "key": "<org.eclipse.jetty.server.session.MemSession: java.lang.Object doGet(java.lang.String)>@L143/result => <spark.resource.ClassPathResource: java.net.URL getURL()>@L161/0",
+      "source": "<org.eclipse.jetty.server.session.MemSession: java.lang.Object doGet(java.lang.String)>[1@L143] %v3 = invokeinterface %v2.get(name)/result",
+      "sink": "<spark.resource.ClassPathResource: java.net.URL getURL()>[4@L161] url = invokevirtual %v4.getResource(%v5)/0",
+      "sink_method": "<spark.resource.ClassPathResource: java.net.URL getURL()>",
+      "sink_line": 161,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "837805252c",
+      "key": "<org.eclipse.jetty.server.session.MemSession: java.lang.Object doGet(java.lang.String)>@L143/result => <spark.resource.ClassPathResource: java.net.URL getURL()>@L163/0",
+      "source": "<org.eclipse.jetty.server.session.MemSession: java.lang.Object doGet(java.lang.String)>[1@L143] %v3 = invokeinterface %v2.get(name)/result",
+      "sink": "<spark.resource.ClassPathResource: java.net.URL getURL()>[8@L163] url = invokevirtual %v6.getResource(%v7)/0",
+      "sink_method": "<spark.resource.ClassPathResource: java.net.URL getURL()>",
+      "sink_line": 163,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "226af1925d",
+      "key": "<org.eclipse.jetty.server.session.MemSession: java.lang.Object doGet(java.lang.String)>@L143/result => <spark.resource.ExternalResource: void <init>(java.lang.String)>@L40/0",
+      "source": "<org.eclipse.jetty.server.session.MemSession: java.lang.Object doGet(java.lang.String)>[1@L143] %v3 = invokeinterface %v2.get(name)/result",
+      "sink": "<spark.resource.ExternalResource: void <init>(java.lang.String)>[3@L40] invokespecial %v2.<init>(%v3)/0",
+      "sink_method": "<spark.resource.ExternalResource: void <init>(java.lang.String)>",
+      "sink_line": 40,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "57c5914091",
+      "key": "<org.eclipse.jetty.server.session.MemSession: java.lang.Object doGet(java.lang.String)>@L143/result => <spark.resource.JarResourceHandler: java.io.InputStream loadStream(java.lang.String)>@L109/0",
+      "source": "<org.eclipse.jetty.server.session.MemSession: java.lang.Object doGet(java.lang.String)>[1@L143] %v3 = invokeinterface %v2.get(name)/result",
+      "sink": "<spark.resource.JarResourceHandler: java.io.InputStream loadStream(java.lang.String)>[1@L109] %v3 = invokevirtual %c2.getResourceAsStream(path)/0",
+      "sink_method": "<spark.resource.JarResourceHandler: java.io.InputStream loadStream(java.lang.String)>",
+      "sink_line": 109,
+      "gt": [],
+      "gt_weak": [
+        "ClassPathResourceHandler.getResource",
+        "ExternalResourceHandler.getResource",
+        "StaticFilesConfiguration.configureJarCase",
+        "StaticFilesConfiguration.configure"
+      ],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "7ac9ab2263",
+      "key": "<org.eclipse.jetty.server.session.MemSession: java.lang.Object doGet(java.lang.String)>@L143/result => <spark.utils.ResourceUtils: java.io.File getFile(java.net.URL,java.lang.String)>@L219/0",
+      "source": "<org.eclipse.jetty.server.session.MemSession: java.lang.Object doGet(java.lang.String)>[1@L143] %v3 = invokeinterface %v2.get(name)/result",
+      "sink": "<spark.utils.ResourceUtils: java.io.File getFile(java.net.URL,java.lang.String)>[20@L219] invokespecial %v15.<init>(%v17)/0",
+      "sink_method": "<spark.utils.ResourceUtils: java.io.File getFile(java.net.URL,java.lang.String)>",
+      "sink_line": 219,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "542ecec3b7",
+      "key": "<org.eclipse.jetty.server.session.MemSession: java.lang.Object doGet(java.lang.String)>@L143/result => <spark.utils.ResourceUtils: java.io.File getFile(java.net.URL,java.lang.String)>@L222/0",
+      "source": "<org.eclipse.jetty.server.session.MemSession: java.lang.Object doGet(java.lang.String)>[1@L143] %v3 = invokeinterface %v2.get(name)/result",
+      "sink": "<spark.utils.ResourceUtils: java.io.File getFile(java.net.URL,java.lang.String)>[25@L222] invokespecial %v19.<init>(%v20)/0",
+      "sink_method": "<spark.utils.ResourceUtils: java.io.File getFile(java.net.URL,java.lang.String)>",
+      "sink_line": 222,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "3403da7e7a",
+      "key": "<org.eclipse.jetty.util.log.Log: void loadProperties(java.lang.String,java.util.Properties)>@L142/result => <org.eclipse.jetty.util.Loader: java.net.URL getResource(java.lang.Class,java.lang.String)>@L54/0",
+      "source": "<org.eclipse.jetty.util.log.Log: void loadProperties(java.lang.String,java.util.Properties)>[13@L142] key = invokeinterface %v17.next()/result",
+      "sink": "<org.eclipse.jetty.util.Loader: java.net.URL getResource(java.lang.Class,java.lang.String)>[4@L54] url = invokevirtual context_loader.getResource(name)/0",
+      "sink_method": "<org.eclipse.jetty.util.Loader: java.net.URL getResource(java.lang.Class,java.lang.String)>",
+      "sink_line": 54,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "38e88ef06b",
+      "key": "<org.eclipse.jetty.util.log.Log: void loadProperties(java.lang.String,java.util.Properties)>@L142/result => <org.eclipse.jetty.util.Loader: java.net.URL getResource(java.lang.Class,java.lang.String)>@L60/0",
+      "source": "<org.eclipse.jetty.util.log.Log: void loadProperties(java.lang.String,java.util.Properties)>[13@L142] key = invokeinterface %v17.next()/result",
+      "sink": "<org.eclipse.jetty.util.Loader: java.net.URL getResource(java.lang.Class,java.lang.String)>[10@L60] url = invokevirtual load_loader.getResource(name)/0",
+      "sink_method": "<org.eclipse.jetty.util.Loader: java.net.URL getResource(java.lang.Class,java.lang.String)>",
+      "sink_line": 60,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "cf80c3a31d",
+      "key": "<org.eclipse.jetty.util.log.Log: void loadProperties(java.lang.String,java.util.Properties)>@L142/result => <org.slf4j.impl.SimpleLogger: java.io.PrintStream computeTargetStream(java.lang.String)>@L219/0",
+      "source": "<org.eclipse.jetty.util.log.Log: void loadProperties(java.lang.String,java.util.Properties)>[13@L142] key = invokeinterface %v17.next()/result",
+      "sink": "<org.slf4j.impl.SimpleLogger: java.io.PrintStream computeTargetStream(java.lang.String)>[12@L219] invokespecial fos.<init>(logFile)/0",
+      "sink_method": "<org.slf4j.impl.SimpleLogger: java.io.PrintStream computeTargetStream(java.lang.String)>",
+      "sink_line": 219,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "3707168ec7",
+      "key": "<org.eclipse.jetty.util.log.Log: void loadProperties(java.lang.String,java.util.Properties)>@L142/result => <spark.resource.ClassPathResource: boolean exists()>@L120/0",
+      "source": "<org.eclipse.jetty.util.log.Log: void loadProperties(java.lang.String,java.util.Properties)>[13@L142] key = invokeinterface %v17.next()/result",
+      "sink": "<spark.resource.ClassPathResource: boolean exists()>[6@L120] url = invokevirtual %v4.getResource(%v5)/0",
+      "sink_method": "<spark.resource.ClassPathResource: boolean exists()>",
+      "sink_line": 120,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "d20a129c1b",
+      "key": "<org.eclipse.jetty.util.log.Log: void loadProperties(java.lang.String,java.util.Properties)>@L142/result => <spark.resource.ClassPathResource: boolean exists()>@L122/0",
+      "source": "<org.eclipse.jetty.util.log.Log: void loadProperties(java.lang.String,java.util.Properties)>[13@L142] key = invokeinterface %v17.next()/result",
+      "sink": "<spark.resource.ClassPathResource: boolean exists()>[10@L122] url = invokevirtual %v6.getResource(%v7)/0",
+      "sink_method": "<spark.resource.ClassPathResource: boolean exists()>",
+      "sink_line": 122,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "316a115e34",
+      "key": "<org.eclipse.jetty.util.log.Log: void loadProperties(java.lang.String,java.util.Properties)>@L142/result => <spark.resource.ClassPathResource: java.io.InputStream getInputStream()>@L139/0",
+      "source": "<org.eclipse.jetty.util.log.Log: void loadProperties(java.lang.String,java.util.Properties)>[13@L142] key = invokeinterface %v17.next()/result",
+      "sink": "<spark.resource.ClassPathResource: java.io.InputStream getInputStream()>[4@L139] is = invokevirtual %v4.getResourceAsStream(%v5)/0",
+      "sink_method": "<spark.resource.ClassPathResource: java.io.InputStream getInputStream()>",
+      "sink_line": 139,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "f6a23d7bef",
+      "key": "<org.eclipse.jetty.util.log.Log: void loadProperties(java.lang.String,java.util.Properties)>@L142/result => <spark.resource.ClassPathResource: java.io.InputStream getInputStream()>@L141/0",
+      "source": "<org.eclipse.jetty.util.log.Log: void loadProperties(java.lang.String,java.util.Properties)>[13@L142] key = invokeinterface %v17.next()/result",
+      "sink": "<spark.resource.ClassPathResource: java.io.InputStream getInputStream()>[8@L141] is = invokevirtual %v6.getResourceAsStream(%v7)/0",
+      "sink_method": "<spark.resource.ClassPathResource: java.io.InputStream getInputStream()>",
+      "sink_line": 141,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "e0c73dad8b",
+      "key": "<org.eclipse.jetty.util.log.Log: void loadProperties(java.lang.String,java.util.Properties)>@L142/result => <spark.resource.ClassPathResource: java.net.URL getURL()>@L161/0",
+      "source": "<org.eclipse.jetty.util.log.Log: void loadProperties(java.lang.String,java.util.Properties)>[13@L142] key = invokeinterface %v17.next()/result",
+      "sink": "<spark.resource.ClassPathResource: java.net.URL getURL()>[4@L161] url = invokevirtual %v4.getResource(%v5)/0",
+      "sink_method": "<spark.resource.ClassPathResource: java.net.URL getURL()>",
+      "sink_line": 161,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "ca611052ab",
+      "key": "<org.eclipse.jetty.util.log.Log: void loadProperties(java.lang.String,java.util.Properties)>@L142/result => <spark.resource.ClassPathResource: java.net.URL getURL()>@L163/0",
+      "source": "<org.eclipse.jetty.util.log.Log: void loadProperties(java.lang.String,java.util.Properties)>[13@L142] key = invokeinterface %v17.next()/result",
+      "sink": "<spark.resource.ClassPathResource: java.net.URL getURL()>[8@L163] url = invokevirtual %v6.getResource(%v7)/0",
+      "sink_method": "<spark.resource.ClassPathResource: java.net.URL getURL()>",
+      "sink_line": 163,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "3fb41357d2",
+      "key": "<org.eclipse.jetty.util.log.Log: void loadProperties(java.lang.String,java.util.Properties)>@L142/result => <spark.resource.ExternalResource: void <init>(java.lang.String)>@L40/0",
+      "source": "<org.eclipse.jetty.util.log.Log: void loadProperties(java.lang.String,java.util.Properties)>[13@L142] key = invokeinterface %v17.next()/result",
+      "sink": "<spark.resource.ExternalResource: void <init>(java.lang.String)>[3@L40] invokespecial %v2.<init>(%v3)/0",
+      "sink_method": "<spark.resource.ExternalResource: void <init>(java.lang.String)>",
+      "sink_line": 40,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "6e84805948",
+      "key": "<org.eclipse.jetty.util.log.Log: void loadProperties(java.lang.String,java.util.Properties)>@L142/result => <spark.resource.JarResourceHandler: java.io.InputStream loadStream(java.lang.String)>@L109/0",
+      "source": "<org.eclipse.jetty.util.log.Log: void loadProperties(java.lang.String,java.util.Properties)>[13@L142] key = invokeinterface %v17.next()/result",
+      "sink": "<spark.resource.JarResourceHandler: java.io.InputStream loadStream(java.lang.String)>[1@L109] %v3 = invokevirtual %c2.getResourceAsStream(path)/0",
+      "sink_method": "<spark.resource.JarResourceHandler: java.io.InputStream loadStream(java.lang.String)>",
+      "sink_line": 109,
+      "gt": [],
+      "gt_weak": [
+        "ClassPathResourceHandler.getResource",
+        "ExternalResourceHandler.getResource",
+        "StaticFilesConfiguration.configureJarCase",
+        "StaticFilesConfiguration.configure"
+      ],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "6f31b119e3",
+      "key": "<org.eclipse.jetty.util.log.Log: void loadProperties(java.lang.String,java.util.Properties)>@L142/result => <spark.utils.ResourceUtils: java.io.File getFile(java.net.URL,java.lang.String)>@L219/0",
+      "source": "<org.eclipse.jetty.util.log.Log: void loadProperties(java.lang.String,java.util.Properties)>[13@L142] key = invokeinterface %v17.next()/result",
+      "sink": "<spark.utils.ResourceUtils: java.io.File getFile(java.net.URL,java.lang.String)>[20@L219] invokespecial %v15.<init>(%v17)/0",
+      "sink_method": "<spark.utils.ResourceUtils: java.io.File getFile(java.net.URL,java.lang.String)>",
+      "sink_line": 219,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "ea462c160c",
+      "key": "<org.eclipse.jetty.util.log.Log: void loadProperties(java.lang.String,java.util.Properties)>@L142/result => <spark.utils.ResourceUtils: java.io.File getFile(java.net.URL,java.lang.String)>@L222/0",
+      "source": "<org.eclipse.jetty.util.log.Log: void loadProperties(java.lang.String,java.util.Properties)>[13@L142] key = invokeinterface %v17.next()/result",
+      "sink": "<spark.utils.ResourceUtils: java.io.File getFile(java.net.URL,java.lang.String)>[25@L222] invokespecial %v19.<init>(%v20)/0",
+      "sink_method": "<spark.utils.ResourceUtils: java.io.File getFile(java.net.URL,java.lang.String)>",
+      "sink_line": 222,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "9165011fa1",
+      "key": "<spark.http.matching.MatcherFilter: void doFilter(javax.servlet.ServletRequest,javax.servlet.ServletResponse,javax.servlet.FilterChain)>@L100/result => <org.eclipse.jetty.util.Loader: java.net.URL getResource(java.lang.Class,java.lang.String)>@L54/0",
+      "source": "<spark.http.matching.MatcherFilter: void doFilter(javax.servlet.ServletRequest,javax.servlet.ServletResponse,javax.servlet.FilterChain)>[10@L100] uri = invokeinterface httpRequest.getRequestURI()/result",
+      "sink": "<org.eclipse.jetty.util.Loader: java.net.URL getResource(java.lang.Class,java.lang.String)>[4@L54] url = invokevirtual context_loader.getResource(name)/0",
+      "sink_method": "<org.eclipse.jetty.util.Loader: java.net.URL getResource(java.lang.Class,java.lang.String)>",
+      "sink_line": 54,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "50bc0fd1ba",
+      "key": "<spark.http.matching.MatcherFilter: void doFilter(javax.servlet.ServletRequest,javax.servlet.ServletResponse,javax.servlet.FilterChain)>@L100/result => <org.eclipse.jetty.util.Loader: java.net.URL getResource(java.lang.Class,java.lang.String)>@L60/0",
+      "source": "<spark.http.matching.MatcherFilter: void doFilter(javax.servlet.ServletRequest,javax.servlet.ServletResponse,javax.servlet.FilterChain)>[10@L100] uri = invokeinterface httpRequest.getRequestURI()/result",
+      "sink": "<org.eclipse.jetty.util.Loader: java.net.URL getResource(java.lang.Class,java.lang.String)>[10@L60] url = invokevirtual load_loader.getResource(name)/0",
+      "sink_method": "<org.eclipse.jetty.util.Loader: java.net.URL getResource(java.lang.Class,java.lang.String)>",
+      "sink_line": 60,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "72785618eb",
+      "key": "<spark.http.matching.MatcherFilter: void doFilter(javax.servlet.ServletRequest,javax.servlet.ServletResponse,javax.servlet.FilterChain)>@L100/result => <org.slf4j.impl.SimpleLogger: java.io.PrintStream computeTargetStream(java.lang.String)>@L219/0",
+      "source": "<spark.http.matching.MatcherFilter: void doFilter(javax.servlet.ServletRequest,javax.servlet.ServletResponse,javax.servlet.FilterChain)>[10@L100] uri = invokeinterface httpRequest.getRequestURI()/result",
+      "sink": "<org.slf4j.impl.SimpleLogger: java.io.PrintStream computeTargetStream(java.lang.String)>[12@L219] invokespecial fos.<init>(logFile)/0",
+      "sink_method": "<org.slf4j.impl.SimpleLogger: java.io.PrintStream computeTargetStream(java.lang.String)>",
+      "sink_line": 219,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "c59e765740",
+      "key": "<spark.http.matching.MatcherFilter: void doFilter(javax.servlet.ServletRequest,javax.servlet.ServletResponse,javax.servlet.FilterChain)>@L100/result => <spark.resource.ClassPathResource: boolean exists()>@L120/0",
+      "source": "<spark.http.matching.MatcherFilter: void doFilter(javax.servlet.ServletRequest,javax.servlet.ServletResponse,javax.servlet.FilterChain)>[10@L100] uri = invokeinterface httpRequest.getRequestURI()/result",
+      "sink": "<spark.resource.ClassPathResource: boolean exists()>[6@L120] url = invokevirtual %v4.getResource(%v5)/0",
+      "sink_method": "<spark.resource.ClassPathResource: boolean exists()>",
+      "sink_line": 120,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "d42aff301e",
+      "key": "<spark.http.matching.MatcherFilter: void doFilter(javax.servlet.ServletRequest,javax.servlet.ServletResponse,javax.servlet.FilterChain)>@L100/result => <spark.resource.ClassPathResource: boolean exists()>@L122/0",
+      "source": "<spark.http.matching.MatcherFilter: void doFilter(javax.servlet.ServletRequest,javax.servlet.ServletResponse,javax.servlet.FilterChain)>[10@L100] uri = invokeinterface httpRequest.getRequestURI()/result",
+      "sink": "<spark.resource.ClassPathResource: boolean exists()>[10@L122] url = invokevirtual %v6.getResource(%v7)/0",
+      "sink_method": "<spark.resource.ClassPathResource: boolean exists()>",
+      "sink_line": 122,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "0352bc917c",
+      "key": "<spark.http.matching.MatcherFilter: void doFilter(javax.servlet.ServletRequest,javax.servlet.ServletResponse,javax.servlet.FilterChain)>@L100/result => <spark.resource.ClassPathResource: java.io.InputStream getInputStream()>@L139/0",
+      "source": "<spark.http.matching.MatcherFilter: void doFilter(javax.servlet.ServletRequest,javax.servlet.ServletResponse,javax.servlet.FilterChain)>[10@L100] uri = invokeinterface httpRequest.getRequestURI()/result",
+      "sink": "<spark.resource.ClassPathResource: java.io.InputStream getInputStream()>[4@L139] is = invokevirtual %v4.getResourceAsStream(%v5)/0",
+      "sink_method": "<spark.resource.ClassPathResource: java.io.InputStream getInputStream()>",
+      "sink_line": 139,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "a945590afc",
+      "key": "<spark.http.matching.MatcherFilter: void doFilter(javax.servlet.ServletRequest,javax.servlet.ServletResponse,javax.servlet.FilterChain)>@L100/result => <spark.resource.ClassPathResource: java.io.InputStream getInputStream()>@L141/0",
+      "source": "<spark.http.matching.MatcherFilter: void doFilter(javax.servlet.ServletRequest,javax.servlet.ServletResponse,javax.servlet.FilterChain)>[10@L100] uri = invokeinterface httpRequest.getRequestURI()/result",
+      "sink": "<spark.resource.ClassPathResource: java.io.InputStream getInputStream()>[8@L141] is = invokevirtual %v6.getResourceAsStream(%v7)/0",
+      "sink_method": "<spark.resource.ClassPathResource: java.io.InputStream getInputStream()>",
+      "sink_line": 141,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "ed4ca64cce",
+      "key": "<spark.http.matching.MatcherFilter: void doFilter(javax.servlet.ServletRequest,javax.servlet.ServletResponse,javax.servlet.FilterChain)>@L100/result => <spark.resource.ClassPathResource: java.net.URL getURL()>@L161/0",
+      "source": "<spark.http.matching.MatcherFilter: void doFilter(javax.servlet.ServletRequest,javax.servlet.ServletResponse,javax.servlet.FilterChain)>[10@L100] uri = invokeinterface httpRequest.getRequestURI()/result",
+      "sink": "<spark.resource.ClassPathResource: java.net.URL getURL()>[4@L161] url = invokevirtual %v4.getResource(%v5)/0",
+      "sink_method": "<spark.resource.ClassPathResource: java.net.URL getURL()>",
+      "sink_line": 161,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "6e5ba8da87",
+      "key": "<spark.http.matching.MatcherFilter: void doFilter(javax.servlet.ServletRequest,javax.servlet.ServletResponse,javax.servlet.FilterChain)>@L100/result => <spark.resource.ClassPathResource: java.net.URL getURL()>@L163/0",
+      "source": "<spark.http.matching.MatcherFilter: void doFilter(javax.servlet.ServletRequest,javax.servlet.ServletResponse,javax.servlet.FilterChain)>[10@L100] uri = invokeinterface httpRequest.getRequestURI()/result",
+      "sink": "<spark.resource.ClassPathResource: java.net.URL getURL()>[8@L163] url = invokevirtual %v6.getResource(%v7)/0",
+      "sink_method": "<spark.resource.ClassPathResource: java.net.URL getURL()>",
+      "sink_line": 163,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "b2fa92ff69",
+      "key": "<spark.http.matching.MatcherFilter: void doFilter(javax.servlet.ServletRequest,javax.servlet.ServletResponse,javax.servlet.FilterChain)>@L100/result => <spark.resource.ExternalResource: void <init>(java.lang.String)>@L40/0",
+      "source": "<spark.http.matching.MatcherFilter: void doFilter(javax.servlet.ServletRequest,javax.servlet.ServletResponse,javax.servlet.FilterChain)>[10@L100] uri = invokeinterface httpRequest.getRequestURI()/result",
+      "sink": "<spark.resource.ExternalResource: void <init>(java.lang.String)>[3@L40] invokespecial %v2.<init>(%v3)/0",
+      "sink_method": "<spark.resource.ExternalResource: void <init>(java.lang.String)>",
+      "sink_line": 40,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "a71efb4d38",
+      "key": "<spark.http.matching.MatcherFilter: void doFilter(javax.servlet.ServletRequest,javax.servlet.ServletResponse,javax.servlet.FilterChain)>@L100/result => <spark.resource.JarResourceHandler: java.io.InputStream loadStream(java.lang.String)>@L109/0",
+      "source": "<spark.http.matching.MatcherFilter: void doFilter(javax.servlet.ServletRequest,javax.servlet.ServletResponse,javax.servlet.FilterChain)>[10@L100] uri = invokeinterface httpRequest.getRequestURI()/result",
+      "sink": "<spark.resource.JarResourceHandler: java.io.InputStream loadStream(java.lang.String)>[1@L109] %v3 = invokevirtual %c2.getResourceAsStream(path)/0",
+      "sink_method": "<spark.resource.JarResourceHandler: java.io.InputStream loadStream(java.lang.String)>",
+      "sink_line": 109,
+      "gt": [],
+      "gt_weak": [
+        "ClassPathResourceHandler.getResource",
+        "ExternalResourceHandler.getResource",
+        "StaticFilesConfiguration.configureJarCase",
+        "StaticFilesConfiguration.configure"
+      ],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "df5f4d805e",
+      "key": "<spark.http.matching.MatcherFilter: void doFilter(javax.servlet.ServletRequest,javax.servlet.ServletResponse,javax.servlet.FilterChain)>@L100/result => <spark.utils.ResourceUtils: java.io.File getFile(java.net.URL,java.lang.String)>@L219/0",
+      "source": "<spark.http.matching.MatcherFilter: void doFilter(javax.servlet.ServletRequest,javax.servlet.ServletResponse,javax.servlet.FilterChain)>[10@L100] uri = invokeinterface httpRequest.getRequestURI()/result",
+      "sink": "<spark.utils.ResourceUtils: java.io.File getFile(java.net.URL,java.lang.String)>[20@L219] invokespecial %v15.<init>(%v17)/0",
+      "sink_method": "<spark.utils.ResourceUtils: java.io.File getFile(java.net.URL,java.lang.String)>",
+      "sink_line": 219,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "131c3dfe22",
+      "key": "<spark.http.matching.MatcherFilter: void doFilter(javax.servlet.ServletRequest,javax.servlet.ServletResponse,javax.servlet.FilterChain)>@L100/result => <spark.utils.ResourceUtils: java.io.File getFile(java.net.URL,java.lang.String)>@L222/0",
+      "source": "<spark.http.matching.MatcherFilter: void doFilter(javax.servlet.ServletRequest,javax.servlet.ServletResponse,javax.servlet.FilterChain)>[10@L100] uri = invokeinterface httpRequest.getRequestURI()/result",
+      "sink": "<spark.utils.ResourceUtils: java.io.File getFile(java.net.URL,java.lang.String)>[25@L222] invokespecial %v19.<init>(%v20)/0",
+      "sink_method": "<spark.utils.ResourceUtils: java.io.File getFile(java.net.URL,java.lang.String)>",
+      "sink_line": 222,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "c6c4fe5ac6",
+      "key": "<spark.resource.AbstractResourceHandler: spark.resource.AbstractFileResolvingResource getResource(javax.servlet.http.HttpServletRequest)>@L50/result => <org.eclipse.jetty.util.Loader: java.net.URL getResource(java.lang.Class,java.lang.String)>@L54/0",
+      "source": "<spark.resource.AbstractResourceHandler: spark.resource.AbstractFileResolvingResource getResource(javax.servlet.http.HttpServletRequest)>[17@L50] servletPath = invokeinterface request.getServletPath()/result",
+      "sink": "<org.eclipse.jetty.util.Loader: java.net.URL getResource(java.lang.Class,java.lang.String)>[4@L54] url = invokevirtual context_loader.getResource(name)/0",
+      "sink_method": "<org.eclipse.jetty.util.Loader: java.net.URL getResource(java.lang.Class,java.lang.String)>",
+      "sink_line": 54,
+      "gt": [],
+      "gt_weak": [
+        "ClassPathResourceHandler.getResource",
+        "ExternalResourceHandler.getResource"
+      ],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "05798cf8e7",
+      "key": "<spark.resource.AbstractResourceHandler: spark.resource.AbstractFileResolvingResource getResource(javax.servlet.http.HttpServletRequest)>@L50/result => <org.eclipse.jetty.util.Loader: java.net.URL getResource(java.lang.Class,java.lang.String)>@L60/0",
+      "source": "<spark.resource.AbstractResourceHandler: spark.resource.AbstractFileResolvingResource getResource(javax.servlet.http.HttpServletRequest)>[17@L50] servletPath = invokeinterface request.getServletPath()/result",
+      "sink": "<org.eclipse.jetty.util.Loader: java.net.URL getResource(java.lang.Class,java.lang.String)>[10@L60] url = invokevirtual load_loader.getResource(name)/0",
+      "sink_method": "<org.eclipse.jetty.util.Loader: java.net.URL getResource(java.lang.Class,java.lang.String)>",
+      "sink_line": 60,
+      "gt": [],
+      "gt_weak": [
+        "ClassPathResourceHandler.getResource",
+        "ExternalResourceHandler.getResource"
+      ],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "d37dee2e0e",
+      "key": "<spark.resource.AbstractResourceHandler: spark.resource.AbstractFileResolvingResource getResource(javax.servlet.http.HttpServletRequest)>@L50/result => <org.slf4j.impl.SimpleLogger: java.io.PrintStream computeTargetStream(java.lang.String)>@L219/0",
+      "source": "<spark.resource.AbstractResourceHandler: spark.resource.AbstractFileResolvingResource getResource(javax.servlet.http.HttpServletRequest)>[17@L50] servletPath = invokeinterface request.getServletPath()/result",
+      "sink": "<org.slf4j.impl.SimpleLogger: java.io.PrintStream computeTargetStream(java.lang.String)>[12@L219] invokespecial fos.<init>(logFile)/0",
+      "sink_method": "<org.slf4j.impl.SimpleLogger: java.io.PrintStream computeTargetStream(java.lang.String)>",
+      "sink_line": 219,
+      "gt": [],
+      "gt_weak": [
+        "ClassPathResourceHandler.getResource",
+        "ExternalResourceHandler.getResource"
+      ],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "3484d59c3e",
+      "key": "<spark.resource.AbstractResourceHandler: spark.resource.AbstractFileResolvingResource getResource(javax.servlet.http.HttpServletRequest)>@L50/result => <spark.resource.ClassPathResource: boolean exists()>@L120/0",
+      "source": "<spark.resource.AbstractResourceHandler: spark.resource.AbstractFileResolvingResource getResource(javax.servlet.http.HttpServletRequest)>[17@L50] servletPath = invokeinterface request.getServletPath()/result",
+      "sink": "<spark.resource.ClassPathResource: boolean exists()>[6@L120] url = invokevirtual %v4.getResource(%v5)/0",
+      "sink_method": "<spark.resource.ClassPathResource: boolean exists()>",
+      "sink_line": 120,
+      "gt": [],
+      "gt_weak": [
+        "ClassPathResourceHandler.getResource",
+        "ExternalResourceHandler.getResource"
+      ],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "97316615c2",
+      "key": "<spark.resource.AbstractResourceHandler: spark.resource.AbstractFileResolvingResource getResource(javax.servlet.http.HttpServletRequest)>@L50/result => <spark.resource.ClassPathResource: boolean exists()>@L122/0",
+      "source": "<spark.resource.AbstractResourceHandler: spark.resource.AbstractFileResolvingResource getResource(javax.servlet.http.HttpServletRequest)>[17@L50] servletPath = invokeinterface request.getServletPath()/result",
+      "sink": "<spark.resource.ClassPathResource: boolean exists()>[10@L122] url = invokevirtual %v6.getResource(%v7)/0",
+      "sink_method": "<spark.resource.ClassPathResource: boolean exists()>",
+      "sink_line": 122,
+      "gt": [],
+      "gt_weak": [
+        "ClassPathResourceHandler.getResource",
+        "ExternalResourceHandler.getResource"
+      ],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "ca120fee5f",
+      "key": "<spark.resource.AbstractResourceHandler: spark.resource.AbstractFileResolvingResource getResource(javax.servlet.http.HttpServletRequest)>@L50/result => <spark.resource.ClassPathResource: java.io.InputStream getInputStream()>@L139/0",
+      "source": "<spark.resource.AbstractResourceHandler: spark.resource.AbstractFileResolvingResource getResource(javax.servlet.http.HttpServletRequest)>[17@L50] servletPath = invokeinterface request.getServletPath()/result",
+      "sink": "<spark.resource.ClassPathResource: java.io.InputStream getInputStream()>[4@L139] is = invokevirtual %v4.getResourceAsStream(%v5)/0",
+      "sink_method": "<spark.resource.ClassPathResource: java.io.InputStream getInputStream()>",
+      "sink_line": 139,
+      "gt": [],
+      "gt_weak": [
+        "ClassPathResourceHandler.getResource",
+        "ExternalResourceHandler.getResource"
+      ],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "c1c13a7813",
+      "key": "<spark.resource.AbstractResourceHandler: spark.resource.AbstractFileResolvingResource getResource(javax.servlet.http.HttpServletRequest)>@L50/result => <spark.resource.ClassPathResource: java.io.InputStream getInputStream()>@L141/0",
+      "source": "<spark.resource.AbstractResourceHandler: spark.resource.AbstractFileResolvingResource getResource(javax.servlet.http.HttpServletRequest)>[17@L50] servletPath = invokeinterface request.getServletPath()/result",
+      "sink": "<spark.resource.ClassPathResource: java.io.InputStream getInputStream()>[8@L141] is = invokevirtual %v6.getResourceAsStream(%v7)/0",
+      "sink_method": "<spark.resource.ClassPathResource: java.io.InputStream getInputStream()>",
+      "sink_line": 141,
+      "gt": [],
+      "gt_weak": [
+        "ClassPathResourceHandler.getResource",
+        "ExternalResourceHandler.getResource"
+      ],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "046f173d0c",
+      "key": "<spark.resource.AbstractResourceHandler: spark.resource.AbstractFileResolvingResource getResource(javax.servlet.http.HttpServletRequest)>@L50/result => <spark.resource.ClassPathResource: java.net.URL getURL()>@L161/0",
+      "source": "<spark.resource.AbstractResourceHandler: spark.resource.AbstractFileResolvingResource getResource(javax.servlet.http.HttpServletRequest)>[17@L50] servletPath = invokeinterface request.getServletPath()/result",
+      "sink": "<spark.resource.ClassPathResource: java.net.URL getURL()>[4@L161] url = invokevirtual %v4.getResource(%v5)/0",
+      "sink_method": "<spark.resource.ClassPathResource: java.net.URL getURL()>",
+      "sink_line": 161,
+      "gt": [],
+      "gt_weak": [
+        "ClassPathResourceHandler.getResource",
+        "ExternalResourceHandler.getResource"
+      ],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "bf9cf61c69",
+      "key": "<spark.resource.AbstractResourceHandler: spark.resource.AbstractFileResolvingResource getResource(javax.servlet.http.HttpServletRequest)>@L50/result => <spark.resource.ClassPathResource: java.net.URL getURL()>@L163/0",
+      "source": "<spark.resource.AbstractResourceHandler: spark.resource.AbstractFileResolvingResource getResource(javax.servlet.http.HttpServletRequest)>[17@L50] servletPath = invokeinterface request.getServletPath()/result",
+      "sink": "<spark.resource.ClassPathResource: java.net.URL getURL()>[8@L163] url = invokevirtual %v6.getResource(%v7)/0",
+      "sink_method": "<spark.resource.ClassPathResource: java.net.URL getURL()>",
+      "sink_line": 163,
+      "gt": [],
+      "gt_weak": [
+        "ClassPathResourceHandler.getResource",
+        "ExternalResourceHandler.getResource"
+      ],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "7bd0df4f36",
+      "key": "<spark.resource.AbstractResourceHandler: spark.resource.AbstractFileResolvingResource getResource(javax.servlet.http.HttpServletRequest)>@L50/result => <spark.resource.ExternalResource: void <init>(java.lang.String)>@L40/0",
+      "source": "<spark.resource.AbstractResourceHandler: spark.resource.AbstractFileResolvingResource getResource(javax.servlet.http.HttpServletRequest)>[17@L50] servletPath = invokeinterface request.getServletPath()/result",
+      "sink": "<spark.resource.ExternalResource: void <init>(java.lang.String)>[3@L40] invokespecial %v2.<init>(%v3)/0",
+      "sink_method": "<spark.resource.ExternalResource: void <init>(java.lang.String)>",
+      "sink_line": 40,
+      "gt": [],
+      "gt_weak": [
+        "ClassPathResourceHandler.getResource",
+        "ExternalResourceHandler.getResource"
+      ],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "59609926d1",
+      "key": "<spark.resource.AbstractResourceHandler: spark.resource.AbstractFileResolvingResource getResource(javax.servlet.http.HttpServletRequest)>@L50/result => <spark.resource.JarResourceHandler: java.io.InputStream loadStream(java.lang.String)>@L109/0",
+      "source": "<spark.resource.AbstractResourceHandler: spark.resource.AbstractFileResolvingResource getResource(javax.servlet.http.HttpServletRequest)>[17@L50] servletPath = invokeinterface request.getServletPath()/result",
+      "sink": "<spark.resource.JarResourceHandler: java.io.InputStream loadStream(java.lang.String)>[1@L109] %v3 = invokevirtual %c2.getResourceAsStream(path)/0",
+      "sink_method": "<spark.resource.JarResourceHandler: java.io.InputStream loadStream(java.lang.String)>",
+      "sink_line": 109,
+      "gt": [
+        "ClassPathResourceHandler.getResource",
+        "ExternalResourceHandler.getResource"
+      ],
+      "gt_weak": [],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "e1b93f1b2b",
+      "key": "<spark.resource.AbstractResourceHandler: spark.resource.AbstractFileResolvingResource getResource(javax.servlet.http.HttpServletRequest)>@L50/result => <spark.utils.ResourceUtils: java.io.File getFile(java.net.URL,java.lang.String)>@L219/0",
+      "source": "<spark.resource.AbstractResourceHandler: spark.resource.AbstractFileResolvingResource getResource(javax.servlet.http.HttpServletRequest)>[17@L50] servletPath = invokeinterface request.getServletPath()/result",
+      "sink": "<spark.utils.ResourceUtils: java.io.File getFile(java.net.URL,java.lang.String)>[20@L219] invokespecial %v15.<init>(%v17)/0",
+      "sink_method": "<spark.utils.ResourceUtils: java.io.File getFile(java.net.URL,java.lang.String)>",
+      "sink_line": 219,
+      "gt": [],
+      "gt_weak": [
+        "ClassPathResourceHandler.getResource",
+        "ExternalResourceHandler.getResource"
+      ],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "e89973950e",
+      "key": "<spark.resource.AbstractResourceHandler: spark.resource.AbstractFileResolvingResource getResource(javax.servlet.http.HttpServletRequest)>@L50/result => <spark.utils.ResourceUtils: java.io.File getFile(java.net.URL,java.lang.String)>@L222/0",
+      "source": "<spark.resource.AbstractResourceHandler: spark.resource.AbstractFileResolvingResource getResource(javax.servlet.http.HttpServletRequest)>[17@L50] servletPath = invokeinterface request.getServletPath()/result",
+      "sink": "<spark.utils.ResourceUtils: java.io.File getFile(java.net.URL,java.lang.String)>[25@L222] invokespecial %v19.<init>(%v20)/0",
+      "sink_method": "<spark.utils.ResourceUtils: java.io.File getFile(java.net.URL,java.lang.String)>",
+      "sink_line": 222,
+      "gt": [],
+      "gt_weak": [
+        "ClassPathResourceHandler.getResource",
+        "ExternalResourceHandler.getResource"
+      ],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "89360276df",
+      "key": "<spark.resource.AbstractResourceHandler: spark.resource.AbstractFileResolvingResource getResource(javax.servlet.http.HttpServletRequest)>@L51/result => <org.eclipse.jetty.util.Loader: java.net.URL getResource(java.lang.Class,java.lang.String)>@L54/0",
+      "source": "<spark.resource.AbstractResourceHandler: spark.resource.AbstractFileResolvingResource getResource(javax.servlet.http.HttpServletRequest)>[18@L51] pathInfo = invokeinterface request.getPathInfo()/result",
+      "sink": "<org.eclipse.jetty.util.Loader: java.net.URL getResource(java.lang.Class,java.lang.String)>[4@L54] url = invokevirtual context_loader.getResource(name)/0",
+      "sink_method": "<org.eclipse.jetty.util.Loader: java.net.URL getResource(java.lang.Class,java.lang.String)>",
+      "sink_line": 54,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "12d14e53a0",
+      "key": "<spark.resource.AbstractResourceHandler: spark.resource.AbstractFileResolvingResource getResource(javax.servlet.http.HttpServletRequest)>@L51/result => <org.eclipse.jetty.util.Loader: java.net.URL getResource(java.lang.Class,java.lang.String)>@L60/0",
+      "source": "<spark.resource.AbstractResourceHandler: spark.resource.AbstractFileResolvingResource getResource(javax.servlet.http.HttpServletRequest)>[18@L51] pathInfo = invokeinterface request.getPathInfo()/result",
+      "sink": "<org.eclipse.jetty.util.Loader: java.net.URL getResource(java.lang.Class,java.lang.String)>[10@L60] url = invokevirtual load_loader.getResource(name)/0",
+      "sink_method": "<org.eclipse.jetty.util.Loader: java.net.URL getResource(java.lang.Class,java.lang.String)>",
+      "sink_line": 60,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "cc39cf98e5",
+      "key": "<spark.resource.AbstractResourceHandler: spark.resource.AbstractFileResolvingResource getResource(javax.servlet.http.HttpServletRequest)>@L51/result => <org.slf4j.impl.SimpleLogger: java.io.PrintStream computeTargetStream(java.lang.String)>@L219/0",
+      "source": "<spark.resource.AbstractResourceHandler: spark.resource.AbstractFileResolvingResource getResource(javax.servlet.http.HttpServletRequest)>[18@L51] pathInfo = invokeinterface request.getPathInfo()/result",
+      "sink": "<org.slf4j.impl.SimpleLogger: java.io.PrintStream computeTargetStream(java.lang.String)>[12@L219] invokespecial fos.<init>(logFile)/0",
+      "sink_method": "<org.slf4j.impl.SimpleLogger: java.io.PrintStream computeTargetStream(java.lang.String)>",
+      "sink_line": 219,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "95883e5338",
+      "key": "<spark.resource.AbstractResourceHandler: spark.resource.AbstractFileResolvingResource getResource(javax.servlet.http.HttpServletRequest)>@L51/result => <spark.resource.ClassPathResource: boolean exists()>@L120/0",
+      "source": "<spark.resource.AbstractResourceHandler: spark.resource.AbstractFileResolvingResource getResource(javax.servlet.http.HttpServletRequest)>[18@L51] pathInfo = invokeinterface request.getPathInfo()/result",
+      "sink": "<spark.resource.ClassPathResource: boolean exists()>[6@L120] url = invokevirtual %v4.getResource(%v5)/0",
+      "sink_method": "<spark.resource.ClassPathResource: boolean exists()>",
+      "sink_line": 120,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "8aa7fa0ac1",
+      "key": "<spark.resource.AbstractResourceHandler: spark.resource.AbstractFileResolvingResource getResource(javax.servlet.http.HttpServletRequest)>@L51/result => <spark.resource.ClassPathResource: boolean exists()>@L122/0",
+      "source": "<spark.resource.AbstractResourceHandler: spark.resource.AbstractFileResolvingResource getResource(javax.servlet.http.HttpServletRequest)>[18@L51] pathInfo = invokeinterface request.getPathInfo()/result",
+      "sink": "<spark.resource.ClassPathResource: boolean exists()>[10@L122] url = invokevirtual %v6.getResource(%v7)/0",
+      "sink_method": "<spark.resource.ClassPathResource: boolean exists()>",
+      "sink_line": 122,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "dfe1fd2b8f",
+      "key": "<spark.resource.AbstractResourceHandler: spark.resource.AbstractFileResolvingResource getResource(javax.servlet.http.HttpServletRequest)>@L51/result => <spark.resource.ClassPathResource: java.io.InputStream getInputStream()>@L139/0",
+      "source": "<spark.resource.AbstractResourceHandler: spark.resource.AbstractFileResolvingResource getResource(javax.servlet.http.HttpServletRequest)>[18@L51] pathInfo = invokeinterface request.getPathInfo()/result",
+      "sink": "<spark.resource.ClassPathResource: java.io.InputStream getInputStream()>[4@L139] is = invokevirtual %v4.getResourceAsStream(%v5)/0",
+      "sink_method": "<spark.resource.ClassPathResource: java.io.InputStream getInputStream()>",
+      "sink_line": 139,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "0bb240c894",
+      "key": "<spark.resource.AbstractResourceHandler: spark.resource.AbstractFileResolvingResource getResource(javax.servlet.http.HttpServletRequest)>@L51/result => <spark.resource.ClassPathResource: java.io.InputStream getInputStream()>@L141/0",
+      "source": "<spark.resource.AbstractResourceHandler: spark.resource.AbstractFileResolvingResource getResource(javax.servlet.http.HttpServletRequest)>[18@L51] pathInfo = invokeinterface request.getPathInfo()/result",
+      "sink": "<spark.resource.ClassPathResource: java.io.InputStream getInputStream()>[8@L141] is = invokevirtual %v6.getResourceAsStream(%v7)/0",
+      "sink_method": "<spark.resource.ClassPathResource: java.io.InputStream getInputStream()>",
+      "sink_line": 141,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "f4678f05c6",
+      "key": "<spark.resource.AbstractResourceHandler: spark.resource.AbstractFileResolvingResource getResource(javax.servlet.http.HttpServletRequest)>@L51/result => <spark.resource.ClassPathResource: java.net.URL getURL()>@L161/0",
+      "source": "<spark.resource.AbstractResourceHandler: spark.resource.AbstractFileResolvingResource getResource(javax.servlet.http.HttpServletRequest)>[18@L51] pathInfo = invokeinterface request.getPathInfo()/result",
+      "sink": "<spark.resource.ClassPathResource: java.net.URL getURL()>[4@L161] url = invokevirtual %v4.getResource(%v5)/0",
+      "sink_method": "<spark.resource.ClassPathResource: java.net.URL getURL()>",
+      "sink_line": 161,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "e118e9ee98",
+      "key": "<spark.resource.AbstractResourceHandler: spark.resource.AbstractFileResolvingResource getResource(javax.servlet.http.HttpServletRequest)>@L51/result => <spark.resource.ClassPathResource: java.net.URL getURL()>@L163/0",
+      "source": "<spark.resource.AbstractResourceHandler: spark.resource.AbstractFileResolvingResource getResource(javax.servlet.http.HttpServletRequest)>[18@L51] pathInfo = invokeinterface request.getPathInfo()/result",
+      "sink": "<spark.resource.ClassPathResource: java.net.URL getURL()>[8@L163] url = invokevirtual %v6.getResource(%v7)/0",
+      "sink_method": "<spark.resource.ClassPathResource: java.net.URL getURL()>",
+      "sink_line": 163,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "40aeac24c9",
+      "key": "<spark.resource.AbstractResourceHandler: spark.resource.AbstractFileResolvingResource getResource(javax.servlet.http.HttpServletRequest)>@L51/result => <spark.resource.ExternalResource: void <init>(java.lang.String)>@L40/0",
+      "source": "<spark.resource.AbstractResourceHandler: spark.resource.AbstractFileResolvingResource getResource(javax.servlet.http.HttpServletRequest)>[18@L51] pathInfo = invokeinterface request.getPathInfo()/result",
+      "sink": "<spark.resource.ExternalResource: void <init>(java.lang.String)>[3@L40] invokespecial %v2.<init>(%v3)/0",
+      "sink_method": "<spark.resource.ExternalResource: void <init>(java.lang.String)>",
+      "sink_line": 40,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "1a649937fa",
+      "key": "<spark.resource.AbstractResourceHandler: spark.resource.AbstractFileResolvingResource getResource(javax.servlet.http.HttpServletRequest)>@L51/result => <spark.resource.JarResourceHandler: java.io.InputStream loadStream(java.lang.String)>@L109/0",
+      "source": "<spark.resource.AbstractResourceHandler: spark.resource.AbstractFileResolvingResource getResource(javax.servlet.http.HttpServletRequest)>[18@L51] pathInfo = invokeinterface request.getPathInfo()/result",
+      "sink": "<spark.resource.JarResourceHandler: java.io.InputStream loadStream(java.lang.String)>[1@L109] %v3 = invokevirtual %c2.getResourceAsStream(path)/0",
+      "sink_method": "<spark.resource.JarResourceHandler: java.io.InputStream loadStream(java.lang.String)>",
+      "sink_line": 109,
+      "gt": [],
+      "gt_weak": [
+        "ClassPathResourceHandler.getResource",
+        "ExternalResourceHandler.getResource",
+        "StaticFilesConfiguration.configureJarCase",
+        "StaticFilesConfiguration.configure"
+      ],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "c87d7475f8",
+      "key": "<spark.resource.AbstractResourceHandler: spark.resource.AbstractFileResolvingResource getResource(javax.servlet.http.HttpServletRequest)>@L51/result => <spark.utils.ResourceUtils: java.io.File getFile(java.net.URL,java.lang.String)>@L219/0",
+      "source": "<spark.resource.AbstractResourceHandler: spark.resource.AbstractFileResolvingResource getResource(javax.servlet.http.HttpServletRequest)>[18@L51] pathInfo = invokeinterface request.getPathInfo()/result",
+      "sink": "<spark.utils.ResourceUtils: java.io.File getFile(java.net.URL,java.lang.String)>[20@L219] invokespecial %v15.<init>(%v17)/0",
+      "sink_method": "<spark.utils.ResourceUtils: java.io.File getFile(java.net.URL,java.lang.String)>",
+      "sink_line": 219,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "8c0eb17929",
+      "key": "<spark.resource.AbstractResourceHandler: spark.resource.AbstractFileResolvingResource getResource(javax.servlet.http.HttpServletRequest)>@L51/result => <spark.utils.ResourceUtils: java.io.File getFile(java.net.URL,java.lang.String)>@L222/0",
+      "source": "<spark.resource.AbstractResourceHandler: spark.resource.AbstractFileResolvingResource getResource(javax.servlet.http.HttpServletRequest)>[18@L51] pathInfo = invokeinterface request.getPathInfo()/result",
+      "sink": "<spark.utils.ResourceUtils: java.io.File getFile(java.net.URL,java.lang.String)>[25@L222] invokespecial %v19.<init>(%v20)/0",
+      "sink_method": "<spark.utils.ResourceUtils: java.io.File getFile(java.net.URL,java.lang.String)>",
+      "sink_line": 222,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "7f62b98b93",
+      "key": "<spark.resource.AbstractResourceHandler: spark.resource.AbstractFileResolvingResource getResource(javax.servlet.http.HttpServletRequest)>@L54/result => <org.eclipse.jetty.util.Loader: java.net.URL getResource(java.lang.Class,java.lang.String)>@L54/0",
+      "source": "<spark.resource.AbstractResourceHandler: spark.resource.AbstractFileResolvingResource getResource(javax.servlet.http.HttpServletRequest)>[20@L54] servletPath = invokeinterface request.getServletPath()/result",
+      "sink": "<org.eclipse.jetty.util.Loader: java.net.URL getResource(java.lang.Class,java.lang.String)>[4@L54] url = invokevirtual context_loader.getResource(name)/0",
+      "sink_method": "<org.eclipse.jetty.util.Loader: java.net.URL getResource(java.lang.Class,java.lang.String)>",
+      "sink_line": 54,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "9eb6839d45",
+      "key": "<spark.resource.AbstractResourceHandler: spark.resource.AbstractFileResolvingResource getResource(javax.servlet.http.HttpServletRequest)>@L54/result => <org.eclipse.jetty.util.Loader: java.net.URL getResource(java.lang.Class,java.lang.String)>@L60/0",
+      "source": "<spark.resource.AbstractResourceHandler: spark.resource.AbstractFileResolvingResource getResource(javax.servlet.http.HttpServletRequest)>[20@L54] servletPath = invokeinterface request.getServletPath()/result",
+      "sink": "<org.eclipse.jetty.util.Loader: java.net.URL getResource(java.lang.Class,java.lang.String)>[10@L60] url = invokevirtual load_loader.getResource(name)/0",
+      "sink_method": "<org.eclipse.jetty.util.Loader: java.net.URL getResource(java.lang.Class,java.lang.String)>",
+      "sink_line": 60,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "0b9bfc2d1a",
+      "key": "<spark.resource.AbstractResourceHandler: spark.resource.AbstractFileResolvingResource getResource(javax.servlet.http.HttpServletRequest)>@L54/result => <org.slf4j.impl.SimpleLogger: java.io.PrintStream computeTargetStream(java.lang.String)>@L219/0",
+      "source": "<spark.resource.AbstractResourceHandler: spark.resource.AbstractFileResolvingResource getResource(javax.servlet.http.HttpServletRequest)>[20@L54] servletPath = invokeinterface request.getServletPath()/result",
+      "sink": "<org.slf4j.impl.SimpleLogger: java.io.PrintStream computeTargetStream(java.lang.String)>[12@L219] invokespecial fos.<init>(logFile)/0",
+      "sink_method": "<org.slf4j.impl.SimpleLogger: java.io.PrintStream computeTargetStream(java.lang.String)>",
+      "sink_line": 219,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "16c3cf872e",
+      "key": "<spark.resource.AbstractResourceHandler: spark.resource.AbstractFileResolvingResource getResource(javax.servlet.http.HttpServletRequest)>@L54/result => <spark.resource.ClassPathResource: boolean exists()>@L120/0",
+      "source": "<spark.resource.AbstractResourceHandler: spark.resource.AbstractFileResolvingResource getResource(javax.servlet.http.HttpServletRequest)>[20@L54] servletPath = invokeinterface request.getServletPath()/result",
+      "sink": "<spark.resource.ClassPathResource: boolean exists()>[6@L120] url = invokevirtual %v4.getResource(%v5)/0",
+      "sink_method": "<spark.resource.ClassPathResource: boolean exists()>",
+      "sink_line": 120,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "2f68530acf",
+      "key": "<spark.resource.AbstractResourceHandler: spark.resource.AbstractFileResolvingResource getResource(javax.servlet.http.HttpServletRequest)>@L54/result => <spark.resource.ClassPathResource: boolean exists()>@L122/0",
+      "source": "<spark.resource.AbstractResourceHandler: spark.resource.AbstractFileResolvingResource getResource(javax.servlet.http.HttpServletRequest)>[20@L54] servletPath = invokeinterface request.getServletPath()/result",
+      "sink": "<spark.resource.ClassPathResource: boolean exists()>[10@L122] url = invokevirtual %v6.getResource(%v7)/0",
+      "sink_method": "<spark.resource.ClassPathResource: boolean exists()>",
+      "sink_line": 122,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "e7499a3571",
+      "key": "<spark.resource.AbstractResourceHandler: spark.resource.AbstractFileResolvingResource getResource(javax.servlet.http.HttpServletRequest)>@L54/result => <spark.resource.ClassPathResource: java.io.InputStream getInputStream()>@L139/0",
+      "source": "<spark.resource.AbstractResourceHandler: spark.resource.AbstractFileResolvingResource getResource(javax.servlet.http.HttpServletRequest)>[20@L54] servletPath = invokeinterface request.getServletPath()/result",
+      "sink": "<spark.resource.ClassPathResource: java.io.InputStream getInputStream()>[4@L139] is = invokevirtual %v4.getResourceAsStream(%v5)/0",
+      "sink_method": "<spark.resource.ClassPathResource: java.io.InputStream getInputStream()>",
+      "sink_line": 139,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "64c4ee5e38",
+      "key": "<spark.resource.AbstractResourceHandler: spark.resource.AbstractFileResolvingResource getResource(javax.servlet.http.HttpServletRequest)>@L54/result => <spark.resource.ClassPathResource: java.io.InputStream getInputStream()>@L141/0",
+      "source": "<spark.resource.AbstractResourceHandler: spark.resource.AbstractFileResolvingResource getResource(javax.servlet.http.HttpServletRequest)>[20@L54] servletPath = invokeinterface request.getServletPath()/result",
+      "sink": "<spark.resource.ClassPathResource: java.io.InputStream getInputStream()>[8@L141] is = invokevirtual %v6.getResourceAsStream(%v7)/0",
+      "sink_method": "<spark.resource.ClassPathResource: java.io.InputStream getInputStream()>",
+      "sink_line": 141,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "79777a84dd",
+      "key": "<spark.resource.AbstractResourceHandler: spark.resource.AbstractFileResolvingResource getResource(javax.servlet.http.HttpServletRequest)>@L54/result => <spark.resource.ClassPathResource: java.net.URL getURL()>@L161/0",
+      "source": "<spark.resource.AbstractResourceHandler: spark.resource.AbstractFileResolvingResource getResource(javax.servlet.http.HttpServletRequest)>[20@L54] servletPath = invokeinterface request.getServletPath()/result",
+      "sink": "<spark.resource.ClassPathResource: java.net.URL getURL()>[4@L161] url = invokevirtual %v4.getResource(%v5)/0",
+      "sink_method": "<spark.resource.ClassPathResource: java.net.URL getURL()>",
+      "sink_line": 161,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "df3ffc45bf",
+      "key": "<spark.resource.AbstractResourceHandler: spark.resource.AbstractFileResolvingResource getResource(javax.servlet.http.HttpServletRequest)>@L54/result => <spark.resource.ClassPathResource: java.net.URL getURL()>@L163/0",
+      "source": "<spark.resource.AbstractResourceHandler: spark.resource.AbstractFileResolvingResource getResource(javax.servlet.http.HttpServletRequest)>[20@L54] servletPath = invokeinterface request.getServletPath()/result",
+      "sink": "<spark.resource.ClassPathResource: java.net.URL getURL()>[8@L163] url = invokevirtual %v6.getResource(%v7)/0",
+      "sink_method": "<spark.resource.ClassPathResource: java.net.URL getURL()>",
+      "sink_line": 163,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "b4052ffab4",
+      "key": "<spark.resource.AbstractResourceHandler: spark.resource.AbstractFileResolvingResource getResource(javax.servlet.http.HttpServletRequest)>@L54/result => <spark.resource.ExternalResource: void <init>(java.lang.String)>@L40/0",
+      "source": "<spark.resource.AbstractResourceHandler: spark.resource.AbstractFileResolvingResource getResource(javax.servlet.http.HttpServletRequest)>[20@L54] servletPath = invokeinterface request.getServletPath()/result",
+      "sink": "<spark.resource.ExternalResource: void <init>(java.lang.String)>[3@L40] invokespecial %v2.<init>(%v3)/0",
+      "sink_method": "<spark.resource.ExternalResource: void <init>(java.lang.String)>",
+      "sink_line": 40,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "0da199a211",
+      "key": "<spark.resource.AbstractResourceHandler: spark.resource.AbstractFileResolvingResource getResource(javax.servlet.http.HttpServletRequest)>@L54/result => <spark.resource.JarResourceHandler: java.io.InputStream loadStream(java.lang.String)>@L109/0",
+      "source": "<spark.resource.AbstractResourceHandler: spark.resource.AbstractFileResolvingResource getResource(javax.servlet.http.HttpServletRequest)>[20@L54] servletPath = invokeinterface request.getServletPath()/result",
+      "sink": "<spark.resource.JarResourceHandler: java.io.InputStream loadStream(java.lang.String)>[1@L109] %v3 = invokevirtual %c2.getResourceAsStream(path)/0",
+      "sink_method": "<spark.resource.JarResourceHandler: java.io.InputStream loadStream(java.lang.String)>",
+      "sink_line": 109,
+      "gt": [],
+      "gt_weak": [
+        "ClassPathResourceHandler.getResource",
+        "ExternalResourceHandler.getResource",
+        "StaticFilesConfiguration.configureJarCase",
+        "StaticFilesConfiguration.configure"
+      ],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "3b74d0637a",
+      "key": "<spark.resource.AbstractResourceHandler: spark.resource.AbstractFileResolvingResource getResource(javax.servlet.http.HttpServletRequest)>@L54/result => <spark.utils.ResourceUtils: java.io.File getFile(java.net.URL,java.lang.String)>@L219/0",
+      "source": "<spark.resource.AbstractResourceHandler: spark.resource.AbstractFileResolvingResource getResource(javax.servlet.http.HttpServletRequest)>[20@L54] servletPath = invokeinterface request.getServletPath()/result",
+      "sink": "<spark.utils.ResourceUtils: java.io.File getFile(java.net.URL,java.lang.String)>[20@L219] invokespecial %v15.<init>(%v17)/0",
+      "sink_method": "<spark.utils.ResourceUtils: java.io.File getFile(java.net.URL,java.lang.String)>",
+      "sink_line": 219,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "f389662b0a",
+      "key": "<spark.resource.AbstractResourceHandler: spark.resource.AbstractFileResolvingResource getResource(javax.servlet.http.HttpServletRequest)>@L54/result => <spark.utils.ResourceUtils: java.io.File getFile(java.net.URL,java.lang.String)>@L222/0",
+      "source": "<spark.resource.AbstractResourceHandler: spark.resource.AbstractFileResolvingResource getResource(javax.servlet.http.HttpServletRequest)>[20@L54] servletPath = invokeinterface request.getServletPath()/result",
+      "sink": "<spark.utils.ResourceUtils: java.io.File getFile(java.net.URL,java.lang.String)>[25@L222] invokespecial %v19.<init>(%v20)/0",
+      "sink_method": "<spark.utils.ResourceUtils: java.io.File getFile(java.net.URL,java.lang.String)>",
+      "sink_line": 222,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "b5370cc4a2",
+      "key": "<spark.resource.AbstractResourceHandler: spark.resource.AbstractFileResolvingResource getResource(javax.servlet.http.HttpServletRequest)>@L55/result => <org.eclipse.jetty.util.Loader: java.net.URL getResource(java.lang.Class,java.lang.String)>@L54/0",
+      "source": "<spark.resource.AbstractResourceHandler: spark.resource.AbstractFileResolvingResource getResource(javax.servlet.http.HttpServletRequest)>[21@L55] pathInfo = invokeinterface request.getPathInfo()/result",
+      "sink": "<org.eclipse.jetty.util.Loader: java.net.URL getResource(java.lang.Class,java.lang.String)>[4@L54] url = invokevirtual context_loader.getResource(name)/0",
+      "sink_method": "<org.eclipse.jetty.util.Loader: java.net.URL getResource(java.lang.Class,java.lang.String)>",
+      "sink_line": 54,
+      "gt": [],
+      "gt_weak": [
+        "ClassPathResourceHandler.getResource",
+        "ExternalResourceHandler.getResource"
+      ],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "705dc5d6db",
+      "key": "<spark.resource.AbstractResourceHandler: spark.resource.AbstractFileResolvingResource getResource(javax.servlet.http.HttpServletRequest)>@L55/result => <org.eclipse.jetty.util.Loader: java.net.URL getResource(java.lang.Class,java.lang.String)>@L60/0",
+      "source": "<spark.resource.AbstractResourceHandler: spark.resource.AbstractFileResolvingResource getResource(javax.servlet.http.HttpServletRequest)>[21@L55] pathInfo = invokeinterface request.getPathInfo()/result",
+      "sink": "<org.eclipse.jetty.util.Loader: java.net.URL getResource(java.lang.Class,java.lang.String)>[10@L60] url = invokevirtual load_loader.getResource(name)/0",
+      "sink_method": "<org.eclipse.jetty.util.Loader: java.net.URL getResource(java.lang.Class,java.lang.String)>",
+      "sink_line": 60,
+      "gt": [],
+      "gt_weak": [
+        "ClassPathResourceHandler.getResource",
+        "ExternalResourceHandler.getResource"
+      ],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "ab4ca9c988",
+      "key": "<spark.resource.AbstractResourceHandler: spark.resource.AbstractFileResolvingResource getResource(javax.servlet.http.HttpServletRequest)>@L55/result => <org.slf4j.impl.SimpleLogger: java.io.PrintStream computeTargetStream(java.lang.String)>@L219/0",
+      "source": "<spark.resource.AbstractResourceHandler: spark.resource.AbstractFileResolvingResource getResource(javax.servlet.http.HttpServletRequest)>[21@L55] pathInfo = invokeinterface request.getPathInfo()/result",
+      "sink": "<org.slf4j.impl.SimpleLogger: java.io.PrintStream computeTargetStream(java.lang.String)>[12@L219] invokespecial fos.<init>(logFile)/0",
+      "sink_method": "<org.slf4j.impl.SimpleLogger: java.io.PrintStream computeTargetStream(java.lang.String)>",
+      "sink_line": 219,
+      "gt": [],
+      "gt_weak": [
+        "ClassPathResourceHandler.getResource",
+        "ExternalResourceHandler.getResource"
+      ],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "f0392c9453",
+      "key": "<spark.resource.AbstractResourceHandler: spark.resource.AbstractFileResolvingResource getResource(javax.servlet.http.HttpServletRequest)>@L55/result => <spark.resource.ClassPathResource: boolean exists()>@L120/0",
+      "source": "<spark.resource.AbstractResourceHandler: spark.resource.AbstractFileResolvingResource getResource(javax.servlet.http.HttpServletRequest)>[21@L55] pathInfo = invokeinterface request.getPathInfo()/result",
+      "sink": "<spark.resource.ClassPathResource: boolean exists()>[6@L120] url = invokevirtual %v4.getResource(%v5)/0",
+      "sink_method": "<spark.resource.ClassPathResource: boolean exists()>",
+      "sink_line": 120,
+      "gt": [],
+      "gt_weak": [
+        "ClassPathResourceHandler.getResource",
+        "ExternalResourceHandler.getResource"
+      ],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "f1a677dc53",
+      "key": "<spark.resource.AbstractResourceHandler: spark.resource.AbstractFileResolvingResource getResource(javax.servlet.http.HttpServletRequest)>@L55/result => <spark.resource.ClassPathResource: boolean exists()>@L122/0",
+      "source": "<spark.resource.AbstractResourceHandler: spark.resource.AbstractFileResolvingResource getResource(javax.servlet.http.HttpServletRequest)>[21@L55] pathInfo = invokeinterface request.getPathInfo()/result",
+      "sink": "<spark.resource.ClassPathResource: boolean exists()>[10@L122] url = invokevirtual %v6.getResource(%v7)/0",
+      "sink_method": "<spark.resource.ClassPathResource: boolean exists()>",
+      "sink_line": 122,
+      "gt": [],
+      "gt_weak": [
+        "ClassPathResourceHandler.getResource",
+        "ExternalResourceHandler.getResource"
+      ],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "73dcaca1c0",
+      "key": "<spark.resource.AbstractResourceHandler: spark.resource.AbstractFileResolvingResource getResource(javax.servlet.http.HttpServletRequest)>@L55/result => <spark.resource.ClassPathResource: java.io.InputStream getInputStream()>@L139/0",
+      "source": "<spark.resource.AbstractResourceHandler: spark.resource.AbstractFileResolvingResource getResource(javax.servlet.http.HttpServletRequest)>[21@L55] pathInfo = invokeinterface request.getPathInfo()/result",
+      "sink": "<spark.resource.ClassPathResource: java.io.InputStream getInputStream()>[4@L139] is = invokevirtual %v4.getResourceAsStream(%v5)/0",
+      "sink_method": "<spark.resource.ClassPathResource: java.io.InputStream getInputStream()>",
+      "sink_line": 139,
+      "gt": [],
+      "gt_weak": [
+        "ClassPathResourceHandler.getResource",
+        "ExternalResourceHandler.getResource"
+      ],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "6c750170b4",
+      "key": "<spark.resource.AbstractResourceHandler: spark.resource.AbstractFileResolvingResource getResource(javax.servlet.http.HttpServletRequest)>@L55/result => <spark.resource.ClassPathResource: java.io.InputStream getInputStream()>@L141/0",
+      "source": "<spark.resource.AbstractResourceHandler: spark.resource.AbstractFileResolvingResource getResource(javax.servlet.http.HttpServletRequest)>[21@L55] pathInfo = invokeinterface request.getPathInfo()/result",
+      "sink": "<spark.resource.ClassPathResource: java.io.InputStream getInputStream()>[8@L141] is = invokevirtual %v6.getResourceAsStream(%v7)/0",
+      "sink_method": "<spark.resource.ClassPathResource: java.io.InputStream getInputStream()>",
+      "sink_line": 141,
+      "gt": [],
+      "gt_weak": [
+        "ClassPathResourceHandler.getResource",
+        "ExternalResourceHandler.getResource"
+      ],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "17c1bc18a6",
+      "key": "<spark.resource.AbstractResourceHandler: spark.resource.AbstractFileResolvingResource getResource(javax.servlet.http.HttpServletRequest)>@L55/result => <spark.resource.ClassPathResource: java.net.URL getURL()>@L161/0",
+      "source": "<spark.resource.AbstractResourceHandler: spark.resource.AbstractFileResolvingResource getResource(javax.servlet.http.HttpServletRequest)>[21@L55] pathInfo = invokeinterface request.getPathInfo()/result",
+      "sink": "<spark.resource.ClassPathResource: java.net.URL getURL()>[4@L161] url = invokevirtual %v4.getResource(%v5)/0",
+      "sink_method": "<spark.resource.ClassPathResource: java.net.URL getURL()>",
+      "sink_line": 161,
+      "gt": [],
+      "gt_weak": [
+        "ClassPathResourceHandler.getResource",
+        "ExternalResourceHandler.getResource"
+      ],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "210c7b2947",
+      "key": "<spark.resource.AbstractResourceHandler: spark.resource.AbstractFileResolvingResource getResource(javax.servlet.http.HttpServletRequest)>@L55/result => <spark.resource.ClassPathResource: java.net.URL getURL()>@L163/0",
+      "source": "<spark.resource.AbstractResourceHandler: spark.resource.AbstractFileResolvingResource getResource(javax.servlet.http.HttpServletRequest)>[21@L55] pathInfo = invokeinterface request.getPathInfo()/result",
+      "sink": "<spark.resource.ClassPathResource: java.net.URL getURL()>[8@L163] url = invokevirtual %v6.getResource(%v7)/0",
+      "sink_method": "<spark.resource.ClassPathResource: java.net.URL getURL()>",
+      "sink_line": 163,
+      "gt": [],
+      "gt_weak": [
+        "ClassPathResourceHandler.getResource",
+        "ExternalResourceHandler.getResource"
+      ],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "7f03d7a9fb",
+      "key": "<spark.resource.AbstractResourceHandler: spark.resource.AbstractFileResolvingResource getResource(javax.servlet.http.HttpServletRequest)>@L55/result => <spark.resource.ExternalResource: void <init>(java.lang.String)>@L40/0",
+      "source": "<spark.resource.AbstractResourceHandler: spark.resource.AbstractFileResolvingResource getResource(javax.servlet.http.HttpServletRequest)>[21@L55] pathInfo = invokeinterface request.getPathInfo()/result",
+      "sink": "<spark.resource.ExternalResource: void <init>(java.lang.String)>[3@L40] invokespecial %v2.<init>(%v3)/0",
+      "sink_method": "<spark.resource.ExternalResource: void <init>(java.lang.String)>",
+      "sink_line": 40,
+      "gt": [],
+      "gt_weak": [
+        "ClassPathResourceHandler.getResource",
+        "ExternalResourceHandler.getResource"
+      ],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "a093bd337c",
+      "key": "<spark.resource.AbstractResourceHandler: spark.resource.AbstractFileResolvingResource getResource(javax.servlet.http.HttpServletRequest)>@L55/result => <spark.resource.JarResourceHandler: java.io.InputStream loadStream(java.lang.String)>@L109/0",
+      "source": "<spark.resource.AbstractResourceHandler: spark.resource.AbstractFileResolvingResource getResource(javax.servlet.http.HttpServletRequest)>[21@L55] pathInfo = invokeinterface request.getPathInfo()/result",
+      "sink": "<spark.resource.JarResourceHandler: java.io.InputStream loadStream(java.lang.String)>[1@L109] %v3 = invokevirtual %c2.getResourceAsStream(path)/0",
+      "sink_method": "<spark.resource.JarResourceHandler: java.io.InputStream loadStream(java.lang.String)>",
+      "sink_line": 109,
+      "gt": [
+        "ClassPathResourceHandler.getResource",
+        "ExternalResourceHandler.getResource"
+      ],
+      "gt_weak": [],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "97393d333c",
+      "key": "<spark.resource.AbstractResourceHandler: spark.resource.AbstractFileResolvingResource getResource(javax.servlet.http.HttpServletRequest)>@L55/result => <spark.utils.ResourceUtils: java.io.File getFile(java.net.URL,java.lang.String)>@L219/0",
+      "source": "<spark.resource.AbstractResourceHandler: spark.resource.AbstractFileResolvingResource getResource(javax.servlet.http.HttpServletRequest)>[21@L55] pathInfo = invokeinterface request.getPathInfo()/result",
+      "sink": "<spark.utils.ResourceUtils: java.io.File getFile(java.net.URL,java.lang.String)>[20@L219] invokespecial %v15.<init>(%v17)/0",
+      "sink_method": "<spark.utils.ResourceUtils: java.io.File getFile(java.net.URL,java.lang.String)>",
+      "sink_line": 219,
+      "gt": [],
+      "gt_weak": [
+        "ClassPathResourceHandler.getResource",
+        "ExternalResourceHandler.getResource"
+      ],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "90253af61a",
+      "key": "<spark.resource.AbstractResourceHandler: spark.resource.AbstractFileResolvingResource getResource(javax.servlet.http.HttpServletRequest)>@L55/result => <spark.utils.ResourceUtils: java.io.File getFile(java.net.URL,java.lang.String)>@L222/0",
+      "source": "<spark.resource.AbstractResourceHandler: spark.resource.AbstractFileResolvingResource getResource(javax.servlet.http.HttpServletRequest)>[21@L55] pathInfo = invokeinterface request.getPathInfo()/result",
+      "sink": "<spark.utils.ResourceUtils: java.io.File getFile(java.net.URL,java.lang.String)>[25@L222] invokespecial %v19.<init>(%v20)/0",
+      "sink_method": "<spark.utils.ResourceUtils: java.io.File getFile(java.net.URL,java.lang.String)>",
+      "sink_line": 222,
+      "gt": [],
+      "gt_weak": [
+        "ClassPathResourceHandler.getResource",
+        "ExternalResourceHandler.getResource"
+      ],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "b491271741",
+      "key": "<spark.resource.JarResourceHandler: java.io.InputStream getResource(javax.servlet.http.HttpServletRequest)>@L67/result => <org.eclipse.jetty.util.Loader: java.net.URL getResource(java.lang.Class,java.lang.String)>@L54/0",
+      "source": "<spark.resource.JarResourceHandler: java.io.InputStream getResource(javax.servlet.http.HttpServletRequest)>[17@L67] servletPath = invokeinterface request.getServletPath()/result",
+      "sink": "<org.eclipse.jetty.util.Loader: java.net.URL getResource(java.lang.Class,java.lang.String)>[4@L54] url = invokevirtual context_loader.getResource(name)/0",
+      "sink_method": "<org.eclipse.jetty.util.Loader: java.net.URL getResource(java.lang.Class,java.lang.String)>",
+      "sink_line": 54,
+      "gt": [],
+      "gt_weak": [
+        "ClassPathResourceHandler.getResource",
+        "ExternalResourceHandler.getResource"
+      ],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "1474255bbd",
+      "key": "<spark.resource.JarResourceHandler: java.io.InputStream getResource(javax.servlet.http.HttpServletRequest)>@L67/result => <org.eclipse.jetty.util.Loader: java.net.URL getResource(java.lang.Class,java.lang.String)>@L60/0",
+      "source": "<spark.resource.JarResourceHandler: java.io.InputStream getResource(javax.servlet.http.HttpServletRequest)>[17@L67] servletPath = invokeinterface request.getServletPath()/result",
+      "sink": "<org.eclipse.jetty.util.Loader: java.net.URL getResource(java.lang.Class,java.lang.String)>[10@L60] url = invokevirtual load_loader.getResource(name)/0",
+      "sink_method": "<org.eclipse.jetty.util.Loader: java.net.URL getResource(java.lang.Class,java.lang.String)>",
+      "sink_line": 60,
+      "gt": [],
+      "gt_weak": [
+        "ClassPathResourceHandler.getResource",
+        "ExternalResourceHandler.getResource"
+      ],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "750e92d437",
+      "key": "<spark.resource.JarResourceHandler: java.io.InputStream getResource(javax.servlet.http.HttpServletRequest)>@L67/result => <org.slf4j.impl.SimpleLogger: java.io.PrintStream computeTargetStream(java.lang.String)>@L219/0",
+      "source": "<spark.resource.JarResourceHandler: java.io.InputStream getResource(javax.servlet.http.HttpServletRequest)>[17@L67] servletPath = invokeinterface request.getServletPath()/result",
+      "sink": "<org.slf4j.impl.SimpleLogger: java.io.PrintStream computeTargetStream(java.lang.String)>[12@L219] invokespecial fos.<init>(logFile)/0",
+      "sink_method": "<org.slf4j.impl.SimpleLogger: java.io.PrintStream computeTargetStream(java.lang.String)>",
+      "sink_line": 219,
+      "gt": [],
+      "gt_weak": [
+        "ClassPathResourceHandler.getResource",
+        "ExternalResourceHandler.getResource"
+      ],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "4da0fcca6a",
+      "key": "<spark.resource.JarResourceHandler: java.io.InputStream getResource(javax.servlet.http.HttpServletRequest)>@L67/result => <spark.resource.ClassPathResource: boolean exists()>@L120/0",
+      "source": "<spark.resource.JarResourceHandler: java.io.InputStream getResource(javax.servlet.http.HttpServletRequest)>[17@L67] servletPath = invokeinterface request.getServletPath()/result",
+      "sink": "<spark.resource.ClassPathResource: boolean exists()>[6@L120] url = invokevirtual %v4.getResource(%v5)/0",
+      "sink_method": "<spark.resource.ClassPathResource: boolean exists()>",
+      "sink_line": 120,
+      "gt": [],
+      "gt_weak": [
+        "ClassPathResourceHandler.getResource",
+        "ExternalResourceHandler.getResource"
+      ],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "a5daebed9f",
+      "key": "<spark.resource.JarResourceHandler: java.io.InputStream getResource(javax.servlet.http.HttpServletRequest)>@L67/result => <spark.resource.ClassPathResource: boolean exists()>@L122/0",
+      "source": "<spark.resource.JarResourceHandler: java.io.InputStream getResource(javax.servlet.http.HttpServletRequest)>[17@L67] servletPath = invokeinterface request.getServletPath()/result",
+      "sink": "<spark.resource.ClassPathResource: boolean exists()>[10@L122] url = invokevirtual %v6.getResource(%v7)/0",
+      "sink_method": "<spark.resource.ClassPathResource: boolean exists()>",
+      "sink_line": 122,
+      "gt": [],
+      "gt_weak": [
+        "ClassPathResourceHandler.getResource",
+        "ExternalResourceHandler.getResource"
+      ],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "76a9ae8079",
+      "key": "<spark.resource.JarResourceHandler: java.io.InputStream getResource(javax.servlet.http.HttpServletRequest)>@L67/result => <spark.resource.ClassPathResource: java.io.InputStream getInputStream()>@L139/0",
+      "source": "<spark.resource.JarResourceHandler: java.io.InputStream getResource(javax.servlet.http.HttpServletRequest)>[17@L67] servletPath = invokeinterface request.getServletPath()/result",
+      "sink": "<spark.resource.ClassPathResource: java.io.InputStream getInputStream()>[4@L139] is = invokevirtual %v4.getResourceAsStream(%v5)/0",
+      "sink_method": "<spark.resource.ClassPathResource: java.io.InputStream getInputStream()>",
+      "sink_line": 139,
+      "gt": [],
+      "gt_weak": [
+        "ClassPathResourceHandler.getResource",
+        "ExternalResourceHandler.getResource"
+      ],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "8c71bd3c1e",
+      "key": "<spark.resource.JarResourceHandler: java.io.InputStream getResource(javax.servlet.http.HttpServletRequest)>@L67/result => <spark.resource.ClassPathResource: java.io.InputStream getInputStream()>@L141/0",
+      "source": "<spark.resource.JarResourceHandler: java.io.InputStream getResource(javax.servlet.http.HttpServletRequest)>[17@L67] servletPath = invokeinterface request.getServletPath()/result",
+      "sink": "<spark.resource.ClassPathResource: java.io.InputStream getInputStream()>[8@L141] is = invokevirtual %v6.getResourceAsStream(%v7)/0",
+      "sink_method": "<spark.resource.ClassPathResource: java.io.InputStream getInputStream()>",
+      "sink_line": 141,
+      "gt": [],
+      "gt_weak": [
+        "ClassPathResourceHandler.getResource",
+        "ExternalResourceHandler.getResource"
+      ],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "f22cda6706",
+      "key": "<spark.resource.JarResourceHandler: java.io.InputStream getResource(javax.servlet.http.HttpServletRequest)>@L67/result => <spark.resource.ClassPathResource: java.net.URL getURL()>@L161/0",
+      "source": "<spark.resource.JarResourceHandler: java.io.InputStream getResource(javax.servlet.http.HttpServletRequest)>[17@L67] servletPath = invokeinterface request.getServletPath()/result",
+      "sink": "<spark.resource.ClassPathResource: java.net.URL getURL()>[4@L161] url = invokevirtual %v4.getResource(%v5)/0",
+      "sink_method": "<spark.resource.ClassPathResource: java.net.URL getURL()>",
+      "sink_line": 161,
+      "gt": [],
+      "gt_weak": [
+        "ClassPathResourceHandler.getResource",
+        "ExternalResourceHandler.getResource"
+      ],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "4ed8fc3198",
+      "key": "<spark.resource.JarResourceHandler: java.io.InputStream getResource(javax.servlet.http.HttpServletRequest)>@L67/result => <spark.resource.ClassPathResource: java.net.URL getURL()>@L163/0",
+      "source": "<spark.resource.JarResourceHandler: java.io.InputStream getResource(javax.servlet.http.HttpServletRequest)>[17@L67] servletPath = invokeinterface request.getServletPath()/result",
+      "sink": "<spark.resource.ClassPathResource: java.net.URL getURL()>[8@L163] url = invokevirtual %v6.getResource(%v7)/0",
+      "sink_method": "<spark.resource.ClassPathResource: java.net.URL getURL()>",
+      "sink_line": 163,
+      "gt": [],
+      "gt_weak": [
+        "ClassPathResourceHandler.getResource",
+        "ExternalResourceHandler.getResource"
+      ],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "a36c1a2905",
+      "key": "<spark.resource.JarResourceHandler: java.io.InputStream getResource(javax.servlet.http.HttpServletRequest)>@L67/result => <spark.resource.ExternalResource: void <init>(java.lang.String)>@L40/0",
+      "source": "<spark.resource.JarResourceHandler: java.io.InputStream getResource(javax.servlet.http.HttpServletRequest)>[17@L67] servletPath = invokeinterface request.getServletPath()/result",
+      "sink": "<spark.resource.ExternalResource: void <init>(java.lang.String)>[3@L40] invokespecial %v2.<init>(%v3)/0",
+      "sink_method": "<spark.resource.ExternalResource: void <init>(java.lang.String)>",
+      "sink_line": 40,
+      "gt": [],
+      "gt_weak": [
+        "ClassPathResourceHandler.getResource",
+        "ExternalResourceHandler.getResource"
+      ],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "dccb4dad3e",
+      "key": "<spark.resource.JarResourceHandler: java.io.InputStream getResource(javax.servlet.http.HttpServletRequest)>@L67/result => <spark.resource.JarResourceHandler: java.io.InputStream loadStream(java.lang.String)>@L109/0",
+      "source": "<spark.resource.JarResourceHandler: java.io.InputStream getResource(javax.servlet.http.HttpServletRequest)>[17@L67] servletPath = invokeinterface request.getServletPath()/result",
+      "sink": "<spark.resource.JarResourceHandler: java.io.InputStream loadStream(java.lang.String)>[1@L109] %v3 = invokevirtual %c2.getResourceAsStream(path)/0",
+      "sink_method": "<spark.resource.JarResourceHandler: java.io.InputStream loadStream(java.lang.String)>",
+      "sink_line": 109,
+      "gt": [
+        "ClassPathResourceHandler.getResource",
+        "ExternalResourceHandler.getResource"
+      ],
+      "gt_weak": [],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "de79c00dfb",
+      "key": "<spark.resource.JarResourceHandler: java.io.InputStream getResource(javax.servlet.http.HttpServletRequest)>@L67/result => <spark.utils.ResourceUtils: java.io.File getFile(java.net.URL,java.lang.String)>@L219/0",
+      "source": "<spark.resource.JarResourceHandler: java.io.InputStream getResource(javax.servlet.http.HttpServletRequest)>[17@L67] servletPath = invokeinterface request.getServletPath()/result",
+      "sink": "<spark.utils.ResourceUtils: java.io.File getFile(java.net.URL,java.lang.String)>[20@L219] invokespecial %v15.<init>(%v17)/0",
+      "sink_method": "<spark.utils.ResourceUtils: java.io.File getFile(java.net.URL,java.lang.String)>",
+      "sink_line": 219,
+      "gt": [],
+      "gt_weak": [
+        "ClassPathResourceHandler.getResource",
+        "ExternalResourceHandler.getResource"
+      ],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "e2280f35a0",
+      "key": "<spark.resource.JarResourceHandler: java.io.InputStream getResource(javax.servlet.http.HttpServletRequest)>@L67/result => <spark.utils.ResourceUtils: java.io.File getFile(java.net.URL,java.lang.String)>@L222/0",
+      "source": "<spark.resource.JarResourceHandler: java.io.InputStream getResource(javax.servlet.http.HttpServletRequest)>[17@L67] servletPath = invokeinterface request.getServletPath()/result",
+      "sink": "<spark.utils.ResourceUtils: java.io.File getFile(java.net.URL,java.lang.String)>[25@L222] invokespecial %v19.<init>(%v20)/0",
+      "sink_method": "<spark.utils.ResourceUtils: java.io.File getFile(java.net.URL,java.lang.String)>",
+      "sink_line": 222,
+      "gt": [],
+      "gt_weak": [
+        "ClassPathResourceHandler.getResource",
+        "ExternalResourceHandler.getResource"
+      ],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "96f33ecb1c",
+      "key": "<spark.resource.JarResourceHandler: java.io.InputStream getResource(javax.servlet.http.HttpServletRequest)>@L68/result => <org.eclipse.jetty.util.Loader: java.net.URL getResource(java.lang.Class,java.lang.String)>@L54/0",
+      "source": "<spark.resource.JarResourceHandler: java.io.InputStream getResource(javax.servlet.http.HttpServletRequest)>[18@L68] pathInfo = invokeinterface request.getPathInfo()/result",
+      "sink": "<org.eclipse.jetty.util.Loader: java.net.URL getResource(java.lang.Class,java.lang.String)>[4@L54] url = invokevirtual context_loader.getResource(name)/0",
+      "sink_method": "<org.eclipse.jetty.util.Loader: java.net.URL getResource(java.lang.Class,java.lang.String)>",
+      "sink_line": 54,
+      "gt": [],
+      "gt_weak": [
+        "ClassPathResourceHandler.getResource",
+        "ExternalResourceHandler.getResource"
+      ],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "e357d27d7a",
+      "key": "<spark.resource.JarResourceHandler: java.io.InputStream getResource(javax.servlet.http.HttpServletRequest)>@L68/result => <org.eclipse.jetty.util.Loader: java.net.URL getResource(java.lang.Class,java.lang.String)>@L60/0",
+      "source": "<spark.resource.JarResourceHandler: java.io.InputStream getResource(javax.servlet.http.HttpServletRequest)>[18@L68] pathInfo = invokeinterface request.getPathInfo()/result",
+      "sink": "<org.eclipse.jetty.util.Loader: java.net.URL getResource(java.lang.Class,java.lang.String)>[10@L60] url = invokevirtual load_loader.getResource(name)/0",
+      "sink_method": "<org.eclipse.jetty.util.Loader: java.net.URL getResource(java.lang.Class,java.lang.String)>",
+      "sink_line": 60,
+      "gt": [],
+      "gt_weak": [
+        "ClassPathResourceHandler.getResource",
+        "ExternalResourceHandler.getResource"
+      ],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "6532a8430b",
+      "key": "<spark.resource.JarResourceHandler: java.io.InputStream getResource(javax.servlet.http.HttpServletRequest)>@L68/result => <org.slf4j.impl.SimpleLogger: java.io.PrintStream computeTargetStream(java.lang.String)>@L219/0",
+      "source": "<spark.resource.JarResourceHandler: java.io.InputStream getResource(javax.servlet.http.HttpServletRequest)>[18@L68] pathInfo = invokeinterface request.getPathInfo()/result",
+      "sink": "<org.slf4j.impl.SimpleLogger: java.io.PrintStream computeTargetStream(java.lang.String)>[12@L219] invokespecial fos.<init>(logFile)/0",
+      "sink_method": "<org.slf4j.impl.SimpleLogger: java.io.PrintStream computeTargetStream(java.lang.String)>",
+      "sink_line": 219,
+      "gt": [],
+      "gt_weak": [
+        "ClassPathResourceHandler.getResource",
+        "ExternalResourceHandler.getResource"
+      ],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "0e4a989ec9",
+      "key": "<spark.resource.JarResourceHandler: java.io.InputStream getResource(javax.servlet.http.HttpServletRequest)>@L68/result => <spark.resource.ClassPathResource: boolean exists()>@L120/0",
+      "source": "<spark.resource.JarResourceHandler: java.io.InputStream getResource(javax.servlet.http.HttpServletRequest)>[18@L68] pathInfo = invokeinterface request.getPathInfo()/result",
+      "sink": "<spark.resource.ClassPathResource: boolean exists()>[6@L120] url = invokevirtual %v4.getResource(%v5)/0",
+      "sink_method": "<spark.resource.ClassPathResource: boolean exists()>",
+      "sink_line": 120,
+      "gt": [],
+      "gt_weak": [
+        "ClassPathResourceHandler.getResource",
+        "ExternalResourceHandler.getResource"
+      ],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "bcdfbdee9d",
+      "key": "<spark.resource.JarResourceHandler: java.io.InputStream getResource(javax.servlet.http.HttpServletRequest)>@L68/result => <spark.resource.ClassPathResource: boolean exists()>@L122/0",
+      "source": "<spark.resource.JarResourceHandler: java.io.InputStream getResource(javax.servlet.http.HttpServletRequest)>[18@L68] pathInfo = invokeinterface request.getPathInfo()/result",
+      "sink": "<spark.resource.ClassPathResource: boolean exists()>[10@L122] url = invokevirtual %v6.getResource(%v7)/0",
+      "sink_method": "<spark.resource.ClassPathResource: boolean exists()>",
+      "sink_line": 122,
+      "gt": [],
+      "gt_weak": [
+        "ClassPathResourceHandler.getResource",
+        "ExternalResourceHandler.getResource"
+      ],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "f747374a6f",
+      "key": "<spark.resource.JarResourceHandler: java.io.InputStream getResource(javax.servlet.http.HttpServletRequest)>@L68/result => <spark.resource.ClassPathResource: java.io.InputStream getInputStream()>@L139/0",
+      "source": "<spark.resource.JarResourceHandler: java.io.InputStream getResource(javax.servlet.http.HttpServletRequest)>[18@L68] pathInfo = invokeinterface request.getPathInfo()/result",
+      "sink": "<spark.resource.ClassPathResource: java.io.InputStream getInputStream()>[4@L139] is = invokevirtual %v4.getResourceAsStream(%v5)/0",
+      "sink_method": "<spark.resource.ClassPathResource: java.io.InputStream getInputStream()>",
+      "sink_line": 139,
+      "gt": [],
+      "gt_weak": [
+        "ClassPathResourceHandler.getResource",
+        "ExternalResourceHandler.getResource"
+      ],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "f8d6717753",
+      "key": "<spark.resource.JarResourceHandler: java.io.InputStream getResource(javax.servlet.http.HttpServletRequest)>@L68/result => <spark.resource.ClassPathResource: java.io.InputStream getInputStream()>@L141/0",
+      "source": "<spark.resource.JarResourceHandler: java.io.InputStream getResource(javax.servlet.http.HttpServletRequest)>[18@L68] pathInfo = invokeinterface request.getPathInfo()/result",
+      "sink": "<spark.resource.ClassPathResource: java.io.InputStream getInputStream()>[8@L141] is = invokevirtual %v6.getResourceAsStream(%v7)/0",
+      "sink_method": "<spark.resource.ClassPathResource: java.io.InputStream getInputStream()>",
+      "sink_line": 141,
+      "gt": [],
+      "gt_weak": [
+        "ClassPathResourceHandler.getResource",
+        "ExternalResourceHandler.getResource"
+      ],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "a6b3f120b7",
+      "key": "<spark.resource.JarResourceHandler: java.io.InputStream getResource(javax.servlet.http.HttpServletRequest)>@L68/result => <spark.resource.ClassPathResource: java.net.URL getURL()>@L161/0",
+      "source": "<spark.resource.JarResourceHandler: java.io.InputStream getResource(javax.servlet.http.HttpServletRequest)>[18@L68] pathInfo = invokeinterface request.getPathInfo()/result",
+      "sink": "<spark.resource.ClassPathResource: java.net.URL getURL()>[4@L161] url = invokevirtual %v4.getResource(%v5)/0",
+      "sink_method": "<spark.resource.ClassPathResource: java.net.URL getURL()>",
+      "sink_line": 161,
+      "gt": [],
+      "gt_weak": [
+        "ClassPathResourceHandler.getResource",
+        "ExternalResourceHandler.getResource"
+      ],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "5db22e05b3",
+      "key": "<spark.resource.JarResourceHandler: java.io.InputStream getResource(javax.servlet.http.HttpServletRequest)>@L68/result => <spark.resource.ClassPathResource: java.net.URL getURL()>@L163/0",
+      "source": "<spark.resource.JarResourceHandler: java.io.InputStream getResource(javax.servlet.http.HttpServletRequest)>[18@L68] pathInfo = invokeinterface request.getPathInfo()/result",
+      "sink": "<spark.resource.ClassPathResource: java.net.URL getURL()>[8@L163] url = invokevirtual %v6.getResource(%v7)/0",
+      "sink_method": "<spark.resource.ClassPathResource: java.net.URL getURL()>",
+      "sink_line": 163,
+      "gt": [],
+      "gt_weak": [
+        "ClassPathResourceHandler.getResource",
+        "ExternalResourceHandler.getResource"
+      ],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "1b412271b4",
+      "key": "<spark.resource.JarResourceHandler: java.io.InputStream getResource(javax.servlet.http.HttpServletRequest)>@L68/result => <spark.resource.ExternalResource: void <init>(java.lang.String)>@L40/0",
+      "source": "<spark.resource.JarResourceHandler: java.io.InputStream getResource(javax.servlet.http.HttpServletRequest)>[18@L68] pathInfo = invokeinterface request.getPathInfo()/result",
+      "sink": "<spark.resource.ExternalResource: void <init>(java.lang.String)>[3@L40] invokespecial %v2.<init>(%v3)/0",
+      "sink_method": "<spark.resource.ExternalResource: void <init>(java.lang.String)>",
+      "sink_line": 40,
+      "gt": [],
+      "gt_weak": [
+        "ClassPathResourceHandler.getResource",
+        "ExternalResourceHandler.getResource"
+      ],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "58e1e93791",
+      "key": "<spark.resource.JarResourceHandler: java.io.InputStream getResource(javax.servlet.http.HttpServletRequest)>@L68/result => <spark.resource.JarResourceHandler: java.io.InputStream loadStream(java.lang.String)>@L109/0",
+      "source": "<spark.resource.JarResourceHandler: java.io.InputStream getResource(javax.servlet.http.HttpServletRequest)>[18@L68] pathInfo = invokeinterface request.getPathInfo()/result",
+      "sink": "<spark.resource.JarResourceHandler: java.io.InputStream loadStream(java.lang.String)>[1@L109] %v3 = invokevirtual %c2.getResourceAsStream(path)/0",
+      "sink_method": "<spark.resource.JarResourceHandler: java.io.InputStream loadStream(java.lang.String)>",
+      "sink_line": 109,
+      "gt": [
+        "ClassPathResourceHandler.getResource",
+        "ExternalResourceHandler.getResource"
+      ],
+      "gt_weak": [],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "10f4340490",
+      "key": "<spark.resource.JarResourceHandler: java.io.InputStream getResource(javax.servlet.http.HttpServletRequest)>@L68/result => <spark.utils.ResourceUtils: java.io.File getFile(java.net.URL,java.lang.String)>@L219/0",
+      "source": "<spark.resource.JarResourceHandler: java.io.InputStream getResource(javax.servlet.http.HttpServletRequest)>[18@L68] pathInfo = invokeinterface request.getPathInfo()/result",
+      "sink": "<spark.utils.ResourceUtils: java.io.File getFile(java.net.URL,java.lang.String)>[20@L219] invokespecial %v15.<init>(%v17)/0",
+      "sink_method": "<spark.utils.ResourceUtils: java.io.File getFile(java.net.URL,java.lang.String)>",
+      "sink_line": 219,
+      "gt": [],
+      "gt_weak": [
+        "ClassPathResourceHandler.getResource",
+        "ExternalResourceHandler.getResource"
+      ],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "5c166c6349",
+      "key": "<spark.resource.JarResourceHandler: java.io.InputStream getResource(javax.servlet.http.HttpServletRequest)>@L68/result => <spark.utils.ResourceUtils: java.io.File getFile(java.net.URL,java.lang.String)>@L222/0",
+      "source": "<spark.resource.JarResourceHandler: java.io.InputStream getResource(javax.servlet.http.HttpServletRequest)>[18@L68] pathInfo = invokeinterface request.getPathInfo()/result",
+      "sink": "<spark.utils.ResourceUtils: java.io.File getFile(java.net.URL,java.lang.String)>[25@L222] invokespecial %v19.<init>(%v20)/0",
+      "sink_method": "<spark.utils.ResourceUtils: java.io.File getFile(java.net.URL,java.lang.String)>",
+      "sink_line": 222,
+      "gt": [],
+      "gt_weak": [
+        "ClassPathResourceHandler.getResource",
+        "ExternalResourceHandler.getResource"
+      ],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "146bad25e2",
+      "key": "<spark.resource.JarResourceHandler: java.io.InputStream getResource(javax.servlet.http.HttpServletRequest)>@L71/result => <org.eclipse.jetty.util.Loader: java.net.URL getResource(java.lang.Class,java.lang.String)>@L54/0",
+      "source": "<spark.resource.JarResourceHandler: java.io.InputStream getResource(javax.servlet.http.HttpServletRequest)>[20@L71] servletPath = invokeinterface request.getServletPath()/result",
+      "sink": "<org.eclipse.jetty.util.Loader: java.net.URL getResource(java.lang.Class,java.lang.String)>[4@L54] url = invokevirtual context_loader.getResource(name)/0",
+      "sink_method": "<org.eclipse.jetty.util.Loader: java.net.URL getResource(java.lang.Class,java.lang.String)>",
+      "sink_line": 54,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "d5d4c011f3",
+      "key": "<spark.resource.JarResourceHandler: java.io.InputStream getResource(javax.servlet.http.HttpServletRequest)>@L71/result => <org.eclipse.jetty.util.Loader: java.net.URL getResource(java.lang.Class,java.lang.String)>@L60/0",
+      "source": "<spark.resource.JarResourceHandler: java.io.InputStream getResource(javax.servlet.http.HttpServletRequest)>[20@L71] servletPath = invokeinterface request.getServletPath()/result",
+      "sink": "<org.eclipse.jetty.util.Loader: java.net.URL getResource(java.lang.Class,java.lang.String)>[10@L60] url = invokevirtual load_loader.getResource(name)/0",
+      "sink_method": "<org.eclipse.jetty.util.Loader: java.net.URL getResource(java.lang.Class,java.lang.String)>",
+      "sink_line": 60,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "6049d58abc",
+      "key": "<spark.resource.JarResourceHandler: java.io.InputStream getResource(javax.servlet.http.HttpServletRequest)>@L71/result => <org.slf4j.impl.SimpleLogger: java.io.PrintStream computeTargetStream(java.lang.String)>@L219/0",
+      "source": "<spark.resource.JarResourceHandler: java.io.InputStream getResource(javax.servlet.http.HttpServletRequest)>[20@L71] servletPath = invokeinterface request.getServletPath()/result",
+      "sink": "<org.slf4j.impl.SimpleLogger: java.io.PrintStream computeTargetStream(java.lang.String)>[12@L219] invokespecial fos.<init>(logFile)/0",
+      "sink_method": "<org.slf4j.impl.SimpleLogger: java.io.PrintStream computeTargetStream(java.lang.String)>",
+      "sink_line": 219,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "2c3d4ada4c",
+      "key": "<spark.resource.JarResourceHandler: java.io.InputStream getResource(javax.servlet.http.HttpServletRequest)>@L71/result => <spark.resource.ClassPathResource: boolean exists()>@L120/0",
+      "source": "<spark.resource.JarResourceHandler: java.io.InputStream getResource(javax.servlet.http.HttpServletRequest)>[20@L71] servletPath = invokeinterface request.getServletPath()/result",
+      "sink": "<spark.resource.ClassPathResource: boolean exists()>[6@L120] url = invokevirtual %v4.getResource(%v5)/0",
+      "sink_method": "<spark.resource.ClassPathResource: boolean exists()>",
+      "sink_line": 120,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "d6679ffd9a",
+      "key": "<spark.resource.JarResourceHandler: java.io.InputStream getResource(javax.servlet.http.HttpServletRequest)>@L71/result => <spark.resource.ClassPathResource: boolean exists()>@L122/0",
+      "source": "<spark.resource.JarResourceHandler: java.io.InputStream getResource(javax.servlet.http.HttpServletRequest)>[20@L71] servletPath = invokeinterface request.getServletPath()/result",
+      "sink": "<spark.resource.ClassPathResource: boolean exists()>[10@L122] url = invokevirtual %v6.getResource(%v7)/0",
+      "sink_method": "<spark.resource.ClassPathResource: boolean exists()>",
+      "sink_line": 122,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "45eba57dd4",
+      "key": "<spark.resource.JarResourceHandler: java.io.InputStream getResource(javax.servlet.http.HttpServletRequest)>@L71/result => <spark.resource.ClassPathResource: java.io.InputStream getInputStream()>@L139/0",
+      "source": "<spark.resource.JarResourceHandler: java.io.InputStream getResource(javax.servlet.http.HttpServletRequest)>[20@L71] servletPath = invokeinterface request.getServletPath()/result",
+      "sink": "<spark.resource.ClassPathResource: java.io.InputStream getInputStream()>[4@L139] is = invokevirtual %v4.getResourceAsStream(%v5)/0",
+      "sink_method": "<spark.resource.ClassPathResource: java.io.InputStream getInputStream()>",
+      "sink_line": 139,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "f405d6c0a5",
+      "key": "<spark.resource.JarResourceHandler: java.io.InputStream getResource(javax.servlet.http.HttpServletRequest)>@L71/result => <spark.resource.ClassPathResource: java.io.InputStream getInputStream()>@L141/0",
+      "source": "<spark.resource.JarResourceHandler: java.io.InputStream getResource(javax.servlet.http.HttpServletRequest)>[20@L71] servletPath = invokeinterface request.getServletPath()/result",
+      "sink": "<spark.resource.ClassPathResource: java.io.InputStream getInputStream()>[8@L141] is = invokevirtual %v6.getResourceAsStream(%v7)/0",
+      "sink_method": "<spark.resource.ClassPathResource: java.io.InputStream getInputStream()>",
+      "sink_line": 141,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "254327755a",
+      "key": "<spark.resource.JarResourceHandler: java.io.InputStream getResource(javax.servlet.http.HttpServletRequest)>@L71/result => <spark.resource.ClassPathResource: java.net.URL getURL()>@L161/0",
+      "source": "<spark.resource.JarResourceHandler: java.io.InputStream getResource(javax.servlet.http.HttpServletRequest)>[20@L71] servletPath = invokeinterface request.getServletPath()/result",
+      "sink": "<spark.resource.ClassPathResource: java.net.URL getURL()>[4@L161] url = invokevirtual %v4.getResource(%v5)/0",
+      "sink_method": "<spark.resource.ClassPathResource: java.net.URL getURL()>",
+      "sink_line": 161,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "9d9bb0dbbf",
+      "key": "<spark.resource.JarResourceHandler: java.io.InputStream getResource(javax.servlet.http.HttpServletRequest)>@L71/result => <spark.resource.ClassPathResource: java.net.URL getURL()>@L163/0",
+      "source": "<spark.resource.JarResourceHandler: java.io.InputStream getResource(javax.servlet.http.HttpServletRequest)>[20@L71] servletPath = invokeinterface request.getServletPath()/result",
+      "sink": "<spark.resource.ClassPathResource: java.net.URL getURL()>[8@L163] url = invokevirtual %v6.getResource(%v7)/0",
+      "sink_method": "<spark.resource.ClassPathResource: java.net.URL getURL()>",
+      "sink_line": 163,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "7a6c8d6e98",
+      "key": "<spark.resource.JarResourceHandler: java.io.InputStream getResource(javax.servlet.http.HttpServletRequest)>@L71/result => <spark.resource.ExternalResource: void <init>(java.lang.String)>@L40/0",
+      "source": "<spark.resource.JarResourceHandler: java.io.InputStream getResource(javax.servlet.http.HttpServletRequest)>[20@L71] servletPath = invokeinterface request.getServletPath()/result",
+      "sink": "<spark.resource.ExternalResource: void <init>(java.lang.String)>[3@L40] invokespecial %v2.<init>(%v3)/0",
+      "sink_method": "<spark.resource.ExternalResource: void <init>(java.lang.String)>",
+      "sink_line": 40,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "fa1c1eb535",
+      "key": "<spark.resource.JarResourceHandler: java.io.InputStream getResource(javax.servlet.http.HttpServletRequest)>@L71/result => <spark.resource.JarResourceHandler: java.io.InputStream loadStream(java.lang.String)>@L109/0",
+      "source": "<spark.resource.JarResourceHandler: java.io.InputStream getResource(javax.servlet.http.HttpServletRequest)>[20@L71] servletPath = invokeinterface request.getServletPath()/result",
+      "sink": "<spark.resource.JarResourceHandler: java.io.InputStream loadStream(java.lang.String)>[1@L109] %v3 = invokevirtual %c2.getResourceAsStream(path)/0",
+      "sink_method": "<spark.resource.JarResourceHandler: java.io.InputStream loadStream(java.lang.String)>",
+      "sink_line": 109,
+      "gt": [],
+      "gt_weak": [
+        "ClassPathResourceHandler.getResource",
+        "ExternalResourceHandler.getResource",
+        "StaticFilesConfiguration.configureJarCase",
+        "StaticFilesConfiguration.configure"
+      ],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "d3d0d719ab",
+      "key": "<spark.resource.JarResourceHandler: java.io.InputStream getResource(javax.servlet.http.HttpServletRequest)>@L71/result => <spark.utils.ResourceUtils: java.io.File getFile(java.net.URL,java.lang.String)>@L219/0",
+      "source": "<spark.resource.JarResourceHandler: java.io.InputStream getResource(javax.servlet.http.HttpServletRequest)>[20@L71] servletPath = invokeinterface request.getServletPath()/result",
+      "sink": "<spark.utils.ResourceUtils: java.io.File getFile(java.net.URL,java.lang.String)>[20@L219] invokespecial %v15.<init>(%v17)/0",
+      "sink_method": "<spark.utils.ResourceUtils: java.io.File getFile(java.net.URL,java.lang.String)>",
+      "sink_line": 219,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "e9ad78d881",
+      "key": "<spark.resource.JarResourceHandler: java.io.InputStream getResource(javax.servlet.http.HttpServletRequest)>@L71/result => <spark.utils.ResourceUtils: java.io.File getFile(java.net.URL,java.lang.String)>@L222/0",
+      "source": "<spark.resource.JarResourceHandler: java.io.InputStream getResource(javax.servlet.http.HttpServletRequest)>[20@L71] servletPath = invokeinterface request.getServletPath()/result",
+      "sink": "<spark.utils.ResourceUtils: java.io.File getFile(java.net.URL,java.lang.String)>[25@L222] invokespecial %v19.<init>(%v20)/0",
+      "sink_method": "<spark.utils.ResourceUtils: java.io.File getFile(java.net.URL,java.lang.String)>",
+      "sink_line": 222,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "684677cf97",
+      "key": "<spark.resource.JarResourceHandler: java.io.InputStream getResource(javax.servlet.http.HttpServletRequest)>@L72/result => <org.eclipse.jetty.util.Loader: java.net.URL getResource(java.lang.Class,java.lang.String)>@L54/0",
+      "source": "<spark.resource.JarResourceHandler: java.io.InputStream getResource(javax.servlet.http.HttpServletRequest)>[21@L72] pathInfo = invokeinterface request.getPathInfo()/result",
+      "sink": "<org.eclipse.jetty.util.Loader: java.net.URL getResource(java.lang.Class,java.lang.String)>[4@L54] url = invokevirtual context_loader.getResource(name)/0",
+      "sink_method": "<org.eclipse.jetty.util.Loader: java.net.URL getResource(java.lang.Class,java.lang.String)>",
+      "sink_line": 54,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "dafd610606",
+      "key": "<spark.resource.JarResourceHandler: java.io.InputStream getResource(javax.servlet.http.HttpServletRequest)>@L72/result => <org.eclipse.jetty.util.Loader: java.net.URL getResource(java.lang.Class,java.lang.String)>@L60/0",
+      "source": "<spark.resource.JarResourceHandler: java.io.InputStream getResource(javax.servlet.http.HttpServletRequest)>[21@L72] pathInfo = invokeinterface request.getPathInfo()/result",
+      "sink": "<org.eclipse.jetty.util.Loader: java.net.URL getResource(java.lang.Class,java.lang.String)>[10@L60] url = invokevirtual load_loader.getResource(name)/0",
+      "sink_method": "<org.eclipse.jetty.util.Loader: java.net.URL getResource(java.lang.Class,java.lang.String)>",
+      "sink_line": 60,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "980cc6c51a",
+      "key": "<spark.resource.JarResourceHandler: java.io.InputStream getResource(javax.servlet.http.HttpServletRequest)>@L72/result => <org.slf4j.impl.SimpleLogger: java.io.PrintStream computeTargetStream(java.lang.String)>@L219/0",
+      "source": "<spark.resource.JarResourceHandler: java.io.InputStream getResource(javax.servlet.http.HttpServletRequest)>[21@L72] pathInfo = invokeinterface request.getPathInfo()/result",
+      "sink": "<org.slf4j.impl.SimpleLogger: java.io.PrintStream computeTargetStream(java.lang.String)>[12@L219] invokespecial fos.<init>(logFile)/0",
+      "sink_method": "<org.slf4j.impl.SimpleLogger: java.io.PrintStream computeTargetStream(java.lang.String)>",
+      "sink_line": 219,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "0394520e3d",
+      "key": "<spark.resource.JarResourceHandler: java.io.InputStream getResource(javax.servlet.http.HttpServletRequest)>@L72/result => <spark.resource.ClassPathResource: boolean exists()>@L120/0",
+      "source": "<spark.resource.JarResourceHandler: java.io.InputStream getResource(javax.servlet.http.HttpServletRequest)>[21@L72] pathInfo = invokeinterface request.getPathInfo()/result",
+      "sink": "<spark.resource.ClassPathResource: boolean exists()>[6@L120] url = invokevirtual %v4.getResource(%v5)/0",
+      "sink_method": "<spark.resource.ClassPathResource: boolean exists()>",
+      "sink_line": 120,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "77fea5f6df",
+      "key": "<spark.resource.JarResourceHandler: java.io.InputStream getResource(javax.servlet.http.HttpServletRequest)>@L72/result => <spark.resource.ClassPathResource: boolean exists()>@L122/0",
+      "source": "<spark.resource.JarResourceHandler: java.io.InputStream getResource(javax.servlet.http.HttpServletRequest)>[21@L72] pathInfo = invokeinterface request.getPathInfo()/result",
+      "sink": "<spark.resource.ClassPathResource: boolean exists()>[10@L122] url = invokevirtual %v6.getResource(%v7)/0",
+      "sink_method": "<spark.resource.ClassPathResource: boolean exists()>",
+      "sink_line": 122,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "9ca29b9b6b",
+      "key": "<spark.resource.JarResourceHandler: java.io.InputStream getResource(javax.servlet.http.HttpServletRequest)>@L72/result => <spark.resource.ClassPathResource: java.io.InputStream getInputStream()>@L139/0",
+      "source": "<spark.resource.JarResourceHandler: java.io.InputStream getResource(javax.servlet.http.HttpServletRequest)>[21@L72] pathInfo = invokeinterface request.getPathInfo()/result",
+      "sink": "<spark.resource.ClassPathResource: java.io.InputStream getInputStream()>[4@L139] is = invokevirtual %v4.getResourceAsStream(%v5)/0",
+      "sink_method": "<spark.resource.ClassPathResource: java.io.InputStream getInputStream()>",
+      "sink_line": 139,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "2dcdc80b69",
+      "key": "<spark.resource.JarResourceHandler: java.io.InputStream getResource(javax.servlet.http.HttpServletRequest)>@L72/result => <spark.resource.ClassPathResource: java.io.InputStream getInputStream()>@L141/0",
+      "source": "<spark.resource.JarResourceHandler: java.io.InputStream getResource(javax.servlet.http.HttpServletRequest)>[21@L72] pathInfo = invokeinterface request.getPathInfo()/result",
+      "sink": "<spark.resource.ClassPathResource: java.io.InputStream getInputStream()>[8@L141] is = invokevirtual %v6.getResourceAsStream(%v7)/0",
+      "sink_method": "<spark.resource.ClassPathResource: java.io.InputStream getInputStream()>",
+      "sink_line": 141,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "733732dafc",
+      "key": "<spark.resource.JarResourceHandler: java.io.InputStream getResource(javax.servlet.http.HttpServletRequest)>@L72/result => <spark.resource.ClassPathResource: java.net.URL getURL()>@L161/0",
+      "source": "<spark.resource.JarResourceHandler: java.io.InputStream getResource(javax.servlet.http.HttpServletRequest)>[21@L72] pathInfo = invokeinterface request.getPathInfo()/result",
+      "sink": "<spark.resource.ClassPathResource: java.net.URL getURL()>[4@L161] url = invokevirtual %v4.getResource(%v5)/0",
+      "sink_method": "<spark.resource.ClassPathResource: java.net.URL getURL()>",
+      "sink_line": 161,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "f942b4f6cd",
+      "key": "<spark.resource.JarResourceHandler: java.io.InputStream getResource(javax.servlet.http.HttpServletRequest)>@L72/result => <spark.resource.ClassPathResource: java.net.URL getURL()>@L163/0",
+      "source": "<spark.resource.JarResourceHandler: java.io.InputStream getResource(javax.servlet.http.HttpServletRequest)>[21@L72] pathInfo = invokeinterface request.getPathInfo()/result",
+      "sink": "<spark.resource.ClassPathResource: java.net.URL getURL()>[8@L163] url = invokevirtual %v6.getResource(%v7)/0",
+      "sink_method": "<spark.resource.ClassPathResource: java.net.URL getURL()>",
+      "sink_line": 163,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "429766af6f",
+      "key": "<spark.resource.JarResourceHandler: java.io.InputStream getResource(javax.servlet.http.HttpServletRequest)>@L72/result => <spark.resource.ExternalResource: void <init>(java.lang.String)>@L40/0",
+      "source": "<spark.resource.JarResourceHandler: java.io.InputStream getResource(javax.servlet.http.HttpServletRequest)>[21@L72] pathInfo = invokeinterface request.getPathInfo()/result",
+      "sink": "<spark.resource.ExternalResource: void <init>(java.lang.String)>[3@L40] invokespecial %v2.<init>(%v3)/0",
+      "sink_method": "<spark.resource.ExternalResource: void <init>(java.lang.String)>",
+      "sink_line": 40,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "d19cdc2704",
+      "key": "<spark.resource.JarResourceHandler: java.io.InputStream getResource(javax.servlet.http.HttpServletRequest)>@L72/result => <spark.resource.JarResourceHandler: java.io.InputStream loadStream(java.lang.String)>@L109/0",
+      "source": "<spark.resource.JarResourceHandler: java.io.InputStream getResource(javax.servlet.http.HttpServletRequest)>[21@L72] pathInfo = invokeinterface request.getPathInfo()/result",
+      "sink": "<spark.resource.JarResourceHandler: java.io.InputStream loadStream(java.lang.String)>[1@L109] %v3 = invokevirtual %c2.getResourceAsStream(path)/0",
+      "sink_method": "<spark.resource.JarResourceHandler: java.io.InputStream loadStream(java.lang.String)>",
+      "sink_line": 109,
+      "gt": [],
+      "gt_weak": [
+        "ClassPathResourceHandler.getResource",
+        "ExternalResourceHandler.getResource",
+        "StaticFilesConfiguration.configureJarCase",
+        "StaticFilesConfiguration.configure"
+      ],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "6764e622e6",
+      "key": "<spark.resource.JarResourceHandler: java.io.InputStream getResource(javax.servlet.http.HttpServletRequest)>@L72/result => <spark.utils.ResourceUtils: java.io.File getFile(java.net.URL,java.lang.String)>@L219/0",
+      "source": "<spark.resource.JarResourceHandler: java.io.InputStream getResource(javax.servlet.http.HttpServletRequest)>[21@L72] pathInfo = invokeinterface request.getPathInfo()/result",
+      "sink": "<spark.utils.ResourceUtils: java.io.File getFile(java.net.URL,java.lang.String)>[20@L219] invokespecial %v15.<init>(%v17)/0",
+      "sink_method": "<spark.utils.ResourceUtils: java.io.File getFile(java.net.URL,java.lang.String)>",
+      "sink_line": 219,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "78f9d8a897",
+      "key": "<spark.resource.JarResourceHandler: java.io.InputStream getResource(javax.servlet.http.HttpServletRequest)>@L72/result => <spark.utils.ResourceUtils: java.io.File getFile(java.net.URL,java.lang.String)>@L222/0",
+      "source": "<spark.resource.JarResourceHandler: java.io.InputStream getResource(javax.servlet.http.HttpServletRequest)>[21@L72] pathInfo = invokeinterface request.getPathInfo()/result",
+      "sink": "<spark.utils.ResourceUtils: java.io.File getFile(java.net.URL,java.lang.String)>[25@L222] invokespecial %v19.<init>(%v20)/0",
+      "sink_method": "<spark.utils.ResourceUtils: java.io.File getFile(java.net.URL,java.lang.String)>",
+      "sink_line": 222,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "018d985539",
+      "key": "<spark.servlet.FilterTools: java.lang.String getRelativePath(javax.servlet.http.HttpServletRequest,java.lang.String)>@L34/result => <org.eclipse.jetty.util.Loader: java.net.URL getResource(java.lang.Class,java.lang.String)>@L54/0",
+      "source": "<spark.servlet.FilterTools: java.lang.String getRelativePath(javax.servlet.http.HttpServletRequest,java.lang.String)>[2@L34] path = invokeinterface request.getRequestURI()/result",
+      "sink": "<org.eclipse.jetty.util.Loader: java.net.URL getResource(java.lang.Class,java.lang.String)>[4@L54] url = invokevirtual context_loader.getResource(name)/0",
+      "sink_method": "<org.eclipse.jetty.util.Loader: java.net.URL getResource(java.lang.Class,java.lang.String)>",
+      "sink_line": 54,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "bad03f3dff",
+      "key": "<spark.servlet.FilterTools: java.lang.String getRelativePath(javax.servlet.http.HttpServletRequest,java.lang.String)>@L34/result => <org.eclipse.jetty.util.Loader: java.net.URL getResource(java.lang.Class,java.lang.String)>@L60/0",
+      "source": "<spark.servlet.FilterTools: java.lang.String getRelativePath(javax.servlet.http.HttpServletRequest,java.lang.String)>[2@L34] path = invokeinterface request.getRequestURI()/result",
+      "sink": "<org.eclipse.jetty.util.Loader: java.net.URL getResource(java.lang.Class,java.lang.String)>[10@L60] url = invokevirtual load_loader.getResource(name)/0",
+      "sink_method": "<org.eclipse.jetty.util.Loader: java.net.URL getResource(java.lang.Class,java.lang.String)>",
+      "sink_line": 60,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "834d87688f",
+      "key": "<spark.servlet.FilterTools: java.lang.String getRelativePath(javax.servlet.http.HttpServletRequest,java.lang.String)>@L34/result => <org.slf4j.impl.SimpleLogger: java.io.PrintStream computeTargetStream(java.lang.String)>@L219/0",
+      "source": "<spark.servlet.FilterTools: java.lang.String getRelativePath(javax.servlet.http.HttpServletRequest,java.lang.String)>[2@L34] path = invokeinterface request.getRequestURI()/result",
+      "sink": "<org.slf4j.impl.SimpleLogger: java.io.PrintStream computeTargetStream(java.lang.String)>[12@L219] invokespecial fos.<init>(logFile)/0",
+      "sink_method": "<org.slf4j.impl.SimpleLogger: java.io.PrintStream computeTargetStream(java.lang.String)>",
+      "sink_line": 219,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "8646a7b988",
+      "key": "<spark.servlet.FilterTools: java.lang.String getRelativePath(javax.servlet.http.HttpServletRequest,java.lang.String)>@L34/result => <spark.resource.ClassPathResource: boolean exists()>@L120/0",
+      "source": "<spark.servlet.FilterTools: java.lang.String getRelativePath(javax.servlet.http.HttpServletRequest,java.lang.String)>[2@L34] path = invokeinterface request.getRequestURI()/result",
+      "sink": "<spark.resource.ClassPathResource: boolean exists()>[6@L120] url = invokevirtual %v4.getResource(%v5)/0",
+      "sink_method": "<spark.resource.ClassPathResource: boolean exists()>",
+      "sink_line": 120,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "baeea879f8",
+      "key": "<spark.servlet.FilterTools: java.lang.String getRelativePath(javax.servlet.http.HttpServletRequest,java.lang.String)>@L34/result => <spark.resource.ClassPathResource: boolean exists()>@L122/0",
+      "source": "<spark.servlet.FilterTools: java.lang.String getRelativePath(javax.servlet.http.HttpServletRequest,java.lang.String)>[2@L34] path = invokeinterface request.getRequestURI()/result",
+      "sink": "<spark.resource.ClassPathResource: boolean exists()>[10@L122] url = invokevirtual %v6.getResource(%v7)/0",
+      "sink_method": "<spark.resource.ClassPathResource: boolean exists()>",
+      "sink_line": 122,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "d7bb851ca6",
+      "key": "<spark.servlet.FilterTools: java.lang.String getRelativePath(javax.servlet.http.HttpServletRequest,java.lang.String)>@L34/result => <spark.resource.ClassPathResource: java.io.InputStream getInputStream()>@L139/0",
+      "source": "<spark.servlet.FilterTools: java.lang.String getRelativePath(javax.servlet.http.HttpServletRequest,java.lang.String)>[2@L34] path = invokeinterface request.getRequestURI()/result",
+      "sink": "<spark.resource.ClassPathResource: java.io.InputStream getInputStream()>[4@L139] is = invokevirtual %v4.getResourceAsStream(%v5)/0",
+      "sink_method": "<spark.resource.ClassPathResource: java.io.InputStream getInputStream()>",
+      "sink_line": 139,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "41cdcdf303",
+      "key": "<spark.servlet.FilterTools: java.lang.String getRelativePath(javax.servlet.http.HttpServletRequest,java.lang.String)>@L34/result => <spark.resource.ClassPathResource: java.io.InputStream getInputStream()>@L141/0",
+      "source": "<spark.servlet.FilterTools: java.lang.String getRelativePath(javax.servlet.http.HttpServletRequest,java.lang.String)>[2@L34] path = invokeinterface request.getRequestURI()/result",
+      "sink": "<spark.resource.ClassPathResource: java.io.InputStream getInputStream()>[8@L141] is = invokevirtual %v6.getResourceAsStream(%v7)/0",
+      "sink_method": "<spark.resource.ClassPathResource: java.io.InputStream getInputStream()>",
+      "sink_line": 141,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "4bc5e9ff04",
+      "key": "<spark.servlet.FilterTools: java.lang.String getRelativePath(javax.servlet.http.HttpServletRequest,java.lang.String)>@L34/result => <spark.resource.ClassPathResource: java.net.URL getURL()>@L161/0",
+      "source": "<spark.servlet.FilterTools: java.lang.String getRelativePath(javax.servlet.http.HttpServletRequest,java.lang.String)>[2@L34] path = invokeinterface request.getRequestURI()/result",
+      "sink": "<spark.resource.ClassPathResource: java.net.URL getURL()>[4@L161] url = invokevirtual %v4.getResource(%v5)/0",
+      "sink_method": "<spark.resource.ClassPathResource: java.net.URL getURL()>",
+      "sink_line": 161,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "b938079283",
+      "key": "<spark.servlet.FilterTools: java.lang.String getRelativePath(javax.servlet.http.HttpServletRequest,java.lang.String)>@L34/result => <spark.resource.ClassPathResource: java.net.URL getURL()>@L163/0",
+      "source": "<spark.servlet.FilterTools: java.lang.String getRelativePath(javax.servlet.http.HttpServletRequest,java.lang.String)>[2@L34] path = invokeinterface request.getRequestURI()/result",
+      "sink": "<spark.resource.ClassPathResource: java.net.URL getURL()>[8@L163] url = invokevirtual %v6.getResource(%v7)/0",
+      "sink_method": "<spark.resource.ClassPathResource: java.net.URL getURL()>",
+      "sink_line": 163,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "6a4781516d",
+      "key": "<spark.servlet.FilterTools: java.lang.String getRelativePath(javax.servlet.http.HttpServletRequest,java.lang.String)>@L34/result => <spark.resource.ExternalResource: void <init>(java.lang.String)>@L40/0",
+      "source": "<spark.servlet.FilterTools: java.lang.String getRelativePath(javax.servlet.http.HttpServletRequest,java.lang.String)>[2@L34] path = invokeinterface request.getRequestURI()/result",
+      "sink": "<spark.resource.ExternalResource: void <init>(java.lang.String)>[3@L40] invokespecial %v2.<init>(%v3)/0",
+      "sink_method": "<spark.resource.ExternalResource: void <init>(java.lang.String)>",
+      "sink_line": 40,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "ee7bd36652",
+      "key": "<spark.servlet.FilterTools: java.lang.String getRelativePath(javax.servlet.http.HttpServletRequest,java.lang.String)>@L34/result => <spark.resource.JarResourceHandler: java.io.InputStream loadStream(java.lang.String)>@L109/0",
+      "source": "<spark.servlet.FilterTools: java.lang.String getRelativePath(javax.servlet.http.HttpServletRequest,java.lang.String)>[2@L34] path = invokeinterface request.getRequestURI()/result",
+      "sink": "<spark.resource.JarResourceHandler: java.io.InputStream loadStream(java.lang.String)>[1@L109] %v3 = invokevirtual %c2.getResourceAsStream(path)/0",
+      "sink_method": "<spark.resource.JarResourceHandler: java.io.InputStream loadStream(java.lang.String)>",
+      "sink_line": 109,
+      "gt": [],
+      "gt_weak": [
+        "ClassPathResourceHandler.getResource",
+        "ExternalResourceHandler.getResource",
+        "StaticFilesConfiguration.configureJarCase",
+        "StaticFilesConfiguration.configure"
+      ],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "180c31a8ef",
+      "key": "<spark.servlet.FilterTools: java.lang.String getRelativePath(javax.servlet.http.HttpServletRequest,java.lang.String)>@L34/result => <spark.utils.ResourceUtils: java.io.File getFile(java.net.URL,java.lang.String)>@L219/0",
+      "source": "<spark.servlet.FilterTools: java.lang.String getRelativePath(javax.servlet.http.HttpServletRequest,java.lang.String)>[2@L34] path = invokeinterface request.getRequestURI()/result",
+      "sink": "<spark.utils.ResourceUtils: java.io.File getFile(java.net.URL,java.lang.String)>[20@L219] invokespecial %v15.<init>(%v17)/0",
+      "sink_method": "<spark.utils.ResourceUtils: java.io.File getFile(java.net.URL,java.lang.String)>",
+      "sink_line": 219,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "372ac6f207",
+      "key": "<spark.servlet.FilterTools: java.lang.String getRelativePath(javax.servlet.http.HttpServletRequest,java.lang.String)>@L34/result => <spark.utils.ResourceUtils: java.io.File getFile(java.net.URL,java.lang.String)>@L222/0",
+      "source": "<spark.servlet.FilterTools: java.lang.String getRelativePath(javax.servlet.http.HttpServletRequest,java.lang.String)>[2@L34] path = invokeinterface request.getRequestURI()/result",
+      "sink": "<spark.utils.ResourceUtils: java.io.File getFile(java.net.URL,java.lang.String)>[25@L222] invokespecial %v19.<init>(%v20)/0",
+      "sink_method": "<spark.utils.ResourceUtils: java.io.File getFile(java.net.URL,java.lang.String)>",
+      "sink_line": 222,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "4623fd7c30",
+      "key": "<spark.utils.StringUtils: java.lang.String collectionToDelimitedString(java.util.Collection,java.lang.String,java.lang.String,java.lang.String)>@L356/result => <org.eclipse.jetty.util.Loader: java.net.URL getResource(java.lang.Class,java.lang.String)>@L54/0",
+      "source": "<spark.utils.StringUtils: java.lang.String collectionToDelimitedString(java.util.Collection,java.lang.String,java.lang.String,java.lang.String)>[11@L356] %v13 = invokeinterface it.next()/result",
+      "sink": "<org.eclipse.jetty.util.Loader: java.net.URL getResource(java.lang.Class,java.lang.String)>[4@L54] url = invokevirtual context_loader.getResource(name)/0",
+      "sink_method": "<org.eclipse.jetty.util.Loader: java.net.URL getResource(java.lang.Class,java.lang.String)>",
+      "sink_line": 54,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "0c16b20415",
+      "key": "<spark.utils.StringUtils: java.lang.String collectionToDelimitedString(java.util.Collection,java.lang.String,java.lang.String,java.lang.String)>@L356/result => <org.eclipse.jetty.util.Loader: java.net.URL getResource(java.lang.Class,java.lang.String)>@L60/0",
+      "source": "<spark.utils.StringUtils: java.lang.String collectionToDelimitedString(java.util.Collection,java.lang.String,java.lang.String,java.lang.String)>[11@L356] %v13 = invokeinterface it.next()/result",
+      "sink": "<org.eclipse.jetty.util.Loader: java.net.URL getResource(java.lang.Class,java.lang.String)>[10@L60] url = invokevirtual load_loader.getResource(name)/0",
+      "sink_method": "<org.eclipse.jetty.util.Loader: java.net.URL getResource(java.lang.Class,java.lang.String)>",
+      "sink_line": 60,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "d6eade1fd0",
+      "key": "<spark.utils.StringUtils: java.lang.String collectionToDelimitedString(java.util.Collection,java.lang.String,java.lang.String,java.lang.String)>@L356/result => <org.slf4j.impl.SimpleLogger: java.io.PrintStream computeTargetStream(java.lang.String)>@L219/0",
+      "source": "<spark.utils.StringUtils: java.lang.String collectionToDelimitedString(java.util.Collection,java.lang.String,java.lang.String,java.lang.String)>[11@L356] %v13 = invokeinterface it.next()/result",
+      "sink": "<org.slf4j.impl.SimpleLogger: java.io.PrintStream computeTargetStream(java.lang.String)>[12@L219] invokespecial fos.<init>(logFile)/0",
+      "sink_method": "<org.slf4j.impl.SimpleLogger: java.io.PrintStream computeTargetStream(java.lang.String)>",
+      "sink_line": 219,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "4b4f64faf2",
+      "key": "<spark.utils.StringUtils: java.lang.String collectionToDelimitedString(java.util.Collection,java.lang.String,java.lang.String,java.lang.String)>@L356/result => <spark.resource.ClassPathResource: boolean exists()>@L120/0",
+      "source": "<spark.utils.StringUtils: java.lang.String collectionToDelimitedString(java.util.Collection,java.lang.String,java.lang.String,java.lang.String)>[11@L356] %v13 = invokeinterface it.next()/result",
+      "sink": "<spark.resource.ClassPathResource: boolean exists()>[6@L120] url = invokevirtual %v4.getResource(%v5)/0",
+      "sink_method": "<spark.resource.ClassPathResource: boolean exists()>",
+      "sink_line": 120,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "5a5f217372",
+      "key": "<spark.utils.StringUtils: java.lang.String collectionToDelimitedString(java.util.Collection,java.lang.String,java.lang.String,java.lang.String)>@L356/result => <spark.resource.ClassPathResource: boolean exists()>@L122/0",
+      "source": "<spark.utils.StringUtils: java.lang.String collectionToDelimitedString(java.util.Collection,java.lang.String,java.lang.String,java.lang.String)>[11@L356] %v13 = invokeinterface it.next()/result",
+      "sink": "<spark.resource.ClassPathResource: boolean exists()>[10@L122] url = invokevirtual %v6.getResource(%v7)/0",
+      "sink_method": "<spark.resource.ClassPathResource: boolean exists()>",
+      "sink_line": 122,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "f3868fcee4",
+      "key": "<spark.utils.StringUtils: java.lang.String collectionToDelimitedString(java.util.Collection,java.lang.String,java.lang.String,java.lang.String)>@L356/result => <spark.resource.ClassPathResource: java.io.InputStream getInputStream()>@L139/0",
+      "source": "<spark.utils.StringUtils: java.lang.String collectionToDelimitedString(java.util.Collection,java.lang.String,java.lang.String,java.lang.String)>[11@L356] %v13 = invokeinterface it.next()/result",
+      "sink": "<spark.resource.ClassPathResource: java.io.InputStream getInputStream()>[4@L139] is = invokevirtual %v4.getResourceAsStream(%v5)/0",
+      "sink_method": "<spark.resource.ClassPathResource: java.io.InputStream getInputStream()>",
+      "sink_line": 139,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "81ccc2b4b2",
+      "key": "<spark.utils.StringUtils: java.lang.String collectionToDelimitedString(java.util.Collection,java.lang.String,java.lang.String,java.lang.String)>@L356/result => <spark.resource.ClassPathResource: java.io.InputStream getInputStream()>@L141/0",
+      "source": "<spark.utils.StringUtils: java.lang.String collectionToDelimitedString(java.util.Collection,java.lang.String,java.lang.String,java.lang.String)>[11@L356] %v13 = invokeinterface it.next()/result",
+      "sink": "<spark.resource.ClassPathResource: java.io.InputStream getInputStream()>[8@L141] is = invokevirtual %v6.getResourceAsStream(%v7)/0",
+      "sink_method": "<spark.resource.ClassPathResource: java.io.InputStream getInputStream()>",
+      "sink_line": 141,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "9a1f37577d",
+      "key": "<spark.utils.StringUtils: java.lang.String collectionToDelimitedString(java.util.Collection,java.lang.String,java.lang.String,java.lang.String)>@L356/result => <spark.resource.ClassPathResource: java.net.URL getURL()>@L161/0",
+      "source": "<spark.utils.StringUtils: java.lang.String collectionToDelimitedString(java.util.Collection,java.lang.String,java.lang.String,java.lang.String)>[11@L356] %v13 = invokeinterface it.next()/result",
+      "sink": "<spark.resource.ClassPathResource: java.net.URL getURL()>[4@L161] url = invokevirtual %v4.getResource(%v5)/0",
+      "sink_method": "<spark.resource.ClassPathResource: java.net.URL getURL()>",
+      "sink_line": 161,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "f14ecb8708",
+      "key": "<spark.utils.StringUtils: java.lang.String collectionToDelimitedString(java.util.Collection,java.lang.String,java.lang.String,java.lang.String)>@L356/result => <spark.resource.ClassPathResource: java.net.URL getURL()>@L163/0",
+      "source": "<spark.utils.StringUtils: java.lang.String collectionToDelimitedString(java.util.Collection,java.lang.String,java.lang.String,java.lang.String)>[11@L356] %v13 = invokeinterface it.next()/result",
+      "sink": "<spark.resource.ClassPathResource: java.net.URL getURL()>[8@L163] url = invokevirtual %v6.getResource(%v7)/0",
+      "sink_method": "<spark.resource.ClassPathResource: java.net.URL getURL()>",
+      "sink_line": 163,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "ee79675e55",
+      "key": "<spark.utils.StringUtils: java.lang.String collectionToDelimitedString(java.util.Collection,java.lang.String,java.lang.String,java.lang.String)>@L356/result => <spark.resource.ExternalResource: void <init>(java.lang.String)>@L40/0",
+      "source": "<spark.utils.StringUtils: java.lang.String collectionToDelimitedString(java.util.Collection,java.lang.String,java.lang.String,java.lang.String)>[11@L356] %v13 = invokeinterface it.next()/result",
+      "sink": "<spark.resource.ExternalResource: void <init>(java.lang.String)>[3@L40] invokespecial %v2.<init>(%v3)/0",
+      "sink_method": "<spark.resource.ExternalResource: void <init>(java.lang.String)>",
+      "sink_line": 40,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "26df84dadc",
+      "key": "<spark.utils.StringUtils: java.lang.String collectionToDelimitedString(java.util.Collection,java.lang.String,java.lang.String,java.lang.String)>@L356/result => <spark.resource.JarResourceHandler: java.io.InputStream loadStream(java.lang.String)>@L109/0",
+      "source": "<spark.utils.StringUtils: java.lang.String collectionToDelimitedString(java.util.Collection,java.lang.String,java.lang.String,java.lang.String)>[11@L356] %v13 = invokeinterface it.next()/result",
+      "sink": "<spark.resource.JarResourceHandler: java.io.InputStream loadStream(java.lang.String)>[1@L109] %v3 = invokevirtual %c2.getResourceAsStream(path)/0",
+      "sink_method": "<spark.resource.JarResourceHandler: java.io.InputStream loadStream(java.lang.String)>",
+      "sink_line": 109,
+      "gt": [],
+      "gt_weak": [
+        "ClassPathResourceHandler.getResource",
+        "ExternalResourceHandler.getResource",
+        "StaticFilesConfiguration.configureJarCase",
+        "StaticFilesConfiguration.configure"
+      ],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "26dfd15638",
+      "key": "<spark.utils.StringUtils: java.lang.String collectionToDelimitedString(java.util.Collection,java.lang.String,java.lang.String,java.lang.String)>@L356/result => <spark.utils.ResourceUtils: java.io.File getFile(java.net.URL,java.lang.String)>@L219/0",
+      "source": "<spark.utils.StringUtils: java.lang.String collectionToDelimitedString(java.util.Collection,java.lang.String,java.lang.String,java.lang.String)>[11@L356] %v13 = invokeinterface it.next()/result",
+      "sink": "<spark.utils.ResourceUtils: java.io.File getFile(java.net.URL,java.lang.String)>[20@L219] invokespecial %v15.<init>(%v17)/0",
+      "sink_method": "<spark.utils.ResourceUtils: java.io.File getFile(java.net.URL,java.lang.String)>",
+      "sink_line": 219,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "34310bfbeb",
+      "key": "<spark.utils.StringUtils: java.lang.String collectionToDelimitedString(java.util.Collection,java.lang.String,java.lang.String,java.lang.String)>@L356/result => <spark.utils.ResourceUtils: java.io.File getFile(java.net.URL,java.lang.String)>@L222/0",
+      "source": "<spark.utils.StringUtils: java.lang.String collectionToDelimitedString(java.util.Collection,java.lang.String,java.lang.String,java.lang.String)>[11@L356] %v13 = invokeinterface it.next()/result",
+      "sink": "<spark.utils.ResourceUtils: java.io.File getFile(java.net.URL,java.lang.String)>[25@L222] invokespecial %v19.<init>(%v20)/0",
+      "sink_method": "<spark.utils.ResourceUtils: java.io.File getFile(java.net.URL,java.lang.String)>",
+      "sink_line": 222,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": null
+    }
+  ],
+  "result_revision": {
+    "kind": "validator-correction-replay",
+    "original_raw_n1_n2_responses_reused": true,
+    "historical_cache_model_key": "default",
+    "new_api_request_model": "qwen3.6:35b",
+    "spec_vote_version": 2,
+    "v3_exact_visible_lines": true
+  }
+}

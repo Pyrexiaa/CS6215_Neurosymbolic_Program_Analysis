@@ -1,0 +1,23 @@
+{
+  "estimator": "HT-frozen-sample-v1",
+  "formula": "sum(originally sampled AND currently reported TP / original inclusion probability) / current reported count",
+  "manifest": "labels/sampling_manifest.json",
+  "manifest_sha256": "64b43477dc7a6cd8e0e30f3c9e3acaec82052560b1abf9c3bdb6e39872de4bc7",
+  "original_run_count": 208,
+  "original_sample_count": 436,
+  "current_label_sha256": {
+    "cron-utils-buggy.csv": "b21c8f0def7315f4b20bda0b46c547f8dc1be684ba52211c6166533a2c6871d1",
+    "cron-utils-fixed.csv": "5629916321bf3d68b7c7f8d44c68aebf7d98401e45854c610795d22d7ce40b1c",
+    "perfecto-plugin-buggy.csv": "70aa27e48ad89cb5f60e52152b98063589f3719cda85252fd75dac3644d6d47a",
+    "perfecto-plugin-fixed.csv": "24c82c932b8ecd205387705aef7a1c5e1d400ade310339d5d6f31f211abf25f3",
+    "spark-buggy.csv": "926ad2aabe90a175e401a2020e3e7678cc5638dac4a4c185c50c7624cc977444",
+    "spark-fixed.csv": "5dd61628886350fe8032314399bf725ebb7fd2966d01641a59f21e43e82fcf9a",
+    "zt-zip-buggy.csv": "fd06e88bdc3916f9ef2c9a2e05719c625df0796557f336cfefb4eca39d81a2dc",
+    "zt-zip-fixed.csv": "7cac339870d6a80cc02e2fa16638e51601cdf1e34264aa673bbe01345393b090"
+  },
+  "empty_runs": "Precision undefined; omit from precision means.",
+  "unknown_nonempty_runs": "Unseen or zero-probability reported flow, missing sampling frame, or missing sampled reported label. Propagate unknown to subject/config and headline precision.",
+  "zero_sample_domains": "Covered nonempty domain with no sampled member has HT=0 and coverage=0; retained in means. This is an estimate, not a judgement that unseen flows are FP.",
+  "uncertain_labels": "Only current TP/FP labels count; UNSURE, ?, and empty are missing judgements. Ad-hoc labels outside the original sample do not enter HT.",
+  "limits": "HT may exceed 1 and is not clipped. The frozen design corrects unequal sampling, not LLM labelling errors, route-dependent label identity, or selection after inspecting labels. No confidence interval is claimed."
+}

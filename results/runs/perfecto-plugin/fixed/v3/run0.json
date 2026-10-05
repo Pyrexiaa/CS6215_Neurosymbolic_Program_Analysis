@@ -1,0 +1,173 @@
+{
+  "subject": "perfecto-plugin",
+  "slug": "jenkinsci__perfecto-plugin_CVE-2020-2261_1.17",
+  "cve": "CVE-2020-2261",
+  "cwe": "CWE-078",
+  "version": "fixed",
+  "config": "v3",
+  "run": 0,
+  "config_def": {
+    "driver": "llm",
+    "spec": [
+      "base",
+      "llm"
+    ],
+    "triage": true
+  },
+  "model": "default",
+  "served_models": [
+    "qwen3.6:35b"
+  ],
+  "prompt_versions": {
+    "n1_driver": "3914024e",
+    "n1_repair": "0393a228",
+    "n2_spec": "647ee643",
+    "n3_triage": "e5fc00c6"
+  },
+  "taie_settings": {
+    "jar": "/Users/jiayulim/Documents/GitHub/CS6215_Neurosymbolic_Program_Analysis/tools/tai-e-all-0.5.4.jar",
+    "java_bin": "/Library/Java/JavaVirtualMachines/jdk-17.jdk/Contents/Home/bin/java",
+    "jre_version": "8",
+    "home": "/Users/jiayulim/Documents/GitHub/CS6215_Neurosymbolic_Program_Analysis/work/taie-home",
+    "cs": "1-call",
+    "only_app": "True",
+    "time_limit_s": "1800",
+    "wall_timeout_s": "3600",
+    "xmx": "6g",
+    "extra_pta_options": "{}"
+  },
+  "facts": {
+    "app_classes": 10,
+    "app_methods": 69,
+    "external_apis": 103,
+    "external_apis_jdk": 44,
+    "entry_candidates": 23,
+    "entry_kinds": {
+      "web": 8,
+      "plugin": 5,
+      "library-api": 10
+    }
+  },
+  "subject_stats": {
+    "java_files": 4,
+    "non_blank_loc": 759,
+    "dependency_jars": 182,
+    "modules_analysed": 1
+  },
+  "gt_methods": [
+    "PerfectoBuildWrapper.getTunnelId",
+    "PerfectoBuildWrapper.setUp",
+    "PerfectoBuildWrapper.PerfectoBuildWrapper",
+    "DescriptorImpl.doCheckUserName",
+    "DescriptorImpl.doAuthenticate",
+    "PerfectoCredentials.migrateToCredentials",
+    "PerfectoCredentials.getPassword",
+    "DescriptorImpl.doCheckApiKey",
+    "PerfectoCredentials.PerfectoCredentials"
+  ],
+  "driver": {
+    "kind": "llm",
+    "ok": true,
+    "entries": 19,
+    "attempts": 1,
+    "removed_entries": 0,
+    "app_calls": 40,
+    "taint_calls": 32,
+    "errors": 0,
+    "entry_mismatches": 0
+  },
+  "spec": {
+    "candidates": 96,
+    "batches": 4,
+    "samples": 3,
+    "accepted": 8,
+    "accepted_by_role": {
+      "sink": 2,
+      "transfer": 6
+    },
+    "rejected": 3,
+    "rejected_by_reason": {
+      "to:base-of-static": 3
+    },
+    "extra_signatures": 0,
+    "parse_failures": 0,
+    "mean_vote_agreement": 0.931,
+    "validators": true,
+    "vote_version": 2
+  },
+  "manual_spec_entries": null,
+  "taie": {
+    "ok": true,
+    "returncode": 0,
+    "elapsed_s": 1.82,
+    "timed_out": false,
+    "detected_raw": 0,
+    "reachable_methods": 2064,
+    "out_dir": "/Users/jiayulim/Documents/GitHub/CS6215_Neurosymbolic_Program_Analysis/work/runs/perfecto-plugin/fixed/taie/6d630ced30016b75",
+    "error": "",
+    "invalid_spec_entries": [],
+    "expected_failure": false
+  },
+  "counts": {
+    "raw": 0,
+    "filtered": 0,
+    "reported": 0,
+    "reported_gt": 0,
+    "reported_gt_weak": 0,
+    "removed_by_triage": 0,
+    "removed_gt_by_triage": 0,
+    "v3_rejected": 0,
+    "trusted_sink_overrides": 0
+  },
+  "detected": false,
+  "usage": {
+    "N1": {
+      "calls": 1,
+      "cached_calls": 1,
+      "prompt_tokens": 2762,
+      "completion_tokens": 3069,
+      "fresh_prompt_tokens": 0,
+      "fresh_completion_tokens": 0,
+      "latency_s": 0.0,
+      "truncated": 0
+    },
+    "N2": {
+      "calls": 12,
+      "cached_calls": 12,
+      "prompt_tokens": 30702,
+      "completion_tokens": 20264,
+      "fresh_prompt_tokens": 0,
+      "fresh_completion_tokens": 0,
+      "latency_s": 0.0,
+      "truncated": 0
+    },
+    "N3": {},
+    "total": {
+      "calls": 13,
+      "cached_calls": 13,
+      "prompt_tokens": 33464,
+      "completion_tokens": 23333,
+      "fresh_prompt_tokens": 0,
+      "fresh_completion_tokens": 0,
+      "latency_s": 0.0,
+      "truncated": 0
+    }
+  },
+  "timings": {
+    "facts_s": 2.01,
+    "driver_s": 0.0,
+    "spec_s": 0.0,
+    "taie_s": 0.0,
+    "triage_s": 0.0,
+    "total_s": 2.02
+  },
+  "flows": [],
+  "result_revision": {
+    "kind": "validator-correction-replay",
+    "original_raw_n1_n2_responses_reused": true,
+    "historical_cache_model_key": "default",
+    "new_api_request_model": "qwen3.6:35b",
+    "spec_vote_version": 2,
+    "v3_exact_visible_lines": true
+  }
+}

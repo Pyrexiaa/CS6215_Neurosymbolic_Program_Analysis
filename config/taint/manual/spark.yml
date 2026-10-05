@@ -1,0 +1,47 @@
+# B2 manual taint specification for spark (CVE-2016-9177).
+# Added on top of the B1 base configuration (Tai-e commonly-used config for CWE-022).
+#
+# Prepared from work/manual-candidates/spark.md (the API list shown to N2)
+# and the buggy-version source. Advisories, fix diffs and fix_info.csv were not
+# consulted during preparation. Each entry records its technical rationale.
+# Preparation details and limitations: report/main_revised2.tex.
+#
+# Format: "<pkg.Cls: retType name(argType1,argType2)>"; index = result | base | 0,1,... | "N[*]" (array elements).
+
+# Specification rationale for path traversal through static-file handling:
+# * Untrusted input is the HTTP request (path, URI, query, headers). In this Tai-e config these
+#   servlet getters are NOT sources yet; call-site mode lets them fire even though the driver has no
+#   real request object.
+# * Static files are resolved through File, FileInputStream and the class loader (classpath
+#   resources), so those are the sinks. Decoding and URL/URI conversions must keep taint.
+sources:
+  - { kind: call, method: "<javax.servlet.http.HttpServletRequest: java.lang.String getPathInfo()>", index: result }
+  - { kind: call, method: "<javax.servlet.http.HttpServletRequest: java.lang.String getServletPath()>", index: result }
+  - { kind: call, method: "<javax.servlet.http.HttpServletRequest: java.lang.String getRequestURI()>", index: result }
+  - { kind: call, method: "<javax.servlet.http.HttpServletRequest: java.lang.String getQueryString()>", index: result }
+  - { kind: call, method: "<javax.servlet.http.HttpServletRequest: java.lang.String getHeader(java.lang.String)>", index: result }
+  - { kind: call, method: "<javax.servlet.ServletRequest: java.lang.String getParameter(java.lang.String)>", index: result }
+
+sinks:
+  # opening a file chosen by the request
+  - { method: "<java.io.FileInputStream: void <init>(java.io.File)>", index: 0 }
+  # classpath resources chosen by the request
+  - { method: "<java.lang.ClassLoader: java.net.URL getResource(java.lang.String)>", index: 0 }
+  - { method: "<java.lang.ClassLoader: java.io.InputStream getResourceAsStream(java.lang.String)>", index: 0 }
+
+transfers:
+  # percent-decoding keeps the attacker's characters ("%2e%2e/" -> "../")
+  - { method: "<java.net.URLDecoder: java.lang.String decode(java.lang.String,java.lang.String)>", from: 0, to: result }
+  # File / URI / URL conversions used by the resource classes
+  - { method: "<java.io.File: void <init>(java.lang.String)>", from: 0, to: base }
+  - { method: "<java.io.File: java.lang.String getPath()>", from: base, to: result }
+  - { method: "<java.io.File: java.lang.String getAbsolutePath()>", from: base, to: result }
+  - { method: "<java.io.File: java.net.URI toURI()>", from: base, to: result }
+  - { method: "<java.net.URI: void <init>(java.lang.String)>", from: 0, to: base }
+  - { method: "<java.net.URI: java.net.URL toURL()>", from: base, to: result }
+  - { method: "<java.net.URI: java.lang.String getSchemeSpecificPart()>", from: base, to: result }
+  - { method: "<java.net.URL: void <init>(java.lang.String)>", from: 0, to: base }
+  - { method: "<java.net.URL: java.lang.String getFile()>", from: base, to: result }
+
+# Spark's own path-cleaning helpers are app code under test, so they are not declared sanitizers.
+sanitizers: []

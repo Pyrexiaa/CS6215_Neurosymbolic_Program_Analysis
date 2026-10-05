@@ -1,0 +1,3315 @@
+{
+  "summary": {
+    "app_classes": 10,
+    "app_methods": 70,
+    "external_apis": 106,
+    "external_apis_jdk": 51,
+    "entry_candidates": 23,
+    "entry_kinds": {
+      "web": 8,
+      "plugin": 5,
+      "library-api": 10
+    }
+  },
+  "external_apis": [
+    {
+      "signature": "<java.lang.Object: void <init>()>",
+      "owner": "java.lang.Object",
+      "name": "<init>",
+      "params": [],
+      "ret": "void",
+      "is_static": false,
+      "from_jdk": true,
+      "origin": "JDK",
+      "call_sites": [
+        {
+          "caller": "<io.plugins.perfecto.BuildUtils: void <init>()>",
+          "line": 5,
+          "source_file": "BuildUtils.java"
+        },
+        {
+          "caller": "<io.plugins.perfecto.PerfectoEnvironmentUtil: void <init>()>",
+          "line": 27,
+          "source_file": "PerfectoEnvironmentUtil.java"
+        }
+      ]
+    },
+    {
+      "signature": "<java.lang.Class: java.lang.String getName()>",
+      "owner": "java.lang.Class",
+      "name": "getName",
+      "params": [],
+      "ret": "java.lang.String",
+      "is_static": false,
+      "from_jdk": true,
+      "origin": "JDK",
+      "call_sites": [
+        {
+          "caller": "<io.plugins.perfecto.BuildUtils: void <clinit>()>",
+          "line": 7,
+          "source_file": "BuildUtils.java"
+        },
+        {
+          "caller": "<io.plugins.perfecto.PerfectoBuildWrapper: void <clinit>()>",
+          "line": 60,
+          "source_file": "PerfectoBuildWrapper.java"
+        },
+        {
+          "caller": "<io.plugins.perfecto.PerfectoEnvironmentUtil: void <clinit>()>",
+          "line": 19,
+          "source_file": "PerfectoEnvironmentUtil.java"
+        }
+      ]
+    },
+    {
+      "signature": "<java.util.logging.Logger: java.util.logging.Logger getLogger(java.lang.String)>",
+      "owner": "java.util.logging.Logger",
+      "name": "getLogger",
+      "params": [
+        "java.lang.String"
+      ],
+      "ret": "java.util.logging.Logger",
+      "is_static": true,
+      "from_jdk": true,
+      "origin": "JDK",
+      "call_sites": [
+        {
+          "caller": "<io.plugins.perfecto.BuildUtils: void <clinit>()>",
+          "line": 7,
+          "source_file": "BuildUtils.java"
+        },
+        {
+          "caller": "<io.plugins.perfecto.PerfectoBuildWrapper: void <clinit>()>",
+          "line": 60,
+          "source_file": "PerfectoBuildWrapper.java"
+        },
+        {
+          "caller": "<io.plugins.perfecto.PerfectoEnvironmentUtil: void <clinit>()>",
+          "line": 19,
+          "source_file": "PerfectoEnvironmentUtil.java"
+        }
+      ]
+    },
+    {
+      "signature": "<hudson.tasks.BuildWrapper$Environment: void <init>(hudson.tasks.BuildWrapper)>",
+      "owner": "hudson.tasks.BuildWrapper$Environment",
+      "name": "<init>",
+      "params": [
+        "hudson.tasks.BuildWrapper"
+      ],
+      "ret": "void",
+      "is_static": false,
+      "from_jdk": false,
+      "origin": "jenkins-core-2.164.3.jar",
+      "call_sites": [
+        {
+          "caller": "<io.plugins.perfecto.PerfectoBuildWrapper$1: void <init>(io.plugins.perfecto.PerfectoBuildWrapper)>",
+          "line": 225,
+          "source_file": "PerfectoBuildWrapper.java"
+        }
+      ]
+    },
+    {
+      "signature": "<java.util.logging.Logger: void fine(java.lang.String)>",
+      "owner": "java.util.logging.Logger",
+      "name": "fine",
+      "params": [
+        "java.lang.String"
+      ],
+      "ret": "void",
+      "is_static": false,
+      "from_jdk": true,
+      "origin": "JDK",
+      "call_sites": [
+        {
+          "caller": "<io.plugins.perfecto.PerfectoBuildWrapper$1: void buildEnvVars(java.util.Map)>",
+          "line": 233,
+          "source_file": "PerfectoBuildWrapper.java"
+        },
+        {
+          "caller": "<io.plugins.perfecto.PerfectoBuildWrapper: hudson.tasks.BuildWrapper$Environment setUp(hudson.model.AbstractBuild,hudson.Launcher,hudson.model.BuildListener)>",
+          "line": 207,
+          "source_file": "PerfectoBuildWrapper.java"
+        },
+        {
+          "caller": "<io.plugins.perfecto.PerfectoEnvironmentUtil: io.plugins.perfecto.PerfectoBuildWrapper getBuildWrapper(hudson.model.AbstractProject)>",
+          "line": 53,
+          "source_file": "PerfectoEnvironmentUtil.java"
+        },
+        {
+          "caller": "<io.plugins.perfecto.PerfectoEnvironmentUtil: io.plugins.perfecto.PerfectoBuildWrapper getBuildWrapper(hudson.model.AbstractProject)>",
+          "line": 56,
+          "source_file": "PerfectoEnvironmentUtil.java"
+        }
+      ]
+    },
+    {
+      "signature": "<hudson.tasks.BuildWrapperDescriptor: void <init>()>",
+      "owner": "hudson.tasks.BuildWrapperDescriptor",
+      "name": "<init>",
+      "params": [],
+      "ret": "void",
+      "is_static": false,
+      "from_jdk": false,
+      "origin": "jenkins-core-2.164.3.jar",
+      "call_sites": [
+        {
+          "caller": "<io.plugins.perfecto.PerfectoBuildWrapper$DescriptorImpl: void <init>()>",
+          "line": 316,
+          "source_file": "PerfectoBuildWrapper.java"
+        }
+      ]
+    },
+    {
+      "signature": "<jenkins.model.Jenkins: jenkins.model.Jenkins get()>",
+      "owner": "jenkins.model.Jenkins",
+      "name": "get",
+      "params": [],
+      "ret": "jenkins.model.Jenkins",
+      "is_static": true,
+      "from_jdk": false,
+      "origin": "jenkins-core-2.164.3.jar",
+      "call_sites": [
+        {
+          "caller": "<io.plugins.perfecto.PerfectoBuildWrapper$DescriptorImpl: hudson.util.ListBoxModel doFillCredentialIdItems(hudson.model.ItemGroup,java.lang.String)>",
+          "line": 334,
+          "source_file": "PerfectoBuildWrapper.java"
+        },
+        {
+          "caller": "<io.plugins.perfecto.PerfectoBuildWrapper$DescriptorImpl: hudson.util.FormValidation doCheckCredentialId(hudson.model.Item,java.lang.String)>",
+          "line": 360,
+          "source_file": "PerfectoBuildWrapper.java"
+        },
+        {
+          "caller": "<io.plugins.perfecto.credentials.PerfectoCredentials$DescriptorImpl: hudson.util.FormValidation doCheckCloudName(java.lang.String)>",
+          "line": 205,
+          "source_file": "PerfectoCredentials.java"
+        },
+        {
+          "caller": "<io.plugins.perfecto.credentials.PerfectoCredentials$DescriptorImpl: hudson.util.FormValidation doCheckApiKey(java.lang.String)>",
+          "line": 214,
+          "source_file": "PerfectoCredentials.java"
+        },
+        {
+          "caller": "<io.plugins.perfecto.credentials.PerfectoCredentials$DescriptorImpl: hudson.util.FormValidation doCheckUserName(java.lang.String)>",
+          "line": 223,
+          "source_file": "PerfectoCredentials.java"
+        }
+      ]
+    },
+    {
+      "signature": "<hudson.security.AccessControlled: void checkPermission(hudson.security.Permission)>",
+      "owner": "hudson.security.AccessControlled",
+      "name": "checkPermission",
+      "params": [
+        "hudson.security.Permission"
+      ],
+      "ret": "void",
+      "is_static": false,
+      "from_jdk": false,
+      "origin": "jenkins-core-2.164.3.jar",
+      "call_sites": [
+        {
+          "caller": "<io.plugins.perfecto.PerfectoBuildWrapper$DescriptorImpl: hudson.util.ListBoxModel doFillCredentialIdItems(hudson.model.ItemGroup,java.lang.String)>",
+          "line": 334,
+          "source_file": "PerfectoBuildWrapper.java"
+        },
+        {
+          "caller": "<io.plugins.perfecto.PerfectoBuildWrapper$DescriptorImpl: hudson.util.FormValidation doCheckCredentialId(hudson.model.Item,java.lang.String)>",
+          "line": 360,
+          "source_file": "PerfectoBuildWrapper.java"
+        },
+        {
+          "caller": "<io.plugins.perfecto.PerfectoBuildWrapper$DescriptorImpl: hudson.util.FormValidation doCheckPerfectoConnectLocation(java.lang.String,hudson.model.Item)>",
+          "line": 376,
+          "source_file": "PerfectoBuildWrapper.java"
+        },
+        {
+          "caller": "<io.plugins.perfecto.PerfectoBuildWrapper$DescriptorImpl: hudson.util.FormValidation doCheckPerfectoConnectFile(java.lang.String,hudson.model.Item)>",
+          "line": 389,
+          "source_file": "PerfectoBuildWrapper.java"
+        },
+        {
+          "caller": "<io.plugins.perfecto.credentials.PerfectoCredentials$DescriptorImpl: hudson.util.FormValidation doCheckCloudName(java.lang.String)>",
+          "line": 205,
+          "source_file": "PerfectoCredentials.java"
+        },
+        {
+          "caller": "<io.plugins.perfecto.credentials.PerfectoCredentials$DescriptorImpl: hudson.util.FormValidation doCheckApiKey(java.lang.String)>",
+          "line": 214,
+          "source_file": "PerfectoCredentials.java"
+        },
+        {
+          "caller": "<io.plugins.perfecto.credentials.PerfectoCredentials$DescriptorImpl: hudson.util.FormValidation doCheckUserName(java.lang.String)>",
+          "line": 223,
+          "source_file": "PerfectoCredentials.java"
+        }
+      ]
+    },
+    {
+      "signature": "<jenkins.model.Jenkins: jenkins.model.Jenkins getInstanceOrNull()>",
+      "owner": "jenkins.model.Jenkins",
+      "name": "getInstanceOrNull",
+      "params": [],
+      "ret": "jenkins.model.Jenkins",
+      "is_static": true,
+      "from_jdk": false,
+      "origin": "jenkins-core-2.164.3.jar",
+      "call_sites": [
+        {
+          "caller": "<io.plugins.perfecto.PerfectoBuildWrapper$DescriptorImpl: hudson.util.ListBoxModel doFillCredentialIdItems(hudson.model.ItemGroup,java.lang.String)>",
+          "line": 335,
+          "source_file": "PerfectoBuildWrapper.java"
+        }
+      ]
+    },
+    {
+      "signature": "<hudson.security.AccessControlled: boolean hasPermission(hudson.security.Permission)>",
+      "owner": "hudson.security.AccessControlled",
+      "name": "hasPermission",
+      "params": [
+        "hudson.security.Permission"
+      ],
+      "ret": "boolean",
+      "is_static": false,
+      "from_jdk": false,
+      "origin": "jenkins-core-2.164.3.jar",
+      "call_sites": [
+        {
+          "caller": "<io.plugins.perfecto.PerfectoBuildWrapper$DescriptorImpl: hudson.util.ListBoxModel doFillCredentialIdItems(hudson.model.ItemGroup,java.lang.String)>",
+          "line": 339,
+          "source_file": "PerfectoBuildWrapper.java"
+        },
+        {
+          "caller": "<io.plugins.perfecto.PerfectoBuildWrapper$DescriptorImpl: hudson.util.ListBoxModel doFillCredentialIdItems(hudson.model.ItemGroup,java.lang.String)>",
+          "line": 342,
+          "source_file": "PerfectoBuildWrapper.java"
+        }
+      ]
+    },
+    {
+      "signature": "<com.cloudbees.plugins.credentials.common.StandardUsernameListBoxModel: void <init>()>",
+      "owner": "com.cloudbees.plugins.credentials.common.StandardUsernameListBoxModel",
+      "name": "<init>",
+      "params": [],
+      "ret": "void",
+      "is_static": false,
+      "from_jdk": false,
+      "origin": "credentials-2.1.16.jar",
+      "call_sites": [
+        {
+          "caller": "<io.plugins.perfecto.PerfectoBuildWrapper$DescriptorImpl: hudson.util.ListBoxModel doFillCredentialIdItems(hudson.model.ItemGroup,java.lang.String)>",
+          "line": 340,
+          "source_file": "PerfectoBuildWrapper.java"
+        },
+        {
+          "caller": "<io.plugins.perfecto.PerfectoBuildWrapper$DescriptorImpl: hudson.util.ListBoxModel doFillCredentialIdItems(hudson.model.ItemGroup,java.lang.String)>",
+          "line": 343,
+          "source_file": "PerfectoBuildWrapper.java"
+        },
+        {
+          "caller": "<io.plugins.perfecto.PerfectoBuildWrapper$DescriptorImpl: hudson.util.ListBoxModel doFillCredentialIdItems(hudson.model.ItemGroup,java.lang.String)>",
+          "line": 346,
+          "source_file": "PerfectoBuildWrapper.java"
+        }
+      ]
+    },
+    {
+      "signature": "<com.cloudbees.plugins.credentials.common.AbstractIdCredentialsListBoxModel: com.cloudbees.plugins.credentials.common.AbstractIdCredentialsListBoxModel includeCurrentValue(java.lang.String)>",
+      "owner": "com.cloudbees.plugins.credentials.common.AbstractIdCredentialsListBoxModel",
+      "name": "includeCurrentValue",
+      "params": [
+        "java.lang.String"
+      ],
+      "ret": "com.cloudbees.plugins.credentials.common.AbstractIdCredentialsListBoxModel",
+      "is_static": false,
+      "from_jdk": false,
+      "origin": "credentials-2.1.16.jar",
+      "call_sites": [
+        {
+          "caller": "<io.plugins.perfecto.PerfectoBuildWrapper$DescriptorImpl: hudson.util.ListBoxModel doFillCredentialIdItems(hudson.model.ItemGroup,java.lang.String)>",
+          "line": 340,
+          "source_file": "PerfectoBuildWrapper.java"
+        },
+        {
+          "caller": "<io.plugins.perfecto.PerfectoBuildWrapper$DescriptorImpl: hudson.util.ListBoxModel doFillCredentialIdItems(hudson.model.ItemGroup,java.lang.String)>",
+          "line": 348,
+          "source_file": "PerfectoBuildWrapper.java"
+        }
+      ]
+    },
+    {
+      "signature": "<com.cloudbees.plugins.credentials.common.AbstractIdCredentialsListBoxModel: com.cloudbees.plugins.credentials.common.AbstractIdCredentialsListBoxModel includeAs(org.acegisecurity.Authentication,hudson.model.ItemGroup,java.lang.Class)>",
+      "owner": "com.cloudbees.plugins.credentials.common.AbstractIdCredentialsListBoxModel",
+      "name": "includeAs",
+      "params": [
+        "org.acegisecurity.Authentication",
+        "hudson.model.ItemGroup",
+        "java.lang.Class"
+      ],
+      "ret": "com.cloudbees.plugins.credentials.common.AbstractIdCredentialsListBoxModel",
+      "is_static": false,
+      "from_jdk": false,
+      "origin": "credentials-2.1.16.jar",
+      "call_sites": [
+        {
+          "caller": "<io.plugins.perfecto.PerfectoBuildWrapper$DescriptorImpl: hudson.util.ListBoxModel doFillCredentialIdItems(hudson.model.ItemGroup,java.lang.String)>",
+          "line": 347,
+          "source_file": "PerfectoBuildWrapper.java"
+        }
+      ]
+    },
+    {
+      "signature": "<java.lang.String: java.lang.String trim()>",
+      "owner": "java.lang.String",
+      "name": "trim",
+      "params": [],
+      "ret": "java.lang.String",
+      "is_static": false,
+      "from_jdk": true,
+      "origin": "JDK",
+      "call_sites": [
+        {
+          "caller": "<io.plugins.perfecto.PerfectoBuildWrapper$DescriptorImpl: hudson.util.FormValidation doCheckCredentialId(hudson.model.Item,java.lang.String)>",
+          "line": 361,
+          "source_file": "PerfectoBuildWrapper.java"
+        },
+        {
+          "caller": "<io.plugins.perfecto.PerfectoBuildWrapper: java.lang.String getTunnelId(java.lang.String,java.lang.String,java.lang.String,hudson.model.BuildListener)>",
+          "line": 160,
+          "source_file": "PerfectoBuildWrapper.java"
+        },
+        {
+          "caller": "<io.plugins.perfecto.PerfectoBuildWrapper: java.lang.String getTunnelId(java.lang.String,java.lang.String,java.lang.String,hudson.model.BuildListener)>",
+          "line": 160,
+          "source_file": "PerfectoBuildWrapper.java"
+        },
+        {
+          "caller": "<io.plugins.perfecto.PerfectoBuildWrapper: java.lang.String getTunnelId(java.lang.String,java.lang.String,java.lang.String,hudson.model.BuildListener)>",
+          "line": 160,
+          "source_file": "PerfectoBuildWrapper.java"
+        },
+        {
+          "caller": "<io.plugins.perfecto.PerfectoBuildWrapper: java.lang.String getTunnelId(java.lang.String,java.lang.String,java.lang.String,hudson.model.BuildListener)>",
+          "line": 161,
+          "source_file": "PerfectoBuildWrapper.java"
+        },
+        {
+          "caller": "<io.plugins.perfecto.PerfectoBuildWrapper: java.lang.String getTunnelId(java.lang.String,java.lang.String,java.lang.String,hudson.model.BuildListener)>",
+          "line": 161,
+          "source_file": "PerfectoBuildWrapper.java"
+        },
+        {
+          "caller": "<io.plugins.perfecto.PerfectoBuildWrapper: java.lang.String getTunnelId(java.lang.String,java.lang.String,java.lang.String,hudson.model.BuildListener)>",
+          "line": 161,
+          "source_file": "PerfectoBuildWrapper.java"
+        },
+        {
+          "caller": "<io.plugins.perfecto.PerfectoBuildWrapper: java.lang.String getTunnelId(java.lang.String,java.lang.String,java.lang.String,hudson.model.BuildListener)>",
+          "line": 163,
+          "source_file": "PerfectoBuildWrapper.java"
+        },
+        {
+          "caller": "<io.plugins.perfecto.PerfectoBuildWrapper: java.lang.String getTunnelId(java.lang.String,java.lang.String,java.lang.String,hudson.model.BuildListener)>",
+          "line": 166,
+          "source_file": "PerfectoBuildWrapper.java"
+        }
+      ]
+    },
+    {
+      "signature": "<java.lang.String: boolean isEmpty()>",
+      "owner": "java.lang.String",
+      "name": "isEmpty",
+      "params": [],
+      "ret": "boolean",
+      "is_static": false,
+      "from_jdk": true,
+      "origin": "JDK",
+      "call_sites": [
+        {
+          "caller": "<io.plugins.perfecto.PerfectoBuildWrapper$DescriptorImpl: hudson.util.FormValidation doCheckCredentialId(hudson.model.Item,java.lang.String)>",
+          "line": 361,
+          "source_file": "PerfectoBuildWrapper.java"
+        },
+        {
+          "caller": "<io.plugins.perfecto.PerfectoBuildWrapper$DescriptorImpl: hudson.util.FormValidation doCheckCredentialId(hudson.model.Item,java.lang.String)>",
+          "line": 365,
+          "source_file": "PerfectoBuildWrapper.java"
+        }
+      ]
+    },
+    {
+      "signature": "<hudson.util.FormValidation: hudson.util.FormValidation ok()>",
+      "owner": "hudson.util.FormValidation",
+      "name": "ok",
+      "params": [],
+      "ret": "hudson.util.FormValidation",
+      "is_static": true,
+      "from_jdk": false,
+      "origin": "jenkins-core-2.164.3.jar",
+      "call_sites": [
+        {
+          "caller": "<io.plugins.perfecto.PerfectoBuildWrapper$DescriptorImpl: hudson.util.FormValidation doCheckCredentialId(hudson.model.Item,java.lang.String)>",
+          "line": 362,
+          "source_file": "PerfectoBuildWrapper.java"
+        },
+        {
+          "caller": "<io.plugins.perfecto.PerfectoBuildWrapper$DescriptorImpl: hudson.util.FormValidation doCheckCredentialId(hudson.model.Item,java.lang.String)>",
+          "line": 368,
+          "source_file": "PerfectoBuildWrapper.java"
+        },
+        {
+          "caller": "<io.plugins.perfecto.PerfectoBuildWrapper$DescriptorImpl: hudson.util.FormValidation doCheckPerfectoConnectLocation(java.lang.String,hudson.model.Item)>",
+          "line": 374,
+          "source_file": "PerfectoBuildWrapper.java"
+        },
+        {
+          "caller": "<io.plugins.perfecto.PerfectoBuildWrapper$DescriptorImpl: hudson.util.FormValidation doCheckPerfectoConnectLocation(java.lang.String,hudson.model.Item)>",
+          "line": 381,
+          "source_file": "PerfectoBuildWrapper.java"
+        },
+        {
+          "caller": "<io.plugins.perfecto.PerfectoBuildWrapper$DescriptorImpl: hudson.util.FormValidation doCheckPerfectoConnectFile(java.lang.String,hudson.model.Item)>",
+          "line": 387,
+          "source_file": "PerfectoBuildWrapper.java"
+        },
+        {
+          "caller": "<io.plugins.perfecto.PerfectoBuildWrapper$DescriptorImpl: hudson.util.FormValidation doCheckPerfectoConnectFile(java.lang.String,hudson.model.Item)>",
+          "line": 394,
+          "source_file": "PerfectoBuildWrapper.java"
+        },
+        {
+          "caller": "<io.plugins.perfecto.credentials.PerfectoCredentials$DescriptorImpl: hudson.util.FormValidation doCheckCloudName(java.lang.String)>",
+          "line": 209,
+          "source_file": "PerfectoCredentials.java"
+        },
+        {
+          "caller": "<io.plugins.perfecto.credentials.PerfectoCredentials$DescriptorImpl: hudson.util.FormValidation doCheckApiKey(java.lang.String)>",
+          "line": 218,
+          "source_file": "PerfectoCredentials.java"
+        },
+        {
+          "caller": "<io.plugins.perfecto.credentials.PerfectoCredentials$DescriptorImpl: hudson.util.FormValidation doCheckUserName(java.lang.String)>",
+          "line": 227,
+          "source_file": "PerfectoCredentials.java"
+        }
+      ]
+    },
+    {
+      "signature": "<java.util.Collections: java.util.List emptyList()>",
+      "owner": "java.util.Collections",
+      "name": "emptyList",
+      "params": [],
+      "ret": "java.util.List",
+      "is_static": true,
+      "from_jdk": true,
+      "origin": "JDK",
+      "call_sites": [
+        {
+          "caller": "<io.plugins.perfecto.PerfectoBuildWrapper$DescriptorImpl: hudson.util.FormValidation doCheckCredentialId(hudson.model.Item,java.lang.String)>",
+          "line": 365,
+          "source_file": "PerfectoBuildWrapper.java"
+        }
+      ]
+    },
+    {
+      "signature": "<com.cloudbees.plugins.credentials.CredentialsMatchers: com.cloudbees.plugins.credentials.CredentialsMatcher withId(java.lang.String)>",
+      "owner": "com.cloudbees.plugins.credentials.CredentialsMatchers",
+      "name": "withId",
+      "params": [
+        "java.lang.String"
+      ],
+      "ret": "com.cloudbees.plugins.credentials.CredentialsMatcher",
+      "is_static": true,
+      "from_jdk": false,
+      "origin": "credentials-2.1.16.jar",
+      "call_sites": [
+        {
+          "caller": "<io.plugins.perfecto.PerfectoBuildWrapper$DescriptorImpl: hudson.util.FormValidation doCheckCredentialId(hudson.model.Item,java.lang.String)>",
+          "line": 365,
+          "source_file": "PerfectoBuildWrapper.java"
+        },
+        {
+          "caller": "<io.plugins.perfecto.credentials.PerfectoCredentials: io.plugins.perfecto.credentials.PerfectoCredentials getCredentialsById(hudson.model.Item,java.lang.String)>",
+          "line": 295,
+          "source_file": "PerfectoCredentials.java"
+        }
+      ]
+    },
+    {
+      "signature": "<com.cloudbees.plugins.credentials.CredentialsProvider: hudson.util.ListBoxModel listCredentials(java.lang.Class,hudson.model.Item,org.acegisecurity.Authentication,java.util.List,com.cloudbees.plugins.credentials.CredentialsMatcher)>",
+      "owner": "com.cloudbees.plugins.credentials.CredentialsProvider",
+      "name": "listCredentials",
+      "params": [
+        "java.lang.Class",
+        "hudson.model.Item",
+        "org.acegisecurity.Authentication",
+        "java.util.List",
+        "com.cloudbees.plugins.credentials.CredentialsMatcher"
+      ],
+      "ret": "hudson.util.ListBoxModel",
+      "is_static": true,
+      "from_jdk": false,
+      "origin": "credentials-2.1.16.jar",
+      "call_sites": [
+        {
+          "caller": "<io.plugins.perfecto.PerfectoBuildWrapper$DescriptorImpl: hudson.util.FormValidation doCheckCredentialId(hudson.model.Item,java.lang.String)>",
+          "line": 365,
+          "source_file": "PerfectoBuildWrapper.java"
+        }
+      ]
+    },
+    {
+      "signature": "<java.util.ArrayList: boolean isEmpty()>",
+      "owner": "java.util.ArrayList",
+      "name": "isEmpty",
+      "params": [],
+      "ret": "boolean",
+      "is_static": false,
+      "from_jdk": true,
+      "origin": "JDK",
+      "call_sites": [
+        {
+          "caller": "<io.plugins.perfecto.PerfectoBuildWrapper$DescriptorImpl: hudson.util.FormValidation doCheckCredentialId(hudson.model.Item,java.lang.String)>",
+          "line": 365,
+          "source_file": "PerfectoBuildWrapper.java"
+        }
+      ]
+    },
+    {
+      "signature": "<hudson.util.FormValidation: hudson.util.FormValidation error(java.lang.String)>",
+      "owner": "hudson.util.FormValidation",
+      "name": "error",
+      "params": [
+        "java.lang.String"
+      ],
+      "ret": "hudson.util.FormValidation",
+      "is_static": true,
+      "from_jdk": false,
+      "origin": "jenkins-core-2.164.3.jar",
+      "call_sites": [
+        {
+          "caller": "<io.plugins.perfecto.PerfectoBuildWrapper$DescriptorImpl: hudson.util.FormValidation doCheckCredentialId(hudson.model.Item,java.lang.String)>",
+          "line": 366,
+          "source_file": "PerfectoBuildWrapper.java"
+        },
+        {
+          "caller": "<io.plugins.perfecto.PerfectoBuildWrapper$DescriptorImpl: hudson.util.FormValidation doCheckPerfectoConnectLocation(java.lang.String,hudson.model.Item)>",
+          "line": 379,
+          "source_file": "PerfectoBuildWrapper.java"
+        },
+        {
+          "caller": "<io.plugins.perfecto.PerfectoBuildWrapper$DescriptorImpl: hudson.util.FormValidation doCheckPerfectoConnectFile(java.lang.String,hudson.model.Item)>",
+          "line": 392,
+          "source_file": "PerfectoBuildWrapper.java"
+        },
+        {
+          "caller": "<io.plugins.perfecto.credentials.PerfectoCredentials$DescriptorImpl: hudson.util.FormValidation doAuthenticate(java.lang.String,java.lang.String,java.lang.String)>",
+          "line": 198,
+          "source_file": "PerfectoCredentials.java"
+        },
+        {
+          "caller": "<io.plugins.perfecto.credentials.PerfectoCredentials$DescriptorImpl: hudson.util.FormValidation doCheckCloudName(java.lang.String)>",
+          "line": 207,
+          "source_file": "PerfectoCredentials.java"
+        },
+        {
+          "caller": "<io.plugins.perfecto.credentials.PerfectoCredentials$DescriptorImpl: hudson.util.FormValidation doCheckApiKey(java.lang.String)>",
+          "line": 216,
+          "source_file": "PerfectoCredentials.java"
+        },
+        {
+          "caller": "<io.plugins.perfecto.credentials.PerfectoCredentials$DescriptorImpl: hudson.util.FormValidation doCheckUserName(java.lang.String)>",
+          "line": 225,
+          "source_file": "PerfectoCredentials.java"
+        },
+        {
+          "caller": "<io.plugins.perfecto.credentials.PerfectoCredentials: hudson.util.FormValidation testAuthentication(java.lang.String,java.lang.String,java.lang.String)>",
+          "line": 119,
+          "source_file": "PerfectoCredentials.java"
+        },
+        {
+          "caller": "<io.plugins.perfecto.credentials.PerfectoCredentials: hudson.util.FormValidation testAuthentication(java.lang.String,java.lang.String,java.lang.String)>",
+          "line": 127,
+          "source_file": "PerfectoCredentials.java"
+        }
+      ]
+    },
+    {
+      "signature": "<hudson.Util: java.lang.String fixEmptyAndTrim(java.lang.String)>",
+      "owner": "hudson.Util",
+      "name": "fixEmptyAndTrim",
+      "params": [
+        "java.lang.String"
+      ],
+      "ret": "java.lang.String",
+      "is_static": true,
+      "from_jdk": false,
+      "origin": "jenkins-core-2.164.3.jar",
+      "call_sites": [
+        {
+          "caller": "<io.plugins.perfecto.PerfectoBuildWrapper$DescriptorImpl: hudson.util.FormValidation doCheckPerfectoConnectLocation(java.lang.String,hudson.model.Item)>",
+          "line": 378,
+          "source_file": "PerfectoBuildWrapper.java"
+        },
+        {
+          "caller": "<io.plugins.perfecto.PerfectoBuildWrapper$DescriptorImpl: hudson.util.FormValidation doCheckPerfectoConnectFile(java.lang.String,hudson.model.Item)>",
+          "line": 391,
+          "source_file": "PerfectoBuildWrapper.java"
+        },
+        {
+          "caller": "<io.plugins.perfecto.credentials.PerfectoCredentials$DescriptorImpl: hudson.util.FormValidation doCheckCloudName(java.lang.String)>",
+          "line": 206,
+          "source_file": "PerfectoCredentials.java"
+        },
+        {
+          "caller": "<io.plugins.perfecto.credentials.PerfectoCredentials$DescriptorImpl: hudson.util.FormValidation doCheckApiKey(java.lang.String)>",
+          "line": 215,
+          "source_file": "PerfectoCredentials.java"
+        },
+        {
+          "caller": "<io.plugins.perfecto.credentials.PerfectoCredentials$DescriptorImpl: hudson.util.FormValidation doCheckUserName(java.lang.String)>",
+          "line": 224,
+          "source_file": "PerfectoCredentials.java"
+        }
+      ]
+    },
+    {
+      "signature": "<hudson.model.listeners.ItemListener: void <init>()>",
+      "owner": "hudson.model.listeners.ItemListener",
+      "name": "<init>",
+      "params": [],
+      "ret": "void",
+      "is_static": false,
+      "from_jdk": false,
+      "origin": "jenkins-core-2.164.3.jar",
+      "call_sites": [
+        {
+          "caller": "<io.plugins.perfecto.PerfectoBuildWrapper$ItemListenerImpl: void <init>()>",
+          "line": 442,
+          "source_file": "PerfectoBuildWrapper.java"
+        }
+      ]
+    },
+    {
+      "signature": "<jenkins.model.Jenkins: jenkins.model.Jenkins getInstance()>",
+      "owner": "jenkins.model.Jenkins",
+      "name": "getInstance",
+      "params": [],
+      "ret": "jenkins.model.Jenkins",
+      "is_static": true,
+      "from_jdk": false,
+      "origin": "jenkins-core-2.164.3.jar",
+      "call_sites": [
+        {
+          "caller": "<io.plugins.perfecto.PerfectoBuildWrapper$ItemListenerImpl: void onLoaded()>",
+          "line": 444,
+          "source_file": "PerfectoBuildWrapper.java"
+        }
+      ]
+    },
+    {
+      "signature": "<jenkins.model.Jenkins: java.util.List getItems(java.lang.Class)>",
+      "owner": "jenkins.model.Jenkins",
+      "name": "getItems",
+      "params": [
+        "java.lang.Class"
+      ],
+      "ret": "java.util.List",
+      "is_static": false,
+      "from_jdk": false,
+      "origin": "jenkins-core-2.164.3.jar",
+      "call_sites": [
+        {
+          "caller": "<io.plugins.perfecto.PerfectoBuildWrapper$ItemListenerImpl: void onLoaded()>",
+          "line": 446,
+          "source_file": "PerfectoBuildWrapper.java"
+        }
+      ]
+    },
+    {
+      "signature": "<java.util.List: java.util.Iterator iterator()>",
+      "owner": "java.util.List",
+      "name": "iterator",
+      "params": [],
+      "ret": "java.util.Iterator",
+      "is_static": false,
+      "from_jdk": true,
+      "origin": "JDK",
+      "call_sites": [
+        {
+          "caller": "<io.plugins.perfecto.PerfectoBuildWrapper$ItemListenerImpl: void onLoaded()>",
+          "line": 446,
+          "source_file": "PerfectoBuildWrapper.java"
+        },
+        {
+          "caller": "<io.plugins.perfecto.PerfectoBuildWrapper$ItemListenerImpl: void onLoaded()>",
+          "line": 449,
+          "source_file": "PerfectoBuildWrapper.java"
+        }
+      ]
+    },
+    {
+      "signature": "<java.util.Iterator: boolean hasNext()>",
+      "owner": "java.util.Iterator",
+      "name": "hasNext",
+      "params": [],
+      "ret": "boolean",
+      "is_static": false,
+      "from_jdk": true,
+      "origin": "JDK",
+      "call_sites": [
+        {
+          "caller": "<io.plugins.perfecto.PerfectoBuildWrapper$ItemListenerImpl: void onLoaded()>",
+          "line": 446,
+          "source_file": "PerfectoBuildWrapper.java"
+        },
+        {
+          "caller": "<io.plugins.perfecto.PerfectoBuildWrapper$ItemListenerImpl: void onLoaded()>",
+          "line": 449,
+          "source_file": "PerfectoBuildWrapper.java"
+        }
+      ]
+    },
+    {
+      "signature": "<java.util.Iterator: java.lang.Object next()>",
+      "owner": "java.util.Iterator",
+      "name": "next",
+      "params": [],
+      "ret": "java.lang.Object",
+      "is_static": false,
+      "from_jdk": true,
+      "origin": "JDK",
+      "call_sites": [
+        {
+          "caller": "<io.plugins.perfecto.PerfectoBuildWrapper$ItemListenerImpl: void onLoaded()>",
+          "line": 446,
+          "source_file": "PerfectoBuildWrapper.java"
+        },
+        {
+          "caller": "<io.plugins.perfecto.PerfectoBuildWrapper$ItemListenerImpl: void onLoaded()>",
+          "line": 449,
+          "source_file": "PerfectoBuildWrapper.java"
+        }
+      ]
+    },
+    {
+      "signature": "<hudson.model.BuildableItemWithBuildWrappers: hudson.model.AbstractProject asProject()>",
+      "owner": "hudson.model.BuildableItemWithBuildWrappers",
+      "name": "asProject",
+      "params": [],
+      "ret": "hudson.model.AbstractProject",
+      "is_static": false,
+      "from_jdk": false,
+      "origin": "jenkins-core-2.164.3.jar",
+      "call_sites": [
+        {
+          "caller": "<io.plugins.perfecto.PerfectoBuildWrapper$ItemListenerImpl: void onLoaded()>",
+          "line": 448,
+          "source_file": "PerfectoBuildWrapper.java"
+        }
+      ]
+    },
+    {
+      "signature": "<hudson.model.BuildableItemWithBuildWrappers: hudson.util.DescribableList getBuildWrappersList()>",
+      "owner": "hudson.model.BuildableItemWithBuildWrappers",
+      "name": "getBuildWrappersList",
+      "params": [],
+      "ret": "hudson.util.DescribableList",
+      "is_static": false,
+      "from_jdk": false,
+      "origin": "jenkins-core-2.164.3.jar",
+      "call_sites": [
+        {
+          "caller": "<io.plugins.perfecto.PerfectoBuildWrapper$ItemListenerImpl: void onLoaded()>",
+          "line": 449,
+          "source_file": "PerfectoBuildWrapper.java"
+        },
+        {
+          "caller": "<io.plugins.perfecto.PerfectoEnvironmentUtil: io.plugins.perfecto.PerfectoBuildWrapper getBuildWrapper(hudson.model.AbstractProject)>",
+          "line": 51,
+          "source_file": "PerfectoEnvironmentUtil.java"
+        },
+        {
+          "caller": "<io.plugins.perfecto.credentials.PerfectoCredentials: io.plugins.perfecto.credentials.PerfectoCredentials getCredentials(hudson.model.AbstractProject)>",
+          "line": 100,
+          "source_file": "PerfectoCredentials.java"
+        }
+      ]
+    },
+    {
+      "signature": "<hudson.util.PersistedList: java.util.List getAll(java.lang.Class)>",
+      "owner": "hudson.util.PersistedList",
+      "name": "getAll",
+      "params": [
+        "java.lang.Class"
+      ],
+      "ret": "java.util.List",
+      "is_static": false,
+      "from_jdk": false,
+      "origin": "jenkins-core-2.164.3.jar",
+      "call_sites": [
+        {
+          "caller": "<io.plugins.perfecto.PerfectoBuildWrapper$ItemListenerImpl: void onLoaded()>",
+          "line": 449,
+          "source_file": "PerfectoBuildWrapper.java"
+        }
+      ]
+    },
+    {
+      "signature": "<hudson.model.AbstractProject: void save()>",
+      "owner": "hudson.model.AbstractProject",
+      "name": "save",
+      "params": [],
+      "ret": "void",
+      "is_static": false,
+      "from_jdk": false,
+      "origin": "jenkins-core-2.164.3.jar",
+      "call_sites": [
+        {
+          "caller": "<io.plugins.perfecto.PerfectoBuildWrapper$ItemListenerImpl: void onLoaded()>",
+          "line": 453,
+          "source_file": "PerfectoBuildWrapper.java"
+        }
+      ]
+    },
+    {
+      "signature": "<java.lang.Throwable: void printStackTrace()>",
+      "owner": "java.lang.Throwable",
+      "name": "printStackTrace",
+      "params": [],
+      "ret": "void",
+      "is_static": false,
+      "from_jdk": true,
+      "origin": "JDK",
+      "call_sites": [
+        {
+          "caller": "<io.plugins.perfecto.PerfectoBuildWrapper$ItemListenerImpl: void onLoaded()>",
+          "line": 455,
+          "source_file": "PerfectoBuildWrapper.java"
+        },
+        {
+          "caller": "<io.plugins.perfecto.PerfectoBuildWrapper: boolean migrateCredentials(hudson.model.AbstractProject)>",
+          "line": 417,
+          "source_file": "PerfectoBuildWrapper.java"
+        },
+        {
+          "caller": "<io.plugins.perfecto.PerfectoBuildWrapper: boolean migrateCredentials(hudson.model.AbstractProject)>",
+          "line": 419,
+          "source_file": "PerfectoBuildWrapper.java"
+        },
+        {
+          "caller": "<io.plugins.perfecto.PerfectoBuildWrapper: boolean migrateCredentials(hudson.model.AbstractProject)>",
+          "line": 433,
+          "source_file": "PerfectoBuildWrapper.java"
+        },
+        {
+          "caller": "<io.plugins.perfecto.PerfectoBuildWrapper: boolean migrateCredentials(hudson.model.AbstractProject)>",
+          "line": 435,
+          "source_file": "PerfectoBuildWrapper.java"
+        },
+        {
+          "caller": "<io.plugins.perfecto.credentials.PerfectoCredentials: hudson.util.Secret getPassword()>",
+          "line": 154,
+          "source_file": "PerfectoCredentials.java"
+        },
+        {
+          "caller": "<io.plugins.perfecto.credentials.PerfectoCredentials: hudson.util.Secret getPassword()>",
+          "line": 156,
+          "source_file": "PerfectoCredentials.java"
+        }
+      ]
+    },
+    {
+      "signature": "<hudson.tasks.BuildWrapper: void makeSensitiveBuildVariables(hudson.model.AbstractBuild,java.util.Set)>",
+      "owner": "hudson.tasks.BuildWrapper",
+      "name": "makeSensitiveBuildVariables",
+      "params": [
+        "hudson.model.AbstractBuild",
+        "java.util.Set"
+      ],
+      "ret": "void",
+      "is_static": false,
+      "from_jdk": false,
+      "origin": "jenkins-core-2.164.3.jar",
+      "call_sites": [
+        {
+          "caller": "<io.plugins.perfecto.PerfectoBuildWrapper: void makeSensitiveBuildVariables(hudson.model.AbstractBuild,java.util.Set)>",
+          "line": 114,
+          "source_file": "PerfectoBuildWrapper.java"
+        }
+      ]
+    },
+    {
+      "signature": "<java.util.Set: boolean add(java.lang.Object)>",
+      "owner": "java.util.Set",
+      "name": "add",
+      "params": [
+        "java.lang.Object"
+      ],
+      "ret": "boolean",
+      "is_static": false,
+      "from_jdk": true,
+      "origin": "JDK",
+      "call_sites": [
+        {
+          "caller": "<io.plugins.perfecto.PerfectoBuildWrapper: void makeSensitiveBuildVariables(hudson.model.AbstractBuild,java.util.Set)>",
+          "line": 115,
+          "source_file": "PerfectoBuildWrapper.java"
+        }
+      ]
+    },
+    {
+      "signature": "<hudson.tasks.BuildWrapper: void <init>()>",
+      "owner": "hudson.tasks.BuildWrapper",
+      "name": "<init>",
+      "params": [],
+      "ret": "void",
+      "is_static": false,
+      "from_jdk": false,
+      "origin": "jenkins-core-2.164.3.jar",
+      "call_sites": [
+        {
+          "caller": "<io.plugins.perfecto.PerfectoBuildWrapper: void <init>(org.jenkins_ci.plugins.run_condition.RunCondition,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String)>",
+          "line": 139,
+          "source_file": "PerfectoBuildWrapper.java"
+        }
+      ]
+    },
+    {
+      "signature": "<java.lang.String: int length()>",
+      "owner": "java.lang.String",
+      "name": "length",
+      "params": [],
+      "ret": "int",
+      "is_static": false,
+      "from_jdk": true,
+      "origin": "JDK",
+      "call_sites": [
+        {
+          "caller": "<io.plugins.perfecto.PerfectoBuildWrapper: void <init>(org.jenkins_ci.plugins.run_condition.RunCondition,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String)>",
+          "line": 142,
+          "source_file": "PerfectoBuildWrapper.java"
+        }
+      ]
+    },
+    {
+      "signature": "<hudson.Functions: boolean isWindows()>",
+      "owner": "hudson.Functions",
+      "name": "isWindows",
+      "params": [],
+      "ret": "boolean",
+      "is_static": true,
+      "from_jdk": false,
+      "origin": "jenkins-core-2.164.3.jar",
+      "call_sites": [
+        {
+          "caller": "<io.plugins.perfecto.PerfectoBuildWrapper: java.lang.String getTunnelId(java.lang.String,java.lang.String,java.lang.String,hudson.model.BuildListener)>",
+          "line": 153,
+          "source_file": "PerfectoBuildWrapper.java"
+        }
+      ]
+    },
+    {
+      "signature": "<java.lang.String: boolean endsWith(java.lang.String)>",
+      "owner": "java.lang.String",
+      "name": "endsWith",
+      "params": [
+        "java.lang.String"
+      ],
+      "ret": "boolean",
+      "is_static": false,
+      "from_jdk": true,
+      "origin": "JDK",
+      "call_sites": [
+        {
+          "caller": "<io.plugins.perfecto.PerfectoBuildWrapper: java.lang.String getTunnelId(java.lang.String,java.lang.String,java.lang.String,hudson.model.BuildListener)>",
+          "line": 155,
+          "source_file": "PerfectoBuildWrapper.java"
+        },
+        {
+          "caller": "<io.plugins.perfecto.PerfectoBuildWrapper: java.lang.String getTunnelId(java.lang.String,java.lang.String,java.lang.String,hudson.model.BuildListener)>",
+          "line": 155,
+          "source_file": "PerfectoBuildWrapper.java"
+        }
+      ]
+    },
+    {
+      "signature": "<java.lang.StringBuilder: void <init>()>",
+      "owner": "java.lang.StringBuilder",
+      "name": "<init>",
+      "params": [],
+      "ret": "void",
+      "is_static": false,
+      "from_jdk": true,
+      "origin": "JDK",
+      "call_sites": [
+        {
+          "caller": "<io.plugins.perfecto.PerfectoBuildWrapper: java.lang.String getTunnelId(java.lang.String,java.lang.String,java.lang.String,hudson.model.BuildListener)>",
+          "line": 156,
+          "source_file": "PerfectoBuildWrapper.java"
+        },
+        {
+          "caller": "<io.plugins.perfecto.PerfectoBuildWrapper: java.lang.String getTunnelId(java.lang.String,java.lang.String,java.lang.String,hudson.model.BuildListener)>",
+          "line": 158,
+          "source_file": "PerfectoBuildWrapper.java"
+        },
+        {
+          "caller": "<io.plugins.perfecto.PerfectoBuildWrapper: java.lang.String getTunnelId(java.lang.String,java.lang.String,java.lang.String,hudson.model.BuildListener)>",
+          "line": 160,
+          "source_file": "PerfectoBuildWrapper.java"
+        },
+        {
+          "caller": "<io.plugins.perfecto.PerfectoBuildWrapper: java.lang.String getTunnelId(java.lang.String,java.lang.String,java.lang.String,hudson.model.BuildListener)>",
+          "line": 161,
+          "source_file": "PerfectoBuildWrapper.java"
+        },
+        {
+          "caller": "<io.plugins.perfecto.PerfectoBuildWrapper: java.lang.String getTunnelId(java.lang.String,java.lang.String,java.lang.String,hudson.model.BuildListener)>",
+          "line": 163,
+          "source_file": "PerfectoBuildWrapper.java"
+        },
+        {
+          "caller": "<io.plugins.perfecto.PerfectoBuildWrapper: java.lang.String getTunnelId(java.lang.String,java.lang.String,java.lang.String,hudson.model.BuildListener)>",
+          "line": 166,
+          "source_file": "PerfectoBuildWrapper.java"
+        },
+        {
+          "caller": "<io.plugins.perfecto.PerfectoBuildWrapper: java.lang.String getTunnelId(java.lang.String,java.lang.String,java.lang.String,hudson.model.BuildListener)>",
+          "line": 177,
+          "source_file": "PerfectoBuildWrapper.java"
+        },
+        {
+          "caller": "<io.plugins.perfecto.PerfectoBuildWrapper: java.lang.String getTunnelId(java.lang.String,java.lang.String,java.lang.String,hudson.model.BuildListener)>",
+          "line": 180,
+          "source_file": "PerfectoBuildWrapper.java"
+        },
+        {
+          "caller": "<io.plugins.perfecto.PerfectoBuildWrapper: java.lang.String getTunnelId(java.lang.String,java.lang.String,java.lang.String,hudson.model.BuildListener)>",
+          "line": 181,
+          "source_file": "PerfectoBuildWrapper.java"
+        },
+        {
+          "caller": "<io.plugins.perfecto.PerfectoEnvironmentUtil: io.plugins.perfecto.PerfectoBuildWrapper getBuildWrapper(hudson.model.AbstractProject)>",
+          "line": 53,
+          "source_file": "PerfectoEnvironmentUtil.java"
+        },
+        {
+          "caller": "<io.plugins.perfecto.PerfectoEnvironmentUtil: io.plugins.perfecto.PerfectoBuildWrapper getBuildWrapper(hudson.model.AbstractProject)>",
+          "line": 56,
+          "source_file": "PerfectoEnvironmentUtil.java"
+        },
+        {
+          "caller": "<io.plugins.perfecto.credentials.PerfectoCredentials: hudson.util.FormValidation testAuthentication(java.lang.String,java.lang.String,java.lang.String)>",
+          "line": 107,
+          "source_file": "PerfectoCredentials.java"
+        },
+        {
+          "caller": "<io.plugins.perfecto.credentials.PerfectoCredentials: hudson.util.FormValidation testAuthentication(java.lang.String,java.lang.String,java.lang.String)>",
+          "line": 116,
+          "source_file": "PerfectoCredentials.java"
+        },
+        {
+          "caller": "<io.plugins.perfecto.credentials.PerfectoCredentials: hudson.util.FormValidation testAuthentication(java.lang.String,java.lang.String,java.lang.String)>",
+          "line": 119,
+          "source_file": "PerfectoCredentials.java"
+        },
+        {
+          "caller": "<io.plugins.perfecto.credentials.PerfectoCredentials: hudson.util.FormValidation testAuthentication(java.lang.String,java.lang.String,java.lang.String)>",
+          "line": 126,
+          "source_file": "PerfectoCredentials.java"
+        },
+        {
+          "caller": "<io.plugins.perfecto.credentials.PerfectoCredentials: java.lang.String migrateToCredentials(java.lang.String,java.lang.String,java.lang.String,java.lang.String)>",
+          "line": 244,
+          "source_file": "PerfectoCredentials.java"
+        }
+      ]
+    },
+    {
+      "signature": "<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>",
+      "owner": "java.lang.StringBuilder",
+      "name": "append",
+      "params": [
+        "java.lang.String"
+      ],
+      "ret": "java.lang.StringBuilder",
+      "is_static": false,
+      "from_jdk": true,
+      "origin": "JDK",
+      "call_sites": [
+        {
+          "caller": "<io.plugins.perfecto.PerfectoBuildWrapper: java.lang.String getTunnelId(java.lang.String,java.lang.String,java.lang.String,hudson.model.BuildListener)>",
+          "line": 156,
+          "source_file": "PerfectoBuildWrapper.java"
+        },
+        {
+          "caller": "<io.plugins.perfecto.PerfectoBuildWrapper: java.lang.String getTunnelId(java.lang.String,java.lang.String,java.lang.String,hudson.model.BuildListener)>",
+          "line": 156,
+          "source_file": "PerfectoBuildWrapper.java"
+        },
+        {
+          "caller": "<io.plugins.perfecto.PerfectoBuildWrapper: java.lang.String getTunnelId(java.lang.String,java.lang.String,java.lang.String,hudson.model.BuildListener)>",
+          "line": 158,
+          "source_file": "PerfectoBuildWrapper.java"
+        },
+        {
+          "caller": "<io.plugins.perfecto.PerfectoBuildWrapper: java.lang.String getTunnelId(java.lang.String,java.lang.String,java.lang.String,hudson.model.BuildListener)>",
+          "line": 158,
+          "source_file": "PerfectoBuildWrapper.java"
+        },
+        {
+          "caller": "<io.plugins.perfecto.PerfectoBuildWrapper: java.lang.String getTunnelId(java.lang.String,java.lang.String,java.lang.String,hudson.model.BuildListener)>",
+          "line": 158,
+          "source_file": "PerfectoBuildWrapper.java"
+        },
+        {
+          "caller": "<io.plugins.perfecto.PerfectoBuildWrapper: java.lang.String getTunnelId(java.lang.String,java.lang.String,java.lang.String,hudson.model.BuildListener)>",
+          "line": 160,
+          "source_file": "PerfectoBuildWrapper.java"
+        },
+        {
+          "caller": "<io.plugins.perfecto.PerfectoBuildWrapper: java.lang.String getTunnelId(java.lang.String,java.lang.String,java.lang.String,hudson.model.BuildListener)>",
+          "line": 160,
+          "source_file": "PerfectoBuildWrapper.java"
+        },
+        {
+          "caller": "<io.plugins.perfecto.PerfectoBuildWrapper: java.lang.String getTunnelId(java.lang.String,java.lang.String,java.lang.String,hudson.model.BuildListener)>",
+          "line": 160,
+          "source_file": "PerfectoBuildWrapper.java"
+        },
+        {
+          "caller": "<io.plugins.perfecto.PerfectoBuildWrapper: java.lang.String getTunnelId(java.lang.String,java.lang.String,java.lang.String,hudson.model.BuildListener)>",
+          "line": 160,
+          "source_file": "PerfectoBuildWrapper.java"
+        },
+        {
+          "caller": "<io.plugins.perfecto.PerfectoBuildWrapper: java.lang.String getTunnelId(java.lang.String,java.lang.String,java.lang.String,hudson.model.BuildListener)>",
+          "line": 160,
+          "source_file": "PerfectoBuildWrapper.java"
+        },
+        {
+          "caller": "<io.plugins.perfecto.PerfectoBuildWrapper: java.lang.String getTunnelId(java.lang.String,java.lang.String,java.lang.String,hudson.model.BuildListener)>",
+          "line": 161,
+          "source_file": "PerfectoBuildWrapper.java"
+        },
+        {
+          "caller": "<io.plugins.perfecto.PerfectoBuildWrapper: java.lang.String getTunnelId(java.lang.String,java.lang.String,java.lang.String,hudson.model.BuildListener)>",
+          "line": 161,
+          "source_file": "PerfectoBuildWrapper.java"
+        },
+        {
+          "caller": "<io.plugins.perfecto.PerfectoBuildWrapper: java.lang.String getTunnelId(java.lang.String,java.lang.String,java.lang.String,hudson.model.BuildListener)>",
+          "line": 161,
+          "source_file": "PerfectoBuildWrapper.java"
+        },
+        {
+          "caller": "<io.plugins.perfecto.PerfectoBuildWrapper: java.lang.String getTunnelId(java.lang.String,java.lang.String,java.lang.String,hudson.model.BuildListener)>",
+          "line": 161,
+          "source_file": "PerfectoBuildWrapper.java"
+        },
+        {
+          "caller": "<io.plugins.perfecto.PerfectoBuildWrapper: java.lang.String getTunnelId(java.lang.String,java.lang.String,java.lang.String,hudson.model.BuildListener)>",
+          "line": 161,
+          "source_file": "PerfectoBuildWrapper.java"
+        },
+        {
+          "caller": "<io.plugins.perfecto.PerfectoBuildWrapper: java.lang.String getTunnelId(java.lang.String,java.lang.String,java.lang.String,hudson.model.BuildListener)>",
+          "line": 163,
+          "source_file": "PerfectoBuildWrapper.java"
+        },
+        {
+          "caller": "<io.plugins.perfecto.PerfectoBuildWrapper: java.lang.String getTunnelId(java.lang.String,java.lang.String,java.lang.String,hudson.model.BuildListener)>",
+          "line": 163,
+          "source_file": "PerfectoBuildWrapper.java"
+        },
+        {
+          "caller": "<io.plugins.perfecto.PerfectoBuildWrapper: java.lang.String getTunnelId(java.lang.String,java.lang.String,java.lang.String,hudson.model.BuildListener)>",
+          "line": 163,
+          "source_file": "PerfectoBuildWrapper.java"
+        },
+        {
+          "caller": "<io.plugins.perfecto.PerfectoBuildWrapper: java.lang.String getTunnelId(java.lang.String,java.lang.String,java.lang.String,hudson.model.BuildListener)>",
+          "line": 166,
+          "source_file": "PerfectoBuildWrapper.java"
+        },
+        {
+          "caller": "<io.plugins.perfecto.PerfectoBuildWrapper: java.lang.String getTunnelId(java.lang.String,java.lang.String,java.lang.String,hudson.model.BuildListener)>",
+          "line": 166,
+          "source_file": "PerfectoBuildWrapper.java"
+        },
+        {
+          "caller": "<io.plugins.perfecto.PerfectoBuildWrapper: java.lang.String getTunnelId(java.lang.String,java.lang.String,java.lang.String,hudson.model.BuildListener)>",
+          "line": 166,
+          "source_file": "PerfectoBuildWrapper.java"
+        },
+        {
+          "caller": "<io.plugins.perfecto.PerfectoBuildWrapper: java.lang.String getTunnelId(java.lang.String,java.lang.String,java.lang.String,hudson.model.BuildListener)>",
+          "line": 166,
+          "source_file": "PerfectoBuildWrapper.java"
+        },
+        {
+          "caller": "<io.plugins.perfecto.PerfectoBuildWrapper: java.lang.String getTunnelId(java.lang.String,java.lang.String,java.lang.String,hudson.model.BuildListener)>",
+          "line": 166,
+          "source_file": "PerfectoBuildWrapper.java"
+        },
+        {
+          "caller": "<io.plugins.perfecto.PerfectoBuildWrapper: java.lang.String getTunnelId(java.lang.String,java.lang.String,java.lang.String,hudson.model.BuildListener)>",
+          "line": 166,
+          "source_file": "PerfectoBuildWrapper.java"
+        },
+        {
+          "caller": "<io.plugins.perfecto.PerfectoBuildWrapper: java.lang.String getTunnelId(java.lang.String,java.lang.String,java.lang.String,hudson.model.BuildListener)>",
+          "line": 166,
+          "source_file": "PerfectoBuildWrapper.java"
+        },
+        {
+          "caller": "<io.plugins.perfecto.PerfectoBuildWrapper: java.lang.String getTunnelId(java.lang.String,java.lang.String,java.lang.String,hudson.model.BuildListener)>",
+          "line": 177,
+          "source_file": "PerfectoBuildWrapper.java"
+        },
+        {
+          "caller": "<io.plugins.perfecto.PerfectoBuildWrapper: java.lang.String getTunnelId(java.lang.String,java.lang.String,java.lang.String,hudson.model.BuildListener)>",
+          "line": 177,
+          "source_file": "PerfectoBuildWrapper.java"
+        },
+        {
+          "caller": "<io.plugins.perfecto.PerfectoBuildWrapper: java.lang.String getTunnelId(java.lang.String,java.lang.String,java.lang.String,hudson.model.BuildListener)>",
+          "line": 180,
+          "source_file": "PerfectoBuildWrapper.java"
+        },
+        {
+          "caller": "<io.plugins.perfecto.PerfectoBuildWrapper: java.lang.String getTunnelId(java.lang.String,java.lang.String,java.lang.String,hudson.model.BuildListener)>",
+          "line": 180,
+          "source_file": "PerfectoBuildWrapper.java"
+        },
+        {
+          "caller": "<io.plugins.perfecto.PerfectoBuildWrapper: java.lang.String getTunnelId(java.lang.String,java.lang.String,java.lang.String,hudson.model.BuildListener)>",
+          "line": 180,
+          "source_file": "PerfectoBuildWrapper.java"
+        },
+        {
+          "caller": "<io.plugins.perfecto.PerfectoBuildWrapper: java.lang.String getTunnelId(java.lang.String,java.lang.String,java.lang.String,hudson.model.BuildListener)>",
+          "line": 181,
+          "source_file": "PerfectoBuildWrapper.java"
+        },
+        {
+          "caller": "<io.plugins.perfecto.PerfectoBuildWrapper: java.lang.String getTunnelId(java.lang.String,java.lang.String,java.lang.String,hudson.model.BuildListener)>",
+          "line": 181,
+          "source_file": "PerfectoBuildWrapper.java"
+        },
+        {
+          "caller": "<io.plugins.perfecto.PerfectoBuildWrapper: java.lang.String getTunnelId(java.lang.String,java.lang.String,java.lang.String,hudson.model.BuildListener)>",
+          "line": 181,
+          "source_file": "PerfectoBuildWrapper.java"
+        },
+        {
+          "caller": "<io.plugins.perfecto.PerfectoEnvironmentUtil: io.plugins.perfecto.PerfectoBuildWrapper getBuildWrapper(hudson.model.AbstractProject)>",
+          "line": 53,
+          "source_file": "PerfectoEnvironmentUtil.java"
+        },
+        {
+          "caller": "<io.plugins.perfecto.PerfectoEnvironmentUtil: io.plugins.perfecto.PerfectoBuildWrapper getBuildWrapper(hudson.model.AbstractProject)>",
+          "line": 53,
+          "source_file": "PerfectoEnvironmentUtil.java"
+        },
+        {
+          "caller": "<io.plugins.perfecto.PerfectoEnvironmentUtil: io.plugins.perfecto.PerfectoBuildWrapper getBuildWrapper(hudson.model.AbstractProject)>",
+          "line": 56,
+          "source_file": "PerfectoEnvironmentUtil.java"
+        },
+        {
+          "caller": "<io.plugins.perfecto.PerfectoEnvironmentUtil: io.plugins.perfecto.PerfectoBuildWrapper getBuildWrapper(hudson.model.AbstractProject)>",
+          "line": 56,
+          "source_file": "PerfectoEnvironmentUtil.java"
+        },
+        {
+          "caller": "<io.plugins.perfecto.credentials.PerfectoCredentials: hudson.util.FormValidation testAuthentication(java.lang.String,java.lang.String,java.lang.String)>",
+          "line": 107,
+          "source_file": "PerfectoCredentials.java"
+        },
+        {
+          "caller": "<io.plugins.perfecto.credentials.PerfectoCredentials: hudson.util.FormValidation testAuthentication(java.lang.String,java.lang.String,java.lang.String)>",
+          "line": 107,
+          "source_file": "PerfectoCredentials.java"
+        },
+        {
+          "caller": "<io.plugins.perfecto.credentials.PerfectoCredentials: hudson.util.FormValidation testAuthentication(java.lang.String,java.lang.String,java.lang.String)>",
+          "line": 107,
+          "source_file": "PerfectoCredentials.java"
+        },
+        {
+          "caller": "<io.plugins.perfecto.credentials.PerfectoCredentials: hudson.util.FormValidation testAuthentication(java.lang.String,java.lang.String,java.lang.String)>",
+          "line": 107,
+          "source_file": "PerfectoCredentials.java"
+        },
+        {
+          "caller": "<io.plugins.perfecto.credentials.PerfectoCredentials: hudson.util.FormValidation testAuthentication(java.lang.String,java.lang.String,java.lang.String)>",
+          "line": 107,
+          "source_file": "PerfectoCredentials.java"
+        },
+        {
+          "caller": "<io.plugins.perfecto.credentials.PerfectoCredentials: hudson.util.FormValidation testAuthentication(java.lang.String,java.lang.String,java.lang.String)>",
+          "line": 107,
+          "source_file": "PerfectoCredentials.java"
+        },
+        {
+          "caller": "<io.plugins.perfecto.credentials.PerfectoCredentials: hudson.util.FormValidation testAuthentication(java.lang.String,java.lang.String,java.lang.String)>",
+          "line": 116,
+          "source_file": "PerfectoCredentials.java"
+        },
+        {
+          "caller": "<io.plugins.perfecto.credentials.PerfectoCredentials: hudson.util.FormValidation testAuthentication(java.lang.String,java.lang.String,java.lang.String)>",
+          "line": 119,
+          "source_file": "PerfectoCredentials.java"
+        },
+        {
+          "caller": "<io.plugins.perfecto.credentials.PerfectoCredentials: hudson.util.FormValidation testAuthentication(java.lang.String,java.lang.String,java.lang.String)>",
+          "line": 126,
+          "source_file": "PerfectoCredentials.java"
+        },
+        {
+          "caller": "<io.plugins.perfecto.credentials.PerfectoCredentials: java.lang.String migrateToCredentials(java.lang.String,java.lang.String,java.lang.String,java.lang.String)>",
+          "line": 244,
+          "source_file": "PerfectoCredentials.java"
+        },
+        {
+          "caller": "<io.plugins.perfecto.credentials.PerfectoCredentials: java.lang.String migrateToCredentials(java.lang.String,java.lang.String,java.lang.String,java.lang.String)>",
+          "line": 244,
+          "source_file": "PerfectoCredentials.java"
+        }
+      ]
+    },
+    {
+      "signature": "<hudson.model.TaskListener: java.io.PrintStream getLogger()>",
+      "owner": "hudson.model.TaskListener",
+      "name": "getLogger",
+      "params": [],
+      "ret": "java.io.PrintStream",
+      "is_static": false,
+      "from_jdk": false,
+      "origin": "jenkins-core-2.164.3.jar",
+      "call_sites": [
+        {
+          "caller": "<io.plugins.perfecto.PerfectoBuildWrapper: java.lang.String getTunnelId(java.lang.String,java.lang.String,java.lang.String,hudson.model.BuildListener)>",
+          "line": 161,
+          "source_file": "PerfectoBuildWrapper.java"
+        },
+        {
+          "caller": "<io.plugins.perfecto.PerfectoBuildWrapper: java.lang.String getTunnelId(java.lang.String,java.lang.String,java.lang.String,hudson.model.BuildListener)>",
+          "line": 173,
+          "source_file": "PerfectoBuildWrapper.java"
+        },
+        {
+          "caller": "<io.plugins.perfecto.PerfectoBuildWrapper: java.lang.String getTunnelId(java.lang.String,java.lang.String,java.lang.String,hudson.model.BuildListener)>",
+          "line": 177,
+          "source_file": "PerfectoBuildWrapper.java"
+        },
+        {
+          "caller": "<io.plugins.perfecto.PerfectoBuildWrapper: hudson.tasks.BuildWrapper$Environment setUp(hudson.model.AbstractBuild,hudson.Launcher,hudson.model.BuildListener)>",
+          "line": 206,
+          "source_file": "PerfectoBuildWrapper.java"
+        },
+        {
+          "caller": "<io.plugins.perfecto.PerfectoBuildWrapper: hudson.tasks.BuildWrapper$Environment setUp(hudson.model.AbstractBuild,hudson.Launcher,hudson.model.BuildListener)>",
+          "line": 223,
+          "source_file": "PerfectoBuildWrapper.java"
+        }
+      ]
+    },
+    {
+      "signature": "<java.io.PrintStream: void println(java.lang.String)>",
+      "owner": "java.io.PrintStream",
+      "name": "println",
+      "params": [
+        "java.lang.String"
+      ],
+      "ret": "void",
+      "is_static": false,
+      "from_jdk": true,
+      "origin": "JDK",
+      "call_sites": [
+        {
+          "caller": "<io.plugins.perfecto.PerfectoBuildWrapper: java.lang.String getTunnelId(java.lang.String,java.lang.String,java.lang.String,hudson.model.BuildListener)>",
+          "line": 161,
+          "source_file": "PerfectoBuildWrapper.java"
+        },
+        {
+          "caller": "<io.plugins.perfecto.PerfectoBuildWrapper: java.lang.String getTunnelId(java.lang.String,java.lang.String,java.lang.String,hudson.model.BuildListener)>",
+          "line": 173,
+          "source_file": "PerfectoBuildWrapper.java"
+        },
+        {
+          "caller": "<io.plugins.perfecto.PerfectoBuildWrapper: java.lang.String getTunnelId(java.lang.String,java.lang.String,java.lang.String,hudson.model.BuildListener)>",
+          "line": 177,
+          "source_file": "PerfectoBuildWrapper.java"
+        },
+        {
+          "caller": "<io.plugins.perfecto.PerfectoBuildWrapper: hudson.tasks.BuildWrapper$Environment setUp(hudson.model.AbstractBuild,hudson.Launcher,hudson.model.BuildListener)>",
+          "line": 206,
+          "source_file": "PerfectoBuildWrapper.java"
+        },
+        {
+          "caller": "<io.plugins.perfecto.PerfectoBuildWrapper: hudson.tasks.BuildWrapper$Environment setUp(hudson.model.AbstractBuild,hudson.Launcher,hudson.model.BuildListener)>",
+          "line": 223,
+          "source_file": "PerfectoBuildWrapper.java"
+        },
+        {
+          "caller": "<io.plugins.perfecto.credentials.PerfectoCredentials: hudson.util.FormValidation testAuthentication(java.lang.String,java.lang.String,java.lang.String)>",
+          "line": 116,
+          "source_file": "PerfectoCredentials.java"
+        },
+        {
+          "caller": "<io.plugins.perfecto.credentials.PerfectoCredentials: hudson.util.FormValidation testAuthentication(java.lang.String,java.lang.String,java.lang.String)>",
+          "line": 126,
+          "source_file": "PerfectoCredentials.java"
+        },
+        {
+          "caller": "<io.plugins.perfecto.credentials.PerfectoCredentials: hudson.util.FormValidation testAuthentication(java.lang.String,java.lang.String,java.lang.String)>",
+          "line": 129,
+          "source_file": "PerfectoCredentials.java"
+        }
+      ]
+    },
+    {
+      "signature": "<java.lang.ProcessBuilder: void <init>(java.lang.String[])>",
+      "owner": "java.lang.ProcessBuilder",
+      "name": "<init>",
+      "params": [
+        "java.lang.String[]"
+      ],
+      "ret": "void",
+      "is_static": false,
+      "from_jdk": true,
+      "origin": "JDK",
+      "call_sites": [
+        {
+          "caller": "<io.plugins.perfecto.PerfectoBuildWrapper: java.lang.String getTunnelId(java.lang.String,java.lang.String,java.lang.String,hudson.model.BuildListener)>",
+          "line": 164,
+          "source_file": "PerfectoBuildWrapper.java"
+        }
+      ]
+    },
+    {
+      "signature": "<java.lang.ProcessBuilder: java.lang.ProcessBuilder redirectErrorStream(boolean)>",
+      "owner": "java.lang.ProcessBuilder",
+      "name": "redirectErrorStream",
+      "params": [
+        "boolean"
+      ],
+      "ret": "java.lang.ProcessBuilder",
+      "is_static": false,
+      "from_jdk": true,
+      "origin": "JDK",
+      "call_sites": [
+        {
+          "caller": "<io.plugins.perfecto.PerfectoBuildWrapper: java.lang.String getTunnelId(java.lang.String,java.lang.String,java.lang.String,hudson.model.BuildListener)>",
+          "line": 164,
+          "source_file": "PerfectoBuildWrapper.java"
+        }
+      ]
+    },
+    {
+      "signature": "<java.lang.ProcessBuilder: java.lang.Process start()>",
+      "owner": "java.lang.ProcessBuilder",
+      "name": "start",
+      "params": [],
+      "ret": "java.lang.Process",
+      "is_static": false,
+      "from_jdk": true,
+      "origin": "JDK",
+      "call_sites": [
+        {
+          "caller": "<io.plugins.perfecto.PerfectoBuildWrapper: java.lang.String getTunnelId(java.lang.String,java.lang.String,java.lang.String,hudson.model.BuildListener)>",
+          "line": 164,
+          "source_file": "PerfectoBuildWrapper.java"
+        }
+      ]
+    },
+    {
+      "signature": "<java.lang.Runtime: java.lang.Runtime getRuntime()>",
+      "owner": "java.lang.Runtime",
+      "name": "getRuntime",
+      "params": [],
+      "ret": "java.lang.Runtime",
+      "is_static": true,
+      "from_jdk": true,
+      "origin": "JDK",
+      "call_sites": [
+        {
+          "caller": "<io.plugins.perfecto.PerfectoBuildWrapper: java.lang.String getTunnelId(java.lang.String,java.lang.String,java.lang.String,hudson.model.BuildListener)>",
+          "line": 167,
+          "source_file": "PerfectoBuildWrapper.java"
+        }
+      ]
+    },
+    {
+      "signature": "<java.lang.Runtime: java.lang.Process exec(java.lang.String[])>",
+      "owner": "java.lang.Runtime",
+      "name": "exec",
+      "params": [
+        "java.lang.String[]"
+      ],
+      "ret": "java.lang.Process",
+      "is_static": false,
+      "from_jdk": true,
+      "origin": "JDK",
+      "call_sites": [
+        {
+          "caller": "<io.plugins.perfecto.PerfectoBuildWrapper: java.lang.String getTunnelId(java.lang.String,java.lang.String,java.lang.String,hudson.model.BuildListener)>",
+          "line": 167,
+          "source_file": "PerfectoBuildWrapper.java"
+        }
+      ]
+    },
+    {
+      "signature": "<java.lang.Process: java.io.InputStream getInputStream()>",
+      "owner": "java.lang.Process",
+      "name": "getInputStream",
+      "params": [],
+      "ret": "java.io.InputStream",
+      "is_static": false,
+      "from_jdk": true,
+      "origin": "JDK",
+      "call_sites": [
+        {
+          "caller": "<io.plugins.perfecto.PerfectoBuildWrapper: java.lang.String getTunnelId(java.lang.String,java.lang.String,java.lang.String,hudson.model.BuildListener)>",
+          "line": 169,
+          "source_file": "PerfectoBuildWrapper.java"
+        }
+      ]
+    },
+    {
+      "signature": "<java.io.InputStreamReader: void <init>(java.io.InputStream,java.nio.charset.Charset)>",
+      "owner": "java.io.InputStreamReader",
+      "name": "<init>",
+      "params": [
+        "java.io.InputStream",
+        "java.nio.charset.Charset"
+      ],
+      "ret": "void",
+      "is_static": false,
+      "from_jdk": true,
+      "origin": "JDK",
+      "call_sites": [
+        {
+          "caller": "<io.plugins.perfecto.PerfectoBuildWrapper: java.lang.String getTunnelId(java.lang.String,java.lang.String,java.lang.String,hudson.model.BuildListener)>",
+          "line": 170,
+          "source_file": "PerfectoBuildWrapper.java"
+        }
+      ]
+    },
+    {
+      "signature": "<java.io.BufferedReader: void <init>(java.io.Reader)>",
+      "owner": "java.io.BufferedReader",
+      "name": "<init>",
+      "params": [
+        "java.io.Reader"
+      ],
+      "ret": "void",
+      "is_static": false,
+      "from_jdk": true,
+      "origin": "JDK",
+      "call_sites": [
+        {
+          "caller": "<io.plugins.perfecto.PerfectoBuildWrapper: java.lang.String getTunnelId(java.lang.String,java.lang.String,java.lang.String,hudson.model.BuildListener)>",
+          "line": 170,
+          "source_file": "PerfectoBuildWrapper.java"
+        }
+      ]
+    },
+    {
+      "signature": "<java.io.BufferedReader: java.lang.String readLine()>",
+      "owner": "java.io.BufferedReader",
+      "name": "readLine",
+      "params": [],
+      "ret": "java.lang.String",
+      "is_static": false,
+      "from_jdk": true,
+      "origin": "JDK",
+      "call_sites": [
+        {
+          "caller": "<io.plugins.perfecto.PerfectoBuildWrapper: java.lang.String getTunnelId(java.lang.String,java.lang.String,java.lang.String,hudson.model.BuildListener)>",
+          "line": 172,
+          "source_file": "PerfectoBuildWrapper.java"
+        }
+      ]
+    },
+    {
+      "signature": "<java.util.regex.Pattern: java.util.regex.Pattern compile(java.lang.String)>",
+      "owner": "java.util.regex.Pattern",
+      "name": "compile",
+      "params": [
+        "java.lang.String"
+      ],
+      "ret": "java.util.regex.Pattern",
+      "is_static": true,
+      "from_jdk": true,
+      "origin": "JDK",
+      "call_sites": [
+        {
+          "caller": "<io.plugins.perfecto.PerfectoBuildWrapper: java.lang.String getTunnelId(java.lang.String,java.lang.String,java.lang.String,hudson.model.BuildListener)>",
+          "line": 174,
+          "source_file": "PerfectoBuildWrapper.java"
+        },
+        {
+          "caller": "<io.plugins.perfecto.PerfectoBuildWrapper: void <clinit>()>",
+          "line": 71,
+          "source_file": "PerfectoBuildWrapper.java"
+        }
+      ]
+    },
+    {
+      "signature": "<java.util.regex.Pattern: java.util.regex.Matcher matcher(java.lang.CharSequence)>",
+      "owner": "java.util.regex.Pattern",
+      "name": "matcher",
+      "params": [
+        "java.lang.CharSequence"
+      ],
+      "ret": "java.util.regex.Matcher",
+      "is_static": false,
+      "from_jdk": true,
+      "origin": "JDK",
+      "call_sites": [
+        {
+          "caller": "<io.plugins.perfecto.PerfectoBuildWrapper: java.lang.String getTunnelId(java.lang.String,java.lang.String,java.lang.String,hudson.model.BuildListener)>",
+          "line": 174,
+          "source_file": "PerfectoBuildWrapper.java"
+        }
+      ]
+    },
+    {
+      "signature": "<java.util.regex.Matcher: boolean find()>",
+      "owner": "java.util.regex.Matcher",
+      "name": "find",
+      "params": [],
+      "ret": "boolean",
+      "is_static": false,
+      "from_jdk": true,
+      "origin": "JDK",
+      "call_sites": [
+        {
+          "caller": "<io.plugins.perfecto.PerfectoBuildWrapper: java.lang.String getTunnelId(java.lang.String,java.lang.String,java.lang.String,hudson.model.BuildListener)>",
+          "line": 175,
+          "source_file": "PerfectoBuildWrapper.java"
+        }
+      ]
+    },
+    {
+      "signature": "<java.util.regex.Matcher: java.lang.String group(int)>",
+      "owner": "java.util.regex.Matcher",
+      "name": "group",
+      "params": [
+        "int"
+      ],
+      "ret": "java.lang.String",
+      "is_static": false,
+      "from_jdk": true,
+      "origin": "JDK",
+      "call_sites": [
+        {
+          "caller": "<io.plugins.perfecto.PerfectoBuildWrapper: java.lang.String getTunnelId(java.lang.String,java.lang.String,java.lang.String,hudson.model.BuildListener)>",
+          "line": 176,
+          "source_file": "PerfectoBuildWrapper.java"
+        }
+      ]
+    },
+    {
+      "signature": "<java.lang.String: boolean contains(java.lang.CharSequence)>",
+      "owner": "java.lang.String",
+      "name": "contains",
+      "params": [
+        "java.lang.CharSequence"
+      ],
+      "ret": "boolean",
+      "is_static": false,
+      "from_jdk": true,
+      "origin": "JDK",
+      "call_sites": [
+        {
+          "caller": "<io.plugins.perfecto.PerfectoBuildWrapper: java.lang.String getTunnelId(java.lang.String,java.lang.String,java.lang.String,hudson.model.BuildListener)>",
+          "line": 179,
+          "source_file": "PerfectoBuildWrapper.java"
+        },
+        {
+          "caller": "<io.plugins.perfecto.PerfectoBuildWrapper: java.lang.String getTunnelId(java.lang.String,java.lang.String,java.lang.String,hudson.model.BuildListener)>",
+          "line": 183,
+          "source_file": "PerfectoBuildWrapper.java"
+        },
+        {
+          "caller": "<io.plugins.perfecto.PerfectoBuildWrapper: java.lang.String getTunnelId(java.lang.String,java.lang.String,java.lang.String,hudson.model.BuildListener)>",
+          "line": 183,
+          "source_file": "PerfectoBuildWrapper.java"
+        },
+        {
+          "caller": "<io.plugins.perfecto.PerfectoBuildWrapper: hudson.tasks.BuildWrapper$Environment setUp(hudson.model.AbstractBuild,hudson.Launcher,hudson.model.BuildListener)>",
+          "line": 212,
+          "source_file": "PerfectoBuildWrapper.java"
+        },
+        {
+          "caller": "<io.plugins.perfecto.PerfectoBuildWrapper: hudson.tasks.BuildWrapper$Environment setUp(hudson.model.AbstractBuild,hudson.Launcher,hudson.model.BuildListener)>",
+          "line": 217,
+          "source_file": "PerfectoBuildWrapper.java"
+        }
+      ]
+    },
+    {
+      "signature": "<hudson.model.TaskListener: java.io.PrintWriter fatalError(java.lang.String)>",
+      "owner": "hudson.model.TaskListener",
+      "name": "fatalError",
+      "params": [
+        "java.lang.String"
+      ],
+      "ret": "java.io.PrintWriter",
+      "is_static": false,
+      "from_jdk": false,
+      "origin": "jenkins-core-2.164.3.jar",
+      "call_sites": [
+        {
+          "caller": "<io.plugins.perfecto.PerfectoBuildWrapper: java.lang.String getTunnelId(java.lang.String,java.lang.String,java.lang.String,hudson.model.BuildListener)>",
+          "line": 180,
+          "source_file": "PerfectoBuildWrapper.java"
+        },
+        {
+          "caller": "<io.plugins.perfecto.PerfectoBuildWrapper: java.lang.String getTunnelId(java.lang.String,java.lang.String,java.lang.String,hudson.model.BuildListener)>",
+          "line": 184,
+          "source_file": "PerfectoBuildWrapper.java"
+        },
+        {
+          "caller": "<io.plugins.perfecto.PerfectoBuildWrapper: java.lang.String getTunnelId(java.lang.String,java.lang.String,java.lang.String,hudson.model.BuildListener)>",
+          "line": 190,
+          "source_file": "PerfectoBuildWrapper.java"
+        },
+        {
+          "caller": "<io.plugins.perfecto.PerfectoBuildWrapper: hudson.tasks.BuildWrapper$Environment setUp(hudson.model.AbstractBuild,hudson.Launcher,hudson.model.BuildListener)>",
+          "line": 213,
+          "source_file": "PerfectoBuildWrapper.java"
+        }
+      ]
+    },
+    {
+      "signature": "<java.io.IOException: void <init>(java.lang.String)>",
+      "owner": "java.io.IOException",
+      "name": "<init>",
+      "params": [
+        "java.lang.String"
+      ],
+      "ret": "void",
+      "is_static": false,
+      "from_jdk": true,
+      "origin": "JDK",
+      "call_sites": [
+        {
+          "caller": "<io.plugins.perfecto.PerfectoBuildWrapper: java.lang.String getTunnelId(java.lang.String,java.lang.String,java.lang.String,hudson.model.BuildListener)>",
+          "line": 181,
+          "source_file": "PerfectoBuildWrapper.java"
+        },
+        {
+          "caller": "<io.plugins.perfecto.PerfectoBuildWrapper: java.lang.String getTunnelId(java.lang.String,java.lang.String,java.lang.String,hudson.model.BuildListener)>",
+          "line": 185,
+          "source_file": "PerfectoBuildWrapper.java"
+        },
+        {
+          "caller": "<io.plugins.perfecto.PerfectoBuildWrapper: java.lang.String getTunnelId(java.lang.String,java.lang.String,java.lang.String,hudson.model.BuildListener)>",
+          "line": 191,
+          "source_file": "PerfectoBuildWrapper.java"
+        },
+        {
+          "caller": "<io.plugins.perfecto.PerfectoBuildWrapper: hudson.tasks.BuildWrapper$Environment setUp(hudson.model.AbstractBuild,hudson.Launcher,hudson.model.BuildListener)>",
+          "line": 214,
+          "source_file": "PerfectoBuildWrapper.java"
+        }
+      ]
+    },
+    {
+      "signature": "<java.io.BufferedReader: void close()>",
+      "owner": "java.io.BufferedReader",
+      "name": "close",
+      "params": [],
+      "ret": "void",
+      "is_static": false,
+      "from_jdk": true,
+      "origin": "JDK",
+      "call_sites": [
+        {
+          "caller": "<io.plugins.perfecto.PerfectoBuildWrapper: java.lang.String getTunnelId(java.lang.String,java.lang.String,java.lang.String,hudson.model.BuildListener)>",
+          "line": 188,
+          "source_file": "PerfectoBuildWrapper.java"
+        }
+      ]
+    },
+    {
+      "signature": "<com.cloudbees.plugins.credentials.CredentialsProvider: com.cloudbees.plugins.credentials.Credentials track(hudson.model.Run,com.cloudbees.plugins.credentials.Credentials)>",
+      "owner": "com.cloudbees.plugins.credentials.CredentialsProvider",
+      "name": "track",
+      "params": [
+        "hudson.model.Run",
+        "com.cloudbees.plugins.credentials.Credentials"
+      ],
+      "ret": "com.cloudbees.plugins.credentials.Credentials",
+      "is_static": true,
+      "from_jdk": false,
+      "origin": "credentials-2.1.16.jar",
+      "call_sites": [
+        {
+          "caller": "<io.plugins.perfecto.PerfectoBuildWrapper: hudson.tasks.BuildWrapper$Environment setUp(hudson.model.AbstractBuild,hudson.Launcher,hudson.model.BuildListener)>",
+          "line": 210,
+          "source_file": "PerfectoBuildWrapper.java"
+        }
+      ]
+    },
+    {
+      "signature": "<hudson.util.Secret: java.lang.String getPlainText()>",
+      "owner": "hudson.util.Secret",
+      "name": "getPlainText",
+      "params": [],
+      "ret": "java.lang.String",
+      "is_static": false,
+      "from_jdk": false,
+      "origin": "jenkins-core-2.164.3.jar",
+      "call_sites": [
+        {
+          "caller": "<io.plugins.perfecto.PerfectoBuildWrapper: hudson.tasks.BuildWrapper$Environment setUp(hudson.model.AbstractBuild,hudson.Launcher,hudson.model.BuildListener)>",
+          "line": 218,
+          "source_file": "PerfectoBuildWrapper.java"
+        },
+        {
+          "caller": "<io.plugins.perfecto.PerfectoBuildWrapper: boolean migrateCredentials(hudson.model.AbstractProject)>",
+          "line": 412,
+          "source_file": "PerfectoBuildWrapper.java"
+        },
+        {
+          "caller": "<io.plugins.perfecto.PerfectoBuildWrapper: boolean migrateCredentials(hudson.model.AbstractProject)>",
+          "line": 427,
+          "source_file": "PerfectoBuildWrapper.java"
+        },
+        {
+          "caller": "<io.plugins.perfecto.credentials.PerfectoCredentials: hudson.util.Secret getPassword()>",
+          "line": 150,
+          "source_file": "PerfectoCredentials.java"
+        }
+      ]
+    },
+    {
+      "signature": "<com.google.common.base.Strings: boolean isNullOrEmpty(java.lang.String)>",
+      "owner": "com.google.common.base.Strings",
+      "name": "isNullOrEmpty",
+      "params": [
+        "java.lang.String"
+      ],
+      "ret": "boolean",
+      "is_static": true,
+      "from_jdk": false,
+      "origin": "guava-11.0.1.jar",
+      "call_sites": [
+        {
+          "caller": "<io.plugins.perfecto.PerfectoBuildWrapper: boolean migrateCredentials(hudson.model.AbstractProject)>",
+          "line": 406,
+          "source_file": "PerfectoBuildWrapper.java"
+        },
+        {
+          "caller": "<io.plugins.perfecto.credentials.PerfectoCredentials: java.lang.String migrateToCredentials(java.lang.String,java.lang.String,java.lang.String,java.lang.String)>",
+          "line": 243,
+          "source_file": "PerfectoCredentials.java"
+        }
+      ]
+    },
+    {
+      "signature": "<hudson.model.AbstractItem: java.lang.String getDisplayName()>",
+      "owner": "hudson.model.AbstractItem",
+      "name": "getDisplayName",
+      "params": [],
+      "ret": "java.lang.String",
+      "is_static": false,
+      "from_jdk": false,
+      "origin": "jenkins-core-2.164.3.jar",
+      "call_sites": [
+        {
+          "caller": "<io.plugins.perfecto.PerfectoBuildWrapper: boolean migrateCredentials(hudson.model.AbstractProject)>",
+          "line": 413,
+          "source_file": "PerfectoBuildWrapper.java"
+        }
+      ]
+    },
+    {
+      "signature": "<java.util.Map: java.lang.Object get(java.lang.Object)>",
+      "owner": "java.util.Map",
+      "name": "get",
+      "params": [
+        "java.lang.Object"
+      ],
+      "ret": "java.lang.Object",
+      "is_static": false,
+      "from_jdk": true,
+      "origin": "JDK",
+      "call_sites": [
+        {
+          "caller": "<io.plugins.perfecto.PerfectoEnvironmentUtil: void outputEnvironmentVariable(java.util.Map,java.lang.String,java.lang.String,boolean)>",
+          "line": 39,
+          "source_file": "PerfectoEnvironmentUtil.java"
+        },
+        {
+          "caller": "<io.plugins.perfecto.credentials.PerfectoCredentials: java.lang.String migrateToCredentials(java.lang.String,java.lang.String,java.lang.String,java.lang.String)>",
+          "line": 260,
+          "source_file": "PerfectoCredentials.java"
+        },
+        {
+          "caller": "<io.plugins.perfecto.credentials.PerfectoCredentials: java.lang.String migrateToCredentials(java.lang.String,java.lang.String,java.lang.String,java.lang.String)>",
+          "line": 263,
+          "source_file": "PerfectoCredentials.java"
+        }
+      ]
+    },
+    {
+      "signature": "<java.util.Map: java.lang.Object put(java.lang.Object,java.lang.Object)>",
+      "owner": "java.util.Map",
+      "name": "put",
+      "params": [
+        "java.lang.Object",
+        "java.lang.Object"
+      ],
+      "ret": "java.lang.Object",
+      "is_static": false,
+      "from_jdk": true,
+      "origin": "JDK",
+      "call_sites": [
+        {
+          "caller": "<io.plugins.perfecto.PerfectoEnvironmentUtil: void outputEnvironmentVariable(java.util.Map,java.lang.String,java.lang.String,boolean)>",
+          "line": 40,
+          "source_file": "PerfectoEnvironmentUtil.java"
+        },
+        {
+          "caller": "<io.plugins.perfecto.credentials.PerfectoCredentials: java.lang.String migrateToCredentials(java.lang.String,java.lang.String,java.lang.String,java.lang.String)>",
+          "line": 261,
+          "source_file": "PerfectoCredentials.java"
+        }
+      ]
+    },
+    {
+      "signature": "<hudson.util.DescribableList: hudson.model.Describable get(java.lang.Class)>",
+      "owner": "hudson.util.DescribableList",
+      "name": "get",
+      "params": [
+        "java.lang.Class"
+      ],
+      "ret": "hudson.model.Describable",
+      "is_static": false,
+      "from_jdk": false,
+      "origin": "jenkins-core-2.164.3.jar",
+      "call_sites": [
+        {
+          "caller": "<io.plugins.perfecto.PerfectoEnvironmentUtil: io.plugins.perfecto.PerfectoBuildWrapper getBuildWrapper(hudson.model.AbstractProject)>",
+          "line": 51,
+          "source_file": "PerfectoEnvironmentUtil.java"
+        },
+        {
+          "caller": "<io.plugins.perfecto.credentials.PerfectoCredentials: io.plugins.perfecto.credentials.PerfectoCredentials getCredentials(hudson.model.AbstractProject)>",
+          "line": 100,
+          "source_file": "PerfectoCredentials.java"
+        }
+      ]
+    },
+    {
+      "signature": "<com.cloudbees.plugins.credentials.CredentialsDescriptor: void <init>()>",
+      "owner": "com.cloudbees.plugins.credentials.CredentialsDescriptor",
+      "name": "<init>",
+      "params": [],
+      "ret": "void",
+      "is_static": false,
+      "from_jdk": false,
+      "origin": "credentials-2.1.16.jar",
+      "call_sites": [
+        {
+          "caller": "<io.plugins.perfecto.credentials.PerfectoCredentials$DescriptorImpl: void <init>()>",
+          "line": 182,
+          "source_file": "PerfectoCredentials.java"
+        }
+      ]
+    },
+    {
+      "signature": "<org.apache.commons.lang.StringUtils: boolean isBlank(java.lang.String)>",
+      "owner": "org.apache.commons.lang.StringUtils",
+      "name": "isBlank",
+      "params": [
+        "java.lang.String"
+      ],
+      "ret": "boolean",
+      "is_static": true,
+      "from_jdk": false,
+      "origin": "commons-lang-2.6.jar",
+      "call_sites": [
+        {
+          "caller": "<io.plugins.perfecto.credentials.PerfectoCredentials$DescriptorImpl: hudson.util.FormValidation doAuthenticate(java.lang.String,java.lang.String,java.lang.String)>",
+          "line": 197,
+          "source_file": "PerfectoCredentials.java"
+        },
+        {
+          "caller": "<io.plugins.perfecto.credentials.PerfectoCredentials$DescriptorImpl: hudson.util.FormValidation doAuthenticate(java.lang.String,java.lang.String,java.lang.String)>",
+          "line": 197,
+          "source_file": "PerfectoCredentials.java"
+        },
+        {
+          "caller": "<io.plugins.perfecto.credentials.PerfectoCredentials$DescriptorImpl: hudson.util.FormValidation doAuthenticate(java.lang.String,java.lang.String,java.lang.String)>",
+          "line": 197,
+          "source_file": "PerfectoCredentials.java"
+        }
+      ]
+    },
+    {
+      "signature": "<hudson.model.Descriptor: void <init>()>",
+      "owner": "hudson.model.Descriptor",
+      "name": "<init>",
+      "params": [],
+      "ret": "void",
+      "is_static": false,
+      "from_jdk": false,
+      "origin": "jenkins-core-2.164.3.jar",
+      "call_sites": [
+        {
+          "caller": "<io.plugins.perfecto.credentials.PerfectoCredentials$ShortLivedConfig$DescriptorImpl: void <init>()>",
+          "line": 322,
+          "source_file": "PerfectoCredentials.java"
+        }
+      ]
+    },
+    {
+      "signature": "<hudson.model.AbstractDescribableImpl: void <init>()>",
+      "owner": "hudson.model.AbstractDescribableImpl",
+      "name": "<init>",
+      "params": [],
+      "ret": "void",
+      "is_static": false,
+      "from_jdk": false,
+      "origin": "jenkins-core-2.164.3.jar",
+      "call_sites": [
+        {
+          "caller": "<io.plugins.perfecto.credentials.PerfectoCredentials$ShortLivedConfig: void <init>(java.lang.Integer)>",
+          "line": 313,
+          "source_file": "PerfectoCredentials.java"
+        }
+      ]
+    },
+    {
+      "signature": "<com.cloudbees.plugins.credentials.impl.BaseStandardCredentials: void <init>(com.cloudbees.plugins.credentials.CredentialsScope,java.lang.String,java.lang.String)>",
+      "owner": "com.cloudbees.plugins.credentials.impl.BaseStandardCredentials",
+      "name": "<init>",
+      "params": [
+        "com.cloudbees.plugins.credentials.CredentialsScope",
+        "java.lang.String",
+        "java.lang.String"
+      ],
+      "ret": "void",
+      "is_static": false,
+      "from_jdk": false,
+      "origin": "credentials-2.1.16.jar",
+      "call_sites": [
+        {
+          "caller": "<io.plugins.perfecto.credentials.PerfectoCredentials: void <init>(com.cloudbees.plugins.credentials.CredentialsScope,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String)>",
+          "line": 78,
+          "source_file": "PerfectoCredentials.java"
+        }
+      ]
+    },
+    {
+      "signature": "<hudson.util.Secret: hudson.util.Secret fromString(java.lang.String)>",
+      "owner": "hudson.util.Secret",
+      "name": "fromString",
+      "params": [
+        "java.lang.String"
+      ],
+      "ret": "hudson.util.Secret",
+      "is_static": true,
+      "from_jdk": false,
+      "origin": "jenkins-core-2.164.3.jar",
+      "call_sites": [
+        {
+          "caller": "<io.plugins.perfecto.credentials.PerfectoCredentials: void <init>(com.cloudbees.plugins.credentials.CredentialsScope,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String)>",
+          "line": 81,
+          "source_file": "PerfectoCredentials.java"
+        },
+        {
+          "caller": "<io.plugins.perfecto.credentials.PerfectoCredentials: hudson.util.Secret getPassword()>",
+          "line": 151,
+          "source_file": "PerfectoCredentials.java"
+        }
+      ]
+    },
+    {
+      "signature": "<hudson.model.AbstractItem: hudson.model.ItemGroup getParent()>",
+      "owner": "hudson.model.AbstractItem",
+      "name": "getParent",
+      "params": [],
+      "ret": "hudson.model.ItemGroup",
+      "is_static": false,
+      "from_jdk": false,
+      "origin": "jenkins-core-2.164.3.jar",
+      "call_sites": [
+        {
+          "caller": "<io.plugins.perfecto.credentials.PerfectoCredentials: io.plugins.perfecto.credentials.PerfectoCredentials getCredentials(hudson.model.AbstractProject)>",
+          "line": 97,
+          "source_file": "PerfectoCredentials.java"
+        }
+      ]
+    },
+    {
+      "signature": "<java.net.URL: void <init>(java.lang.String)>",
+      "owner": "java.net.URL",
+      "name": "<init>",
+      "params": [
+        "java.lang.String"
+      ],
+      "ret": "void",
+      "is_static": false,
+      "from_jdk": true,
+      "origin": "JDK",
+      "call_sites": [
+        {
+          "caller": "<io.plugins.perfecto.credentials.PerfectoCredentials: hudson.util.FormValidation testAuthentication(java.lang.String,java.lang.String,java.lang.String)>",
+          "line": 111,
+          "source_file": "PerfectoCredentials.java"
+        }
+      ]
+    },
+    {
+      "signature": "<java.net.URL: java.net.URLConnection openConnection()>",
+      "owner": "java.net.URL",
+      "name": "openConnection",
+      "params": [],
+      "ret": "java.net.URLConnection",
+      "is_static": false,
+      "from_jdk": true,
+      "origin": "JDK",
+      "call_sites": [
+        {
+          "caller": "<io.plugins.perfecto.credentials.PerfectoCredentials: hudson.util.FormValidation testAuthentication(java.lang.String,java.lang.String,java.lang.String)>",
+          "line": 112,
+          "source_file": "PerfectoCredentials.java"
+        }
+      ]
+    },
+    {
+      "signature": "<java.net.HttpURLConnection: void setRequestMethod(java.lang.String)>",
+      "owner": "java.net.HttpURLConnection",
+      "name": "setRequestMethod",
+      "params": [
+        "java.lang.String"
+      ],
+      "ret": "void",
+      "is_static": false,
+      "from_jdk": true,
+      "origin": "JDK",
+      "call_sites": [
+        {
+          "caller": "<io.plugins.perfecto.credentials.PerfectoCredentials: hudson.util.FormValidation testAuthentication(java.lang.String,java.lang.String,java.lang.String)>",
+          "line": 113,
+          "source_file": "PerfectoCredentials.java"
+        }
+      ]
+    },
+    {
+      "signature": "<java.net.URLConnection: void setRequestProperty(java.lang.String,java.lang.String)>",
+      "owner": "java.net.URLConnection",
+      "name": "setRequestProperty",
+      "params": [
+        "java.lang.String",
+        "java.lang.String"
+      ],
+      "ret": "void",
+      "is_static": false,
+      "from_jdk": true,
+      "origin": "JDK",
+      "call_sites": [
+        {
+          "caller": "<io.plugins.perfecto.credentials.PerfectoCredentials: hudson.util.FormValidation testAuthentication(java.lang.String,java.lang.String,java.lang.String)>",
+          "line": 114,
+          "source_file": "PerfectoCredentials.java"
+        }
+      ]
+    },
+    {
+      "signature": "<java.net.HttpURLConnection: int getResponseCode()>",
+      "owner": "java.net.HttpURLConnection",
+      "name": "getResponseCode",
+      "params": [],
+      "ret": "int",
+      "is_static": false,
+      "from_jdk": true,
+      "origin": "JDK",
+      "call_sites": [
+        {
+          "caller": "<io.plugins.perfecto.credentials.PerfectoCredentials: hudson.util.FormValidation testAuthentication(java.lang.String,java.lang.String,java.lang.String)>",
+          "line": 115,
+          "source_file": "PerfectoCredentials.java"
+        }
+      ]
+    },
+    {
+      "signature": "<java.lang.StringBuilder: java.lang.StringBuilder append(int)>",
+      "owner": "java.lang.StringBuilder",
+      "name": "append",
+      "params": [
+        "int"
+      ],
+      "ret": "java.lang.StringBuilder",
+      "is_static": false,
+      "from_jdk": true,
+      "origin": "JDK",
+      "call_sites": [
+        {
+          "caller": "<io.plugins.perfecto.credentials.PerfectoCredentials: hudson.util.FormValidation testAuthentication(java.lang.String,java.lang.String,java.lang.String)>",
+          "line": 116,
+          "source_file": "PerfectoCredentials.java"
+        },
+        {
+          "caller": "<io.plugins.perfecto.credentials.PerfectoCredentials: hudson.util.FormValidation testAuthentication(java.lang.String,java.lang.String,java.lang.String)>",
+          "line": 119,
+          "source_file": "PerfectoCredentials.java"
+        }
+      ]
+    },
+    {
+      "signature": "<java.net.HttpURLConnection: void disconnect()>",
+      "owner": "java.net.HttpURLConnection",
+      "name": "disconnect",
+      "params": [],
+      "ret": "void",
+      "is_static": false,
+      "from_jdk": true,
+      "origin": "JDK",
+      "call_sites": [
+        {
+          "caller": "<io.plugins.perfecto.credentials.PerfectoCredentials: hudson.util.FormValidation testAuthentication(java.lang.String,java.lang.String,java.lang.String)>",
+          "line": 118,
+          "source_file": "PerfectoCredentials.java"
+        },
+        {
+          "caller": "<io.plugins.perfecto.credentials.PerfectoCredentials: hudson.util.FormValidation testAuthentication(java.lang.String,java.lang.String,java.lang.String)>",
+          "line": 121,
+          "source_file": "PerfectoCredentials.java"
+        },
+        {
+          "caller": "<io.plugins.perfecto.credentials.PerfectoCredentials: hudson.util.FormValidation testAuthentication(java.lang.String,java.lang.String,java.lang.String)>",
+          "line": 124,
+          "source_file": "PerfectoCredentials.java"
+        }
+      ]
+    },
+    {
+      "signature": "<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.Object)>",
+      "owner": "java.lang.StringBuilder",
+      "name": "append",
+      "params": [
+        "java.lang.Object"
+      ],
+      "ret": "java.lang.StringBuilder",
+      "is_static": false,
+      "from_jdk": true,
+      "origin": "JDK",
+      "call_sites": [
+        {
+          "caller": "<io.plugins.perfecto.credentials.PerfectoCredentials: hudson.util.FormValidation testAuthentication(java.lang.String,java.lang.String,java.lang.String)>",
+          "line": 126,
+          "source_file": "PerfectoCredentials.java"
+        }
+      ]
+    },
+    {
+      "signature": "<hudson.util.FormValidation: hudson.util.FormValidation ok(java.lang.String)>",
+      "owner": "hudson.util.FormValidation",
+      "name": "ok",
+      "params": [
+        "java.lang.String"
+      ],
+      "ret": "hudson.util.FormValidation",
+      "is_static": true,
+      "from_jdk": false,
+      "origin": "jenkins-core-2.164.3.jar",
+      "call_sites": [
+        {
+          "caller": "<io.plugins.perfecto.credentials.PerfectoCredentials: hudson.util.FormValidation testAuthentication(java.lang.String,java.lang.String,java.lang.String)>",
+          "line": 130,
+          "source_file": "PerfectoCredentials.java"
+        }
+      ]
+    },
+    {
+      "signature": "<hudson.model.AbstractBuild: hudson.model.AbstractProject getProject()>",
+      "owner": "hudson.model.AbstractBuild",
+      "name": "getProject",
+      "params": [],
+      "ret": "hudson.model.AbstractProject",
+      "is_static": false,
+      "from_jdk": false,
+      "origin": "jenkins-core-2.164.3.jar",
+      "call_sites": [
+        {
+          "caller": "<io.plugins.perfecto.credentials.PerfectoCredentials: io.plugins.perfecto.credentials.PerfectoCredentials getCredentials(hudson.model.AbstractBuild)>",
+          "line": 134,
+          "source_file": "PerfectoCredentials.java"
+        },
+        {
+          "caller": "<io.plugins.perfecto.credentials.PerfectoCredentials: io.plugins.perfecto.credentials.PerfectoCredentials getPerfectoCredentials(hudson.model.AbstractBuild,io.plugins.perfecto.PerfectoBuildWrapper)>",
+          "line": 174,
+          "source_file": "PerfectoCredentials.java"
+        }
+      ]
+    },
+    {
+      "signature": "<java.util.Date: void <init>()>",
+      "owner": "java.util.Date",
+      "name": "<init>",
+      "params": [],
+      "ret": "void",
+      "is_static": false,
+      "from_jdk": true,
+      "origin": "JDK",
+      "call_sites": [
+        {
+          "caller": "<io.plugins.perfecto.credentials.PerfectoCredentials: hudson.util.Secret getPassword()>",
+          "line": 141,
+          "source_file": "PerfectoCredentials.java"
+        }
+      ]
+    },
+    {
+      "signature": "<java.lang.System: long currentTimeMillis()>",
+      "owner": "java.lang.System",
+      "name": "currentTimeMillis",
+      "params": [],
+      "ret": "long",
+      "is_static": true,
+      "from_jdk": true,
+      "origin": "JDK",
+      "call_sites": [
+        {
+          "caller": "<io.plugins.perfecto.credentials.PerfectoCredentials: hudson.util.Secret getPassword()>",
+          "line": 143,
+          "source_file": "PerfectoCredentials.java"
+        }
+      ]
+    },
+    {
+      "signature": "<java.lang.Integer: int intValue()>",
+      "owner": "java.lang.Integer",
+      "name": "intValue",
+      "params": [],
+      "ret": "int",
+      "is_static": false,
+      "from_jdk": true,
+      "origin": "JDK",
+      "call_sites": [
+        {
+          "caller": "<io.plugins.perfecto.credentials.PerfectoCredentials: hudson.util.Secret getPassword()>",
+          "line": 144,
+          "source_file": "PerfectoCredentials.java"
+        }
+      ]
+    },
+    {
+      "signature": "<java.util.Date: void <init>(long)>",
+      "owner": "java.util.Date",
+      "name": "<init>",
+      "params": [
+        "long"
+      ],
+      "ret": "void",
+      "is_static": false,
+      "from_jdk": true,
+      "origin": "JDK",
+      "call_sites": [
+        {
+          "caller": "<io.plugins.perfecto.credentials.PerfectoCredentials: hudson.util.Secret getPassword()>",
+          "line": 144,
+          "source_file": "PerfectoCredentials.java"
+        }
+      ]
+    },
+    {
+      "signature": "<com.auth0.jwt.JWT: com.auth0.jwt.JWTCreator$Builder create()>",
+      "owner": "com.auth0.jwt.JWT",
+      "name": "create",
+      "params": [],
+      "ret": "com.auth0.jwt.JWTCreator$Builder",
+      "is_static": true,
+      "from_jdk": false,
+      "origin": "java-jwt-3.1.0.jar",
+      "call_sites": [
+        {
+          "caller": "<io.plugins.perfecto.credentials.PerfectoCredentials: hudson.util.Secret getPassword()>",
+          "line": 147,
+          "source_file": "PerfectoCredentials.java"
+        }
+      ]
+    },
+    {
+      "signature": "<com.auth0.jwt.JWTCreator$Builder: com.auth0.jwt.JWTCreator$Builder withExpiresAt(java.util.Date)>",
+      "owner": "com.auth0.jwt.JWTCreator$Builder",
+      "name": "withExpiresAt",
+      "params": [
+        "java.util.Date"
+      ],
+      "ret": "com.auth0.jwt.JWTCreator$Builder",
+      "is_static": false,
+      "from_jdk": false,
+      "origin": "java-jwt-3.1.0.jar",
+      "call_sites": [
+        {
+          "caller": "<io.plugins.perfecto.credentials.PerfectoCredentials: hudson.util.Secret getPassword()>",
+          "line": 148,
+          "source_file": "PerfectoCredentials.java"
+        }
+      ]
+    },
+    {
+      "signature": "<com.auth0.jwt.JWTCreator$Builder: com.auth0.jwt.JWTCreator$Builder withIssuedAt(java.util.Date)>",
+      "owner": "com.auth0.jwt.JWTCreator$Builder",
+      "name": "withIssuedAt",
+      "params": [
+        "java.util.Date"
+      ],
+      "ret": "com.auth0.jwt.JWTCreator$Builder",
+      "is_static": false,
+      "from_jdk": false,
+      "origin": "java-jwt-3.1.0.jar",
+      "call_sites": [
+        {
+          "caller": "<io.plugins.perfecto.credentials.PerfectoCredentials: hudson.util.Secret getPassword()>",
+          "line": 149,
+          "source_file": "PerfectoCredentials.java"
+        }
+      ]
+    },
+    {
+      "signature": "<com.auth0.jwt.algorithms.Algorithm: com.auth0.jwt.algorithms.Algorithm HMAC256(java.lang.String)>",
+      "owner": "com.auth0.jwt.algorithms.Algorithm",
+      "name": "HMAC256",
+      "params": [
+        "java.lang.String"
+      ],
+      "ret": "com.auth0.jwt.algorithms.Algorithm",
+      "is_static": true,
+      "from_jdk": false,
+      "origin": "java-jwt-3.1.0.jar",
+      "call_sites": [
+        {
+          "caller": "<io.plugins.perfecto.credentials.PerfectoCredentials: hudson.util.Secret getPassword()>",
+          "line": 150,
+          "source_file": "PerfectoCredentials.java"
+        }
+      ]
+    },
+    {
+      "signature": "<com.auth0.jwt.JWTCreator$Builder: java.lang.String sign(com.auth0.jwt.algorithms.Algorithm)>",
+      "owner": "com.auth0.jwt.JWTCreator$Builder",
+      "name": "sign",
+      "params": [
+        "com.auth0.jwt.algorithms.Algorithm"
+      ],
+      "ret": "java.lang.String",
+      "is_static": false,
+      "from_jdk": false,
+      "origin": "java-jwt-3.1.0.jar",
+      "call_sites": [
+        {
+          "caller": "<io.plugins.perfecto.credentials.PerfectoCredentials: hudson.util.Secret getPassword()>",
+          "line": 150,
+          "source_file": "PerfectoCredentials.java"
+        }
+      ]
+    },
+    {
+      "signature": "<com.cloudbees.plugins.credentials.CredentialsMatchers: com.cloudbees.plugins.credentials.CredentialsMatcher withUsername(java.lang.String)>",
+      "owner": "com.cloudbees.plugins.credentials.CredentialsMatchers",
+      "name": "withUsername",
+      "params": [
+        "java.lang.String"
+      ],
+      "ret": "com.cloudbees.plugins.credentials.CredentialsMatcher",
+      "is_static": true,
+      "from_jdk": false,
+      "origin": "credentials-2.1.16.jar",
+      "call_sites": [
+        {
+          "caller": "<io.plugins.perfecto.credentials.PerfectoCredentials: java.lang.String migrateToCredentials(java.lang.String,java.lang.String,java.lang.String,java.lang.String)>",
+          "line": 235,
+          "source_file": "PerfectoCredentials.java"
+        }
+      ]
+    },
+    {
+      "signature": "<com.cloudbees.plugins.credentials.CredentialsMatchers: com.cloudbees.plugins.credentials.Credentials firstOrNull(java.lang.Iterable,com.cloudbees.plugins.credentials.CredentialsMatcher)>",
+      "owner": "com.cloudbees.plugins.credentials.CredentialsMatchers",
+      "name": "firstOrNull",
+      "params": [
+        "java.lang.Iterable",
+        "com.cloudbees.plugins.credentials.CredentialsMatcher"
+      ],
+      "ret": "com.cloudbees.plugins.credentials.Credentials",
+      "is_static": true,
+      "from_jdk": false,
+      "origin": "credentials-2.1.16.jar",
+      "call_sites": [
+        {
+          "caller": "<io.plugins.perfecto.credentials.PerfectoCredentials: java.lang.String migrateToCredentials(java.lang.String,java.lang.String,java.lang.String,java.lang.String)>",
+          "line": 233,
+          "source_file": "PerfectoCredentials.java"
+        },
+        {
+          "caller": "<io.plugins.perfecto.credentials.PerfectoCredentials: io.plugins.perfecto.credentials.PerfectoCredentials getCredentialsById(hudson.model.Item,java.lang.String)>",
+          "line": 293,
+          "source_file": "PerfectoCredentials.java"
+        }
+      ]
+    },
+    {
+      "signature": "<java.util.UUID: java.util.UUID randomUUID()>",
+      "owner": "java.util.UUID",
+      "name": "randomUUID",
+      "params": [],
+      "ret": "java.util.UUID",
+      "is_static": true,
+      "from_jdk": true,
+      "origin": "JDK",
+      "call_sites": [
+        {
+          "caller": "<io.plugins.perfecto.credentials.PerfectoCredentials: java.lang.String migrateToCredentials(java.lang.String,java.lang.String,java.lang.String,java.lang.String)>",
+          "line": 240,
+          "source_file": "PerfectoCredentials.java"
+        }
+      ]
+    },
+    {
+      "signature": "<java.lang.InterruptedException: void <init>(java.lang.String)>",
+      "owner": "java.lang.InterruptedException",
+      "name": "<init>",
+      "params": [
+        "java.lang.String"
+      ],
+      "ret": "void",
+      "is_static": false,
+      "from_jdk": true,
+      "origin": "JDK",
+      "call_sites": [
+        {
+          "caller": "<io.plugins.perfecto.credentials.PerfectoCredentials: java.lang.String migrateToCredentials(java.lang.String,java.lang.String,java.lang.String,java.lang.String)>",
+          "line": 253,
+          "source_file": "PerfectoCredentials.java"
+        }
+      ]
+    },
+    {
+      "signature": "<com.cloudbees.plugins.credentials.SystemCredentialsProvider: com.cloudbees.plugins.credentials.SystemCredentialsProvider getInstance()>",
+      "owner": "com.cloudbees.plugins.credentials.SystemCredentialsProvider",
+      "name": "getInstance",
+      "params": [],
+      "ret": "com.cloudbees.plugins.credentials.SystemCredentialsProvider",
+      "is_static": true,
+      "from_jdk": false,
+      "origin": "credentials-2.1.16.jar",
+      "call_sites": [
+        {
+          "caller": "<io.plugins.perfecto.credentials.PerfectoCredentials: java.lang.String migrateToCredentials(java.lang.String,java.lang.String,java.lang.String,java.lang.String)>",
+          "line": 256,
+          "source_file": "PerfectoCredentials.java"
+        }
+      ]
+    },
+    {
+      "signature": "<com.cloudbees.plugins.credentials.SystemCredentialsProvider: java.util.Map getDomainCredentialsMap()>",
+      "owner": "com.cloudbees.plugins.credentials.SystemCredentialsProvider",
+      "name": "getDomainCredentialsMap",
+      "params": [],
+      "ret": "java.util.Map",
+      "is_static": false,
+      "from_jdk": false,
+      "origin": "credentials-2.1.16.jar",
+      "call_sites": [
+        {
+          "caller": "<io.plugins.perfecto.credentials.PerfectoCredentials: java.lang.String migrateToCredentials(java.lang.String,java.lang.String,java.lang.String,java.lang.String)>",
+          "line": 257,
+          "source_file": "PerfectoCredentials.java"
+        }
+      ]
+    },
+    {
+      "signature": "<com.cloudbees.plugins.credentials.domains.Domain: com.cloudbees.plugins.credentials.domains.Domain global()>",
+      "owner": "com.cloudbees.plugins.credentials.domains.Domain",
+      "name": "global",
+      "params": [],
+      "ret": "com.cloudbees.plugins.credentials.domains.Domain",
+      "is_static": true,
+      "from_jdk": false,
+      "origin": "credentials-2.1.16.jar",
+      "call_sites": [
+        {
+          "caller": "<io.plugins.perfecto.credentials.PerfectoCredentials: java.lang.String migrateToCredentials(java.lang.String,java.lang.String,java.lang.String,java.lang.String)>",
+          "line": 259,
+          "source_file": "PerfectoCredentials.java"
+        }
+      ]
+    },
+    {
+      "signature": "<java.util.List: boolean add(java.lang.Object)>",
+      "owner": "java.util.List",
+      "name": "add",
+      "params": [
+        "java.lang.Object"
+      ],
+      "ret": "boolean",
+      "is_static": false,
+      "from_jdk": true,
+      "origin": "JDK",
+      "call_sites": [
+        {
+          "caller": "<io.plugins.perfecto.credentials.PerfectoCredentials: java.lang.String migrateToCredentials(java.lang.String,java.lang.String,java.lang.String,java.lang.String)>",
+          "line": 263,
+          "source_file": "PerfectoCredentials.java"
+        }
+      ]
+    },
+    {
+      "signature": "<com.cloudbees.plugins.credentials.SystemCredentialsProvider: void setDomainCredentialsMap(java.util.Map)>",
+      "owner": "com.cloudbees.plugins.credentials.SystemCredentialsProvider",
+      "name": "setDomainCredentialsMap",
+      "params": [
+        "java.util.Map"
+      ],
+      "ret": "void",
+      "is_static": false,
+      "from_jdk": false,
+      "origin": "credentials-2.1.16.jar",
+      "call_sites": [
+        {
+          "caller": "<io.plugins.perfecto.credentials.PerfectoCredentials: java.lang.String migrateToCredentials(java.lang.String,java.lang.String,java.lang.String,java.lang.String)>",
+          "line": 265,
+          "source_file": "PerfectoCredentials.java"
+        }
+      ]
+    },
+    {
+      "signature": "<com.cloudbees.plugins.credentials.SystemCredentialsProvider: void save()>",
+      "owner": "com.cloudbees.plugins.credentials.SystemCredentialsProvider",
+      "name": "save",
+      "params": [],
+      "ret": "void",
+      "is_static": false,
+      "from_jdk": false,
+      "origin": "credentials-2.1.16.jar",
+      "call_sites": [
+        {
+          "caller": "<io.plugins.perfecto.credentials.PerfectoCredentials: java.lang.String migrateToCredentials(java.lang.String,java.lang.String,java.lang.String,java.lang.String)>",
+          "line": 266,
+          "source_file": "PerfectoCredentials.java"
+        }
+      ]
+    },
+    {
+      "signature": "<com.cloudbees.plugins.credentials.common.IdCredentials: java.lang.String getId()>",
+      "owner": "com.cloudbees.plugins.credentials.common.IdCredentials",
+      "name": "getId",
+      "params": [],
+      "ret": "java.lang.String",
+      "is_static": false,
+      "from_jdk": false,
+      "origin": "credentials-2.1.16.jar",
+      "call_sites": [
+        {
+          "caller": "<io.plugins.perfecto.credentials.PerfectoCredentials: java.lang.String migrateToCredentials(java.lang.String,java.lang.String,java.lang.String,java.lang.String)>",
+          "line": 270,
+          "source_file": "PerfectoCredentials.java"
+        }
+      ]
+    },
+    {
+      "signature": "<com.cloudbees.plugins.credentials.CredentialsProvider: java.util.List lookupCredentials(java.lang.Class,hudson.model.ItemGroup,org.acegisecurity.Authentication)>",
+      "owner": "com.cloudbees.plugins.credentials.CredentialsProvider",
+      "name": "lookupCredentials",
+      "params": [
+        "java.lang.Class",
+        "hudson.model.ItemGroup",
+        "org.acegisecurity.Authentication"
+      ],
+      "ret": "java.util.List",
+      "is_static": true,
+      "from_jdk": false,
+      "origin": "credentials-2.1.16.jar",
+      "call_sites": [
+        {
+          "caller": "<io.plugins.perfecto.credentials.PerfectoCredentials: java.util.List all(hudson.model.ItemGroup)>",
+          "line": 277,
+          "source_file": "PerfectoCredentials.java"
+        }
+      ]
+    },
+    {
+      "signature": "<com.cloudbees.plugins.credentials.CredentialsProvider: java.util.List lookupCredentials(java.lang.Class,hudson.model.Item,org.acegisecurity.Authentication)>",
+      "owner": "com.cloudbees.plugins.credentials.CredentialsProvider",
+      "name": "lookupCredentials",
+      "params": [
+        "java.lang.Class",
+        "hudson.model.Item",
+        "org.acegisecurity.Authentication"
+      ],
+      "ret": "java.util.List",
+      "is_static": true,
+      "from_jdk": false,
+      "origin": "credentials-2.1.16.jar",
+      "call_sites": [
+        {
+          "caller": "<io.plugins.perfecto.credentials.PerfectoCredentials: java.util.List all(hudson.model.Item)>",
+          "line": 285,
+          "source_file": "PerfectoCredentials.java"
+        }
+      ]
+    }
+  ],
+  "entries": [
+    {
+      "signature": "<io.plugins.perfecto.credentials.PerfectoCredentials$DescriptorImpl: hudson.util.FormValidation doAuthenticate(java.lang.String,java.lang.String,java.lang.String)>",
+      "owner": "io.plugins.perfecto.credentials.PerfectoCredentials$DescriptorImpl",
+      "name": "doAuthenticate",
+      "params": [
+        "java.lang.String",
+        "java.lang.String",
+        "java.lang.String"
+      ],
+      "is_static": false,
+      "kind": "web",
+      "score": 16.0,
+      "annotations": [
+        "org.kohsuke.stapler.verb.POST",
+        "org.kohsuke.stapler.QueryParameter",
+        "org.kohsuke.stapler.QueryParameter",
+        "org.kohsuke.stapler.QueryParameter"
+      ],
+      "constructors": [
+        []
+      ],
+      "owner_is_abstract": false
+    },
+    {
+      "signature": "<io.plugins.perfecto.PerfectoBuildWrapper$DescriptorImpl: hudson.util.FormValidation doCheckCredentialId(hudson.model.Item,java.lang.String)>",
+      "owner": "io.plugins.perfecto.PerfectoBuildWrapper$DescriptorImpl",
+      "name": "doCheckCredentialId",
+      "params": [
+        "hudson.model.Item",
+        "java.lang.String"
+      ],
+      "is_static": false,
+      "kind": "web",
+      "score": 14.0,
+      "annotations": [
+        "org.kohsuke.stapler.verb.POST",
+        "org.kohsuke.stapler.AncestorInPath",
+        "org.kohsuke.stapler.QueryParameter"
+      ],
+      "constructors": [
+        []
+      ],
+      "owner_is_abstract": false
+    },
+    {
+      "signature": "<io.plugins.perfecto.PerfectoBuildWrapper$DescriptorImpl: hudson.util.FormValidation doCheckPerfectoConnectFile(java.lang.String,hudson.model.Item)>",
+      "owner": "io.plugins.perfecto.PerfectoBuildWrapper$DescriptorImpl",
+      "name": "doCheckPerfectoConnectFile",
+      "params": [
+        "java.lang.String",
+        "hudson.model.Item"
+      ],
+      "is_static": false,
+      "kind": "web",
+      "score": 14.0,
+      "annotations": [
+        "org.kohsuke.stapler.verb.POST",
+        "org.kohsuke.stapler.QueryParameter",
+        "org.kohsuke.stapler.AncestorInPath"
+      ],
+      "constructors": [
+        []
+      ],
+      "owner_is_abstract": false
+    },
+    {
+      "signature": "<io.plugins.perfecto.PerfectoBuildWrapper$DescriptorImpl: hudson.util.FormValidation doCheckPerfectoConnectLocation(java.lang.String,hudson.model.Item)>",
+      "owner": "io.plugins.perfecto.PerfectoBuildWrapper$DescriptorImpl",
+      "name": "doCheckPerfectoConnectLocation",
+      "params": [
+        "java.lang.String",
+        "hudson.model.Item"
+      ],
+      "is_static": false,
+      "kind": "web",
+      "score": 14.0,
+      "annotations": [
+        "org.kohsuke.stapler.verb.POST",
+        "org.kohsuke.stapler.QueryParameter",
+        "org.kohsuke.stapler.AncestorInPath"
+      ],
+      "constructors": [
+        []
+      ],
+      "owner_is_abstract": false
+    },
+    {
+      "signature": "<io.plugins.perfecto.PerfectoBuildWrapper$DescriptorImpl: hudson.util.ListBoxModel doFillCredentialIdItems(hudson.model.ItemGroup,java.lang.String)>",
+      "owner": "io.plugins.perfecto.PerfectoBuildWrapper$DescriptorImpl",
+      "name": "doFillCredentialIdItems",
+      "params": [
+        "hudson.model.ItemGroup",
+        "java.lang.String"
+      ],
+      "is_static": false,
+      "kind": "web",
+      "score": 14.0,
+      "annotations": [
+        "org.kohsuke.stapler.verb.POST",
+        "org.kohsuke.stapler.AncestorInPath",
+        "org.kohsuke.stapler.QueryParameter"
+      ],
+      "constructors": [
+        []
+      ],
+      "owner_is_abstract": false
+    },
+    {
+      "signature": "<io.plugins.perfecto.credentials.PerfectoCredentials$DescriptorImpl: hudson.util.FormValidation doCheckApiKey(java.lang.String)>",
+      "owner": "io.plugins.perfecto.credentials.PerfectoCredentials$DescriptorImpl",
+      "name": "doCheckApiKey",
+      "params": [
+        "java.lang.String"
+      ],
+      "is_static": false,
+      "kind": "web",
+      "score": 14.0,
+      "annotations": [
+        "org.kohsuke.stapler.verb.POST",
+        "org.kohsuke.stapler.QueryParameter"
+      ],
+      "constructors": [
+        []
+      ],
+      "owner_is_abstract": false
+    },
+    {
+      "signature": "<io.plugins.perfecto.credentials.PerfectoCredentials$DescriptorImpl: hudson.util.FormValidation doCheckCloudName(java.lang.String)>",
+      "owner": "io.plugins.perfecto.credentials.PerfectoCredentials$DescriptorImpl",
+      "name": "doCheckCloudName",
+      "params": [
+        "java.lang.String"
+      ],
+      "is_static": false,
+      "kind": "web",
+      "score": 14.0,
+      "annotations": [
+        "org.kohsuke.stapler.verb.POST",
+        "org.kohsuke.stapler.QueryParameter"
+      ],
+      "constructors": [
+        []
+      ],
+      "owner_is_abstract": false
+    },
+    {
+      "signature": "<io.plugins.perfecto.credentials.PerfectoCredentials$DescriptorImpl: hudson.util.FormValidation doCheckUserName(java.lang.String)>",
+      "owner": "io.plugins.perfecto.credentials.PerfectoCredentials$DescriptorImpl",
+      "name": "doCheckUserName",
+      "params": [
+        "java.lang.String"
+      ],
+      "is_static": false,
+      "kind": "web",
+      "score": 14.0,
+      "annotations": [
+        "org.kohsuke.stapler.verb.POST",
+        "org.kohsuke.stapler.QueryParameter"
+      ],
+      "constructors": [
+        []
+      ],
+      "owner_is_abstract": false
+    },
+    {
+      "signature": "<io.plugins.perfecto.PerfectoBuildWrapper: hudson.tasks.BuildWrapper$Environment setUp(hudson.model.AbstractBuild,hudson.Launcher,hudson.model.BuildListener)>",
+      "owner": "io.plugins.perfecto.PerfectoBuildWrapper",
+      "name": "setUp",
+      "params": [
+        "hudson.model.AbstractBuild",
+        "hudson.Launcher",
+        "hudson.model.BuildListener"
+      ],
+      "is_static": false,
+      "kind": "plugin",
+      "score": 11.0,
+      "annotations": [],
+      "constructors": [
+        [
+          "org.jenkins_ci.plugins.run_condition.RunCondition",
+          "java.lang.String",
+          "java.lang.String",
+          "java.lang.String",
+          "java.lang.String",
+          "java.lang.String",
+          "java.lang.String",
+          "java.lang.String"
+        ]
+      ],
+      "owner_is_abstract": false
+    },
+    {
+      "signature": "<io.plugins.perfecto.PerfectoBuildWrapper: void <init>(org.jenkins_ci.plugins.run_condition.RunCondition,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String)>",
+      "owner": "io.plugins.perfecto.PerfectoBuildWrapper",
+      "name": "<init>",
+      "params": [
+        "org.jenkins_ci.plugins.run_condition.RunCondition",
+        "java.lang.String",
+        "java.lang.String",
+        "java.lang.String",
+        "java.lang.String",
+        "java.lang.String",
+        "java.lang.String",
+        "java.lang.String"
+      ],
+      "is_static": false,
+      "kind": "plugin",
+      "score": 11.0,
+      "annotations": [
+        "org.kohsuke.stapler.DataBoundConstructor"
+      ],
+      "constructors": [
+        [
+          "org.jenkins_ci.plugins.run_condition.RunCondition",
+          "java.lang.String",
+          "java.lang.String",
+          "java.lang.String",
+          "java.lang.String",
+          "java.lang.String",
+          "java.lang.String",
+          "java.lang.String"
+        ]
+      ],
+      "owner_is_abstract": false
+    },
+    {
+      "signature": "<io.plugins.perfecto.credentials.PerfectoCredentials: void <init>(com.cloudbees.plugins.credentials.CredentialsScope,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String)>",
+      "owner": "io.plugins.perfecto.credentials.PerfectoCredentials",
+      "name": "<init>",
+      "params": [
+        "com.cloudbees.plugins.credentials.CredentialsScope",
+        "java.lang.String",
+        "java.lang.String",
+        "java.lang.String",
+        "java.lang.String",
+        "java.lang.String"
+      ],
+      "is_static": false,
+      "kind": "plugin",
+      "score": 11.0,
+      "annotations": [
+        "org.kohsuke.stapler.DataBoundConstructor",
+        "javax.annotation.CheckForNull",
+        "javax.annotation.CheckForNull",
+        "javax.annotation.CheckForNull",
+        "javax.annotation.CheckForNull",
+        "javax.annotation.CheckForNull"
+      ],
+      "constructors": [
+        [
+          "com.cloudbees.plugins.credentials.CredentialsScope",
+          "java.lang.String",
+          "java.lang.String",
+          "java.lang.String",
+          "java.lang.String",
+          "java.lang.String"
+        ]
+      ],
+      "owner_is_abstract": false
+    },
+    {
+      "signature": "<io.plugins.perfecto.credentials.PerfectoCredentials$ShortLivedConfig: void <init>(java.lang.Integer)>",
+      "owner": "io.plugins.perfecto.credentials.PerfectoCredentials$ShortLivedConfig",
+      "name": "<init>",
+      "params": [
+        "java.lang.Integer"
+      ],
+      "is_static": false,
+      "kind": "plugin",
+      "score": 8.0,
+      "annotations": [
+        "org.kohsuke.stapler.DataBoundConstructor"
+      ],
+      "constructors": [
+        [
+          "java.lang.Integer"
+        ]
+      ],
+      "owner_is_abstract": false
+    },
+    {
+      "signature": "<io.plugins.perfecto.credentials.PerfectoCredentials: void setShortLivedConfig(io.plugins.perfecto.credentials.PerfectoCredentials$ShortLivedConfig)>",
+      "owner": "io.plugins.perfecto.credentials.PerfectoCredentials",
+      "name": "setShortLivedConfig",
+      "params": [
+        "io.plugins.perfecto.credentials.PerfectoCredentials$ShortLivedConfig"
+      ],
+      "is_static": false,
+      "kind": "plugin",
+      "score": 8.0,
+      "annotations": [
+        "org.kohsuke.stapler.DataBoundSetter"
+      ],
+      "constructors": [
+        [
+          "com.cloudbees.plugins.credentials.CredentialsScope",
+          "java.lang.String",
+          "java.lang.String",
+          "java.lang.String",
+          "java.lang.String",
+          "java.lang.String"
+        ]
+      ],
+      "owner_is_abstract": false
+    },
+    {
+      "signature": "<io.plugins.perfecto.PerfectoBuildWrapper: void setPerfectoConnectFile(java.lang.String)>",
+      "owner": "io.plugins.perfecto.PerfectoBuildWrapper",
+      "name": "setPerfectoConnectFile",
+      "params": [
+        "java.lang.String"
+      ],
+      "is_static": false,
+      "kind": "library-api",
+      "score": 6.0,
+      "annotations": [],
+      "constructors": [
+        [
+          "org.jenkins_ci.plugins.run_condition.RunCondition",
+          "java.lang.String",
+          "java.lang.String",
+          "java.lang.String",
+          "java.lang.String",
+          "java.lang.String",
+          "java.lang.String",
+          "java.lang.String"
+        ]
+      ],
+      "owner_is_abstract": false
+    },
+    {
+      "signature": "<io.plugins.perfecto.PerfectoEnvironmentUtil: void outputEnvironmentVariable(java.util.Map,java.lang.String,java.lang.String,boolean)>",
+      "owner": "io.plugins.perfecto.PerfectoEnvironmentUtil",
+      "name": "outputEnvironmentVariable",
+      "params": [
+        "java.util.Map",
+        "java.lang.String",
+        "java.lang.String",
+        "boolean"
+      ],
+      "is_static": true,
+      "kind": "library-api",
+      "score": 5.5,
+      "annotations": [],
+      "constructors": [],
+      "owner_is_abstract": false
+    },
+    {
+      "signature": "<io.plugins.perfecto.credentials.PerfectoCredentials: hudson.util.FormValidation testAuthentication(java.lang.String,java.lang.String,java.lang.String)>",
+      "owner": "io.plugins.perfecto.credentials.PerfectoCredentials",
+      "name": "testAuthentication",
+      "params": [
+        "java.lang.String",
+        "java.lang.String",
+        "java.lang.String"
+      ],
+      "is_static": true,
+      "kind": "library-api",
+      "score": 5.5,
+      "annotations": [],
+      "constructors": [
+        [
+          "com.cloudbees.plugins.credentials.CredentialsScope",
+          "java.lang.String",
+          "java.lang.String",
+          "java.lang.String",
+          "java.lang.String",
+          "java.lang.String"
+        ]
+      ],
+      "owner_is_abstract": false
+    },
+    {
+      "signature": "<io.plugins.perfecto.credentials.PerfectoCredentials: java.lang.String migrateToCredentials(java.lang.String,java.lang.String,java.lang.String,java.lang.String)>",
+      "owner": "io.plugins.perfecto.credentials.PerfectoCredentials",
+      "name": "migrateToCredentials",
+      "params": [
+        "java.lang.String",
+        "java.lang.String",
+        "java.lang.String",
+        "java.lang.String"
+      ],
+      "is_static": true,
+      "kind": "library-api",
+      "score": 5.5,
+      "annotations": [],
+      "constructors": [
+        [
+          "com.cloudbees.plugins.credentials.CredentialsScope",
+          "java.lang.String",
+          "java.lang.String",
+          "java.lang.String",
+          "java.lang.String",
+          "java.lang.String"
+        ]
+      ],
+      "owner_is_abstract": false
+    },
+    {
+      "signature": "<io.plugins.perfecto.credentials.PerfectoCredentials: io.plugins.perfecto.credentials.PerfectoCredentials getCredentialsById(hudson.model.Item,java.lang.String)>",
+      "owner": "io.plugins.perfecto.credentials.PerfectoCredentials",
+      "name": "getCredentialsById",
+      "params": [
+        "hudson.model.Item",
+        "java.lang.String"
+      ],
+      "is_static": true,
+      "kind": "library-api",
+      "score": 3.5,
+      "annotations": [],
+      "constructors": [
+        [
+          "com.cloudbees.plugins.credentials.CredentialsScope",
+          "java.lang.String",
+          "java.lang.String",
+          "java.lang.String",
+          "java.lang.String",
+          "java.lang.String"
+        ]
+      ],
+      "owner_is_abstract": false
+    },
+    {
+      "signature": "<io.plugins.perfecto.PerfectoBuildWrapper: void setCredentialId(java.lang.String)>",
+      "owner": "io.plugins.perfecto.PerfectoBuildWrapper",
+      "name": "setCredentialId",
+      "params": [
+        "java.lang.String"
+      ],
+      "is_static": false,
+      "kind": "library-api",
+      "score": 3.0,
+      "annotations": [],
+      "constructors": [
+        [
+          "org.jenkins_ci.plugins.run_condition.RunCondition",
+          "java.lang.String",
+          "java.lang.String",
+          "java.lang.String",
+          "java.lang.String",
+          "java.lang.String",
+          "java.lang.String",
+          "java.lang.String"
+        ]
+      ],
+      "owner_is_abstract": false
+    },
+    {
+      "signature": "<io.plugins.perfecto.PerfectoBuildWrapper: void setPcParameters(java.lang.String)>",
+      "owner": "io.plugins.perfecto.PerfectoBuildWrapper",
+      "name": "setPcParameters",
+      "params": [
+        "java.lang.String"
+      ],
+      "is_static": false,
+      "kind": "library-api",
+      "score": 3.0,
+      "annotations": [],
+      "constructors": [
+        [
+          "org.jenkins_ci.plugins.run_condition.RunCondition",
+          "java.lang.String",
+          "java.lang.String",
+          "java.lang.String",
+          "java.lang.String",
+          "java.lang.String",
+          "java.lang.String",
+          "java.lang.String"
+        ]
+      ],
+      "owner_is_abstract": false
+    },
+    {
+      "signature": "<io.plugins.perfecto.PerfectoBuildWrapper: void setPerfectoConnectLocation(java.lang.String)>",
+      "owner": "io.plugins.perfecto.PerfectoBuildWrapper",
+      "name": "setPerfectoConnectLocation",
+      "params": [
+        "java.lang.String"
+      ],
+      "is_static": false,
+      "kind": "library-api",
+      "score": 3.0,
+      "annotations": [],
+      "constructors": [
+        [
+          "org.jenkins_ci.plugins.run_condition.RunCondition",
+          "java.lang.String",
+          "java.lang.String",
+          "java.lang.String",
+          "java.lang.String",
+          "java.lang.String",
+          "java.lang.String",
+          "java.lang.String"
+        ]
+      ],
+      "owner_is_abstract": false
+    },
+    {
+      "signature": "<io.plugins.perfecto.PerfectoBuildWrapper: void setSecurityToken(java.lang.String)>",
+      "owner": "io.plugins.perfecto.PerfectoBuildWrapper",
+      "name": "setSecurityToken",
+      "params": [
+        "java.lang.String"
+      ],
+      "is_static": false,
+      "kind": "library-api",
+      "score": 3.0,
+      "annotations": [],
+      "constructors": [
+        [
+          "org.jenkins_ci.plugins.run_condition.RunCondition",
+          "java.lang.String",
+          "java.lang.String",
+          "java.lang.String",
+          "java.lang.String",
+          "java.lang.String",
+          "java.lang.String",
+          "java.lang.String"
+        ]
+      ],
+      "owner_is_abstract": false
+    },
+    {
+      "signature": "<io.plugins.perfecto.PerfectoBuildWrapper: void setTunnelIdCustomName(java.lang.String)>",
+      "owner": "io.plugins.perfecto.PerfectoBuildWrapper",
+      "name": "setTunnelIdCustomName",
+      "params": [
+        "java.lang.String"
+      ],
+      "is_static": false,
+      "kind": "library-api",
+      "score": 3.0,
+      "annotations": [],
+      "constructors": [
+        [
+          "org.jenkins_ci.plugins.run_condition.RunCondition",
+          "java.lang.String",
+          "java.lang.String",
+          "java.lang.String",
+          "java.lang.String",
+          "java.lang.String",
+          "java.lang.String",
+          "java.lang.String"
+        ]
+      ],
+      "owner_is_abstract": false
+    }
+  ]
+}

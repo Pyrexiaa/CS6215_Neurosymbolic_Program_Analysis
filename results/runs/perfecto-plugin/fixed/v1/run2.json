@@ -1,0 +1,195 @@
+{
+  "subject": "perfecto-plugin",
+  "slug": "jenkinsci__perfecto-plugin_CVE-2020-2261_1.17",
+  "cve": "CVE-2020-2261",
+  "cwe": "CWE-078",
+  "version": "fixed",
+  "config": "v1",
+  "run": 2,
+  "config_def": {
+    "driver": "template",
+    "spec": [
+      "base",
+      "llm"
+    ],
+    "triage": false
+  },
+  "model": "default",
+  "served_models": [
+    "qwen3.6:35b"
+  ],
+  "prompt_versions": {
+    "n1_driver": "3914024e",
+    "n1_repair": "0393a228",
+    "n2_spec": "647ee643",
+    "n3_triage": "e5fc00c6"
+  },
+  "taie_settings": {
+    "jar": "/Users/jiayulim/Documents/GitHub/CS6215_Neurosymbolic_Program_Analysis/tools/tai-e-all-0.5.4.jar",
+    "java_bin": "/Library/Java/JavaVirtualMachines/jdk-17.jdk/Contents/Home/bin/java",
+    "jre_version": "8",
+    "home": "/Users/jiayulim/Documents/GitHub/CS6215_Neurosymbolic_Program_Analysis/work/taie-home",
+    "cs": "1-call",
+    "only_app": "True",
+    "time_limit_s": "1800",
+    "wall_timeout_s": "3600",
+    "xmx": "6g",
+    "extra_pta_options": "{}"
+  },
+  "facts": {
+    "app_classes": 10,
+    "app_methods": 69,
+    "external_apis": 103,
+    "external_apis_jdk": 44,
+    "entry_candidates": 23,
+    "entry_kinds": {
+      "web": 8,
+      "plugin": 5,
+      "library-api": 10
+    }
+  },
+  "subject_stats": {
+    "java_files": 4,
+    "non_blank_loc": 759,
+    "dependency_jars": 182,
+    "modules_analysed": 1
+  },
+  "gt_methods": [
+    "PerfectoBuildWrapper.getTunnelId",
+    "PerfectoBuildWrapper.setUp",
+    "PerfectoBuildWrapper.PerfectoBuildWrapper",
+    "DescriptorImpl.doCheckUserName",
+    "DescriptorImpl.doAuthenticate",
+    "PerfectoCredentials.migrateToCredentials",
+    "PerfectoCredentials.getPassword",
+    "DescriptorImpl.doCheckApiKey",
+    "PerfectoCredentials.PerfectoCredentials"
+  ],
+  "driver": {
+    "kind": "template",
+    "ok": true,
+    "entries": 23,
+    "attempts": 1,
+    "removed_entries": 0,
+    "app_calls": 25,
+    "taint_calls": 40,
+    "errors": 0,
+    "entry_mismatches": 0
+  },
+  "spec": {
+    "candidates": 96,
+    "batches": 4,
+    "samples": 3,
+    "accepted": 9,
+    "accepted_by_role": {
+      "sink": 2,
+      "transfer": 7
+    },
+    "rejected": 2,
+    "rejected_by_reason": {
+      "to:base-of-static": 2
+    },
+    "extra_signatures": 0,
+    "parse_failures": 0,
+    "mean_vote_agreement": 0.941,
+    "validators": true,
+    "vote_version": 2
+  },
+  "manual_spec_entries": null,
+  "taie": {
+    "ok": true,
+    "returncode": 0,
+    "elapsed_s": 2.06,
+    "timed_out": false,
+    "detected_raw": 12,
+    "reachable_methods": 2355,
+    "out_dir": "/Users/jiayulim/Documents/GitHub/CS6215_Neurosymbolic_Program_Analysis/work/runs/perfecto-plugin/fixed/taie/c6b24f582163db09",
+    "error": "",
+    "invalid_spec_entries": [],
+    "expected_failure": false
+  },
+  "counts": {
+    "raw": 12,
+    "filtered": 2,
+    "reported": 2,
+    "reported_gt": 1,
+    "reported_gt_weak": 1,
+    "removed_by_triage": 0,
+    "removed_gt_by_triage": 0,
+    "v3_rejected": 0,
+    "trusted_sink_overrides": 0
+  },
+  "detected": true,
+  "usage": {
+    "N1": {},
+    "N2": {
+      "calls": 12,
+      "cached_calls": 12,
+      "prompt_tokens": 30702,
+      "completion_tokens": 12716,
+      "fresh_prompt_tokens": 0,
+      "fresh_completion_tokens": 0,
+      "latency_s": 0.0,
+      "truncated": 0
+    },
+    "N3": {},
+    "total": {
+      "calls": 12,
+      "cached_calls": 12,
+      "prompt_tokens": 30702,
+      "completion_tokens": 12716,
+      "fresh_prompt_tokens": 0,
+      "fresh_completion_tokens": 0,
+      "latency_s": 0.0,
+      "truncated": 0
+    }
+  },
+  "timings": {
+    "facts_s": 2.01,
+    "driver_s": 0.0,
+    "spec_s": 0.07,
+    "taie_s": 0.0,
+    "triage_s": 0.0,
+    "total_s": 2.09
+  },
+  "flows": [
+    {
+      "id": "24db402138",
+      "key": "DRIVER => <io.plugins.perfecto.PerfectoBuildWrapper: hudson.tasks.CommandInterpreter getCommandInterpreter(hudson.Launcher,java.lang.String)>@L254/0",
+      "source": "<nesy.NesyDriver: void main(java.lang.String[])>[56@L19] %v37 = invokestatic nesy.Taint.src()/result",
+      "sink": "<io.plugins.perfecto.PerfectoBuildWrapper: hudson.tasks.CommandInterpreter getCommandInterpreter(hudson.Launcher,java.lang.String)>[4@L254] invokespecial %v5.<init>(script)/0",
+      "sink_method": "<io.plugins.perfecto.PerfectoBuildWrapper: hudson.tasks.CommandInterpreter getCommandInterpreter(hudson.Launcher,java.lang.String)>",
+      "sink_line": 254,
+      "gt": [],
+      "gt_weak": [
+        "PerfectoBuildWrapper.setUp",
+        "PerfectoBuildWrapper.PerfectoBuildWrapper"
+      ],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "f88d0d638a",
+      "key": "DRIVER => <io.plugins.perfecto.PerfectoBuildWrapper: hudson.tasks.CommandInterpreter getCommandInterpreter(hudson.Launcher,java.lang.String)>@L256/0",
+      "source": "<nesy.NesyDriver: void main(java.lang.String[])>[56@L19] %v37 = invokestatic nesy.Taint.src()/result",
+      "sink": "<io.plugins.perfecto.PerfectoBuildWrapper: hudson.tasks.CommandInterpreter getCommandInterpreter(hudson.Launcher,java.lang.String)>[7@L256] invokespecial %v6.<init>(script)/0",
+      "sink_method": "<io.plugins.perfecto.PerfectoBuildWrapper: hudson.tasks.CommandInterpreter getCommandInterpreter(hudson.Launcher,java.lang.String)>",
+      "sink_line": 256,
+      "gt": [
+        "PerfectoBuildWrapper.setUp",
+        "PerfectoBuildWrapper.PerfectoBuildWrapper"
+      ],
+      "gt_weak": [],
+      "reported": true,
+      "triage": null
+    }
+  ],
+  "result_revision": {
+    "kind": "validator-correction-replay",
+    "original_raw_n1_n2_responses_reused": true,
+    "historical_cache_model_key": "default",
+    "new_api_request_model": "qwen3.6:35b",
+    "spec_vote_version": 2,
+    "v3_exact_visible_lines": true
+  }
+}

@@ -1,0 +1,114 @@
+{
+  "kind": "llm",
+  "ok": true,
+  "classes_dir": "/Users/jiayulim/Documents/GitHub/CS6215_Neurosymbolic_Program_Analysis/work/runs/spark/buggy/run1/llm-driver/classes",
+  "source_path": "/Users/jiayulim/Documents/GitHub/CS6215_Neurosymbolic_Program_Analysis/work/runs/spark/buggy/run1/llm-driver/src/nesy/NesyDriver.java",
+  "entries": [
+    "spark.http.matching.MatcherFilter: void doFilter(javax.servlet.ServletRequest,javax.servlet.ServletResponse,javax.servlet.FilterChain)",
+    "spark.servlet.SparkFilter: void doFilter(javax.servlet.ServletRequest,javax.servlet.ServletResponse,javax.servlet.FilterChain)",
+    "spark.embeddedserver.jetty.JettyHandler: void doHandle(java.lang.String,org.eclipse.jetty.server.Request,javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)",
+    "spark.utils.ResourceUtils: java.io.File getFile(java.net.URI,java.lang.String)",
+    "spark.utils.ResourceUtils: java.io.File getFile(java.net.URL,java.lang.String)",
+    "spark.utils.ResourceUtils: java.io.File getFile(java.lang.String)",
+    "spark.utils.ResourceUtils: java.io.File getFile(java.net.URI)",
+    "spark.utils.ResourceUtils: java.io.File getFile(java.net.URL)",
+    "spark.utils.StringUtils: java.lang.String applyRelativePath(java.lang.String,java.lang.String)",
+    "spark.utils.StringUtils: java.lang.String getFilename(java.lang.String)",
+    "spark.route.SimpleRouteMatcher: void parseValidateAddRoute(java.lang.String,java.lang.String,java.lang.Object)",
+    "spark.resource.AbstractResourceHandler: java.lang.String addPaths(java.lang.String,java.lang.String)"
+  ],
+  "attempts": 2,
+  "errors": [
+    "/Users/jiayulim/Documents/GitHub/CS6215_Neurosymbolic_Program_Analysis/work/runs/spark/buggy/run1/llm-driver/src/nesy/NesyDriver.java:21: error: Routes() has protected access in Routes\n                new spark.route.Routes(),\n                ^\n/Users/jiayulim/Documents/GitHub/CS6215_Neurosymbolic_Program_Analysis/work/runs/spark/buggy/run1/llm-driver/src/nesy/NesyDriver.java:22: error: constructor StaticFilesConfiguration in class StaticFilesConfiguration cannot be applied to given types;\n                new spark.staticfiles.StaticFilesConfiguration(null, null),\n                ^\n  required: no arguments\n  found:    <null>,<null>\n  reason: actual and formal argument lists differ in length\nNote: /Users/jiayulim/Documents/GitHub/CS6215_Neurosymbolic_Program_Analysis/work/runs/spark/buggy/run1/llm-driver/src/nesy/NesyDriver.java uses or overrides a deprecated API.\nNote: Recompile with -Xlint:deprecation for details.\n2 errors"
+  ],
+  "removed_entries": [],
+  "app_calls": 17,
+  "taint_calls": 7,
+  "llm_entries": [
+    {
+      "signature": "spark.http.matching.MatcherFilter: void doFilter(javax.servlet.ServletRequest,javax.servlet.ServletResponse,javax.servlet.FilterChain)",
+      "tainted_params": [
+        0
+      ],
+      "why": "Servlet filter entry point; ServletRequest contains attacker-controlled path/params."
+    },
+    {
+      "signature": "spark.servlet.SparkFilter: void doFilter(javax.servlet.ServletRequest,javax.servlet.ServletResponse,javax.servlet.FilterChain)",
+      "tainted_params": [
+        0
+      ],
+      "why": "Servlet filter entry point; ServletRequest contains attacker-controlled path/params."
+    },
+    {
+      "signature": "spark.embeddedserver.jetty.JettyHandler: void doHandle(java.lang.String,org.eclipse.jetty.server.Request,javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)",
+      "tainted_params": [
+        2
+      ],
+      "why": "Jetty handler receives HTTP request with attacker-controlled URI/params."
+    },
+    {
+      "signature": "spark.utils.ResourceUtils: java.io.File getFile(java.net.URI,java.lang.String)",
+      "tainted_params": [
+        1
+      ],
+      "why": "Utility to resolve file from URI and relative path; second param can be attacker-controlled traversal."
+    },
+    {
+      "signature": "spark.utils.ResourceUtils: java.io.File getFile(java.net.URL,java.lang.String)",
+      "tainted_params": [
+        1
+      ],
+      "why": "Utility to resolve file from URL and relative path; second param can be attacker-controlled traversal."
+    },
+    {
+      "signature": "spark.utils.ResourceUtils: java.io.File getFile(java.lang.String)",
+      "tainted_params": [
+        0
+      ],
+      "why": "Utility to resolve file from string path; attacker-controlled string can contain traversal."
+    },
+    {
+      "signature": "spark.utils.ResourceUtils: java.io.File getFile(java.net.URI)",
+      "tainted_params": [
+        0
+      ],
+      "why": "Utility to resolve file from URI; attacker-controlled URI can point outside intended directory."
+    },
+    {
+      "signature": "spark.utils.ResourceUtils: java.io.File getFile(java.net.URL)",
+      "tainted_params": [
+        0
+      ],
+      "why": "Utility to resolve file from URL; attacker-controlled URL can point outside intended directory."
+    },
+    {
+      "signature": "spark.utils.StringUtils: java.lang.String applyRelativePath(java.lang.String,java.lang.String)",
+      "tainted_params": [
+        1
+      ],
+      "why": "Applies relative path to base; second param can be attacker-controlled traversal sequence."
+    },
+    {
+      "signature": "spark.utils.StringUtils: java.lang.String getFilename(java.lang.String)",
+      "tainted_params": [
+        0
+      ],
+      "why": "Extracts filename from path; attacker-controlled path can contain traversal."
+    },
+    {
+      "signature": "spark.route.SimpleRouteMatcher: void parseValidateAddRoute(java.lang.String,java.lang.String,java.lang.Object)",
+      "tainted_params": [
+        0
+      ],
+      "why": "Route matcher parses URL pattern; attacker-controlled pattern can influence path resolution."
+    },
+    {
+      "signature": "spark.resource.AbstractResourceHandler: java.lang.String addPaths(java.lang.String,java.lang.String)",
+      "tainted_params": [
+        1
+      ],
+      "why": "Adds paths to resource handler; second param can be attacker-controlled traversal."
+    }
+  ],
+  "prompt_version": "3914024e"
+}

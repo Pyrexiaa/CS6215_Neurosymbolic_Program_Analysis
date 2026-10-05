@@ -1,0 +1,82 @@
+{
+  "prompt_version": "e5fc00c6",
+  "decisions": [
+    {
+      "flow_id": "d06c28ee07",
+      "flow_key": "DRIVER => <com.cronutils.StringValidations: java.util.regex.Pattern buildWordsPattern(java.util.Set)>@L73/0",
+      "verdict": "not_vulnerable",
+      "reason": "not_dangerous_sink",
+      "kept": false,
+      "v3_ok": null,
+      "v3_problems": [],
+      "evidence": [
+        {
+          "file": "com/cronutils/StringValidations.java",
+          "line": 73,
+          "note": "Pattern.compile is called with a string built from user input, but this is regex compilation, not code execution."
+        },
+        {
+          "file": "com/cronutils/StringValidations.java",
+          "line": 82,
+          "note": "Pattern.compile is called with a string built from user input, but this is regex compilation, not code execution."
+        }
+      ],
+      "explanation": "CWE-094 refers to code injection where attacker-controlled data is evaluated as executable code (e.g., via script engines, EL, or template engines). The sink here is `java.util.regex.Pattern.compile`, which compiles a regular expression. While this can lead to ReDoS (CWE-400) or regex injection if the pattern is used in a way that allows bypassing filters, it does not constitute code injection (CWE-094) because the compiled pattern is not executed as arbitrary application logic or script code. The input is treated as a data pattern, not executable code.",
+      "samples": [
+        "not_vulnerable"
+      ],
+      "methods_shown": [
+        "<com.cronutils.StringValidations: java.util.regex.Pattern buildWordsPattern(java.util.Set)>"
+      ],
+      "override": ""
+    },
+    {
+      "flow_id": "b82b6c816c",
+      "flow_key": "DRIVER => <com.cronutils.StringValidations: java.util.regex.Pattern buildWordsPattern(java.util.Set)>@L82/0",
+      "verdict": "not_vulnerable",
+      "reason": "not_dangerous_sink",
+      "kept": false,
+      "v3_ok": null,
+      "v3_problems": [],
+      "evidence": [
+        {
+          "file": "com/cronutils/StringValidations.java",
+          "line": 82,
+          "note": "Pattern.compile is called with a string built from user input, but this is regex compilation, not code execution."
+        }
+      ],
+      "explanation": "CWE-094 refers to code injection where attacker-controlled data is evaluated as executable code (e.g., via script engines, EL, or template engines). The sink here is java.util.regex.Pattern.compile, which compiles a regular expression. While this could lead to ReDoS (CWE-400) or regex injection if the pattern is used in a way that allows bypassing filters, it does not constitute code injection (CWE-094) because the compiled pattern is not executed as arbitrary application logic or script. The input is treated as data for a regex engine, not as code.",
+      "samples": [
+        "not_vulnerable"
+      ],
+      "methods_shown": [
+        "<com.cronutils.StringValidations: java.util.regex.Pattern buildWordsPattern(java.util.Set)>"
+      ],
+      "override": ""
+    },
+    {
+      "flow_id": "7f847a860a",
+      "flow_key": "DRIVER => <com.cronutils.validation.CronValidator: boolean isValid(java.lang.String,javax.validation.ConstraintValidatorContext)>@L33/0",
+      "verdict": "not_vulnerable",
+      "reason": "not_dangerous_sink",
+      "kept": false,
+      "v3_ok": null,
+      "v3_problems": [],
+      "evidence": [
+        {
+          "file": "com/cronutils/validation/CronValidator.java",
+          "line": 33,
+          "note": "The tainted value (e.getMessage()) is passed to buildConstraintViolationWithTemplate, which constructs a validation error message string, not executing it as code."
+        }
+      ],
+      "explanation": "The sink `buildConstraintViolationWithTemplate` is used to create a human-readable error message for the validation framework, not to evaluate the string as code or an expression language. CWE-094 requires the input to be evaluated as code; here, the input is merely stored or displayed as a string literal within the validation context, posing no code injection risk.",
+      "samples": [
+        "not_vulnerable"
+      ],
+      "methods_shown": [
+        "<com.cronutils.validation.CronValidator: boolean isValid(java.lang.String,javax.validation.ConstraintValidatorContext)>"
+      ],
+      "override": ""
+    }
+  ]
+}

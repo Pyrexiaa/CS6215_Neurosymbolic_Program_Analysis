@@ -1,0 +1,240 @@
+{
+  "subject": "cron-utils",
+  "slug": "jmrozanec__cron-utils_CVE-2021-41269_9.1.5",
+  "cve": "CVE-2021-41269",
+  "cwe": "CWE-094",
+  "version": "buggy",
+  "config": "v4",
+  "run": 2,
+  "config_def": {
+    "driver": "llm",
+    "spec": [
+      "base",
+      "llm"
+    ],
+    "triage": true,
+    "spec_array_elements": true,
+    "triage_trusted_sinks": true,
+    "driver_entry_check": true
+  },
+  "model": "default",
+  "served_models": [
+    "qwen3.6:35b"
+  ],
+  "prompt_versions": {
+    "n1_driver": "3914024e",
+    "n1_repair": "0393a228",
+    "n2_spec": "647ee643",
+    "n3_triage": "e5fc00c6"
+  },
+  "taie_settings": {
+    "jar": "/Users/jiayulim/Documents/GitHub/CS6215_Neurosymbolic_Program_Analysis/tools/tai-e-all-0.5.4.jar",
+    "java_bin": "/Library/Java/JavaVirtualMachines/jdk-17.jdk/Contents/Home/bin/java",
+    "jre_version": "8",
+    "home": "/Users/jiayulim/Documents/GitHub/CS6215_Neurosymbolic_Program_Analysis/work/taie-home",
+    "cs": "1-call",
+    "only_app": "False",
+    "time_limit_s": "1800",
+    "wall_timeout_s": "3600",
+    "xmx": "6g",
+    "extra_pta_options": "{}"
+  },
+  "facts": {
+    "app_classes": 98,
+    "app_methods": 678,
+    "external_apis": 214,
+    "external_apis_jdk": 209,
+    "entry_candidates": 33,
+    "entry_kinds": {
+      "library-api": 33
+    }
+  },
+  "subject_stats": {
+    "java_files": 84,
+    "non_blank_loc": 7877,
+    "dependency_jars": 32,
+    "modules_analysed": 1
+  },
+  "gt_methods": [
+    "CronParser.parse",
+    "CronValidator.isValid"
+  ],
+  "driver": {
+    "kind": "llm-fallback-template",
+    "ok": true,
+    "entries": 24,
+    "attempts": 4,
+    "removed_entries": 8,
+    "app_calls": 32,
+    "taint_calls": 28,
+    "errors": 4,
+    "entry_mismatches": 0
+  },
+  "spec": {
+    "candidates": 189,
+    "batches": 8,
+    "samples": 3,
+    "accepted": 5,
+    "accepted_by_role": {
+      "sink": 5
+    },
+    "rejected": 5,
+    "rejected_by_reason": {
+      "transfer-to-self": 2,
+      "primitive-type": 1,
+      "transfer-to-primitive": 2
+    },
+    "extra_signatures": 0,
+    "parse_failures": 0,
+    "mean_vote_agreement": 0.928,
+    "validators": true,
+    "vote_version": 2,
+    "array_element_sinks_added": 0
+  },
+  "manual_spec_entries": null,
+  "taie": {
+    "ok": true,
+    "returncode": 0,
+    "elapsed_s": 9.15,
+    "timed_out": false,
+    "detected_raw": 155,
+    "reachable_methods": 10599,
+    "out_dir": "/Users/jiayulim/Documents/GitHub/CS6215_Neurosymbolic_Program_Analysis/work/runs/cron-utils/buggy/taie/c2c495ea05074ef4",
+    "error": "",
+    "invalid_spec_entries": [],
+    "expected_failure": false
+  },
+  "counts": {
+    "raw": 155,
+    "filtered": 3,
+    "reported": 1,
+    "reported_gt": 1,
+    "reported_gt_weak": 0,
+    "removed_by_triage": 2,
+    "removed_gt_by_triage": 0,
+    "v3_rejected": 1,
+    "trusted_sink_overrides": 1
+  },
+  "detected": true,
+  "usage": {
+    "N1": {
+      "calls": 4,
+      "cached_calls": 4,
+      "prompt_tokens": 11934,
+      "completion_tokens": 9818,
+      "fresh_prompt_tokens": 0,
+      "fresh_completion_tokens": 0,
+      "latency_s": 0.0,
+      "truncated": 0
+    },
+    "N2": {
+      "calls": 24,
+      "cached_calls": 24,
+      "prompt_tokens": 60087,
+      "completion_tokens": 23674,
+      "fresh_prompt_tokens": 0,
+      "fresh_completion_tokens": 0,
+      "latency_s": 0.0,
+      "truncated": 0
+    },
+    "N3": {
+      "calls": 3,
+      "cached_calls": 3,
+      "prompt_tokens": 2344,
+      "completion_tokens": 713,
+      "fresh_prompt_tokens": 0,
+      "fresh_completion_tokens": 0,
+      "latency_s": 0.0,
+      "truncated": 0
+    },
+    "total": {
+      "calls": 31,
+      "cached_calls": 31,
+      "prompt_tokens": 74365,
+      "completion_tokens": 34205,
+      "fresh_prompt_tokens": 0,
+      "fresh_completion_tokens": 0,
+      "latency_s": 0.0,
+      "truncated": 0
+    }
+  },
+  "timings": {
+    "facts_s": 3.81,
+    "driver_s": 1.73,
+    "spec_s": 0.0,
+    "taie_s": 0.0,
+    "triage_s": 0.04,
+    "total_s": 5.59
+  },
+  "flows": [
+    {
+      "id": "d06c28ee07",
+      "key": "DRIVER => <com.cronutils.StringValidations: java.util.regex.Pattern buildWordsPattern(java.util.Set)>@L73/0",
+      "source": "<nesy.NesyDriver: void main(java.lang.String[])>[8@L8] %v14 = invokestatic nesy.Taint.src()/result",
+      "sink": "<com.cronutils.StringValidations: java.util.regex.Pattern buildWordsPattern(java.util.Set)>[10@L73] %v12 = invokestatic java.util.regex.Pattern.compile(%v11)/0",
+      "sink_method": "<com.cronutils.StringValidations: java.util.regex.Pattern buildWordsPattern(java.util.Set)>",
+      "sink_line": 73,
+      "gt": [],
+      "gt_weak": [],
+      "reported": false,
+      "triage": {
+        "verdict": "not_vulnerable",
+        "reason": "not_dangerous_sink",
+        "kept": false,
+        "v3_ok": true,
+        "v3_problems": [],
+        "override": ""
+      }
+    },
+    {
+      "id": "b82b6c816c",
+      "key": "DRIVER => <com.cronutils.StringValidations: java.util.regex.Pattern buildWordsPattern(java.util.Set)>@L82/0",
+      "source": "<nesy.NesyDriver: void main(java.lang.String[])>[8@L8] %v14 = invokestatic nesy.Taint.src()/result",
+      "sink": "<com.cronutils.StringValidations: java.util.regex.Pattern buildWordsPattern(java.util.Set)>[26@L82] %v21 = invokestatic java.util.regex.Pattern.compile(%v20)/0",
+      "sink_method": "<com.cronutils.StringValidations: java.util.regex.Pattern buildWordsPattern(java.util.Set)>",
+      "sink_line": 82,
+      "gt": [],
+      "gt_weak": [],
+      "reported": false,
+      "triage": {
+        "verdict": "not_vulnerable",
+        "reason": "not_dangerous_sink",
+        "kept": false,
+        "v3_ok": true,
+        "v3_problems": [],
+        "override": ""
+      }
+    },
+    {
+      "id": "7f847a860a",
+      "key": "DRIVER => <com.cronutils.validation.CronValidator: boolean isValid(java.lang.String,javax.validation.ConstraintValidatorContext)>@L33/0",
+      "source": "<nesy.NesyDriver: void main(java.lang.String[])>[8@L8] %v14 = invokestatic nesy.Taint.src()/result",
+      "sink": "<com.cronutils.validation.CronValidator: boolean isValid(java.lang.String,javax.validation.ConstraintValidatorContext)>[14@L33] %v14 = invokeinterface context.buildConstraintViolationWithTemplate(%v13)/0",
+      "sink_method": "<com.cronutils.validation.CronValidator: boolean isValid(java.lang.String,javax.validation.ConstraintValidatorContext)>",
+      "sink_line": 33,
+      "gt": [
+        "CronValidator.isValid"
+      ],
+      "gt_weak": [],
+      "reported": true,
+      "triage": {
+        "verdict": "not_vulnerable",
+        "reason": "not_dangerous_sink",
+        "kept": true,
+        "v3_ok": false,
+        "v3_problems": [
+          "sink <javax.validation.ConstraintValidatorContext: javax.validation.ConstraintValidatorContext$ConstraintViolationBuilder buildConstraintViolationWithTemplate(java.lang.String)> is a trusted specification; N3 may not overrule it (trusted-sink rule)"
+        ],
+        "override": "trusted-sink"
+      }
+    }
+  ],
+  "result_revision": {
+    "kind": "validator-correction-replay",
+    "original_raw_n1_n2_responses_reused": true,
+    "historical_cache_model_key": "default",
+    "new_api_request_model": "qwen3.6:35b",
+    "spec_vote_version": 2,
+    "v3_exact_visible_lines": true
+  }
+}

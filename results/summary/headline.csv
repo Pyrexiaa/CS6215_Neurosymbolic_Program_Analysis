@@ -1,0 +1,11 @@
+config,subjects,cves_detected,detection_rate_mean,cves_confirmed,confirmed_rate_mean,precision_mean,precision_subjects,precision_unknown_subjects,precision_known_runs,precision_nonempty_runs,precision_zero_sample_runs,precision_descriptive_mean,cves_tp_reported,tp_reported_rate_mean,alarms_buggy_total,alarms_fixed_total,differential_ok,iris_avg_fdr,iris_avg_f1,llm_driver_fallbacks,taie_failures
+B1,4,1,0.25,0,0.0,0.01,2,0,2,2,0,0.07,1,0.25,496,505,0,0.857,0.111,0,0
+B2,4,4,1.0,4,1.0,0.507,4,0,4,4,0,0.528,4,1.0,1511,1525,2,0.444,0.594,0,0
+iris-like,4,3,0.583,2,0.5,0.009,4,0,8,8,0,0.029,2,0.5,1865.0,1924.7,1,0.676,0.205,0,0
+v1,4,4,0.834,3,0.667,0.064,4,0,11,11,0,0.084,3,0.667,1918.0,2041.3,2,0.625,0.366,0,0
+v2,4,4,0.667,2,0.417,0.096,4,0,10,10,0,0.104,3,0.584,295.3,114,4,0.587,0.32,2,0
+v3,4,2,0.417,1,0.25,0.048,3,0,8,8,0,0.061,2,0.417,268.7,44.0,2,0.844,0.162,2,0
+v3-noV2,4,2,0.417,1,0.25,0.051,3,0,8,8,0,0.065,2,0.417,269,44.0,2,0.843,0.163,2,4
+v3-noV3,4,2,0.417,1,0.25,0.048,3,0,8,8,0,0.062,2,0.417,267.3,44.0,2,0.844,0.162,2,0
+v3-noval,4,2,0.417,1,0.25,0.051,3,0,8,8,0,0.066,2,0.417,267.7,44.0,2,0.843,0.163,2,4
+v4,4,4,0.834,3,0.584,0.333,4,0,12,12,0,0.339,4,0.75,289.0,563.0,3,0.515,0.544,4,0

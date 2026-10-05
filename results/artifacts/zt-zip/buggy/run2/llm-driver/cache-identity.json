@@ -1,0 +1,45 @@
+{
+  "identity": {
+    "version": 1,
+    "stage": "driver",
+    "settings": {
+      "max_entries_template": 300,
+      "max_entries_prompt": 60,
+      "max_repairs": 3,
+      "javac_release": 8,
+      "max_tokens": 8192,
+      "temperature": 0.0,
+      "sample_offset": 2000,
+      "entry_check": false
+    },
+    "facts_sha256": "2dd0d5ce5288698e13eabea5183fa1f61851b7adb47e9bd29ffe68246c4b54d6",
+    "files_sha256": "567641ed1825a930d33a76b74399d3eb0ec6186ffd408a8c62f0e727fae4f7f1",
+    "implementation_sha256": "6411aba12840cd9ce2f64bfeaf189bdefdea0d03b3b8b6071fed4b2e551d835f",
+    "project": {
+      "repo": "https://github.com/zeroturnaround/zt-zip.git",
+      "id": "zt-zip"
+    },
+    "cwe_id": "CWE-022",
+    "cwe": {
+      "name": "Path Traversal",
+      "description": "Attacker-controlled data (a request parameter, URL path, archive entry name, file name) is used to build a file system path without normalising it and checking that it stays inside an intended directory, so \"../\" sequences reach files outside it.",
+      "sinks": [
+        "sink/injection/java/path-traversal",
+        "sink/injection/spring-framework/file-disclosure",
+        "sink/injection/apache-struts/file-disclosure"
+      ]
+    },
+    "prompts": {
+      "n1_driver": "3914024e",
+      "n1_repair": "0393a228"
+    },
+    "entry_check_version": 2,
+    "template_version": 2,
+    "llm": {
+      "model": "default",
+      "endpoint_sha256": "9932912d077e8e03e5ead10fb3a45323a7e57acbe7c563638f92e8fa3aa5bd4f",
+      "extra_body": {}
+    }
+  },
+  "provenance": "date-omitted validator replay: verified unchanged experiment, prompts and subject builds; historical default alias served qwen3.6:35b from the configured SoCLaaS endpoint with empty extra_body; N1/N2 raw draws frozen, N2 vote_version=2; only newly needed N3 answers regenerated with pinned model. See results/provenance/validator-refresh.json and labels/sampling_manifest.json."
+}

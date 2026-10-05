@@ -1,0 +1,29 @@
+{
+  "cache_records": 5009,
+  "malformed_json": 0,
+  "models": {
+    "qwen3.6:35b": 5009
+  },
+  "top_level_field_names": {
+    "text": 5009,
+    "model": 5009,
+    "prompt_tokens": 5009,
+    "completion_tokens": 5009,
+    "latency_s": 5009,
+    "cached": 5009,
+    "raw": 5009,
+    "finish_reason": 5009
+  },
+  "records_with_nonempty_raw": 0,
+  "raw_field_names": {},
+  "records_with_sensitive_raw_key_names": 0,
+  "records_containing_known_configured_secret_values": 0,
+  "records_with_credential_like_response_text_patterns": 0,
+  "total_response_text_characters": 8673044,
+  "total_file_bytes": 9937658,
+  "notes": [
+    "No values or credentials printed.",
+    "This scan cannot prove absence of all sensitive content; model response text includes generated code and study reasoning.",
+    "Response cache alone lacks the prompts/request settings needed to interpret opaque cache filenames; preserve manifests and compatible code."
+  ]
+}

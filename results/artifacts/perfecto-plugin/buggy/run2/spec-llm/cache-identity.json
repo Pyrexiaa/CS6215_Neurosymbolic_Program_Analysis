@@ -1,0 +1,43 @@
+{
+  "identity": {
+    "version": 1,
+    "stage": "spec",
+    "settings": {
+      "mode": "full",
+      "batch_size": 25,
+      "samples": 3,
+      "include_jdk_apis": true,
+      "max_call_sites_per_api": 2,
+      "temperature": 0.0,
+      "sample_temperature": 0.7,
+      "max_tokens": 8192,
+      "sample_offset": 2000,
+      "validators": true
+    },
+    "facts_sha256": "085960f13586b5c2b704a444511d18756433e63eee396020c2f7496756656da4",
+    "files_sha256": "9805cbf12684008fd05b823642cf102fd0b0719d0de685966b4aab8e03ea820f",
+    "implementation_sha256": "c7e94bc91a08ff36a0df9e9598a2fd15480c8d29278374e4ff24671e05f601bb",
+    "project": {
+      "repo": "https://github.com/jenkinsci/perfecto-plugin.git",
+      "id": "perfecto-plugin"
+    },
+    "cwe_id": "CWE-078",
+    "cwe": {
+      "name": "OS Command Injection",
+      "description": "Attacker-controlled data reaches an API that starts an operating-system process or shell (Runtime.exec, ProcessBuilder, launcher helpers) without proper neutralisation.",
+      "sinks": [
+        "sink/injection/java/rce"
+      ]
+    },
+    "prompts": {
+      "n2_spec": "647ee643"
+    },
+    "vote_version": 2,
+    "llm": {
+      "model": "default",
+      "endpoint_sha256": "9932912d077e8e03e5ead10fb3a45323a7e57acbe7c563638f92e8fa3aa5bd4f",
+      "extra_body": {}
+    }
+  },
+  "provenance": "date-omitted validator replay: verified unchanged experiment, prompts and subject builds; historical default alias served qwen3.6:35b from the configured SoCLaaS endpoint with empty extra_body; N1/N2 raw draws frozen, N2 vote_version=2; only newly needed N3 answers regenerated with pinned model. See results/provenance/validator-refresh.json and labels/sampling_manifest.json."
+}

@@ -1,0 +1,16 @@
+# Conda environment for this project:
+#   conda env create -f environment.yml
+#   conda activate nesy
+#   bash scripts/setup_tools.sh      # downloads Tai-e and installs this package into the active env
+# Install Java (JDK 17 + JDK 8) separately; setup_tools.sh downloads pinned Maven.
+name: nesy
+channels:
+  - conda-forge
+dependencies:
+  - python=3.11
+  - pip
+  - pyyaml>=6.0
+  - pytest>=7.0
+  - matplotlib>=3.7       # report figures (scripts/make_report_assets.py)
+  - pip:
+      - openai>=1.30

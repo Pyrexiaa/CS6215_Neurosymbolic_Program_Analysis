@@ -1,0 +1,4 @@
+# Array-element sinks added symbolically for accepted N2 array sinks (I-23).
+sinks:
+  - { method: "<java.lang.ProcessBuilder: void <init>(java.lang.String[])>", index: "0[*]" }
+  - { method: "<java.lang.Runtime: java.lang.Process exec(java.lang.String[])>", index: "0[*]" }

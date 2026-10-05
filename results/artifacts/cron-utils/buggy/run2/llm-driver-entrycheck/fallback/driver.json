@@ -1,0 +1,52 @@
+{
+  "kind": "template",
+  "ok": true,
+  "classes_dir": "/Users/jiayulim/Documents/GitHub/CS6215_Neurosymbolic_Program_Analysis/work/runs/cron-utils/buggy/run2/llm-driver-entrycheck/fallback/classes",
+  "source_path": "/Users/jiayulim/Documents/GitHub/CS6215_Neurosymbolic_Program_Analysis/work/runs/cron-utils/buggy/run2/llm-driver-entrycheck/fallback/src/nesy/NesyDriver.java",
+  "entries": [
+    "<com.cronutils.StringValidations: java.lang.String removeValidChars(java.lang.String)>",
+    "<com.cronutils.parser.CronParser: com.cronutils.model.Cron parse(java.lang.String)>",
+    "<com.cronutils.parser.CronParserField: com.cronutils.model.field.CronField parse(java.lang.String)>",
+    "<com.cronutils.parser.FieldParser: com.cronutils.model.field.expression.FieldExpression parse(java.lang.String)>",
+    "<com.cronutils.converter.CronConverter: com.cronutils.converter.CronConverter using(java.lang.String)>",
+    "<com.cronutils.model.field.constraint.FieldConstraints: java.lang.Integer getStringMappingValue(java.lang.String)>",
+    "<com.cronutils.validation.CronValidator: boolean isValid(java.lang.String,javax.validation.ConstraintValidatorContext)>",
+    "<com.cronutils.utils.Preconditions: java.lang.Object checkNotNull(java.lang.Object,java.lang.Object)>",
+    "<com.cronutils.utils.Preconditions: java.lang.String checkNotNullNorEmpty(java.lang.String,java.lang.Object)>",
+    "<com.cronutils.utils.Preconditions: java.util.Collection checkNotNullNorEmpty(java.util.Collection,java.lang.Object)>",
+    "<com.cronutils.utils.StringUtils: boolean containsAny(java.lang.CharSequence,char[])>",
+    "<com.cronutils.model.CronType: com.cronutils.model.CronType valueOf(java.lang.String)>",
+    "<com.cronutils.model.field.CronFieldName: com.cronutils.model.field.CronFieldName valueOf(java.lang.String)>",
+    "<com.cronutils.model.field.expression.Weekdays: com.cronutils.model.field.expression.Weekdays valueOf(java.lang.String)>",
+    "<com.cronutils.model.field.value.SpecialChar: com.cronutils.model.field.value.SpecialChar valueOf(java.lang.String)>",
+    "<com.cronutils.utils.Preconditions: java.lang.Object checkNotNull(java.lang.Object)>",
+    "<com.cronutils.utils.Preconditions: void checkArgument(boolean,java.lang.Object)>",
+    "<com.cronutils.utils.Preconditions: void checkArgument(boolean,java.lang.String,java.lang.Object[])>",
+    "<com.cronutils.utils.Preconditions: void checkPositive(int,java.lang.Object)>",
+    "<com.cronutils.utils.Preconditions: void checkState(boolean,java.lang.String,java.lang.Object[])>",
+    "<com.cronutils.utils.StringUtils: boolean isEmpty(java.lang.CharSequence)>",
+    "<com.cronutils.utils.StringUtils: boolean isNumeric(java.lang.CharSequence)>",
+    "<com.cronutils.utils.StringUtils: java.lang.String join(java.lang.Object[],java.lang.String)>",
+    "<com.cronutils.utils.WeekendPolicy: com.cronutils.utils.WeekendPolicy valueOf(java.lang.String)>"
+  ],
+  "attempts": 2,
+  "errors": [
+    "describeYear(java.util.Collections.singletonMap(nesy.Taint.src(), nesy.Taint.src())); } catch (Throwable t) {} // ENTRY <com.cronutils.descriptor.CronDescriptor: java.lang.String describeYear(java.util.Map)>\n                ^\n    equality constraints: CronFieldName\n    lower bounds: String\n  where K,V are type-variables:\n    K extends Object declared in method <K,V>singletonMap(K,V)\n    V extends Object declared in method <K,V>singletonMap(K,V)\n/Users/jiayulim/Documents/GitHub/CS6215_Neurosymbolic_Program_Analysis/work/runs/cron-utils/buggy/run2/llm-driver-entrycheck/fallback/src/nesy/NesyDriver.java:40: error: incompatible types: inference variable T has incompatible bounds\n        try { com.cronutils.model.field.expression.FieldExpressionFactory.and(java.util.Collections.singletonList(nesy.Taint.src())); } catch (Throwable t) {} // ENTRY <com.cronutils.model.field.expression.FieldExpressionFactory: com.cronutils.model.field.expression.And and(java.util.List)>\n                                                                         ^\n    equality constraints: FieldExpression\n    lower bounds: String\n  where T is a type-variable:\n    T extends Object declared in method <T>singletonList(T)\n/Users/jiayulim/Documents/GitHub/CS6215_Neurosymbolic_Program_Analysis/work/runs/cron-utils/buggy/run2/llm-driver-entrycheck/fallback/src/nesy/NesyDriver.java:43: error: no suitable method found for workdaysCount(ZonedDateTime,int,List<String>,WeekendPolicy)\n        try { com.cronutils.utils.DateUtils.workdaysCount((java.time.ZonedDateTime) null, (int) 0, java.util.Collections.singletonList(nesy.Taint.src()), (com.cronutils.utils.WeekendPolicy) null); } catch (Throwable t) {} // ENTRY <com.cronutils.utils.DateUtils: int workdaysCount(java.time.ZonedDateTime,int,java.util.List,com.cronutils.utils.WeekendPolicy)>\n                                           ^\n    method DateUtils.workdaysCount(ZonedDateTime,int,List<ZonedDateTime>,WeekendPolicy) is not applicable\n      (argument mismatch; inference variable T has incompatible bounds\n          equality constraints: ZonedDateTime\n          lower bounds: String)\n    method DateUtils.workdaysCount(ZonedDateTime,ZonedDateTime,List<ZonedDateTime>,WeekendPolicy) is not applicable\n      (argument mismatch; int cannot be converted to ZonedDateTime)\n  where T is a type-variable:\n    T extends Object declared in method <T>singletonList(T)\n/Users/jiayulim/Documents/GitHub/CS6215_Neurosymbolic_Program_Analysis/work/runs/cron-utils/buggy/run2/llm-driver-entrycheck/fallback/src/nesy/NesyDriver.java:44: error: no suitable method found for workdaysCount(ZonedDateTime,ZonedDateTime,List<String>,WeekendPolicy)\n        try { com.cronutils.utils.DateUtils.workdaysCount((java.time.ZonedDateTime) null, (java.time.ZonedDateTime) null, java.util.Collections.singletonList(nesy.Taint.src()), (com.cronutils.utils.WeekendPolicy) null); } catch (Throwable t) {} // ENTRY <com.cronutils.utils.DateUtils: int workdaysCount(java.time.ZonedDateTime,java.time.ZonedDateTime,java.util.List,com.cronutils.utils.WeekendPolicy)>\n                                           ^\n    method DateUtils.workdaysCount(ZonedDateTime,int,List<ZonedDateTime>,WeekendPolicy) is not applicable\n      (argument mismatch; ZonedDateTime cannot be converted to int)\n    method DateUtils.workdaysCount(ZonedDateTime,ZonedDateTime,List<ZonedDateTime>,WeekendPolicy) is not applicable\n      (argument mismatch; inference variable T has incompatible bounds\n          equality constraints: ZonedDateTime\n          lower bounds: String)\n  where T is a type-variable:\n    T extends Object declared in method <T>singletonList(T)\nNote: /Users/jiayulim/Documents/GitHub/CS6215_Neurosymbolic_Program_Analysis/work/runs/cron-utils/buggy/run2/llm-driver-entrycheck/fallback/src/nesy/NesyDriver.java uses unchecked or unsafe operations.\nNote: Recompile with -Xlint:unchecked for details.\nNote: Some messages have been simplified; recompile with -Xdiags:verbose to get full output\n8 errors"
+  ],
+  "removed_entries": [
+    "<com.cronutils.descriptor.CronDescriptor: java.lang.String describeDayOfWeek(java.util.Map,java.util.Map)>",
+    "<com.cronutils.descriptor.CronDescriptor: java.lang.String describeDayOfMonth(java.util.Map)>",
+    "<com.cronutils.descriptor.CronDescriptor: java.lang.String describeHHmmss(java.util.Map)>",
+    "<com.cronutils.descriptor.CronDescriptor: java.lang.String describeMonth(java.util.Map)>",
+    "<com.cronutils.descriptor.CronDescriptor: java.lang.String describeYear(java.util.Map)>",
+    "<com.cronutils.model.field.expression.FieldExpressionFactory: com.cronutils.model.field.expression.And and(java.util.List)>",
+    "<com.cronutils.utils.DateUtils: int workdaysCount(java.time.ZonedDateTime,int,java.util.List,com.cronutils.utils.WeekendPolicy)>",
+    "<com.cronutils.utils.DateUtils: int workdaysCount(java.time.ZonedDateTime,java.time.ZonedDateTime,java.util.List,com.cronutils.utils.WeekendPolicy)>"
+  ],
+  "app_calls": 32,
+  "taint_calls": 28,
+  "llm_entries": [],
+  "prompt_version": "",
+  "entry_mismatches": [],
+  "check_version": 0
+}

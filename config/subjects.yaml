@@ -1,0 +1,134 @@
+# Evaluation subjects (from CWE-Bench-Java, https://github.com/iris-sast/cwe-bench-java).
+# Fields marked 'from CWE-Bench-Java' were copied from config/cwe-bench-java/*.csv.
+# role: primary = development set used to design and evaluate the analyzer (main study RQ1-RQ4).
+#       test    = candidates for a planned held-out evaluation; no test runs are included.
+#                 Selection protocol: scripts/select_test_subjects.py.
+#                 xxl-job was prepared before that selection protocol and remains unevaluated.
+# Optional per-subject overrides: build_cmd, modules (list of module dirs to analyse),
+#   taie (dict overriding experiment.yaml taie settings), extra_lib_jars.
+subjects:
+  - id: spark
+    slug: perwendel__spark_CVE-2016-9177_2.5.1
+    role: primary
+    cve: CVE-2016-9177
+    cwe: CWE-022
+    repo: https://github.com/perwendel/spark.git
+    tag: "2.5.1"
+    buggy_commit: ce57dfb949ed183405f75dee8cf3262b45c9b3b5
+    fixed_commit: efcb46c710e3f56805b9257a63d1306882f4faf9   # last fix commit
+    all_fix_commits: [efcb46c710e3f56805b9257a63d1306882f4faf9]
+    jdk: 8
+    maven: "3.5.0"
+    why: "Web micro-framework; HTTP request path reaches a file read (easy control case)."
+  - id: zt-zip
+    slug: zeroturnaround__zt-zip_CVE-2018-1002201_1.12
+    role: primary
+    cve: CVE-2018-1002201
+    cwe: CWE-022
+    repo: https://github.com/zeroturnaround/zt-zip.git
+    tag: "1.12"
+    buggy_commit: bd3f3d77f3709f901fd5180a493ef32e4dfebfa6
+    fixed_commit: 759b72f33bc8f4d69f84f09fcb7f010ad45d6fff   # last fix commit
+    all_fix_commits: [759b72f33bc8f4d69f84f09fcb7f010ad45d6fff]
+    jdk: 8
+    maven: "3.5.0"
+    why: "Zip library; Zip Slip where the source is a zip entry name, not HTTP input."
+  - id: cron-utils
+    slug: jmrozanec__cron-utils_CVE-2021-41269_9.1.5
+    role: primary
+    cve: CVE-2021-41269
+    cwe: CWE-094
+    repo: https://github.com/jmrozanec/cron-utils.git
+    tag: "9.1.5"
+    buggy_commit: 34493c66edb490396202edad66c5f8cc5717d494
+    fixed_commit: d6707503ec2f20947f79e38f861dba93b39df9da   # last fix commit
+    all_fix_commits: [cfd2880f80e62ea74b92fa83474c2aabdb9899da, d6707503ec2f20947f79e38f861dba93b39df9da]
+    jdk: 8
+    maven: "3.5.0"
+    why: "Library; cron expression flows into a Bean Validation message (EL injection)."
+    # The fix commits also moved the project to Java 16 (pom: source/target 16), so the upstream
+    # fixed commit cannot be compiled for the JDK 8 analysis. The fixed version is therefore the
+    # buggy commit plus the src/main changes of the two security fix commits (backport).
+    fixed_backport: [9c93c17b8107e58073443a045e22274467b88aae, d7c6e3cd8c8c7732330b00c01fc881845b4a6fbe]
+    fixed_note: "buggy + backported RCE fix (9c93c17 CronParser, d7c6e3c CronValidator); upstream fix commit needs JDK 16"
+  - id: perfecto-plugin
+    slug: jenkinsci__perfecto-plugin_CVE-2020-2261_1.17
+    role: primary
+    cve: CVE-2020-2261
+    cwe: CWE-078
+    repo: https://github.com/jenkinsci/perfecto-plugin.git
+    tag: "1.17"
+    buggy_commit: adabcd9da98628e063bb91198e30ff39a34dc921
+    # The fix commit 52c09ad does not compile (java-jwt HMAC256 throws a checked exception with the
+    # pinned dependencies); the same author's next commit, one minute later, only updates pom.xml
+    # (Jenkins 2.164.3 -> 2.204) and makes it build. That commit is used as the fixed version.
+    fixed_commit: 5787f36205cb4136e879b07add4bb939e3b31240   # fix 52c09ad + pom update
+    fixed_note: "52c09ad (fix) + 5787f36 (pom update needed to compile)"
+    all_fix_commits: [52c09ad2e26416211e4009b095c4f16508b27b8a]
+    jdk: 8
+    maven: "3.5.0"
+    why: "Jenkins plugin; no main method, entry points are plugin hooks."
+    # Whole-program analysis of Jenkins core (222 dependency jars) ran out of memory after 30 min with
+    # a 6 GB heap. This subject is analysed without library bodies (only-app) for EVERY configuration;
+    # call-site mode + chaining transfers keep string flows.
+    taie: {only_app: true}
+  - id: xxl-job
+    slug: xuxueli__xxl-job_CVE-2020-29204_2.2.0
+    role: test
+    cve: CVE-2020-29204
+    cwe: CWE-079
+    repo: https://github.com/xuxueli/xxl-job.git
+    tag: "2.2.0"
+    buggy_commit: 1874c4854f81d6af4a9471d3fe111cdbf713f336
+    fixed_commit: 227628567354d3c156951009d683c6fec3006e0e   # last fix commit
+    all_fix_commits: [227628567354d3c156951009d683c6fec3006e0e]
+    jdk: 8
+    maven: "3.5.0"
+    why: "Spring Boot web app; stored XSS (hard case, both CodeQL and IRIS missed it)."
+    # xxl-job is a multi-module Maven project; only the admin web app is analysed.
+    modules: [xxl-job-admin]
+    # Tai-e's Spring plugin (DI + web entry points) can replace the driver for this subject.
+    # Try it as an extra baseline: taie: {extra_pta_options: {spring: "true"}}
+
+  # ---- planned held-out candidates: one candidate per development CWE ---------------------
+  - id: sling-resolver
+    slug: apache__sling-org-apache-sling-servlets-resolver_CVE-2024-23673_2.10.0
+    role: test
+    cve: CVE-2024-23673
+    cwe: CWE-022
+    repo: https://github.com/apache/sling-org-apache-sling-servlets-resolver.git
+    tag: "2.10.0"
+    buggy_commit: cb80c5e80144fcd9f6ac283ffb564f3b863cfbb2
+    fixed_commit: b54d4e6693e0bcd63a97a0328f4f065b8a81b75e   # last fix commit
+    all_fix_commits: [b54d4e6693e0bcd63a97a0328f4f065b8a81b75e]
+    jdk: 8
+    maven: "3.5.0"
+    why: "Held-out test subject (CWE-022), drawn by scripts/select_test_subjects.py."
+  - id: plexus-utils
+    slug: codehaus-plexus__plexus-utils_CVE-2017-1000487_3.0.15
+    role: test
+    cve: CVE-2017-1000487
+    cwe: CWE-078
+    repo: https://github.com/codehaus-plexus/plexus-utils.git
+    tag: "3.0.15"
+    buggy_commit: 3b271b43f9e5021b4232fc2ffdfb4e469c7f8685
+    fixed_commit: b38a1b3a4352303e4312b2bb601a0d7ec6e28f41   # last fix commit
+    all_fix_commits: [b38a1b3a4352303e4312b2bb601a0d7ec6e28f41]
+    jdk: 8
+    maven: "3.5.0"
+    why: "Held-out test subject (CWE-078), drawn by scripts/select_test_subjects.py."
+  - id: spring-cloud-gateway
+    slug: spring-cloud__spring-cloud-gateway_CVE-2022-22947_3.0.6
+    role: test
+    cve: CVE-2022-22947
+    cwe: CWE-094
+    repo: https://github.com/spring-cloud/spring-cloud-gateway.git
+    tag: "3.0.6"
+    buggy_commit: da0f9014bcc9131d8f15141be74011b89a01420f
+    fixed_commit: 1b868d2159e8fb71c22d583e424ae699f90532e3   # last fix commit
+    all_fix_commits: [1b868d2159e8fb71c22d583e424ae699f90532e3]
+    jdk: 8
+    maven: "3.5.0"
+    why: "Held-out test subject (CWE-094), drawn by scripts/select_test_subjects.py."
+    # Multi-module project; the gateway server module is the deployable library (as for xxl-job-admin).
+    modules: [spring-cloud-gateway-server]

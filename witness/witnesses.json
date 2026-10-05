@@ -1,0 +1,17 @@
+{
+  "description": "Runtime CVE witnesses: harmless proof-of-concept exploits run on the already-built buggy and fixed subjects. Each pins the exact source and sink of its CVE and gives machine-checked ground truth (expect witnessed=true on buggy, witnessed=false on fixed) without any LLM call or human label.",
+  "witnesses": [
+    {"subject": "zt-zip", "cls": "ZtZipWitness", "pkg": "", "cve": "CVE-2018-1002201", "cwe": "CWE-22",
+     "source": "java.util.zip.ZipEntry.getName()", "sink_method": "<java.io.File: void <init>(java.io.File,java.lang.String)>", "sink_arg": 1,
+     "sink_site": "org.zeroturnaround.zip.ZipUtil$Unpacker.process", "needs_test_resources": false},
+    {"subject": "cron-utils", "cls": "CronUtilsWitness", "pkg": "", "cve": "CVE-2021-41269", "cwe": "CWE-94",
+     "source": "@Cron-annotated String (user cron text)", "sink_method": "<javax.validation.ConstraintValidatorContext: javax.validation.ConstraintValidatorContext$ConstraintViolationBuilder buildConstraintViolationWithTemplate(java.lang.String)>", "sink_arg": 0,
+     "sink_site": "com.cronutils.validation.CronValidator.isValid", "needs_test_resources": false},
+    {"subject": "spark", "cls": "SparkWitness", "pkg": "spark.resource", "cve": "CVE-2016-9177", "cwe": "CWE-22",
+     "source": "javax.servlet.http.HttpServletRequest path (getPathInfo/getServletPath)", "sink_method": "spark.resource.ClassPathResourceHandler.getResource", "sink_arg": 0,
+     "sink_site": "spark.resource.ClassPathResourceHandler.getResource", "needs_test_resources": true},
+    {"subject": "perfecto-plugin", "cls": "PerfectoWitness", "pkg": "", "cve": "CVE-2020-2261", "cwe": "CWE-78",
+     "source": "job setting pcParameters (PerfectoBuildWrapper)", "sink_method": "<java.lang.Runtime: java.lang.Process exec(java.lang.String[])>", "sink_arg": 0,
+     "sink_site": "io.plugins.perfecto.PerfectoBuildWrapper.getTunnelId", "needs_test_resources": false}
+  ]
+}

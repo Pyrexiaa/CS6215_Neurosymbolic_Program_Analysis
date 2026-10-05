@@ -1,0 +1,148 @@
+{
+  "by_config": {
+    "B1": {
+      "distinct_observed_logs": 8,
+      "end_exceeds_sampled_peak_records": 3,
+      "observed_records": 8,
+      "records": 8,
+      "sampled_peak_mb_max": 2615.0,
+      "sampled_peak_mb_min": 380.0,
+      "statuses": {
+        "observed": 8
+      },
+      "successful_records": 8
+    },
+    "B2": {
+      "distinct_observed_logs": 8,
+      "end_exceeds_sampled_peak_records": 4,
+      "observed_records": 8,
+      "records": 8,
+      "sampled_peak_mb_max": 2793.0,
+      "sampled_peak_mb_min": 400.0,
+      "statuses": {
+        "observed": 8
+      },
+      "successful_records": 8
+    },
+    "iris-like": {
+      "distinct_observed_logs": 24,
+      "end_exceeds_sampled_peak_records": 10,
+      "observed_records": 24,
+      "records": 24,
+      "sampled_peak_mb_max": 3263.0,
+      "sampled_peak_mb_min": 355.0,
+      "statuses": {
+        "observed": 24
+      },
+      "successful_records": 24
+    },
+    "v1": {
+      "distinct_observed_logs": 24,
+      "end_exceeds_sampled_peak_records": 10,
+      "observed_records": 24,
+      "records": 24,
+      "sampled_peak_mb_max": 3263.0,
+      "sampled_peak_mb_min": 355.0,
+      "statuses": {
+        "observed": 24
+      },
+      "successful_records": 24
+    },
+    "v2": {
+      "distinct_observed_logs": 24,
+      "end_exceeds_sampled_peak_records": 16,
+      "observed_records": 24,
+      "records": 24,
+      "sampled_peak_mb_max": 2501.0,
+      "sampled_peak_mb_min": 372.0,
+      "statuses": {
+        "observed": 24
+      },
+      "successful_records": 24
+    },
+    "v3": {
+      "distinct_observed_logs": 24,
+      "end_exceeds_sampled_peak_records": 16,
+      "observed_records": 24,
+      "records": 24,
+      "sampled_peak_mb_max": 2501.0,
+      "sampled_peak_mb_min": 372.0,
+      "statuses": {
+        "observed": 24
+      },
+      "successful_records": 24
+    },
+    "v3-noV2": {
+      "distinct_observed_logs": 20,
+      "end_exceeds_sampled_peak_records": 11,
+      "observed_records": 20,
+      "records": 24,
+      "sampled_peak_mb_max": 2079.0,
+      "sampled_peak_mb_min": 409.0,
+      "statuses": {
+        "no-terminal-memory-line": 4,
+        "observed": 20
+      },
+      "successful_records": 20
+    },
+    "v3-noV3": {
+      "distinct_observed_logs": 24,
+      "end_exceeds_sampled_peak_records": 16,
+      "observed_records": 24,
+      "records": 24,
+      "sampled_peak_mb_max": 2501.0,
+      "sampled_peak_mb_min": 372.0,
+      "statuses": {
+        "observed": 24
+      },
+      "successful_records": 24
+    },
+    "v3-noval": {
+      "distinct_observed_logs": 20,
+      "end_exceeds_sampled_peak_records": 11,
+      "observed_records": 20,
+      "records": 24,
+      "sampled_peak_mb_max": 2079.0,
+      "sampled_peak_mb_min": 409.0,
+      "statuses": {
+        "no-terminal-memory-line": 4,
+        "observed": 20
+      },
+      "successful_records": 20
+    },
+    "v4": {
+      "distinct_observed_logs": 24,
+      "end_exceeds_sampled_peak_records": 12,
+      "observed_records": 24,
+      "records": 24,
+      "sampled_peak_mb_max": 2963.0,
+      "sampled_peak_mb_min": 399.0,
+      "statuses": {
+        "observed": 24
+      },
+      "successful_records": 24
+    }
+  },
+  "generator": "scripts/extract_memory_usage.py",
+  "hash_scope": "CSV hashes cover only the exact terminal memory line, not compressed-file metadata or unrelated dated log lines.",
+  "measurement": "start, peak and end memory fields from the terminal [Tai-e] logger line; units retained as printed (MB).",
+  "missing_policy": "Missing logs or terminal memory lines remain missing, never zero; failed runs may lack the terminal line.",
+  "overall": {
+    "distinct_observed_logs": 80,
+    "end_exceeds_sampled_peak_records": 109,
+    "observed_records": 200,
+    "records": 208,
+    "sampled_peak_mb_max": 3263.0,
+    "sampled_peak_mb_min": 355.0,
+    "statuses": {
+      "no-terminal-memory-line": 8,
+      "observed": 200
+    },
+    "successful_records": 200
+  },
+  "reuse_caveat": "Several configurations reuse the same Tai-e analysis log; record counts are not independent execution counts.",
+  "sampling_caveat": "The logger's peak is a sampled field, not a strict maximum: start or end can exceed it. These values are not OS process RSS or a bound on actual maximum memory.",
+  "schema": "nesy-archived-jvm-memory-v1",
+  "scope": "All current run records; excludes the separately reported controlled-pair extension.",
+  "source": "Current results/runs records mapped to results/artifacts console.log or console.log.gz by subject, version and taie.out_dir cache-directory name."
+}

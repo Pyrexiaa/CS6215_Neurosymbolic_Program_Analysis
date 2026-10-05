@@ -1,0 +1,85 @@
+# Experiment configuration. Paths are relative to the repository root.
+work_dir: work          # clones, builds, raw Tai-e outputs, LLM cache (git-ignored)
+results_dir: results    # processed results that are committed
+
+build:
+  maven_version: "3.5.4"   # downloaded to tools/ by scripts/setup_tools.sh; CWE-Bench-Java used Maven 3.5.x
+
+taie:
+  jar: tools/tai-e-all-0.5.4.jar
+  jre_version: 8         # analyse against the JDK 8 library (rt.jar from JAVA8_HOME). null = Tai-e's own JRE
+  # Context sensitivity. 1-call is the default because with ci the taint objects that string
+  # transfers put on StringBuilder receivers leak through the JDK's shared `return this` and
+  # taint every concatenation in the program (see docs/design.md, "Baseline configuration").
+  cs: 1-call             # ci | 1-call | 1-obj | 2-type | 2-obj ... (deeper = slower, more memory)
+  only_app: false        # true = do not analyse library bodies (faster; needs transfer specs for libraries)
+  time_limit_s: 1800     # Tai-e pointer-analysis time limit
+  wall_timeout_s: 3600   # hard kill
+  xmx: 6g
+  call_site_mode: true   # Tai-e taint call-site mode (sinks on interfaces without implementations still fire)
+  extra_pta_options: {}  # passed verbatim to -a pta=..., e.g. {merge-string-builders: "false"}
+
+flows:
+  drop_jdk_internal_sinks: true   # discard sinks located inside java.*/sun.* code (whole-program artefacts)
+  drop_jdk_internal_sources: true # discard flows whose source call site is inside java.*/sun.* code
+  app_sinks_only: false           # if true, also discard sinks inside dependency jars
+
+llm:
+  model: null            # null = SOCLAAS_MODEL from .env
+  temperature: 0.0       # first sample
+  sample_temperature: 0.7  # further samples used for majority voting
+  max_tokens: 8192       # includes "thinking" tokens of reasoning models; truncated answers are counted in run records
+  timeout_s: 300
+  # Extra JSON body for the chat endpoint. For Qwen3-style reasoning models you can turn
+  # thinking off to save tokens: {chat_template_kwargs: {enable_thinking: false}}
+  extra_body: {}
+
+driver:                  # N1 / V1
+  max_entries_template: 300   # entry calls in the deterministic (symbolic) driver
+  max_entries_prompt: 60      # candidates shown to the LLM
+  max_repairs: 3              # compile-repair rounds (V1)
+  javac_release: 8
+
+spec:                    # N2 / V2
+  mode: full             # full = label every external API; demand = only APIs called from reachable methods
+  batch_size: 25
+  samples: 3             # majority vote over this many samples (1 = no voting)
+  include_jdk_apis: true # also ask about JDK APIs missing from the base config
+  max_call_sites_per_api: 2
+
+triage:                  # N3 / V3
+  samples: 1
+  max_flows: 200         # cap per run (cost guard); flows beyond the cap are kept unjudged
+  snippet_max_lines: 60
+  max_methods: 6
+
+runs: 3                  # repeated runs per configuration (RQ4 stability)
+
+# Configurations compared in the study. spec layers: base = Tai-e commonly-used config for the CWE
+# + driver sources; manual = config/taint/manual/<subject>.yml; llm = N2 output.
+configs:
+  B1:       {driver: template, spec: [base],          triage: false}
+  B2:       {driver: template, spec: [base, manual],  triage: false}
+  v1:       {driver: template, spec: [base, llm],     triage: false}
+  v2:       {driver: llm,      spec: [base, llm],     triage: false}
+  v3:       {driver: llm,      spec: [base, llm],     triage: true}
+  v3-noval: {driver: llm,      spec: [base, llm],     triage: true, validators: false}
+  # Separate validator ablations. Compatible cached N1/N2/N3
+  # answers are reused; changed flows or evidence can require additional triage requests.
+  v3-noV2:  {driver: llm,      spec: [base, llm],     triage: true, spec_validator: false}
+  v3-noV3:  {driver: llm,      spec: [base, llm],     triage: true, triage_validator: false}
+  # v4 adds three rule groups from the development-subject failure analysis.
+  # Compatible answers are reused; driver repairs and changed triage evidence can require new calls.
+  #   spec_array_elements:  accepted N2 sink on array argument N also gets a sink on N[*]
+  #   triage_trusted_sinks: N3 may not drop a flow as "not_dangerous_sink" if the sink is in the
+  #                         curated base config or was labelled unanimously by N2
+  #   driver_entry_check:   bytecode overload/declared-entry checks and a source-pattern receiver
+  #                         heuristic guide repairs. A compiling driver can retain a final warning;
+  #                         these checks do not guarantee entry coverage or correct receiver state.
+  v4:       {driver: llm,      spec: [base, llm],     triage: true, spec_array_elements: true, triage_trusted_sinks: true,
+             driver_entry_check: true}
+  # IRIS-inspired comparison: template entry points + LLM spec (N2+V2) + LLM triage
+  # (N3+V3), i.e. v3 without N1. Same model, prompts, triage budget (triage.max_flows) and subjects as v3,
+  # so v3 vs iris-like isolates LLM entry-point synthesis, the main design difference to IRIS.
+  # Reuses the cached N2 answers; only N3 calls on the template driver's flows are new.
+  iris-like: {driver: template, spec: [base, llm], triage: true}

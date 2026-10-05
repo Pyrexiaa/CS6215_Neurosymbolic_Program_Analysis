@@ -1,0 +1,63 @@
+{
+  "prompt_version": "e5fc00c6",
+  "decisions": [
+    {
+      "flow_id": "d06c28ee07",
+      "flow_key": "DRIVER => <com.cronutils.StringValidations: java.util.regex.Pattern buildWordsPattern(java.util.Set)>@L73/0",
+      "verdict": "vulnerable",
+      "reason": "exploitable",
+      "kept": true,
+      "v3_ok": null,
+      "v3_problems": [],
+      "evidence": [
+        {
+          "file": "com/cronutils/StringValidations.java",
+          "line": 73,
+          "note": "Pattern.compile is called directly on a string built from user-controlled input without sanitization"
+        },
+        {
+          "file": "com/cronutils/StringValidations.java",
+          "line": 82,
+          "note": "Pattern.compile is called directly on a string built from user-controlled input without sanitization"
+        }
+      ],
+      "explanation": "The sink `Pattern.compile` at lines 73 and 82 accepts a string constructed from the `words` set. Since the source is attacker-controlled and there are no sanitization steps (like escaping regex metacharacters) in `buildWordsPattern`, an attacker can inject malicious regex patterns (e.g., `(a+){1000000}`) leading to ReDoS or arbitrary code execution if the pattern is used in a context that allows it, though CWE-094 specifically refers to code injection via EL/script engines. However, in the context of static analysis reports for CWE-094, if the regex is passed to a template engine or script engine later, it is vulnerable. Given the report explicitly flags CWE-094 and the sink is `Pattern.compile`, this is a classic regex injection vulnerability which can lead to DoS or, in specific configurations, code execution. The lack of escaping makes it exploitable.",
+      "samples": [
+        "vulnerable"
+      ],
+      "methods_shown": [
+        "<com.cronutils.StringValidations: java.util.regex.Pattern buildWordsPattern(java.util.Set)>"
+      ],
+      "override": ""
+    },
+    {
+      "flow_id": "b82b6c816c",
+      "flow_key": "DRIVER => <com.cronutils.StringValidations: java.util.regex.Pattern buildWordsPattern(java.util.Set)>@L82/0",
+      "verdict": "vulnerable",
+      "reason": "exploitable",
+      "kept": true,
+      "v3_ok": null,
+      "v3_problems": [],
+      "evidence": [
+        {
+          "file": "com/cronutils/StringValidations.java",
+          "line": 82,
+          "note": "Pattern.compile is called directly on a string constructed from user-controlled input without sanitization."
+        },
+        {
+          "file": "com/cronutils/StringValidations.java",
+          "line": 76,
+          "note": "User input is appended directly to the regex pattern string."
+        }
+      ],
+      "explanation": "The source of the taint is modeled as attacker-controlled input. The sink `Pattern.compile` is invoked with a string constructed by concatenating this tainted input with static strings. Since `Pattern.compile` interprets the input as a regular expression, an attacker can inject malicious regex syntax (e.g., causing ReDoS or capturing groups) if the input is not sanitized. There are no sanitizers or allow-lists visible in the provided code path that would prevent this interpretation.",
+      "samples": [
+        "vulnerable"
+      ],
+      "methods_shown": [
+        "<com.cronutils.StringValidations: java.util.regex.Pattern buildWordsPattern(java.util.Set)>"
+      ],
+      "override": ""
+    }
+  ]
+}

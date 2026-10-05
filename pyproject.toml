@@ -1,0 +1,27 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "nesy-taint"
+version = "0.1.0"
+description = "CS6215 project: Tai-e taint analysis vs a neuro-symbolic (LLM + Tai-e) taint analyzer"
+requires-python = ">=3.9"
+dependencies = ["openai>=1.30", "PyYAML>=6.0"]
+
+[project.optional-dependencies]
+test = ["pytest>=7.0"]
+report = ["matplotlib>=3.7"]
+
+[project.scripts]
+nesy = "nesy.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+markers = [
+  "integration: needs Java 17, a JDK 8 runtime library and the Tai-e jar (skipped otherwise)",
+  "live_llm: calls the real SoCLaaS endpoint (skipped unless NESY_LIVE_LLM=1)",
+]

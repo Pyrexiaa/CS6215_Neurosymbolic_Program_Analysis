@@ -1,0 +1,22 @@
+{
+  "N1-driver": {
+    "calls": 1,
+    "cached_calls": 0,
+    "prompt_tokens": 2870,
+    "completion_tokens": 2193,
+    "fresh_prompt_tokens": 2870,
+    "fresh_completion_tokens": 2193,
+    "latency_s": 15.736,
+    "truncated": 0
+  },
+  "N1-repair": {
+    "calls": 1,
+    "cached_calls": 0,
+    "prompt_tokens": 1999,
+    "completion_tokens": 1058,
+    "fresh_prompt_tokens": 1999,
+    "fresh_completion_tokens": 1058,
+    "latency_s": 7.714,
+    "truncated": 0
+  }
+}

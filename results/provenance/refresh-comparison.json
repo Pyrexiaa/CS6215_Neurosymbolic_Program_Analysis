@@ -1,0 +1,2082 @@
+[
+  {
+    "record": "spark/buggy/B1/run0.json",
+    "taie_ok": true,
+    "expected_failure": false,
+    "old_reported": 489,
+    "new_reported": 489,
+    "old_gt": 0,
+    "new_gt": 0,
+    "detected_changed": false
+  },
+  {
+    "record": "spark/buggy/B2/run0.json",
+    "taie_ok": true,
+    "expected_failure": false,
+    "old_reported": 974,
+    "new_reported": 974,
+    "old_gt": 11,
+    "new_gt": 11,
+    "detected_changed": false
+  },
+  {
+    "record": "spark/buggy/v1/run0.json",
+    "taie_ok": true,
+    "expected_failure": false,
+    "old_reported": 1051,
+    "new_reported": 1051,
+    "old_gt": 23,
+    "new_gt": 23,
+    "detected_changed": false
+  },
+  {
+    "record": "spark/buggy/v1/run1.json",
+    "taie_ok": true,
+    "expected_failure": false,
+    "old_reported": 1641,
+    "new_reported": 1641,
+    "old_gt": 203,
+    "new_gt": 203,
+    "detected_changed": false
+  },
+  {
+    "record": "spark/buggy/v1/run2.json",
+    "taie_ok": true,
+    "expected_failure": false,
+    "old_reported": 1376,
+    "new_reported": 1376,
+    "old_gt": 31,
+    "new_gt": 31,
+    "detected_changed": false
+  },
+  {
+    "record": "spark/buggy/v2/run0.json",
+    "taie_ok": true,
+    "expected_failure": false,
+    "old_reported": 146,
+    "new_reported": 146,
+    "old_gt": 5,
+    "new_gt": 5,
+    "detected_changed": false
+  },
+  {
+    "record": "spark/buggy/v2/run1.json",
+    "taie_ok": true,
+    "expected_failure": false,
+    "old_reported": 38,
+    "new_reported": 38,
+    "old_gt": 0,
+    "new_gt": 0,
+    "detected_changed": false
+  },
+  {
+    "record": "spark/buggy/v2/run2.json",
+    "taie_ok": true,
+    "expected_failure": false,
+    "old_reported": 224,
+    "new_reported": 224,
+    "old_gt": 5,
+    "new_gt": 5,
+    "detected_changed": false
+  },
+  {
+    "record": "spark/buggy/v3/run0.json",
+    "taie_ok": true,
+    "expected_failure": false,
+    "old_reported": 132,
+    "new_reported": 132,
+    "old_gt": 4,
+    "new_gt": 4,
+    "detected_changed": false
+  },
+  {
+    "record": "spark/buggy/v3/run1.json",
+    "taie_ok": true,
+    "expected_failure": false,
+    "old_reported": 34,
+    "new_reported": 34,
+    "old_gt": 0,
+    "new_gt": 0,
+    "detected_changed": false
+  },
+  {
+    "record": "spark/buggy/v3/run2.json",
+    "taie_ok": true,
+    "expected_failure": false,
+    "old_reported": 208,
+    "new_reported": 208,
+    "old_gt": 5,
+    "new_gt": 5,
+    "detected_changed": false
+  },
+  {
+    "record": "spark/buggy/v3-noval/run0.json",
+    "taie_ok": true,
+    "expected_failure": false,
+    "old_reported": 136,
+    "new_reported": 136,
+    "old_gt": 5,
+    "new_gt": 5,
+    "detected_changed": false
+  },
+  {
+    "record": "spark/buggy/v3-noval/run1.json",
+    "taie_ok": true,
+    "expected_failure": false,
+    "old_reported": 31,
+    "new_reported": 31,
+    "old_gt": 0,
+    "new_gt": 0,
+    "detected_changed": false
+  },
+  {
+    "record": "spark/buggy/v3-noval/run2.json",
+    "taie_ok": true,
+    "expected_failure": false,
+    "old_reported": 204,
+    "new_reported": 204,
+    "old_gt": 4,
+    "new_gt": 4,
+    "detected_changed": false
+  },
+  {
+    "record": "spark/buggy/v3-noV2/run0.json",
+    "taie_ok": true,
+    "expected_failure": false,
+    "old_reported": 136,
+    "new_reported": 136,
+    "old_gt": 5,
+    "new_gt": 5,
+    "detected_changed": false
+  },
+  {
+    "record": "spark/buggy/v3-noV2/run1.json",
+    "taie_ok": true,
+    "expected_failure": false,
+    "old_reported": 34,
+    "new_reported": 34,
+    "old_gt": 0,
+    "new_gt": 0,
+    "detected_changed": false
+  },
+  {
+    "record": "spark/buggy/v3-noV2/run2.json",
+    "taie_ok": true,
+    "expected_failure": false,
+    "old_reported": 205,
+    "new_reported": 205,
+    "old_gt": 4,
+    "new_gt": 4,
+    "detected_changed": false
+  },
+  {
+    "record": "spark/buggy/v3-noV3/run0.json",
+    "taie_ok": true,
+    "expected_failure": false,
+    "old_reported": 132,
+    "new_reported": 132,
+    "old_gt": 4,
+    "new_gt": 4,
+    "detected_changed": false
+  },
+  {
+    "record": "spark/buggy/v3-noV3/run1.json",
+    "taie_ok": true,
+    "expected_failure": false,
+    "old_reported": 31,
+    "new_reported": 31,
+    "old_gt": 0,
+    "new_gt": 0,
+    "detected_changed": false
+  },
+  {
+    "record": "spark/buggy/v3-noV3/run2.json",
+    "taie_ok": true,
+    "expected_failure": false,
+    "old_reported": 207,
+    "new_reported": 207,
+    "old_gt": 5,
+    "new_gt": 5,
+    "detected_changed": false
+  },
+  {
+    "record": "spark/buggy/v4/run0.json",
+    "taie_ok": true,
+    "expected_failure": false,
+    "old_reported": 150,
+    "new_reported": 150,
+    "old_gt": 4,
+    "new_gt": 4,
+    "detected_changed": false
+  },
+  {
+    "record": "spark/buggy/v4/run1.json",
+    "taie_ok": true,
+    "expected_failure": false,
+    "old_reported": 50,
+    "new_reported": 50,
+    "old_gt": 0,
+    "new_gt": 0,
+    "detected_changed": false
+  },
+  {
+    "record": "spark/buggy/v4/run2.json",
+    "taie_ok": true,
+    "expected_failure": false,
+    "old_reported": 209,
+    "new_reported": 209,
+    "old_gt": 5,
+    "new_gt": 5,
+    "detected_changed": false
+  },
+  {
+    "record": "spark/buggy/iris-like/run0.json",
+    "taie_ok": true,
+    "expected_failure": false,
+    "old_reported": 1023,
+    "new_reported": 1023,
+    "old_gt": 23,
+    "new_gt": 23,
+    "detected_changed": false
+  },
+  {
+    "record": "spark/buggy/iris-like/run1.json",
+    "taie_ok": true,
+    "expected_failure": false,
+    "old_reported": 1606,
+    "new_reported": 1606,
+    "old_gt": 199,
+    "new_gt": 199,
+    "detected_changed": false
+  },
+  {
+    "record": "spark/buggy/iris-like/run2.json",
+    "taie_ok": true,
+    "expected_failure": false,
+    "old_reported": 1349,
+    "new_reported": 1349,
+    "old_gt": 31,
+    "new_gt": 31,
+    "detected_changed": false
+  },
+  {
+    "record": "spark/fixed/B1/run0.json",
+    "taie_ok": true,
+    "expected_failure": false,
+    "old_reported": 498,
+    "new_reported": 498,
+    "old_gt": 0,
+    "new_gt": 0,
+    "detected_changed": false
+  },
+  {
+    "record": "spark/fixed/B2/run0.json",
+    "taie_ok": true,
+    "expected_failure": false,
+    "old_reported": 991,
+    "new_reported": 991,
+    "old_gt": 11,
+    "new_gt": 11,
+    "detected_changed": false
+  },
+  {
+    "record": "spark/fixed/v1/run0.json",
+    "taie_ok": true,
+    "expected_failure": false,
+    "old_reported": 1777,
+    "new_reported": 1777,
+    "old_gt": 159,
+    "new_gt": 159,
+    "detected_changed": false
+  },
+  {
+    "record": "spark/fixed/v1/run1.json",
+    "taie_ok": true,
+    "expected_failure": false,
+    "old_reported": 1956,
+    "new_reported": 1822,
+    "old_gt": 168,
+    "new_gt": 168,
+    "detected_changed": false
+  },
+  {
+    "record": "spark/fixed/v1/run2.json",
+    "taie_ok": true,
+    "expected_failure": false,
+    "old_reported": 1541,
+    "new_reported": 1541,
+    "old_gt": 29,
+    "new_gt": 29,
+    "detected_changed": false
+  },
+  {
+    "record": "spark/fixed/v2/run0.json",
+    "taie_ok": true,
+    "expected_failure": false,
+    "old_reported": 16,
+    "new_reported": 16,
+    "old_gt": 0,
+    "new_gt": 0,
+    "detected_changed": false
+  },
+  {
+    "record": "spark/fixed/v2/run1.json",
+    "taie_ok": true,
+    "expected_failure": false,
+    "old_reported": 21,
+    "new_reported": 21,
+    "old_gt": 0,
+    "new_gt": 0,
+    "detected_changed": false
+  },
+  {
+    "record": "spark/fixed/v2/run2.json",
+    "taie_ok": true,
+    "expected_failure": false,
+    "old_reported": 11,
+    "new_reported": 11,
+    "old_gt": 0,
+    "new_gt": 0,
+    "detected_changed": false
+  },
+  {
+    "record": "spark/fixed/v3/run0.json",
+    "taie_ok": true,
+    "expected_failure": false,
+    "old_reported": 12,
+    "new_reported": 12,
+    "old_gt": 0,
+    "new_gt": 0,
+    "detected_changed": false
+  },
+  {
+    "record": "spark/fixed/v3/run1.json",
+    "taie_ok": true,
+    "expected_failure": false,
+    "old_reported": 17,
+    "new_reported": 17,
+    "old_gt": 0,
+    "new_gt": 0,
+    "detected_changed": false
+  },
+  {
+    "record": "spark/fixed/v3/run2.json",
+    "taie_ok": true,
+    "expected_failure": false,
+    "old_reported": 9,
+    "new_reported": 9,
+    "old_gt": 0,
+    "new_gt": 0,
+    "detected_changed": false
+  },
+  {
+    "record": "spark/fixed/v3-noval/run0.json",
+    "taie_ok": true,
+    "expected_failure": false,
+    "old_reported": 12,
+    "new_reported": 12,
+    "old_gt": 0,
+    "new_gt": 0,
+    "detected_changed": false
+  },
+  {
+    "record": "spark/fixed/v3-noval/run1.json",
+    "taie_ok": true,
+    "expected_failure": false,
+    "old_reported": 17,
+    "new_reported": 17,
+    "old_gt": 0,
+    "new_gt": 0,
+    "detected_changed": false
+  },
+  {
+    "record": "spark/fixed/v3-noval/run2.json",
+    "taie_ok": true,
+    "expected_failure": false,
+    "old_reported": 9,
+    "new_reported": 9,
+    "old_gt": 0,
+    "new_gt": 0,
+    "detected_changed": false
+  },
+  {
+    "record": "spark/fixed/v3-noV2/run0.json",
+    "taie_ok": true,
+    "expected_failure": false,
+    "old_reported": 12,
+    "new_reported": 12,
+    "old_gt": 0,
+    "new_gt": 0,
+    "detected_changed": false
+  },
+  {
+    "record": "spark/fixed/v3-noV2/run1.json",
+    "taie_ok": true,
+    "expected_failure": false,
+    "old_reported": 17,
+    "new_reported": 17,
+    "old_gt": 0,
+    "new_gt": 0,
+    "detected_changed": false
+  },
+  {
+    "record": "spark/fixed/v3-noV2/run2.json",
+    "taie_ok": true,
+    "expected_failure": false,
+    "old_reported": 9,
+    "new_reported": 9,
+    "old_gt": 0,
+    "new_gt": 0,
+    "detected_changed": false
+  },
+  {
+    "record": "spark/fixed/v3-noV3/run0.json",
+    "taie_ok": true,
+    "expected_failure": false,
+    "old_reported": 12,
+    "new_reported": 12,
+    "old_gt": 0,
+    "new_gt": 0,
+    "detected_changed": false
+  },
+  {
+    "record": "spark/fixed/v3-noV3/run1.json",
+    "taie_ok": true,
+    "expected_failure": false,
+    "old_reported": 17,
+    "new_reported": 17,
+    "old_gt": 0,
+    "new_gt": 0,
+    "detected_changed": false
+  },
+  {
+    "record": "spark/fixed/v3-noV3/run2.json",
+    "taie_ok": true,
+    "expected_failure": false,
+    "old_reported": 9,
+    "new_reported": 9,
+    "old_gt": 0,
+    "new_gt": 0,
+    "detected_changed": false
+  },
+  {
+    "record": "spark/fixed/v4/run0.json",
+    "taie_ok": true,
+    "expected_failure": false,
+    "old_reported": 18,
+    "new_reported": 18,
+    "old_gt": 0,
+    "new_gt": 0,
+    "detected_changed": false
+  },
+  {
+    "record": "spark/fixed/v4/run1.json",
+    "taie_ok": true,
+    "expected_failure": false,
+    "old_reported": 21,
+    "new_reported": 19,
+    "old_gt": 0,
+    "new_gt": 0,
+    "detected_changed": false
+  },
+  {
+    "record": "spark/fixed/v4/run2.json",
+    "taie_ok": true,
+    "expected_failure": false,
+    "old_reported": 1528,
+    "new_reported": 1528,
+    "old_gt": 29,
+    "new_gt": 29,
+    "detected_changed": false
+  },
+  {
+    "record": "spark/fixed/iris-like/run0.json",
+    "taie_ok": true,
+    "expected_failure": false,
+    "old_reported": 1736,
+    "new_reported": 1736,
+    "old_gt": 145,
+    "new_gt": 145,
+    "detected_changed": false
+  },
+  {
+    "record": "spark/fixed/iris-like/run1.json",
+    "taie_ok": true,
+    "expected_failure": false,
+    "old_reported": 1922,
+    "new_reported": 1783,
+    "old_gt": 156,
+    "new_gt": 154,
+    "detected_changed": false
+  },
+  {
+    "record": "spark/fixed/iris-like/run2.json",
+    "taie_ok": true,
+    "expected_failure": false,
+    "old_reported": 1517,
+    "new_reported": 1517,
+    "old_gt": 29,
+    "new_gt": 29,
+    "detected_changed": false
+  },
+  {
+    "record": "zt-zip/buggy/B1/run0.json",
+    "taie_ok": true,
+    "expected_failure": false,
+    "old_reported": 7,
+    "new_reported": 7,
+    "old_gt": 2,
+    "new_gt": 2,
+    "detected_changed": false
+  },
+  {
+    "record": "zt-zip/buggy/B2/run0.json",
+    "taie_ok": true,
+    "expected_failure": false,
+    "old_reported": 534,
+    "new_reported": 534,
+    "old_gt": 114,
+    "new_gt": 114,
+    "detected_changed": false
+  },
+  {
+    "record": "zt-zip/buggy/v1/run0.json",
+    "taie_ok": true,
+    "expected_failure": false,
+    "old_reported": 339,
+    "new_reported": 339,
+    "old_gt": 81,
+    "new_gt": 81,
+    "detected_changed": false
+  },
+  {
+    "record": "zt-zip/buggy/v1/run1.json",
+    "taie_ok": true,
+    "expected_failure": false,
+    "old_reported": 1047,
+    "new_reported": 1047,
+    "old_gt": 174,
+    "new_gt": 174,
+    "detected_changed": false
+  },
+  {
+    "record": "zt-zip/buggy/v1/run2.json",
+    "taie_ok": true,
+    "expected_failure": false,
+    "old_reported": 290,
+    "new_reported": 290,
+    "old_gt": 75,
+    "new_gt": 75,
+    "detected_changed": false
+  },
+  {
+    "record": "zt-zip/buggy/v2/run0.json",
+    "taie_ok": true,
+    "expected_failure": false,
+    "old_reported": 87,
+    "new_reported": 87,
+    "old_gt": 38,
+    "new_gt": 38,
+    "detected_changed": false
+  },
+  {
+    "record": "zt-zip/buggy/v2/run1.json",
+    "taie_ok": true,
+    "expected_failure": false,
+    "old_reported": 319,
+    "new_reported": 319,
+    "old_gt": 93,
+    "new_gt": 93,
+    "detected_changed": false
+  },
+  {
+    "record": "zt-zip/buggy/v2/run2.json",
+    "taie_ok": true,
+    "expected_failure": false,
+    "old_reported": 63,
+    "new_reported": 63,
+    "old_gt": 32,
+    "new_gt": 32,
+    "detected_changed": false
+  },
+  {
+    "record": "zt-zip/buggy/v3/run0.json",
+    "taie_ok": true,
+    "expected_failure": false,
+    "old_reported": 78,
+    "new_reported": 78,
+    "old_gt": 37,
+    "new_gt": 37,
+    "detected_changed": false
+  },
+  {
+    "record": "zt-zip/buggy/v3/run1.json",
+    "taie_ok": true,
+    "expected_failure": false,
+    "old_reported": 294,
+    "new_reported": 294,
+    "old_gt": 93,
+    "new_gt": 93,
+    "detected_changed": false
+  },
+  {
+    "record": "zt-zip/buggy/v3/run2.json",
+    "taie_ok": true,
+    "expected_failure": false,
+    "old_reported": 57,
+    "new_reported": 57,
+    "old_gt": 32,
+    "new_gt": 32,
+    "detected_changed": false
+  },
+  {
+    "record": "zt-zip/buggy/v3-noval/run0.json",
+    "taie_ok": true,
+    "expected_failure": false,
+    "old_reported": 78,
+    "new_reported": 78,
+    "old_gt": 37,
+    "new_gt": 37,
+    "detected_changed": false
+  },
+  {
+    "record": "zt-zip/buggy/v3-noval/run1.json",
+    "taie_ok": true,
+    "expected_failure": false,
+    "old_reported": 294,
+    "new_reported": 294,
+    "old_gt": 93,
+    "new_gt": 93,
+    "detected_changed": false
+  },
+  {
+    "record": "zt-zip/buggy/v3-noval/run2.json",
+    "taie_ok": true,
+    "expected_failure": false,
+    "old_reported": 57,
+    "new_reported": 57,
+    "old_gt": 32,
+    "new_gt": 32,
+    "detected_changed": false
+  },
+  {
+    "record": "zt-zip/buggy/v3-noV2/run0.json",
+    "taie_ok": true,
+    "expected_failure": false,
+    "old_reported": 78,
+    "new_reported": 78,
+    "old_gt": 37,
+    "new_gt": 37,
+    "detected_changed": false
+  },
+  {
+    "record": "zt-zip/buggy/v3-noV2/run1.json",
+    "taie_ok": true,
+    "expected_failure": false,
+    "old_reported": 294,
+    "new_reported": 294,
+    "old_gt": 93,
+    "new_gt": 93,
+    "detected_changed": false
+  },
+  {
+    "record": "zt-zip/buggy/v3-noV2/run2.json",
+    "taie_ok": true,
+    "expected_failure": false,
+    "old_reported": 57,
+    "new_reported": 57,
+    "old_gt": 32,
+    "new_gt": 32,
+    "detected_changed": false
+  },
+  {
+    "record": "zt-zip/buggy/v3-noV3/run0.json",
+    "taie_ok": true,
+    "expected_failure": false,
+    "old_reported": 78,
+    "new_reported": 78,
+    "old_gt": 37,
+    "new_gt": 37,
+    "detected_changed": false
+  },
+  {
+    "record": "zt-zip/buggy/v3-noV3/run1.json",
+    "taie_ok": true,
+    "expected_failure": false,
+    "old_reported": 294,
+    "new_reported": 294,
+    "old_gt": 93,
+    "new_gt": 93,
+    "detected_changed": false
+  },
+  {
+    "record": "zt-zip/buggy/v3-noV3/run2.json",
+    "taie_ok": true,
+    "expected_failure": false,
+    "old_reported": 57,
+    "new_reported": 57,
+    "old_gt": 32,
+    "new_gt": 32,
+    "detected_changed": false
+  },
+  {
+    "record": "zt-zip/buggy/v4/run0.json",
+    "taie_ok": true,
+    "expected_failure": false,
+    "old_reported": 86,
+    "new_reported": 86,
+    "old_gt": 38,
+    "new_gt": 38,
+    "detected_changed": false
+  },
+  {
+    "record": "zt-zip/buggy/v4/run1.json",
+    "taie_ok": true,
+    "expected_failure": false,
+    "old_reported": 300,
+    "new_reported": 300,
+    "old_gt": 93,
+    "new_gt": 93,
+    "detected_changed": false
+  },
+  {
+    "record": "zt-zip/buggy/v4/run2.json",
+    "taie_ok": true,
+    "expected_failure": false,
+    "old_reported": 62,
+    "new_reported": 62,
+    "old_gt": 32,
+    "new_gt": 32,
+    "detected_changed": false
+  },
+  {
+    "record": "zt-zip/buggy/iris-like/run0.json",
+    "taie_ok": true,
+    "expected_failure": false,
+    "old_reported": 307,
+    "new_reported": 307,
+    "old_gt": 81,
+    "new_gt": 81,
+    "detected_changed": false
+  },
+  {
+    "record": "zt-zip/buggy/iris-like/run1.json",
+    "taie_ok": true,
+    "expected_failure": false,
+    "old_reported": 1043,
+    "new_reported": 1043,
+    "old_gt": 174,
+    "new_gt": 174,
+    "detected_changed": false
+  },
+  {
+    "record": "zt-zip/buggy/iris-like/run2.json",
+    "taie_ok": true,
+    "expected_failure": false,
+    "old_reported": 265,
+    "new_reported": 265,
+    "old_gt": 75,
+    "new_gt": 75,
+    "detected_changed": false
+  },
+  {
+    "record": "zt-zip/fixed/B1/run0.json",
+    "taie_ok": true,
+    "expected_failure": false,
+    "old_reported": 7,
+    "new_reported": 7,
+    "old_gt": 2,
+    "new_gt": 2,
+    "detected_changed": false
+  },
+  {
+    "record": "zt-zip/fixed/B2/run0.json",
+    "taie_ok": true,
+    "expected_failure": false,
+    "old_reported": 534,
+    "new_reported": 534,
+    "old_gt": 114,
+    "new_gt": 114,
+    "detected_changed": false
+  },
+  {
+    "record": "zt-zip/fixed/v1/run0.json",
+    "taie_ok": true,
+    "expected_failure": false,
+    "old_reported": 312,
+    "new_reported": 312,
+    "old_gt": 75,
+    "new_gt": 75,
+    "detected_changed": false
+  },
+  {
+    "record": "zt-zip/fixed/v1/run1.json",
+    "taie_ok": true,
+    "expected_failure": false,
+    "old_reported": 313,
+    "new_reported": 313,
+    "old_gt": 79,
+    "new_gt": 79,
+    "detected_changed": false
+  },
+  {
+    "record": "zt-zip/fixed/v1/run2.json",
+    "taie_ok": true,
+    "expected_failure": false,
+    "old_reported": 400,
+    "new_reported": 347,
+    "old_gt": 87,
+    "new_gt": 81,
+    "detected_changed": false
+  },
+  {
+    "record": "zt-zip/fixed/v2/run0.json",
+    "taie_ok": true,
+    "expected_failure": false,
+    "old_reported": 103,
+    "new_reported": 103,
+    "old_gt": 42,
+    "new_gt": 42,
+    "detected_changed": false
+  },
+  {
+    "record": "zt-zip/fixed/v2/run1.json",
+    "taie_ok": true,
+    "expected_failure": false,
+    "old_reported": 115,
+    "new_reported": 115,
+    "old_gt": 46,
+    "new_gt": 46,
+    "detected_changed": false
+  },
+  {
+    "record": "zt-zip/fixed/v2/run2.json",
+    "taie_ok": true,
+    "expected_failure": false,
+    "old_reported": 76,
+    "new_reported": 70,
+    "old_gt": 32,
+    "new_gt": 32,
+    "detected_changed": false
+  },
+  {
+    "record": "zt-zip/fixed/v3/run0.json",
+    "taie_ok": true,
+    "expected_failure": false,
+    "old_reported": 27,
+    "new_reported": 27,
+    "old_gt": 0,
+    "new_gt": 0,
+    "detected_changed": false
+  },
+  {
+    "record": "zt-zip/fixed/v3/run1.json",
+    "taie_ok": true,
+    "expected_failure": false,
+    "old_reported": 34,
+    "new_reported": 34,
+    "old_gt": 0,
+    "new_gt": 0,
+    "detected_changed": false
+  },
+  {
+    "record": "zt-zip/fixed/v3/run2.json",
+    "taie_ok": true,
+    "expected_failure": false,
+    "old_reported": 36,
+    "new_reported": 30,
+    "old_gt": 1,
+    "new_gt": 1,
+    "detected_changed": false
+  },
+  {
+    "record": "zt-zip/fixed/v3-noval/run0.json",
+    "taie_ok": true,
+    "expected_failure": false,
+    "old_reported": 27,
+    "new_reported": 27,
+    "old_gt": 0,
+    "new_gt": 0,
+    "detected_changed": false
+  },
+  {
+    "record": "zt-zip/fixed/v3-noval/run1.json",
+    "taie_ok": true,
+    "expected_failure": false,
+    "old_reported": 34,
+    "new_reported": 34,
+    "old_gt": 0,
+    "new_gt": 0,
+    "detected_changed": false
+  },
+  {
+    "record": "zt-zip/fixed/v3-noval/run2.json",
+    "taie_ok": true,
+    "expected_failure": false,
+    "old_reported": 36,
+    "new_reported": 30,
+    "old_gt": 1,
+    "new_gt": 1,
+    "detected_changed": false
+  },
+  {
+    "record": "zt-zip/fixed/v3-noV2/run0.json",
+    "taie_ok": true,
+    "expected_failure": false,
+    "old_reported": 27,
+    "new_reported": 27,
+    "old_gt": 0,
+    "new_gt": 0,
+    "detected_changed": false
+  },
+  {
+    "record": "zt-zip/fixed/v3-noV2/run1.json",
+    "taie_ok": true,
+    "expected_failure": false,
+    "old_reported": 34,
+    "new_reported": 34,
+    "old_gt": 0,
+    "new_gt": 0,
+    "detected_changed": false
+  },
+  {
+    "record": "zt-zip/fixed/v3-noV2/run2.json",
+    "taie_ok": true,
+    "expected_failure": false,
+    "old_reported": 36,
+    "new_reported": 30,
+    "old_gt": 1,
+    "new_gt": 1,
+    "detected_changed": false
+  },
+  {
+    "record": "zt-zip/fixed/v3-noV3/run0.json",
+    "taie_ok": true,
+    "expected_failure": false,
+    "old_reported": 27,
+    "new_reported": 27,
+    "old_gt": 0,
+    "new_gt": 0,
+    "detected_changed": false
+  },
+  {
+    "record": "zt-zip/fixed/v3-noV3/run1.json",
+    "taie_ok": true,
+    "expected_failure": false,
+    "old_reported": 34,
+    "new_reported": 34,
+    "old_gt": 0,
+    "new_gt": 0,
+    "detected_changed": false
+  },
+  {
+    "record": "zt-zip/fixed/v3-noV3/run2.json",
+    "taie_ok": true,
+    "expected_failure": false,
+    "old_reported": 36,
+    "new_reported": 30,
+    "old_gt": 1,
+    "new_gt": 1,
+    "detected_changed": false
+  },
+  {
+    "record": "zt-zip/fixed/v4/run0.json",
+    "taie_ok": true,
+    "expected_failure": false,
+    "old_reported": 35,
+    "new_reported": 35,
+    "old_gt": 0,
+    "new_gt": 0,
+    "detected_changed": false
+  },
+  {
+    "record": "zt-zip/fixed/v4/run1.json",
+    "taie_ok": true,
+    "expected_failure": false,
+    "old_reported": 42,
+    "new_reported": 42,
+    "old_gt": 0,
+    "new_gt": 0,
+    "detected_changed": false
+  },
+  {
+    "record": "zt-zip/fixed/v4/run2.json",
+    "taie_ok": true,
+    "expected_failure": false,
+    "old_reported": 44,
+    "new_reported": 38,
+    "old_gt": 1,
+    "new_gt": 1,
+    "detected_changed": false
+  },
+  {
+    "record": "zt-zip/fixed/iris-like/run0.json",
+    "taie_ok": true,
+    "expected_failure": false,
+    "old_reported": 231,
+    "new_reported": 231,
+    "old_gt": 47,
+    "new_gt": 47,
+    "detected_changed": false
+  },
+  {
+    "record": "zt-zip/fixed/iris-like/run1.json",
+    "taie_ok": true,
+    "expected_failure": false,
+    "old_reported": 230,
+    "new_reported": 230,
+    "old_gt": 47,
+    "new_gt": 47,
+    "detected_changed": false
+  },
+  {
+    "record": "zt-zip/fixed/iris-like/run2.json",
+    "taie_ok": true,
+    "expected_failure": false,
+    "old_reported": 329,
+    "new_reported": 270,
+    "old_gt": 65,
+    "new_gt": 55,
+    "detected_changed": false
+  },
+  {
+    "record": "cron-utils/buggy/B1/run0.json",
+    "taie_ok": true,
+    "expected_failure": false,
+    "old_reported": 0,
+    "new_reported": 0,
+    "old_gt": 0,
+    "new_gt": 0,
+    "detected_changed": false
+  },
+  {
+    "record": "cron-utils/buggy/B2/run0.json",
+    "taie_ok": true,
+    "expected_failure": false,
+    "old_reported": 1,
+    "new_reported": 1,
+    "old_gt": 1,
+    "new_gt": 1,
+    "detected_changed": false
+  },
+  {
+    "record": "cron-utils/buggy/v1/run0.json",
+    "taie_ok": true,
+    "expected_failure": false,
+    "old_reported": 2,
+    "new_reported": 2,
+    "old_gt": 0,
+    "new_gt": 0,
+    "detected_changed": false
+  },
+  {
+    "record": "cron-utils/buggy/v1/run1.json",
+    "taie_ok": true,
+    "expected_failure": false,
+    "old_reported": 3,
+    "new_reported": 3,
+    "old_gt": 1,
+    "new_gt": 1,
+    "detected_changed": false
+  },
+  {
+    "record": "cron-utils/buggy/v1/run2.json",
+    "taie_ok": true,
+    "expected_failure": false,
+    "old_reported": 3,
+    "new_reported": 3,
+    "old_gt": 1,
+    "new_gt": 1,
+    "detected_changed": false
+  },
+  {
+    "record": "cron-utils/buggy/v2/run0.json",
+    "taie_ok": true,
+    "expected_failure": false,
+    "old_reported": 2,
+    "new_reported": 2,
+    "old_gt": 0,
+    "new_gt": 0,
+    "detected_changed": false
+  },
+  {
+    "record": "cron-utils/buggy/v2/run1.json",
+    "taie_ok": true,
+    "expected_failure": false,
+    "old_reported": 3,
+    "new_reported": 3,
+    "old_gt": 1,
+    "new_gt": 1,
+    "detected_changed": false
+  },
+  {
+    "record": "cron-utils/buggy/v2/run2.json",
+    "taie_ok": true,
+    "expected_failure": false,
+    "old_reported": 3,
+    "new_reported": 3,
+    "old_gt": 1,
+    "new_gt": 1,
+    "detected_changed": false
+  },
+  {
+    "record": "cron-utils/buggy/v3/run0.json",
+    "taie_ok": true,
+    "expected_failure": false,
+    "old_reported": 2,
+    "new_reported": 2,
+    "old_gt": 0,
+    "new_gt": 0,
+    "detected_changed": false
+  },
+  {
+    "record": "cron-utils/buggy/v3/run1.json",
+    "taie_ok": true,
+    "expected_failure": false,
+    "old_reported": 1,
+    "new_reported": 1,
+    "old_gt": 0,
+    "new_gt": 0,
+    "detected_changed": false
+  },
+  {
+    "record": "cron-utils/buggy/v3/run2.json",
+    "taie_ok": true,
+    "expected_failure": false,
+    "old_reported": 0,
+    "new_reported": 0,
+    "old_gt": 0,
+    "new_gt": 0,
+    "detected_changed": false
+  },
+  {
+    "record": "cron-utils/buggy/v3-noval/run0.json",
+    "taie_ok": true,
+    "expected_failure": false,
+    "old_reported": 2,
+    "new_reported": 2,
+    "old_gt": 0,
+    "new_gt": 0,
+    "detected_changed": false
+  },
+  {
+    "record": "cron-utils/buggy/v3-noval/run1.json",
+    "taie_ok": true,
+    "expected_failure": false,
+    "old_reported": 1,
+    "new_reported": 1,
+    "old_gt": 0,
+    "new_gt": 0,
+    "detected_changed": false
+  },
+  {
+    "record": "cron-utils/buggy/v3-noval/run2.json",
+    "taie_ok": true,
+    "expected_failure": false,
+    "old_reported": 0,
+    "new_reported": 0,
+    "old_gt": 0,
+    "new_gt": 0,
+    "detected_changed": false
+  },
+  {
+    "record": "cron-utils/buggy/v3-noV2/run0.json",
+    "taie_ok": true,
+    "expected_failure": false,
+    "old_reported": 2,
+    "new_reported": 2,
+    "old_gt": 0,
+    "new_gt": 0,
+    "detected_changed": false
+  },
+  {
+    "record": "cron-utils/buggy/v3-noV2/run1.json",
+    "taie_ok": true,
+    "expected_failure": false,
+    "old_reported": 1,
+    "new_reported": 1,
+    "old_gt": 0,
+    "new_gt": 0,
+    "detected_changed": false
+  },
+  {
+    "record": "cron-utils/buggy/v3-noV2/run2.json",
+    "taie_ok": true,
+    "expected_failure": false,
+    "old_reported": 0,
+    "new_reported": 0,
+    "old_gt": 0,
+    "new_gt": 0,
+    "detected_changed": false
+  },
+  {
+    "record": "cron-utils/buggy/v3-noV3/run0.json",
+    "taie_ok": true,
+    "expected_failure": false,
+    "old_reported": 2,
+    "new_reported": 2,
+    "old_gt": 0,
+    "new_gt": 0,
+    "detected_changed": false
+  },
+  {
+    "record": "cron-utils/buggy/v3-noV3/run1.json",
+    "taie_ok": true,
+    "expected_failure": false,
+    "old_reported": 1,
+    "new_reported": 1,
+    "old_gt": 0,
+    "new_gt": 0,
+    "detected_changed": false
+  },
+  {
+    "record": "cron-utils/buggy/v3-noV3/run2.json",
+    "taie_ok": true,
+    "expected_failure": false,
+    "old_reported": 0,
+    "new_reported": 0,
+    "old_gt": 0,
+    "new_gt": 0,
+    "detected_changed": false
+  },
+  {
+    "record": "cron-utils/buggy/v4/run0.json",
+    "taie_ok": true,
+    "expected_failure": false,
+    "old_reported": 2,
+    "new_reported": 2,
+    "old_gt": 0,
+    "new_gt": 0,
+    "detected_changed": false
+  },
+  {
+    "record": "cron-utils/buggy/v4/run1.json",
+    "taie_ok": true,
+    "expected_failure": false,
+    "old_reported": 2,
+    "new_reported": 2,
+    "old_gt": 1,
+    "new_gt": 1,
+    "detected_changed": false
+  },
+  {
+    "record": "cron-utils/buggy/v4/run2.json",
+    "taie_ok": true,
+    "expected_failure": false,
+    "old_reported": 1,
+    "new_reported": 1,
+    "old_gt": 1,
+    "new_gt": 1,
+    "detected_changed": false
+  },
+  {
+    "record": "cron-utils/buggy/iris-like/run0.json",
+    "taie_ok": true,
+    "expected_failure": false,
+    "old_reported": 0,
+    "new_reported": 0,
+    "old_gt": 0,
+    "new_gt": 0,
+    "detected_changed": false
+  },
+  {
+    "record": "cron-utils/buggy/iris-like/run1.json",
+    "taie_ok": true,
+    "expected_failure": false,
+    "old_reported": 1,
+    "new_reported": 1,
+    "old_gt": 0,
+    "new_gt": 0,
+    "detected_changed": false
+  },
+  {
+    "record": "cron-utils/buggy/iris-like/run2.json",
+    "taie_ok": true,
+    "expected_failure": false,
+    "old_reported": 0,
+    "new_reported": 0,
+    "old_gt": 0,
+    "new_gt": 0,
+    "detected_changed": false
+  },
+  {
+    "record": "cron-utils/fixed/B1/run0.json",
+    "taie_ok": true,
+    "expected_failure": false,
+    "old_reported": 0,
+    "new_reported": 0,
+    "old_gt": 0,
+    "new_gt": 0,
+    "detected_changed": false
+  },
+  {
+    "record": "cron-utils/fixed/B2/run0.json",
+    "taie_ok": true,
+    "expected_failure": false,
+    "old_reported": 0,
+    "new_reported": 0,
+    "old_gt": 0,
+    "new_gt": 0,
+    "detected_changed": false
+  },
+  {
+    "record": "cron-utils/fixed/v1/run0.json",
+    "taie_ok": true,
+    "expected_failure": false,
+    "old_reported": 2,
+    "new_reported": 2,
+    "old_gt": 0,
+    "new_gt": 0,
+    "detected_changed": false
+  },
+  {
+    "record": "cron-utils/fixed/v1/run1.json",
+    "taie_ok": true,
+    "expected_failure": false,
+    "old_reported": 2,
+    "new_reported": 2,
+    "old_gt": 0,
+    "new_gt": 0,
+    "detected_changed": false
+  },
+  {
+    "record": "cron-utils/fixed/v1/run2.json",
+    "taie_ok": true,
+    "expected_failure": false,
+    "old_reported": 2,
+    "new_reported": 2,
+    "old_gt": 0,
+    "new_gt": 0,
+    "detected_changed": false
+  },
+  {
+    "record": "cron-utils/fixed/v2/run0.json",
+    "taie_ok": true,
+    "expected_failure": false,
+    "old_reported": 2,
+    "new_reported": 2,
+    "old_gt": 0,
+    "new_gt": 0,
+    "detected_changed": false
+  },
+  {
+    "record": "cron-utils/fixed/v2/run1.json",
+    "taie_ok": true,
+    "expected_failure": false,
+    "old_reported": 2,
+    "new_reported": 2,
+    "old_gt": 0,
+    "new_gt": 0,
+    "detected_changed": false
+  },
+  {
+    "record": "cron-utils/fixed/v2/run2.json",
+    "taie_ok": true,
+    "expected_failure": false,
+    "old_reported": 2,
+    "new_reported": 2,
+    "old_gt": 0,
+    "new_gt": 0,
+    "detected_changed": false
+  },
+  {
+    "record": "cron-utils/fixed/v3/run0.json",
+    "taie_ok": true,
+    "expected_failure": false,
+    "old_reported": 2,
+    "new_reported": 2,
+    "old_gt": 0,
+    "new_gt": 0,
+    "detected_changed": false
+  },
+  {
+    "record": "cron-utils/fixed/v3/run1.json",
+    "taie_ok": true,
+    "expected_failure": false,
+    "old_reported": 1,
+    "new_reported": 1,
+    "old_gt": 0,
+    "new_gt": 0,
+    "detected_changed": false
+  },
+  {
+    "record": "cron-utils/fixed/v3/run2.json",
+    "taie_ok": true,
+    "expected_failure": false,
+    "old_reported": 0,
+    "new_reported": 0,
+    "old_gt": 0,
+    "new_gt": 0,
+    "detected_changed": false
+  },
+  {
+    "record": "cron-utils/fixed/v3-noval/run0.json",
+    "taie_ok": true,
+    "expected_failure": false,
+    "old_reported": 2,
+    "new_reported": 2,
+    "old_gt": 0,
+    "new_gt": 0,
+    "detected_changed": false
+  },
+  {
+    "record": "cron-utils/fixed/v3-noval/run1.json",
+    "taie_ok": true,
+    "expected_failure": false,
+    "old_reported": 1,
+    "new_reported": 1,
+    "old_gt": 0,
+    "new_gt": 0,
+    "detected_changed": false
+  },
+  {
+    "record": "cron-utils/fixed/v3-noval/run2.json",
+    "taie_ok": true,
+    "expected_failure": false,
+    "old_reported": 0,
+    "new_reported": 0,
+    "old_gt": 0,
+    "new_gt": 0,
+    "detected_changed": false
+  },
+  {
+    "record": "cron-utils/fixed/v3-noV2/run0.json",
+    "taie_ok": true,
+    "expected_failure": false,
+    "old_reported": 2,
+    "new_reported": 2,
+    "old_gt": 0,
+    "new_gt": 0,
+    "detected_changed": false
+  },
+  {
+    "record": "cron-utils/fixed/v3-noV2/run1.json",
+    "taie_ok": true,
+    "expected_failure": false,
+    "old_reported": 1,
+    "new_reported": 1,
+    "old_gt": 0,
+    "new_gt": 0,
+    "detected_changed": false
+  },
+  {
+    "record": "cron-utils/fixed/v3-noV2/run2.json",
+    "taie_ok": true,
+    "expected_failure": false,
+    "old_reported": 0,
+    "new_reported": 0,
+    "old_gt": 0,
+    "new_gt": 0,
+    "detected_changed": false
+  },
+  {
+    "record": "cron-utils/fixed/v3-noV3/run0.json",
+    "taie_ok": true,
+    "expected_failure": false,
+    "old_reported": 2,
+    "new_reported": 2,
+    "old_gt": 0,
+    "new_gt": 0,
+    "detected_changed": false
+  },
+  {
+    "record": "cron-utils/fixed/v3-noV3/run1.json",
+    "taie_ok": true,
+    "expected_failure": false,
+    "old_reported": 1,
+    "new_reported": 1,
+    "old_gt": 0,
+    "new_gt": 0,
+    "detected_changed": false
+  },
+  {
+    "record": "cron-utils/fixed/v3-noV3/run2.json",
+    "taie_ok": true,
+    "expected_failure": false,
+    "old_reported": 0,
+    "new_reported": 0,
+    "old_gt": 0,
+    "new_gt": 0,
+    "detected_changed": false
+  },
+  {
+    "record": "cron-utils/fixed/v4/run0.json",
+    "taie_ok": true,
+    "expected_failure": false,
+    "old_reported": 2,
+    "new_reported": 2,
+    "old_gt": 0,
+    "new_gt": 0,
+    "detected_changed": false
+  },
+  {
+    "record": "cron-utils/fixed/v4/run1.json",
+    "taie_ok": true,
+    "expected_failure": false,
+    "old_reported": 1,
+    "new_reported": 1,
+    "old_gt": 0,
+    "new_gt": 0,
+    "detected_changed": false
+  },
+  {
+    "record": "cron-utils/fixed/v4/run2.json",
+    "taie_ok": true,
+    "expected_failure": false,
+    "old_reported": 0,
+    "new_reported": 0,
+    "old_gt": 0,
+    "new_gt": 0,
+    "detected_changed": false
+  },
+  {
+    "record": "cron-utils/fixed/iris-like/run0.json",
+    "taie_ok": true,
+    "expected_failure": false,
+    "old_reported": 0,
+    "new_reported": 0,
+    "old_gt": 0,
+    "new_gt": 0,
+    "detected_changed": false
+  },
+  {
+    "record": "cron-utils/fixed/iris-like/run1.json",
+    "taie_ok": true,
+    "expected_failure": false,
+    "old_reported": 1,
+    "new_reported": 1,
+    "old_gt": 0,
+    "new_gt": 0,
+    "detected_changed": false
+  },
+  {
+    "record": "cron-utils/fixed/iris-like/run2.json",
+    "taie_ok": true,
+    "expected_failure": false,
+    "old_reported": 0,
+    "new_reported": 0,
+    "old_gt": 0,
+    "new_gt": 0,
+    "detected_changed": false
+  },
+  {
+    "record": "perfecto-plugin/buggy/B1/run0.json",
+    "taie_ok": true,
+    "expected_failure": false,
+    "old_reported": 0,
+    "new_reported": 0,
+    "old_gt": 0,
+    "new_gt": 0,
+    "detected_changed": false
+  },
+  {
+    "record": "perfecto-plugin/buggy/B2/run0.json",
+    "taie_ok": true,
+    "expected_failure": false,
+    "old_reported": 2,
+    "new_reported": 2,
+    "old_gt": 2,
+    "new_gt": 2,
+    "detected_changed": false
+  },
+  {
+    "record": "perfecto-plugin/buggy/v1/run0.json",
+    "taie_ok": true,
+    "expected_failure": false,
+    "old_reported": 1,
+    "new_reported": 1,
+    "old_gt": 1,
+    "new_gt": 1,
+    "detected_changed": false
+  },
+  {
+    "record": "perfecto-plugin/buggy/v1/run1.json",
+    "taie_ok": true,
+    "expected_failure": false,
+    "old_reported": 1,
+    "new_reported": 1,
+    "old_gt": 1,
+    "new_gt": 1,
+    "detected_changed": false
+  },
+  {
+    "record": "perfecto-plugin/buggy/v1/run2.json",
+    "taie_ok": true,
+    "expected_failure": false,
+    "old_reported": 0,
+    "new_reported": 0,
+    "old_gt": 0,
+    "new_gt": 0,
+    "detected_changed": false
+  },
+  {
+    "record": "perfecto-plugin/buggy/v2/run0.json",
+    "taie_ok": true,
+    "expected_failure": false,
+    "old_reported": 0,
+    "new_reported": 0,
+    "old_gt": 0,
+    "new_gt": 0,
+    "detected_changed": false
+  },
+  {
+    "record": "perfecto-plugin/buggy/v2/run1.json",
+    "taie_ok": true,
+    "expected_failure": false,
+    "old_reported": 1,
+    "new_reported": 1,
+    "old_gt": 1,
+    "new_gt": 1,
+    "detected_changed": false
+  },
+  {
+    "record": "perfecto-plugin/buggy/v2/run2.json",
+    "taie_ok": true,
+    "expected_failure": false,
+    "old_reported": 0,
+    "new_reported": 0,
+    "old_gt": 0,
+    "new_gt": 0,
+    "detected_changed": false
+  },
+  {
+    "record": "perfecto-plugin/buggy/v3/run0.json",
+    "taie_ok": true,
+    "expected_failure": false,
+    "old_reported": 0,
+    "new_reported": 0,
+    "old_gt": 0,
+    "new_gt": 0,
+    "detected_changed": false
+  },
+  {
+    "record": "perfecto-plugin/buggy/v3/run1.json",
+    "taie_ok": true,
+    "expected_failure": false,
+    "old_reported": 0,
+    "new_reported": 0,
+    "old_gt": 0,
+    "new_gt": 0,
+    "detected_changed": false
+  },
+  {
+    "record": "perfecto-plugin/buggy/v3/run2.json",
+    "taie_ok": true,
+    "expected_failure": false,
+    "old_reported": 0,
+    "new_reported": 0,
+    "old_gt": 0,
+    "new_gt": 0,
+    "detected_changed": false
+  },
+  {
+    "record": "perfecto-plugin/buggy/v3-noval/run0.json",
+    "taie_ok": false,
+    "expected_failure": true,
+    "old_reported": 0,
+    "new_reported": 0,
+    "old_gt": 0,
+    "new_gt": 0,
+    "detected_changed": false
+  },
+  {
+    "record": "perfecto-plugin/buggy/v3-noval/run1.json",
+    "taie_ok": true,
+    "expected_failure": false,
+    "old_reported": 0,
+    "new_reported": 0,
+    "old_gt": 0,
+    "new_gt": 0,
+    "detected_changed": false
+  },
+  {
+    "record": "perfecto-plugin/buggy/v3-noval/run2.json",
+    "taie_ok": true,
+    "expected_failure": false,
+    "old_reported": 0,
+    "new_reported": 0,
+    "old_gt": 0,
+    "new_gt": 0,
+    "detected_changed": false
+  },
+  {
+    "record": "perfecto-plugin/buggy/v3-noV2/run0.json",
+    "taie_ok": false,
+    "expected_failure": true,
+    "old_reported": 0,
+    "new_reported": 0,
+    "old_gt": 0,
+    "new_gt": 0,
+    "detected_changed": false
+  },
+  {
+    "record": "perfecto-plugin/buggy/v3-noV2/run1.json",
+    "taie_ok": true,
+    "expected_failure": false,
+    "old_reported": 0,
+    "new_reported": 0,
+    "old_gt": 0,
+    "new_gt": 0,
+    "detected_changed": false
+  },
+  {
+    "record": "perfecto-plugin/buggy/v3-noV2/run2.json",
+    "taie_ok": true,
+    "expected_failure": false,
+    "old_reported": 0,
+    "new_reported": 0,
+    "old_gt": 0,
+    "new_gt": 0,
+    "detected_changed": false
+  },
+  {
+    "record": "perfecto-plugin/buggy/v3-noV3/run0.json",
+    "taie_ok": true,
+    "expected_failure": false,
+    "old_reported": 0,
+    "new_reported": 0,
+    "old_gt": 0,
+    "new_gt": 0,
+    "detected_changed": false
+  },
+  {
+    "record": "perfecto-plugin/buggy/v3-noV3/run1.json",
+    "taie_ok": true,
+    "expected_failure": false,
+    "old_reported": 0,
+    "new_reported": 0,
+    "old_gt": 0,
+    "new_gt": 0,
+    "detected_changed": false
+  },
+  {
+    "record": "perfecto-plugin/buggy/v3-noV3/run2.json",
+    "taie_ok": true,
+    "expected_failure": false,
+    "old_reported": 0,
+    "new_reported": 0,
+    "old_gt": 0,
+    "new_gt": 0,
+    "detected_changed": false
+  },
+  {
+    "record": "perfecto-plugin/buggy/v4/run0.json",
+    "taie_ok": true,
+    "expected_failure": false,
+    "old_reported": 1,
+    "new_reported": 1,
+    "old_gt": 1,
+    "new_gt": 1,
+    "detected_changed": false
+  },
+  {
+    "record": "perfecto-plugin/buggy/v4/run1.json",
+    "taie_ok": true,
+    "expected_failure": false,
+    "old_reported": 2,
+    "new_reported": 2,
+    "old_gt": 2,
+    "new_gt": 2,
+    "detected_changed": false
+  },
+  {
+    "record": "perfecto-plugin/buggy/v4/run2.json",
+    "taie_ok": true,
+    "expected_failure": false,
+    "old_reported": 2,
+    "new_reported": 2,
+    "old_gt": 2,
+    "new_gt": 2,
+    "detected_changed": false
+  },
+  {
+    "record": "perfecto-plugin/buggy/iris-like/run0.json",
+    "taie_ok": true,
+    "expected_failure": false,
+    "old_reported": 1,
+    "new_reported": 1,
+    "old_gt": 1,
+    "new_gt": 1,
+    "detected_changed": false
+  },
+  {
+    "record": "perfecto-plugin/buggy/iris-like/run1.json",
+    "taie_ok": true,
+    "expected_failure": false,
+    "old_reported": 0,
+    "new_reported": 0,
+    "old_gt": 0,
+    "new_gt": 0,
+    "detected_changed": false
+  },
+  {
+    "record": "perfecto-plugin/buggy/iris-like/run2.json",
+    "taie_ok": true,
+    "expected_failure": false,
+    "old_reported": 0,
+    "new_reported": 0,
+    "old_gt": 0,
+    "new_gt": 0,
+    "detected_changed": false
+  },
+  {
+    "record": "perfecto-plugin/fixed/B1/run0.json",
+    "taie_ok": true,
+    "expected_failure": false,
+    "old_reported": 0,
+    "new_reported": 0,
+    "old_gt": 0,
+    "new_gt": 0,
+    "detected_changed": false
+  },
+  {
+    "record": "perfecto-plugin/fixed/B2/run0.json",
+    "taie_ok": true,
+    "expected_failure": false,
+    "old_reported": 0,
+    "new_reported": 0,
+    "old_gt": 0,
+    "new_gt": 0,
+    "detected_changed": false
+  },
+  {
+    "record": "perfecto-plugin/fixed/v1/run0.json",
+    "taie_ok": true,
+    "expected_failure": false,
+    "old_reported": 2,
+    "new_reported": 2,
+    "old_gt": 1,
+    "new_gt": 1,
+    "detected_changed": false
+  },
+  {
+    "record": "perfecto-plugin/fixed/v1/run1.json",
+    "taie_ok": true,
+    "expected_failure": false,
+    "old_reported": 2,
+    "new_reported": 2,
+    "old_gt": 1,
+    "new_gt": 1,
+    "detected_changed": false
+  },
+  {
+    "record": "perfecto-plugin/fixed/v1/run2.json",
+    "taie_ok": true,
+    "expected_failure": false,
+    "old_reported": 2,
+    "new_reported": 2,
+    "old_gt": 1,
+    "new_gt": 1,
+    "detected_changed": false
+  },
+  {
+    "record": "perfecto-plugin/fixed/v2/run0.json",
+    "taie_ok": true,
+    "expected_failure": false,
+    "old_reported": 0,
+    "new_reported": 0,
+    "old_gt": 0,
+    "new_gt": 0,
+    "detected_changed": false
+  },
+  {
+    "record": "perfecto-plugin/fixed/v2/run1.json",
+    "taie_ok": true,
+    "expected_failure": false,
+    "old_reported": 0,
+    "new_reported": 0,
+    "old_gt": 0,
+    "new_gt": 0,
+    "detected_changed": false
+  },
+  {
+    "record": "perfecto-plugin/fixed/v2/run2.json",
+    "taie_ok": true,
+    "expected_failure": false,
+    "old_reported": 0,
+    "new_reported": 0,
+    "old_gt": 0,
+    "new_gt": 0,
+    "detected_changed": false
+  },
+  {
+    "record": "perfecto-plugin/fixed/v3/run0.json",
+    "taie_ok": true,
+    "expected_failure": false,
+    "old_reported": 0,
+    "new_reported": 0,
+    "old_gt": 0,
+    "new_gt": 0,
+    "detected_changed": false
+  },
+  {
+    "record": "perfecto-plugin/fixed/v3/run1.json",
+    "taie_ok": true,
+    "expected_failure": false,
+    "old_reported": 0,
+    "new_reported": 0,
+    "old_gt": 0,
+    "new_gt": 0,
+    "detected_changed": false
+  },
+  {
+    "record": "perfecto-plugin/fixed/v3/run2.json",
+    "taie_ok": true,
+    "expected_failure": false,
+    "old_reported": 0,
+    "new_reported": 0,
+    "old_gt": 0,
+    "new_gt": 0,
+    "detected_changed": false
+  },
+  {
+    "record": "perfecto-plugin/fixed/v3-noval/run0.json",
+    "taie_ok": false,
+    "expected_failure": true,
+    "old_reported": 0,
+    "new_reported": 0,
+    "old_gt": 0,
+    "new_gt": 0,
+    "detected_changed": false
+  },
+  {
+    "record": "perfecto-plugin/fixed/v3-noval/run1.json",
+    "taie_ok": false,
+    "expected_failure": true,
+    "old_reported": 0,
+    "new_reported": 0,
+    "old_gt": 0,
+    "new_gt": 0,
+    "detected_changed": false
+  },
+  {
+    "record": "perfecto-plugin/fixed/v3-noval/run2.json",
+    "taie_ok": false,
+    "expected_failure": true,
+    "old_reported": 0,
+    "new_reported": 0,
+    "old_gt": 0,
+    "new_gt": 0,
+    "detected_changed": false
+  },
+  {
+    "record": "perfecto-plugin/fixed/v3-noV2/run0.json",
+    "taie_ok": false,
+    "expected_failure": true,
+    "old_reported": 0,
+    "new_reported": 0,
+    "old_gt": 0,
+    "new_gt": 0,
+    "detected_changed": false
+  },
+  {
+    "record": "perfecto-plugin/fixed/v3-noV2/run1.json",
+    "taie_ok": false,
+    "expected_failure": true,
+    "old_reported": 0,
+    "new_reported": 0,
+    "old_gt": 0,
+    "new_gt": 0,
+    "detected_changed": false
+  },
+  {
+    "record": "perfecto-plugin/fixed/v3-noV2/run2.json",
+    "taie_ok": false,
+    "expected_failure": true,
+    "old_reported": 0,
+    "new_reported": 0,
+    "old_gt": 0,
+    "new_gt": 0,
+    "detected_changed": false
+  },
+  {
+    "record": "perfecto-plugin/fixed/v3-noV3/run0.json",
+    "taie_ok": true,
+    "expected_failure": false,
+    "old_reported": 0,
+    "new_reported": 0,
+    "old_gt": 0,
+    "new_gt": 0,
+    "detected_changed": false
+  },
+  {
+    "record": "perfecto-plugin/fixed/v3-noV3/run1.json",
+    "taie_ok": true,
+    "expected_failure": false,
+    "old_reported": 0,
+    "new_reported": 0,
+    "old_gt": 0,
+    "new_gt": 0,
+    "detected_changed": false
+  },
+  {
+    "record": "perfecto-plugin/fixed/v3-noV3/run2.json",
+    "taie_ok": true,
+    "expected_failure": false,
+    "old_reported": 0,
+    "new_reported": 0,
+    "old_gt": 0,
+    "new_gt": 0,
+    "detected_changed": false
+  },
+  {
+    "record": "perfecto-plugin/fixed/v4/run0.json",
+    "taie_ok": true,
+    "expected_failure": false,
+    "old_reported": 2,
+    "new_reported": 2,
+    "old_gt": 1,
+    "new_gt": 1,
+    "detected_changed": false
+  },
+  {
+    "record": "perfecto-plugin/fixed/v4/run1.json",
+    "taie_ok": true,
+    "expected_failure": false,
+    "old_reported": 2,
+    "new_reported": 2,
+    "old_gt": 1,
+    "new_gt": 1,
+    "detected_changed": false
+  },
+  {
+    "record": "perfecto-plugin/fixed/v4/run2.json",
+    "taie_ok": true,
+    "expected_failure": false,
+    "old_reported": 2,
+    "new_reported": 2,
+    "old_gt": 1,
+    "new_gt": 1,
+    "detected_changed": false
+  },
+  {
+    "record": "perfecto-plugin/fixed/iris-like/run0.json",
+    "taie_ok": true,
+    "expected_failure": false,
+    "old_reported": 2,
+    "new_reported": 2,
+    "old_gt": 1,
+    "new_gt": 1,
+    "detected_changed": false
+  },
+  {
+    "record": "perfecto-plugin/fixed/iris-like/run1.json",
+    "taie_ok": true,
+    "expected_failure": false,
+    "old_reported": 2,
+    "new_reported": 2,
+    "old_gt": 1,
+    "new_gt": 1,
+    "detected_changed": false
+  },
+  {
+    "record": "perfecto-plugin/fixed/iris-like/run2.json",
+    "taie_ok": true,
+    "expected_failure": false,
+    "old_reported": 2,
+    "new_reported": 2,
+    "old_gt": 1,
+    "new_gt": 1,
+    "detected_changed": false
+  }
+]

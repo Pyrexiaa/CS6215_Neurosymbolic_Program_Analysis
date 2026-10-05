@@ -1,0 +1,2575 @@
+{
+  "ok": true,
+  "returncode": 0,
+  "elapsed_s": 8.56,
+  "timed_out": false,
+  "out_dir": "/Users/jiayulim/Documents/GitHub/CS6215_Neurosymbolic_Program_Analysis/work/runs/cron-utils/fixed/taie/c2c495ea05074ef4",
+  "log_path": "/Users/jiayulim/Documents/GitHub/CS6215_Neurosymbolic_Program_Analysis/work/runs/cron-utils/fixed/taie/c2c495ea05074ef4/console.log",
+  "detected": 124,
+  "flows": [
+    {
+      "id": "d015852b25",
+      "key": "<java.io.DataInputStream: java.lang.String readUTF()>@L564/result => <com.cronutils.StringValidations: java.util.regex.Pattern buildWordsPattern(java.util.Set)>@L73/0",
+      "source": {
+        "method": "<java.io.DataInputStream: java.lang.String readUTF()>",
+        "stmt_index": 0,
+        "line": 564,
+        "stmt": "%v1 = invokestatic java.io.DataInputStream.readUTF(this)",
+        "index": "result",
+        "raw": "<java.io.DataInputStream: java.lang.String readUTF()>[0@L564] %v1 = invokestatic java.io.DataInputStream.readUTF(this)/result"
+      },
+      "sink": {
+        "method": "<com.cronutils.StringValidations: java.util.regex.Pattern buildWordsPattern(java.util.Set)>",
+        "stmt_index": 10,
+        "line": 73,
+        "stmt": "%v12 = invokestatic java.util.regex.Pattern.compile(%v11)",
+        "index": "0",
+        "raw": "<com.cronutils.StringValidations: java.util.regex.Pattern buildWordsPattern(java.util.Set)>[10@L73] %v12 = invokestatic java.util.regex.Pattern.compile(%v11)/0"
+      }
+    },
+    {
+      "id": "0ba1899746",
+      "key": "<java.io.DataInputStream: java.lang.String readUTF()>@L564/result => <com.cronutils.StringValidations: java.util.regex.Pattern buildWordsPattern(java.util.Set)>@L82/0",
+      "source": {
+        "method": "<java.io.DataInputStream: java.lang.String readUTF()>",
+        "stmt_index": 0,
+        "line": 564,
+        "stmt": "%v1 = invokestatic java.io.DataInputStream.readUTF(this)",
+        "index": "result",
+        "raw": "<java.io.DataInputStream: java.lang.String readUTF()>[0@L564] %v1 = invokestatic java.io.DataInputStream.readUTF(this)/result"
+      },
+      "sink": {
+        "method": "<com.cronutils.StringValidations: java.util.regex.Pattern buildWordsPattern(java.util.Set)>",
+        "stmt_index": 26,
+        "line": 82,
+        "stmt": "%v21 = invokestatic java.util.regex.Pattern.compile(%v20)",
+        "index": "0",
+        "raw": "<com.cronutils.StringValidations: java.util.regex.Pattern buildWordsPattern(java.util.Set)>[26@L82] %v21 = invokestatic java.util.regex.Pattern.compile(%v20)/0"
+      }
+    },
+    {
+      "id": "7f43ea22f7",
+      "key": "<java.io.DataInputStream: java.lang.String readUTF()>@L564/result => <java.text.MessageFormat: java.lang.StringBuffer subformat(java.lang.Object[],java.lang.StringBuffer,java.text.FieldPosition,java.util.List)>@L1270/0",
+      "source": {
+        "method": "<java.io.DataInputStream: java.lang.String readUTF()>",
+        "stmt_index": 0,
+        "line": 564,
+        "stmt": "%v1 = invokestatic java.io.DataInputStream.readUTF(this)",
+        "index": "result",
+        "raw": "<java.io.DataInputStream: java.lang.String readUTF()>[0@L564] %v1 = invokestatic java.io.DataInputStream.readUTF(this)/result"
+      },
+      "sink": {
+        "method": "<java.text.MessageFormat: java.lang.StringBuffer subformat(java.lang.Object[],java.lang.StringBuffer,java.text.FieldPosition,java.util.List)>",
+        "stmt_index": 47,
+        "line": 1270,
+        "stmt": "invokespecial %v32.<init>($10, %v33)",
+        "index": "0",
+        "raw": "<java.text.MessageFormat: java.lang.StringBuffer subformat(java.lang.Object[],java.lang.StringBuffer,java.text.FieldPosition,java.util.List)>[47@L1270] invokespecial %v32.<init>($10, %v33)/0"
+      }
+    },
+    {
+      "id": "a91131247b",
+      "key": "<java.io.DataInputStream: java.lang.String readUTF()>@L564/result => <sun.util.locale.provider.LocaleResources: java.lang.String getDateTimePattern(java.lang.String,int,int,java.lang.String)>@L419/0",
+      "source": {
+        "method": "<java.io.DataInputStream: java.lang.String readUTF()>",
+        "stmt_index": 0,
+        "line": 564,
+        "stmt": "%v1 = invokestatic java.io.DataInputStream.readUTF(this)",
+        "index": "result",
+        "raw": "<java.io.DataInputStream: java.lang.String readUTF()>[0@L564] %v1 = invokestatic java.io.DataInputStream.readUTF(this)/result"
+      },
+      "sink": {
+        "method": "<sun.util.locale.provider.LocaleResources: java.lang.String getDateTimePattern(java.lang.String,int,int,java.lang.String)>",
+        "stmt_index": 62,
+        "line": 419,
+        "stmt": "$5 = invokestatic java.text.MessageFormat.format($8, %v38)",
+        "index": "0",
+        "raw": "<sun.util.locale.provider.LocaleResources: java.lang.String getDateTimePattern(java.lang.String,int,int,java.lang.String)>[62@L419] $5 = invokestatic java.text.MessageFormat.format($8, %v38)/0"
+      }
+    },
+    {
+      "id": "64367ea702",
+      "key": "<java.time.zone.TzdbZoneRulesProvider: void load(java.io.DataInputStream)>@L173/result => <com.cronutils.StringValidations: java.util.regex.Pattern buildWordsPattern(java.util.Set)>@L73/0",
+      "source": {
+        "method": "<java.time.zone.TzdbZoneRulesProvider: void load(java.io.DataInputStream)>",
+        "stmt_index": 19,
+        "line": 173,
+        "stmt": "%v25 = invokevirtual $1.readUTF()",
+        "index": "result",
+        "raw": "<java.time.zone.TzdbZoneRulesProvider: void load(java.io.DataInputStream)>[19@L173] %v25 = invokevirtual $1.readUTF()/result"
+      },
+      "sink": {
+        "method": "<com.cronutils.StringValidations: java.util.regex.Pattern buildWordsPattern(java.util.Set)>",
+        "stmt_index": 10,
+        "line": 73,
+        "stmt": "%v12 = invokestatic java.util.regex.Pattern.compile(%v11)",
+        "index": "0",
+        "raw": "<com.cronutils.StringValidations: java.util.regex.Pattern buildWordsPattern(java.util.Set)>[10@L73] %v12 = invokestatic java.util.regex.Pattern.compile(%v11)/0"
+      }
+    },
+    {
+      "id": "20e1a86695",
+      "key": "<java.time.zone.TzdbZoneRulesProvider: void load(java.io.DataInputStream)>@L173/result => <com.cronutils.StringValidations: java.util.regex.Pattern buildWordsPattern(java.util.Set)>@L82/0",
+      "source": {
+        "method": "<java.time.zone.TzdbZoneRulesProvider: void load(java.io.DataInputStream)>",
+        "stmt_index": 19,
+        "line": 173,
+        "stmt": "%v25 = invokevirtual $1.readUTF()",
+        "index": "result",
+        "raw": "<java.time.zone.TzdbZoneRulesProvider: void load(java.io.DataInputStream)>[19@L173] %v25 = invokevirtual $1.readUTF()/result"
+      },
+      "sink": {
+        "method": "<com.cronutils.StringValidations: java.util.regex.Pattern buildWordsPattern(java.util.Set)>",
+        "stmt_index": 26,
+        "line": 82,
+        "stmt": "%v21 = invokestatic java.util.regex.Pattern.compile(%v20)",
+        "index": "0",
+        "raw": "<com.cronutils.StringValidations: java.util.regex.Pattern buildWordsPattern(java.util.Set)>[26@L82] %v21 = invokestatic java.util.regex.Pattern.compile(%v20)/0"
+      }
+    },
+    {
+      "id": "3bef0aecff",
+      "key": "<java.time.zone.TzdbZoneRulesProvider: void load(java.io.DataInputStream)>@L173/result => <java.text.MessageFormat: java.lang.StringBuffer subformat(java.lang.Object[],java.lang.StringBuffer,java.text.FieldPosition,java.util.List)>@L1270/0",
+      "source": {
+        "method": "<java.time.zone.TzdbZoneRulesProvider: void load(java.io.DataInputStream)>",
+        "stmt_index": 19,
+        "line": 173,
+        "stmt": "%v25 = invokevirtual $1.readUTF()",
+        "index": "result",
+        "raw": "<java.time.zone.TzdbZoneRulesProvider: void load(java.io.DataInputStream)>[19@L173] %v25 = invokevirtual $1.readUTF()/result"
+      },
+      "sink": {
+        "method": "<java.text.MessageFormat: java.lang.StringBuffer subformat(java.lang.Object[],java.lang.StringBuffer,java.text.FieldPosition,java.util.List)>",
+        "stmt_index": 47,
+        "line": 1270,
+        "stmt": "invokespecial %v32.<init>($10, %v33)",
+        "index": "0",
+        "raw": "<java.text.MessageFormat: java.lang.StringBuffer subformat(java.lang.Object[],java.lang.StringBuffer,java.text.FieldPosition,java.util.List)>[47@L1270] invokespecial %v32.<init>($10, %v33)/0"
+      }
+    },
+    {
+      "id": "3bd4f2c35d",
+      "key": "<java.time.zone.TzdbZoneRulesProvider: void load(java.io.DataInputStream)>@L173/result => <sun.util.locale.provider.LocaleResources: java.lang.String getDateTimePattern(java.lang.String,int,int,java.lang.String)>@L419/0",
+      "source": {
+        "method": "<java.time.zone.TzdbZoneRulesProvider: void load(java.io.DataInputStream)>",
+        "stmt_index": 19,
+        "line": 173,
+        "stmt": "%v25 = invokevirtual $1.readUTF()",
+        "index": "result",
+        "raw": "<java.time.zone.TzdbZoneRulesProvider: void load(java.io.DataInputStream)>[19@L173] %v25 = invokevirtual $1.readUTF()/result"
+      },
+      "sink": {
+        "method": "<sun.util.locale.provider.LocaleResources: java.lang.String getDateTimePattern(java.lang.String,int,int,java.lang.String)>",
+        "stmt_index": 62,
+        "line": 419,
+        "stmt": "$5 = invokestatic java.text.MessageFormat.format($8, %v38)",
+        "index": "0",
+        "raw": "<sun.util.locale.provider.LocaleResources: java.lang.String getDateTimePattern(java.lang.String,int,int,java.lang.String)>[62@L419] $5 = invokestatic java.text.MessageFormat.format($8, %v38)/0"
+      }
+    },
+    {
+      "id": "c031f6b2d9",
+      "key": "<java.time.zone.TzdbZoneRulesProvider: void load(java.io.DataInputStream)>@L179/result => <com.cronutils.StringValidations: java.util.regex.Pattern buildWordsPattern(java.util.Set)>@L73/0",
+      "source": {
+        "method": "<java.time.zone.TzdbZoneRulesProvider: void load(java.io.DataInputStream)>",
+        "stmt_index": 27,
+        "line": 179,
+        "stmt": "%v28 = invokevirtual $1.readUTF()",
+        "index": "result",
+        "raw": "<java.time.zone.TzdbZoneRulesProvider: void load(java.io.DataInputStream)>[27@L179] %v28 = invokevirtual $1.readUTF()/result"
+      },
+      "sink": {
+        "method": "<com.cronutils.StringValidations: java.util.regex.Pattern buildWordsPattern(java.util.Set)>",
+        "stmt_index": 10,
+        "line": 73,
+        "stmt": "%v12 = invokestatic java.util.regex.Pattern.compile(%v11)",
+        "index": "0",
+        "raw": "<com.cronutils.StringValidations: java.util.regex.Pattern buildWordsPattern(java.util.Set)>[10@L73] %v12 = invokestatic java.util.regex.Pattern.compile(%v11)/0"
+      }
+    },
+    {
+      "id": "96460e550a",
+      "key": "<java.time.zone.TzdbZoneRulesProvider: void load(java.io.DataInputStream)>@L179/result => <com.cronutils.StringValidations: java.util.regex.Pattern buildWordsPattern(java.util.Set)>@L82/0",
+      "source": {
+        "method": "<java.time.zone.TzdbZoneRulesProvider: void load(java.io.DataInputStream)>",
+        "stmt_index": 27,
+        "line": 179,
+        "stmt": "%v28 = invokevirtual $1.readUTF()",
+        "index": "result",
+        "raw": "<java.time.zone.TzdbZoneRulesProvider: void load(java.io.DataInputStream)>[27@L179] %v28 = invokevirtual $1.readUTF()/result"
+      },
+      "sink": {
+        "method": "<com.cronutils.StringValidations: java.util.regex.Pattern buildWordsPattern(java.util.Set)>",
+        "stmt_index": 26,
+        "line": 82,
+        "stmt": "%v21 = invokestatic java.util.regex.Pattern.compile(%v20)",
+        "index": "0",
+        "raw": "<com.cronutils.StringValidations: java.util.regex.Pattern buildWordsPattern(java.util.Set)>[26@L82] %v21 = invokestatic java.util.regex.Pattern.compile(%v20)/0"
+      }
+    },
+    {
+      "id": "2ac3696b06",
+      "key": "<java.time.zone.TzdbZoneRulesProvider: void load(java.io.DataInputStream)>@L179/result => <java.text.MessageFormat: java.lang.StringBuffer subformat(java.lang.Object[],java.lang.StringBuffer,java.text.FieldPosition,java.util.List)>@L1270/0",
+      "source": {
+        "method": "<java.time.zone.TzdbZoneRulesProvider: void load(java.io.DataInputStream)>",
+        "stmt_index": 27,
+        "line": 179,
+        "stmt": "%v28 = invokevirtual $1.readUTF()",
+        "index": "result",
+        "raw": "<java.time.zone.TzdbZoneRulesProvider: void load(java.io.DataInputStream)>[27@L179] %v28 = invokevirtual $1.readUTF()/result"
+      },
+      "sink": {
+        "method": "<java.text.MessageFormat: java.lang.StringBuffer subformat(java.lang.Object[],java.lang.StringBuffer,java.text.FieldPosition,java.util.List)>",
+        "stmt_index": 47,
+        "line": 1270,
+        "stmt": "invokespecial %v32.<init>($10, %v33)",
+        "index": "0",
+        "raw": "<java.text.MessageFormat: java.lang.StringBuffer subformat(java.lang.Object[],java.lang.StringBuffer,java.text.FieldPosition,java.util.List)>[47@L1270] invokespecial %v32.<init>($10, %v33)/0"
+      }
+    },
+    {
+      "id": "7709a92b13",
+      "key": "<java.time.zone.TzdbZoneRulesProvider: void load(java.io.DataInputStream)>@L179/result => <sun.util.locale.provider.LocaleResources: java.lang.String getDateTimePattern(java.lang.String,int,int,java.lang.String)>@L419/0",
+      "source": {
+        "method": "<java.time.zone.TzdbZoneRulesProvider: void load(java.io.DataInputStream)>",
+        "stmt_index": 27,
+        "line": 179,
+        "stmt": "%v28 = invokevirtual $1.readUTF()",
+        "index": "result",
+        "raw": "<java.time.zone.TzdbZoneRulesProvider: void load(java.io.DataInputStream)>[27@L179] %v28 = invokevirtual $1.readUTF()/result"
+      },
+      "sink": {
+        "method": "<sun.util.locale.provider.LocaleResources: java.lang.String getDateTimePattern(java.lang.String,int,int,java.lang.String)>",
+        "stmt_index": 62,
+        "line": 419,
+        "stmt": "$5 = invokestatic java.text.MessageFormat.format($8, %v38)",
+        "index": "0",
+        "raw": "<sun.util.locale.provider.LocaleResources: java.lang.String getDateTimePattern(java.lang.String,int,int,java.lang.String)>[62@L419] $5 = invokestatic java.text.MessageFormat.format($8, %v38)/0"
+      }
+    },
+    {
+      "id": "2c36c368cc",
+      "key": "<java.util.Currency: java.util.List readSpecialCases(java.io.DataInputStream,int)>@L675/result => <com.cronutils.StringValidations: java.util.regex.Pattern buildWordsPattern(java.util.Set)>@L73/0",
+      "source": {
+        "method": "<java.util.Currency: java.util.List readSpecialCases(java.io.DataInputStream,int)>",
+        "stmt_index": 7,
+        "line": 675,
+        "stmt": "%v16 = invokevirtual $0.readUTF()",
+        "index": "result",
+        "raw": "<java.util.Currency: java.util.List readSpecialCases(java.io.DataInputStream,int)>[7@L675] %v16 = invokevirtual $0.readUTF()/result"
+      },
+      "sink": {
+        "method": "<com.cronutils.StringValidations: java.util.regex.Pattern buildWordsPattern(java.util.Set)>",
+        "stmt_index": 10,
+        "line": 73,
+        "stmt": "%v12 = invokestatic java.util.regex.Pattern.compile(%v11)",
+        "index": "0",
+        "raw": "<com.cronutils.StringValidations: java.util.regex.Pattern buildWordsPattern(java.util.Set)>[10@L73] %v12 = invokestatic java.util.regex.Pattern.compile(%v11)/0"
+      }
+    },
+    {
+      "id": "889954ddb8",
+      "key": "<java.util.Currency: java.util.List readSpecialCases(java.io.DataInputStream,int)>@L675/result => <com.cronutils.StringValidations: java.util.regex.Pattern buildWordsPattern(java.util.Set)>@L82/0",
+      "source": {
+        "method": "<java.util.Currency: java.util.List readSpecialCases(java.io.DataInputStream,int)>",
+        "stmt_index": 7,
+        "line": 675,
+        "stmt": "%v16 = invokevirtual $0.readUTF()",
+        "index": "result",
+        "raw": "<java.util.Currency: java.util.List readSpecialCases(java.io.DataInputStream,int)>[7@L675] %v16 = invokevirtual $0.readUTF()/result"
+      },
+      "sink": {
+        "method": "<com.cronutils.StringValidations: java.util.regex.Pattern buildWordsPattern(java.util.Set)>",
+        "stmt_index": 26,
+        "line": 82,
+        "stmt": "%v21 = invokestatic java.util.regex.Pattern.compile(%v20)",
+        "index": "0",
+        "raw": "<com.cronutils.StringValidations: java.util.regex.Pattern buildWordsPattern(java.util.Set)>[26@L82] %v21 = invokestatic java.util.regex.Pattern.compile(%v20)/0"
+      }
+    },
+    {
+      "id": "3282bec74a",
+      "key": "<java.util.Currency: java.util.List readSpecialCases(java.io.DataInputStream,int)>@L675/result => <java.text.MessageFormat: java.lang.StringBuffer subformat(java.lang.Object[],java.lang.StringBuffer,java.text.FieldPosition,java.util.List)>@L1270/0",
+      "source": {
+        "method": "<java.util.Currency: java.util.List readSpecialCases(java.io.DataInputStream,int)>",
+        "stmt_index": 7,
+        "line": 675,
+        "stmt": "%v16 = invokevirtual $0.readUTF()",
+        "index": "result",
+        "raw": "<java.util.Currency: java.util.List readSpecialCases(java.io.DataInputStream,int)>[7@L675] %v16 = invokevirtual $0.readUTF()/result"
+      },
+      "sink": {
+        "method": "<java.text.MessageFormat: java.lang.StringBuffer subformat(java.lang.Object[],java.lang.StringBuffer,java.text.FieldPosition,java.util.List)>",
+        "stmt_index": 47,
+        "line": 1270,
+        "stmt": "invokespecial %v32.<init>($10, %v33)",
+        "index": "0",
+        "raw": "<java.text.MessageFormat: java.lang.StringBuffer subformat(java.lang.Object[],java.lang.StringBuffer,java.text.FieldPosition,java.util.List)>[47@L1270] invokespecial %v32.<init>($10, %v33)/0"
+      }
+    },
+    {
+      "id": "ee872dfa01",
+      "key": "<java.util.Currency: java.util.List readSpecialCases(java.io.DataInputStream,int)>@L675/result => <sun.util.locale.provider.LocaleResources: java.lang.String getDateTimePattern(java.lang.String,int,int,java.lang.String)>@L419/0",
+      "source": {
+        "method": "<java.util.Currency: java.util.List readSpecialCases(java.io.DataInputStream,int)>",
+        "stmt_index": 7,
+        "line": 675,
+        "stmt": "%v16 = invokevirtual $0.readUTF()",
+        "index": "result",
+        "raw": "<java.util.Currency: java.util.List readSpecialCases(java.io.DataInputStream,int)>[7@L675] %v16 = invokevirtual $0.readUTF()/result"
+      },
+      "sink": {
+        "method": "<sun.util.locale.provider.LocaleResources: java.lang.String getDateTimePattern(java.lang.String,int,int,java.lang.String)>",
+        "stmt_index": 62,
+        "line": 419,
+        "stmt": "$5 = invokestatic java.text.MessageFormat.format($8, %v38)",
+        "index": "0",
+        "raw": "<sun.util.locale.provider.LocaleResources: java.lang.String getDateTimePattern(java.lang.String,int,int,java.lang.String)>[62@L419] $5 = invokestatic java.text.MessageFormat.format($8, %v38)/0"
+      }
+    },
+    {
+      "id": "9219d46eed",
+      "key": "<java.util.Currency: java.util.List readSpecialCases(java.io.DataInputStream,int)>@L676/result => <com.cronutils.StringValidations: java.util.regex.Pattern buildWordsPattern(java.util.Set)>@L73/0",
+      "source": {
+        "method": "<java.util.Currency: java.util.List readSpecialCases(java.io.DataInputStream,int)>",
+        "stmt_index": 8,
+        "line": 676,
+        "stmt": "%v17 = invokevirtual $0.readUTF()",
+        "index": "result",
+        "raw": "<java.util.Currency: java.util.List readSpecialCases(java.io.DataInputStream,int)>[8@L676] %v17 = invokevirtual $0.readUTF()/result"
+      },
+      "sink": {
+        "method": "<com.cronutils.StringValidations: java.util.regex.Pattern buildWordsPattern(java.util.Set)>",
+        "stmt_index": 10,
+        "line": 73,
+        "stmt": "%v12 = invokestatic java.util.regex.Pattern.compile(%v11)",
+        "index": "0",
+        "raw": "<com.cronutils.StringValidations: java.util.regex.Pattern buildWordsPattern(java.util.Set)>[10@L73] %v12 = invokestatic java.util.regex.Pattern.compile(%v11)/0"
+      }
+    },
+    {
+      "id": "4d024b1a99",
+      "key": "<java.util.Currency: java.util.List readSpecialCases(java.io.DataInputStream,int)>@L676/result => <com.cronutils.StringValidations: java.util.regex.Pattern buildWordsPattern(java.util.Set)>@L82/0",
+      "source": {
+        "method": "<java.util.Currency: java.util.List readSpecialCases(java.io.DataInputStream,int)>",
+        "stmt_index": 8,
+        "line": 676,
+        "stmt": "%v17 = invokevirtual $0.readUTF()",
+        "index": "result",
+        "raw": "<java.util.Currency: java.util.List readSpecialCases(java.io.DataInputStream,int)>[8@L676] %v17 = invokevirtual $0.readUTF()/result"
+      },
+      "sink": {
+        "method": "<com.cronutils.StringValidations: java.util.regex.Pattern buildWordsPattern(java.util.Set)>",
+        "stmt_index": 26,
+        "line": 82,
+        "stmt": "%v21 = invokestatic java.util.regex.Pattern.compile(%v20)",
+        "index": "0",
+        "raw": "<com.cronutils.StringValidations: java.util.regex.Pattern buildWordsPattern(java.util.Set)>[26@L82] %v21 = invokestatic java.util.regex.Pattern.compile(%v20)/0"
+      }
+    },
+    {
+      "id": "5058b8d5b9",
+      "key": "<java.util.Currency: java.util.List readSpecialCases(java.io.DataInputStream,int)>@L676/result => <java.text.MessageFormat: java.lang.StringBuffer subformat(java.lang.Object[],java.lang.StringBuffer,java.text.FieldPosition,java.util.List)>@L1270/0",
+      "source": {
+        "method": "<java.util.Currency: java.util.List readSpecialCases(java.io.DataInputStream,int)>",
+        "stmt_index": 8,
+        "line": 676,
+        "stmt": "%v17 = invokevirtual $0.readUTF()",
+        "index": "result",
+        "raw": "<java.util.Currency: java.util.List readSpecialCases(java.io.DataInputStream,int)>[8@L676] %v17 = invokevirtual $0.readUTF()/result"
+      },
+      "sink": {
+        "method": "<java.text.MessageFormat: java.lang.StringBuffer subformat(java.lang.Object[],java.lang.StringBuffer,java.text.FieldPosition,java.util.List)>",
+        "stmt_index": 47,
+        "line": 1270,
+        "stmt": "invokespecial %v32.<init>($10, %v33)",
+        "index": "0",
+        "raw": "<java.text.MessageFormat: java.lang.StringBuffer subformat(java.lang.Object[],java.lang.StringBuffer,java.text.FieldPosition,java.util.List)>[47@L1270] invokespecial %v32.<init>($10, %v33)/0"
+      }
+    },
+    {
+      "id": "8e6c0ab56c",
+      "key": "<java.util.Currency: java.util.List readSpecialCases(java.io.DataInputStream,int)>@L676/result => <sun.util.locale.provider.LocaleResources: java.lang.String getDateTimePattern(java.lang.String,int,int,java.lang.String)>@L419/0",
+      "source": {
+        "method": "<java.util.Currency: java.util.List readSpecialCases(java.io.DataInputStream,int)>",
+        "stmt_index": 8,
+        "line": 676,
+        "stmt": "%v17 = invokevirtual $0.readUTF()",
+        "index": "result",
+        "raw": "<java.util.Currency: java.util.List readSpecialCases(java.io.DataInputStream,int)>[8@L676] %v17 = invokevirtual $0.readUTF()/result"
+      },
+      "sink": {
+        "method": "<sun.util.locale.provider.LocaleResources: java.lang.String getDateTimePattern(java.lang.String,int,int,java.lang.String)>",
+        "stmt_index": 62,
+        "line": 419,
+        "stmt": "$5 = invokestatic java.text.MessageFormat.format($8, %v38)",
+        "index": "0",
+        "raw": "<sun.util.locale.provider.LocaleResources: java.lang.String getDateTimePattern(java.lang.String,int,int,java.lang.String)>[62@L419] $5 = invokestatic java.text.MessageFormat.format($8, %v38)/0"
+      }
+    },
+    {
+      "id": "eed1306f35",
+      "key": "<java.util.ServiceLoader: int parseLine(java.lang.Class,java.net.URL,java.io.BufferedReader,int,java.util.List)>@L255/result => <com.cronutils.StringValidations: java.util.regex.Pattern buildWordsPattern(java.util.Set)>@L73/0",
+      "source": {
+        "method": "<java.util.ServiceLoader: int parseLine(java.lang.Class,java.net.URL,java.io.BufferedReader,int,java.util.List)>",
+        "stmt_index": 3,
+        "line": 255,
+        "stmt": "$6 = invokevirtual $3.readLine()",
+        "index": "result",
+        "raw": "<java.util.ServiceLoader: int parseLine(java.lang.Class,java.net.URL,java.io.BufferedReader,int,java.util.List)>[3@L255] $6 = invokevirtual $3.readLine()/result"
+      },
+      "sink": {
+        "method": "<com.cronutils.StringValidations: java.util.regex.Pattern buildWordsPattern(java.util.Set)>",
+        "stmt_index": 10,
+        "line": 73,
+        "stmt": "%v12 = invokestatic java.util.regex.Pattern.compile(%v11)",
+        "index": "0",
+        "raw": "<com.cronutils.StringValidations: java.util.regex.Pattern buildWordsPattern(java.util.Set)>[10@L73] %v12 = invokestatic java.util.regex.Pattern.compile(%v11)/0"
+      }
+    },
+    {
+      "id": "51aca636f5",
+      "key": "<java.util.ServiceLoader: int parseLine(java.lang.Class,java.net.URL,java.io.BufferedReader,int,java.util.List)>@L255/result => <com.cronutils.StringValidations: java.util.regex.Pattern buildWordsPattern(java.util.Set)>@L82/0",
+      "source": {
+        "method": "<java.util.ServiceLoader: int parseLine(java.lang.Class,java.net.URL,java.io.BufferedReader,int,java.util.List)>",
+        "stmt_index": 3,
+        "line": 255,
+        "stmt": "$6 = invokevirtual $3.readLine()",
+        "index": "result",
+        "raw": "<java.util.ServiceLoader: int parseLine(java.lang.Class,java.net.URL,java.io.BufferedReader,int,java.util.List)>[3@L255] $6 = invokevirtual $3.readLine()/result"
+      },
+      "sink": {
+        "method": "<com.cronutils.StringValidations: java.util.regex.Pattern buildWordsPattern(java.util.Set)>",
+        "stmt_index": 26,
+        "line": 82,
+        "stmt": "%v21 = invokestatic java.util.regex.Pattern.compile(%v20)",
+        "index": "0",
+        "raw": "<com.cronutils.StringValidations: java.util.regex.Pattern buildWordsPattern(java.util.Set)>[26@L82] %v21 = invokestatic java.util.regex.Pattern.compile(%v20)/0"
+      }
+    },
+    {
+      "id": "ce9c7077fd",
+      "key": "<java.util.ServiceLoader: int parseLine(java.lang.Class,java.net.URL,java.io.BufferedReader,int,java.util.List)>@L255/result => <java.text.MessageFormat: java.lang.StringBuffer subformat(java.lang.Object[],java.lang.StringBuffer,java.text.FieldPosition,java.util.List)>@L1270/0",
+      "source": {
+        "method": "<java.util.ServiceLoader: int parseLine(java.lang.Class,java.net.URL,java.io.BufferedReader,int,java.util.List)>",
+        "stmt_index": 3,
+        "line": 255,
+        "stmt": "$6 = invokevirtual $3.readLine()",
+        "index": "result",
+        "raw": "<java.util.ServiceLoader: int parseLine(java.lang.Class,java.net.URL,java.io.BufferedReader,int,java.util.List)>[3@L255] $6 = invokevirtual $3.readLine()/result"
+      },
+      "sink": {
+        "method": "<java.text.MessageFormat: java.lang.StringBuffer subformat(java.lang.Object[],java.lang.StringBuffer,java.text.FieldPosition,java.util.List)>",
+        "stmt_index": 47,
+        "line": 1270,
+        "stmt": "invokespecial %v32.<init>($10, %v33)",
+        "index": "0",
+        "raw": "<java.text.MessageFormat: java.lang.StringBuffer subformat(java.lang.Object[],java.lang.StringBuffer,java.text.FieldPosition,java.util.List)>[47@L1270] invokespecial %v32.<init>($10, %v33)/0"
+      }
+    },
+    {
+      "id": "195160362d",
+      "key": "<java.util.ServiceLoader: int parseLine(java.lang.Class,java.net.URL,java.io.BufferedReader,int,java.util.List)>@L255/result => <sun.util.locale.provider.LocaleResources: java.lang.String getDateTimePattern(java.lang.String,int,int,java.lang.String)>@L419/0",
+      "source": {
+        "method": "<java.util.ServiceLoader: int parseLine(java.lang.Class,java.net.URL,java.io.BufferedReader,int,java.util.List)>",
+        "stmt_index": 3,
+        "line": 255,
+        "stmt": "$6 = invokevirtual $3.readLine()",
+        "index": "result",
+        "raw": "<java.util.ServiceLoader: int parseLine(java.lang.Class,java.net.URL,java.io.BufferedReader,int,java.util.List)>[3@L255] $6 = invokevirtual $3.readLine()/result"
+      },
+      "sink": {
+        "method": "<sun.util.locale.provider.LocaleResources: java.lang.String getDateTimePattern(java.lang.String,int,int,java.lang.String)>",
+        "stmt_index": 62,
+        "line": 419,
+        "stmt": "$5 = invokestatic java.text.MessageFormat.format($8, %v38)",
+        "index": "0",
+        "raw": "<sun.util.locale.provider.LocaleResources: java.lang.String getDateTimePattern(java.lang.String,int,int,java.lang.String)>[62@L419] $5 = invokestatic java.text.MessageFormat.format($8, %v38)/0"
+      }
+    },
+    {
+      "id": "d06c28ee07",
+      "key": "DRIVER => <com.cronutils.StringValidations: java.util.regex.Pattern buildWordsPattern(java.util.Set)>@L73/0",
+      "source": {
+        "method": "<nesy.NesyDriver: void main(java.lang.String[])>",
+        "stmt_index": 8,
+        "line": 8,
+        "stmt": "%v14 = invokestatic nesy.Taint.src()",
+        "index": "result",
+        "raw": "<nesy.NesyDriver: void main(java.lang.String[])>[8@L8] %v14 = invokestatic nesy.Taint.src()/result"
+      },
+      "sink": {
+        "method": "<com.cronutils.StringValidations: java.util.regex.Pattern buildWordsPattern(java.util.Set)>",
+        "stmt_index": 10,
+        "line": 73,
+        "stmt": "%v12 = invokestatic java.util.regex.Pattern.compile(%v11)",
+        "index": "0",
+        "raw": "<com.cronutils.StringValidations: java.util.regex.Pattern buildWordsPattern(java.util.Set)>[10@L73] %v12 = invokestatic java.util.regex.Pattern.compile(%v11)/0"
+      }
+    },
+    {
+      "id": "b82b6c816c",
+      "key": "DRIVER => <com.cronutils.StringValidations: java.util.regex.Pattern buildWordsPattern(java.util.Set)>@L82/0",
+      "source": {
+        "method": "<nesy.NesyDriver: void main(java.lang.String[])>",
+        "stmt_index": 8,
+        "line": 8,
+        "stmt": "%v14 = invokestatic nesy.Taint.src()",
+        "index": "result",
+        "raw": "<nesy.NesyDriver: void main(java.lang.String[])>[8@L8] %v14 = invokestatic nesy.Taint.src()/result"
+      },
+      "sink": {
+        "method": "<com.cronutils.StringValidations: java.util.regex.Pattern buildWordsPattern(java.util.Set)>",
+        "stmt_index": 26,
+        "line": 82,
+        "stmt": "%v21 = invokestatic java.util.regex.Pattern.compile(%v20)",
+        "index": "0",
+        "raw": "<com.cronutils.StringValidations: java.util.regex.Pattern buildWordsPattern(java.util.Set)>[26@L82] %v21 = invokestatic java.util.regex.Pattern.compile(%v20)/0"
+      }
+    },
+    {
+      "id": "e11a53a23a",
+      "key": "DRIVER => <java.text.MessageFormat: java.lang.StringBuffer subformat(java.lang.Object[],java.lang.StringBuffer,java.text.FieldPosition,java.util.List)>@L1270/0",
+      "source": {
+        "method": "<nesy.NesyDriver: void main(java.lang.String[])>",
+        "stmt_index": 8,
+        "line": 8,
+        "stmt": "%v14 = invokestatic nesy.Taint.src()",
+        "index": "result",
+        "raw": "<nesy.NesyDriver: void main(java.lang.String[])>[8@L8] %v14 = invokestatic nesy.Taint.src()/result"
+      },
+      "sink": {
+        "method": "<java.text.MessageFormat: java.lang.StringBuffer subformat(java.lang.Object[],java.lang.StringBuffer,java.text.FieldPosition,java.util.List)>",
+        "stmt_index": 47,
+        "line": 1270,
+        "stmt": "invokespecial %v32.<init>($10, %v33)",
+        "index": "0",
+        "raw": "<java.text.MessageFormat: java.lang.StringBuffer subformat(java.lang.Object[],java.lang.StringBuffer,java.text.FieldPosition,java.util.List)>[47@L1270] invokespecial %v32.<init>($10, %v33)/0"
+      }
+    },
+    {
+      "id": "63702b6456",
+      "key": "DRIVER => <sun.util.locale.provider.LocaleResources: java.lang.String getDateTimePattern(java.lang.String,int,int,java.lang.String)>@L419/0",
+      "source": {
+        "method": "<nesy.NesyDriver: void main(java.lang.String[])>",
+        "stmt_index": 8,
+        "line": 8,
+        "stmt": "%v14 = invokestatic nesy.Taint.src()",
+        "index": "result",
+        "raw": "<nesy.NesyDriver: void main(java.lang.String[])>[8@L8] %v14 = invokestatic nesy.Taint.src()/result"
+      },
+      "sink": {
+        "method": "<sun.util.locale.provider.LocaleResources: java.lang.String getDateTimePattern(java.lang.String,int,int,java.lang.String)>",
+        "stmt_index": 62,
+        "line": 419,
+        "stmt": "$5 = invokestatic java.text.MessageFormat.format($8, %v38)",
+        "index": "0",
+        "raw": "<sun.util.locale.provider.LocaleResources: java.lang.String getDateTimePattern(java.lang.String,int,int,java.lang.String)>[62@L419] $5 = invokestatic java.text.MessageFormat.format($8, %v38)/0"
+      }
+    },
+    {
+      "id": "d06c28ee07",
+      "key": "DRIVER => <com.cronutils.StringValidations: java.util.regex.Pattern buildWordsPattern(java.util.Set)>@L73/0",
+      "source": {
+        "method": "<nesy.NesyDriver: void main(java.lang.String[])>",
+        "stmt_index": 19,
+        "line": 11,
+        "stmt": "%v19 = invokestatic nesy.Taint.src()",
+        "index": "result",
+        "raw": "<nesy.NesyDriver: void main(java.lang.String[])>[19@L11] %v19 = invokestatic nesy.Taint.src()/result"
+      },
+      "sink": {
+        "method": "<com.cronutils.StringValidations: java.util.regex.Pattern buildWordsPattern(java.util.Set)>",
+        "stmt_index": 10,
+        "line": 73,
+        "stmt": "%v12 = invokestatic java.util.regex.Pattern.compile(%v11)",
+        "index": "0",
+        "raw": "<com.cronutils.StringValidations: java.util.regex.Pattern buildWordsPattern(java.util.Set)>[10@L73] %v12 = invokestatic java.util.regex.Pattern.compile(%v11)/0"
+      }
+    },
+    {
+      "id": "b82b6c816c",
+      "key": "DRIVER => <com.cronutils.StringValidations: java.util.regex.Pattern buildWordsPattern(java.util.Set)>@L82/0",
+      "source": {
+        "method": "<nesy.NesyDriver: void main(java.lang.String[])>",
+        "stmt_index": 19,
+        "line": 11,
+        "stmt": "%v19 = invokestatic nesy.Taint.src()",
+        "index": "result",
+        "raw": "<nesy.NesyDriver: void main(java.lang.String[])>[19@L11] %v19 = invokestatic nesy.Taint.src()/result"
+      },
+      "sink": {
+        "method": "<com.cronutils.StringValidations: java.util.regex.Pattern buildWordsPattern(java.util.Set)>",
+        "stmt_index": 26,
+        "line": 82,
+        "stmt": "%v21 = invokestatic java.util.regex.Pattern.compile(%v20)",
+        "index": "0",
+        "raw": "<com.cronutils.StringValidations: java.util.regex.Pattern buildWordsPattern(java.util.Set)>[26@L82] %v21 = invokestatic java.util.regex.Pattern.compile(%v20)/0"
+      }
+    },
+    {
+      "id": "e11a53a23a",
+      "key": "DRIVER => <java.text.MessageFormat: java.lang.StringBuffer subformat(java.lang.Object[],java.lang.StringBuffer,java.text.FieldPosition,java.util.List)>@L1270/0",
+      "source": {
+        "method": "<nesy.NesyDriver: void main(java.lang.String[])>",
+        "stmt_index": 19,
+        "line": 11,
+        "stmt": "%v19 = invokestatic nesy.Taint.src()",
+        "index": "result",
+        "raw": "<nesy.NesyDriver: void main(java.lang.String[])>[19@L11] %v19 = invokestatic nesy.Taint.src()/result"
+      },
+      "sink": {
+        "method": "<java.text.MessageFormat: java.lang.StringBuffer subformat(java.lang.Object[],java.lang.StringBuffer,java.text.FieldPosition,java.util.List)>",
+        "stmt_index": 47,
+        "line": 1270,
+        "stmt": "invokespecial %v32.<init>($10, %v33)",
+        "index": "0",
+        "raw": "<java.text.MessageFormat: java.lang.StringBuffer subformat(java.lang.Object[],java.lang.StringBuffer,java.text.FieldPosition,java.util.List)>[47@L1270] invokespecial %v32.<init>($10, %v33)/0"
+      }
+    },
+    {
+      "id": "63702b6456",
+      "key": "DRIVER => <sun.util.locale.provider.LocaleResources: java.lang.String getDateTimePattern(java.lang.String,int,int,java.lang.String)>@L419/0",
+      "source": {
+        "method": "<nesy.NesyDriver: void main(java.lang.String[])>",
+        "stmt_index": 19,
+        "line": 11,
+        "stmt": "%v19 = invokestatic nesy.Taint.src()",
+        "index": "result",
+        "raw": "<nesy.NesyDriver: void main(java.lang.String[])>[19@L11] %v19 = invokestatic nesy.Taint.src()/result"
+      },
+      "sink": {
+        "method": "<sun.util.locale.provider.LocaleResources: java.lang.String getDateTimePattern(java.lang.String,int,int,java.lang.String)>",
+        "stmt_index": 62,
+        "line": 419,
+        "stmt": "$5 = invokestatic java.text.MessageFormat.format($8, %v38)",
+        "index": "0",
+        "raw": "<sun.util.locale.provider.LocaleResources: java.lang.String getDateTimePattern(java.lang.String,int,int,java.lang.String)>[62@L419] $5 = invokestatic java.text.MessageFormat.format($8, %v38)/0"
+      }
+    },
+    {
+      "id": "d06c28ee07",
+      "key": "DRIVER => <com.cronutils.StringValidations: java.util.regex.Pattern buildWordsPattern(java.util.Set)>@L73/0",
+      "source": {
+        "method": "<nesy.NesyDriver: void main(java.lang.String[])>",
+        "stmt_index": 31,
+        "line": 14,
+        "stmt": "%v25 = invokestatic nesy.Taint.src()",
+        "index": "result",
+        "raw": "<nesy.NesyDriver: void main(java.lang.String[])>[31@L14] %v25 = invokestatic nesy.Taint.src()/result"
+      },
+      "sink": {
+        "method": "<com.cronutils.StringValidations: java.util.regex.Pattern buildWordsPattern(java.util.Set)>",
+        "stmt_index": 10,
+        "line": 73,
+        "stmt": "%v12 = invokestatic java.util.regex.Pattern.compile(%v11)",
+        "index": "0",
+        "raw": "<com.cronutils.StringValidations: java.util.regex.Pattern buildWordsPattern(java.util.Set)>[10@L73] %v12 = invokestatic java.util.regex.Pattern.compile(%v11)/0"
+      }
+    },
+    {
+      "id": "b82b6c816c",
+      "key": "DRIVER => <com.cronutils.StringValidations: java.util.regex.Pattern buildWordsPattern(java.util.Set)>@L82/0",
+      "source": {
+        "method": "<nesy.NesyDriver: void main(java.lang.String[])>",
+        "stmt_index": 31,
+        "line": 14,
+        "stmt": "%v25 = invokestatic nesy.Taint.src()",
+        "index": "result",
+        "raw": "<nesy.NesyDriver: void main(java.lang.String[])>[31@L14] %v25 = invokestatic nesy.Taint.src()/result"
+      },
+      "sink": {
+        "method": "<com.cronutils.StringValidations: java.util.regex.Pattern buildWordsPattern(java.util.Set)>",
+        "stmt_index": 26,
+        "line": 82,
+        "stmt": "%v21 = invokestatic java.util.regex.Pattern.compile(%v20)",
+        "index": "0",
+        "raw": "<com.cronutils.StringValidations: java.util.regex.Pattern buildWordsPattern(java.util.Set)>[26@L82] %v21 = invokestatic java.util.regex.Pattern.compile(%v20)/0"
+      }
+    },
+    {
+      "id": "e11a53a23a",
+      "key": "DRIVER => <java.text.MessageFormat: java.lang.StringBuffer subformat(java.lang.Object[],java.lang.StringBuffer,java.text.FieldPosition,java.util.List)>@L1270/0",
+      "source": {
+        "method": "<nesy.NesyDriver: void main(java.lang.String[])>",
+        "stmt_index": 31,
+        "line": 14,
+        "stmt": "%v25 = invokestatic nesy.Taint.src()",
+        "index": "result",
+        "raw": "<nesy.NesyDriver: void main(java.lang.String[])>[31@L14] %v25 = invokestatic nesy.Taint.src()/result"
+      },
+      "sink": {
+        "method": "<java.text.MessageFormat: java.lang.StringBuffer subformat(java.lang.Object[],java.lang.StringBuffer,java.text.FieldPosition,java.util.List)>",
+        "stmt_index": 47,
+        "line": 1270,
+        "stmt": "invokespecial %v32.<init>($10, %v33)",
+        "index": "0",
+        "raw": "<java.text.MessageFormat: java.lang.StringBuffer subformat(java.lang.Object[],java.lang.StringBuffer,java.text.FieldPosition,java.util.List)>[47@L1270] invokespecial %v32.<init>($10, %v33)/0"
+      }
+    },
+    {
+      "id": "63702b6456",
+      "key": "DRIVER => <sun.util.locale.provider.LocaleResources: java.lang.String getDateTimePattern(java.lang.String,int,int,java.lang.String)>@L419/0",
+      "source": {
+        "method": "<nesy.NesyDriver: void main(java.lang.String[])>",
+        "stmt_index": 31,
+        "line": 14,
+        "stmt": "%v25 = invokestatic nesy.Taint.src()",
+        "index": "result",
+        "raw": "<nesy.NesyDriver: void main(java.lang.String[])>[31@L14] %v25 = invokestatic nesy.Taint.src()/result"
+      },
+      "sink": {
+        "method": "<sun.util.locale.provider.LocaleResources: java.lang.String getDateTimePattern(java.lang.String,int,int,java.lang.String)>",
+        "stmt_index": 62,
+        "line": 419,
+        "stmt": "$5 = invokestatic java.text.MessageFormat.format($8, %v38)",
+        "index": "0",
+        "raw": "<sun.util.locale.provider.LocaleResources: java.lang.String getDateTimePattern(java.lang.String,int,int,java.lang.String)>[62@L419] $5 = invokestatic java.text.MessageFormat.format($8, %v38)/0"
+      }
+    },
+    {
+      "id": "d06c28ee07",
+      "key": "DRIVER => <com.cronutils.StringValidations: java.util.regex.Pattern buildWordsPattern(java.util.Set)>@L73/0",
+      "source": {
+        "method": "<nesy.NesyDriver: void main(java.lang.String[])>",
+        "stmt_index": 42,
+        "line": 17,
+        "stmt": "%v30 = invokestatic nesy.Taint.src()",
+        "index": "result",
+        "raw": "<nesy.NesyDriver: void main(java.lang.String[])>[42@L17] %v30 = invokestatic nesy.Taint.src()/result"
+      },
+      "sink": {
+        "method": "<com.cronutils.StringValidations: java.util.regex.Pattern buildWordsPattern(java.util.Set)>",
+        "stmt_index": 10,
+        "line": 73,
+        "stmt": "%v12 = invokestatic java.util.regex.Pattern.compile(%v11)",
+        "index": "0",
+        "raw": "<com.cronutils.StringValidations: java.util.regex.Pattern buildWordsPattern(java.util.Set)>[10@L73] %v12 = invokestatic java.util.regex.Pattern.compile(%v11)/0"
+      }
+    },
+    {
+      "id": "b82b6c816c",
+      "key": "DRIVER => <com.cronutils.StringValidations: java.util.regex.Pattern buildWordsPattern(java.util.Set)>@L82/0",
+      "source": {
+        "method": "<nesy.NesyDriver: void main(java.lang.String[])>",
+        "stmt_index": 42,
+        "line": 17,
+        "stmt": "%v30 = invokestatic nesy.Taint.src()",
+        "index": "result",
+        "raw": "<nesy.NesyDriver: void main(java.lang.String[])>[42@L17] %v30 = invokestatic nesy.Taint.src()/result"
+      },
+      "sink": {
+        "method": "<com.cronutils.StringValidations: java.util.regex.Pattern buildWordsPattern(java.util.Set)>",
+        "stmt_index": 26,
+        "line": 82,
+        "stmt": "%v21 = invokestatic java.util.regex.Pattern.compile(%v20)",
+        "index": "0",
+        "raw": "<com.cronutils.StringValidations: java.util.regex.Pattern buildWordsPattern(java.util.Set)>[26@L82] %v21 = invokestatic java.util.regex.Pattern.compile(%v20)/0"
+      }
+    },
+    {
+      "id": "e11a53a23a",
+      "key": "DRIVER => <java.text.MessageFormat: java.lang.StringBuffer subformat(java.lang.Object[],java.lang.StringBuffer,java.text.FieldPosition,java.util.List)>@L1270/0",
+      "source": {
+        "method": "<nesy.NesyDriver: void main(java.lang.String[])>",
+        "stmt_index": 42,
+        "line": 17,
+        "stmt": "%v30 = invokestatic nesy.Taint.src()",
+        "index": "result",
+        "raw": "<nesy.NesyDriver: void main(java.lang.String[])>[42@L17] %v30 = invokestatic nesy.Taint.src()/result"
+      },
+      "sink": {
+        "method": "<java.text.MessageFormat: java.lang.StringBuffer subformat(java.lang.Object[],java.lang.StringBuffer,java.text.FieldPosition,java.util.List)>",
+        "stmt_index": 47,
+        "line": 1270,
+        "stmt": "invokespecial %v32.<init>($10, %v33)",
+        "index": "0",
+        "raw": "<java.text.MessageFormat: java.lang.StringBuffer subformat(java.lang.Object[],java.lang.StringBuffer,java.text.FieldPosition,java.util.List)>[47@L1270] invokespecial %v32.<init>($10, %v33)/0"
+      }
+    },
+    {
+      "id": "63702b6456",
+      "key": "DRIVER => <sun.util.locale.provider.LocaleResources: java.lang.String getDateTimePattern(java.lang.String,int,int,java.lang.String)>@L419/0",
+      "source": {
+        "method": "<nesy.NesyDriver: void main(java.lang.String[])>",
+        "stmt_index": 42,
+        "line": 17,
+        "stmt": "%v30 = invokestatic nesy.Taint.src()",
+        "index": "result",
+        "raw": "<nesy.NesyDriver: void main(java.lang.String[])>[42@L17] %v30 = invokestatic nesy.Taint.src()/result"
+      },
+      "sink": {
+        "method": "<sun.util.locale.provider.LocaleResources: java.lang.String getDateTimePattern(java.lang.String,int,int,java.lang.String)>",
+        "stmt_index": 62,
+        "line": 419,
+        "stmt": "$5 = invokestatic java.text.MessageFormat.format($8, %v38)",
+        "index": "0",
+        "raw": "<sun.util.locale.provider.LocaleResources: java.lang.String getDateTimePattern(java.lang.String,int,int,java.lang.String)>[62@L419] $5 = invokestatic java.text.MessageFormat.format($8, %v38)/0"
+      }
+    },
+    {
+      "id": "d06c28ee07",
+      "key": "DRIVER => <com.cronutils.StringValidations: java.util.regex.Pattern buildWordsPattern(java.util.Set)>@L73/0",
+      "source": {
+        "method": "<nesy.NesyDriver: void main(java.lang.String[])>",
+        "stmt_index": 59,
+        "line": 22,
+        "stmt": "%v39 = invokestatic nesy.Taint.src()",
+        "index": "result",
+        "raw": "<nesy.NesyDriver: void main(java.lang.String[])>[59@L22] %v39 = invokestatic nesy.Taint.src()/result"
+      },
+      "sink": {
+        "method": "<com.cronutils.StringValidations: java.util.regex.Pattern buildWordsPattern(java.util.Set)>",
+        "stmt_index": 10,
+        "line": 73,
+        "stmt": "%v12 = invokestatic java.util.regex.Pattern.compile(%v11)",
+        "index": "0",
+        "raw": "<com.cronutils.StringValidations: java.util.regex.Pattern buildWordsPattern(java.util.Set)>[10@L73] %v12 = invokestatic java.util.regex.Pattern.compile(%v11)/0"
+      }
+    },
+    {
+      "id": "b82b6c816c",
+      "key": "DRIVER => <com.cronutils.StringValidations: java.util.regex.Pattern buildWordsPattern(java.util.Set)>@L82/0",
+      "source": {
+        "method": "<nesy.NesyDriver: void main(java.lang.String[])>",
+        "stmt_index": 59,
+        "line": 22,
+        "stmt": "%v39 = invokestatic nesy.Taint.src()",
+        "index": "result",
+        "raw": "<nesy.NesyDriver: void main(java.lang.String[])>[59@L22] %v39 = invokestatic nesy.Taint.src()/result"
+      },
+      "sink": {
+        "method": "<com.cronutils.StringValidations: java.util.regex.Pattern buildWordsPattern(java.util.Set)>",
+        "stmt_index": 26,
+        "line": 82,
+        "stmt": "%v21 = invokestatic java.util.regex.Pattern.compile(%v20)",
+        "index": "0",
+        "raw": "<com.cronutils.StringValidations: java.util.regex.Pattern buildWordsPattern(java.util.Set)>[26@L82] %v21 = invokestatic java.util.regex.Pattern.compile(%v20)/0"
+      }
+    },
+    {
+      "id": "e11a53a23a",
+      "key": "DRIVER => <java.text.MessageFormat: java.lang.StringBuffer subformat(java.lang.Object[],java.lang.StringBuffer,java.text.FieldPosition,java.util.List)>@L1270/0",
+      "source": {
+        "method": "<nesy.NesyDriver: void main(java.lang.String[])>",
+        "stmt_index": 59,
+        "line": 22,
+        "stmt": "%v39 = invokestatic nesy.Taint.src()",
+        "index": "result",
+        "raw": "<nesy.NesyDriver: void main(java.lang.String[])>[59@L22] %v39 = invokestatic nesy.Taint.src()/result"
+      },
+      "sink": {
+        "method": "<java.text.MessageFormat: java.lang.StringBuffer subformat(java.lang.Object[],java.lang.StringBuffer,java.text.FieldPosition,java.util.List)>",
+        "stmt_index": 47,
+        "line": 1270,
+        "stmt": "invokespecial %v32.<init>($10, %v33)",
+        "index": "0",
+        "raw": "<java.text.MessageFormat: java.lang.StringBuffer subformat(java.lang.Object[],java.lang.StringBuffer,java.text.FieldPosition,java.util.List)>[47@L1270] invokespecial %v32.<init>($10, %v33)/0"
+      }
+    },
+    {
+      "id": "63702b6456",
+      "key": "DRIVER => <sun.util.locale.provider.LocaleResources: java.lang.String getDateTimePattern(java.lang.String,int,int,java.lang.String)>@L419/0",
+      "source": {
+        "method": "<nesy.NesyDriver: void main(java.lang.String[])>",
+        "stmt_index": 59,
+        "line": 22,
+        "stmt": "%v39 = invokestatic nesy.Taint.src()",
+        "index": "result",
+        "raw": "<nesy.NesyDriver: void main(java.lang.String[])>[59@L22] %v39 = invokestatic nesy.Taint.src()/result"
+      },
+      "sink": {
+        "method": "<sun.util.locale.provider.LocaleResources: java.lang.String getDateTimePattern(java.lang.String,int,int,java.lang.String)>",
+        "stmt_index": 62,
+        "line": 419,
+        "stmt": "$5 = invokestatic java.text.MessageFormat.format($8, %v38)",
+        "index": "0",
+        "raw": "<sun.util.locale.provider.LocaleResources: java.lang.String getDateTimePattern(java.lang.String,int,int,java.lang.String)>[62@L419] $5 = invokestatic java.text.MessageFormat.format($8, %v38)/0"
+      }
+    },
+    {
+      "id": "d06c28ee07",
+      "key": "DRIVER => <com.cronutils.StringValidations: java.util.regex.Pattern buildWordsPattern(java.util.Set)>@L73/0",
+      "source": {
+        "method": "<nesy.NesyDriver: void main(java.lang.String[])>",
+        "stmt_index": 82,
+        "line": 28,
+        "stmt": "%v51 = invokestatic nesy.Taint.src()",
+        "index": "result",
+        "raw": "<nesy.NesyDriver: void main(java.lang.String[])>[82@L28] %v51 = invokestatic nesy.Taint.src()/result"
+      },
+      "sink": {
+        "method": "<com.cronutils.StringValidations: java.util.regex.Pattern buildWordsPattern(java.util.Set)>",
+        "stmt_index": 10,
+        "line": 73,
+        "stmt": "%v12 = invokestatic java.util.regex.Pattern.compile(%v11)",
+        "index": "0",
+        "raw": "<com.cronutils.StringValidations: java.util.regex.Pattern buildWordsPattern(java.util.Set)>[10@L73] %v12 = invokestatic java.util.regex.Pattern.compile(%v11)/0"
+      }
+    },
+    {
+      "id": "b82b6c816c",
+      "key": "DRIVER => <com.cronutils.StringValidations: java.util.regex.Pattern buildWordsPattern(java.util.Set)>@L82/0",
+      "source": {
+        "method": "<nesy.NesyDriver: void main(java.lang.String[])>",
+        "stmt_index": 82,
+        "line": 28,
+        "stmt": "%v51 = invokestatic nesy.Taint.src()",
+        "index": "result",
+        "raw": "<nesy.NesyDriver: void main(java.lang.String[])>[82@L28] %v51 = invokestatic nesy.Taint.src()/result"
+      },
+      "sink": {
+        "method": "<com.cronutils.StringValidations: java.util.regex.Pattern buildWordsPattern(java.util.Set)>",
+        "stmt_index": 26,
+        "line": 82,
+        "stmt": "%v21 = invokestatic java.util.regex.Pattern.compile(%v20)",
+        "index": "0",
+        "raw": "<com.cronutils.StringValidations: java.util.regex.Pattern buildWordsPattern(java.util.Set)>[26@L82] %v21 = invokestatic java.util.regex.Pattern.compile(%v20)/0"
+      }
+    },
+    {
+      "id": "e11a53a23a",
+      "key": "DRIVER => <java.text.MessageFormat: java.lang.StringBuffer subformat(java.lang.Object[],java.lang.StringBuffer,java.text.FieldPosition,java.util.List)>@L1270/0",
+      "source": {
+        "method": "<nesy.NesyDriver: void main(java.lang.String[])>",
+        "stmt_index": 82,
+        "line": 28,
+        "stmt": "%v51 = invokestatic nesy.Taint.src()",
+        "index": "result",
+        "raw": "<nesy.NesyDriver: void main(java.lang.String[])>[82@L28] %v51 = invokestatic nesy.Taint.src()/result"
+      },
+      "sink": {
+        "method": "<java.text.MessageFormat: java.lang.StringBuffer subformat(java.lang.Object[],java.lang.StringBuffer,java.text.FieldPosition,java.util.List)>",
+        "stmt_index": 47,
+        "line": 1270,
+        "stmt": "invokespecial %v32.<init>($10, %v33)",
+        "index": "0",
+        "raw": "<java.text.MessageFormat: java.lang.StringBuffer subformat(java.lang.Object[],java.lang.StringBuffer,java.text.FieldPosition,java.util.List)>[47@L1270] invokespecial %v32.<init>($10, %v33)/0"
+      }
+    },
+    {
+      "id": "63702b6456",
+      "key": "DRIVER => <sun.util.locale.provider.LocaleResources: java.lang.String getDateTimePattern(java.lang.String,int,int,java.lang.String)>@L419/0",
+      "source": {
+        "method": "<nesy.NesyDriver: void main(java.lang.String[])>",
+        "stmt_index": 82,
+        "line": 28,
+        "stmt": "%v51 = invokestatic nesy.Taint.src()",
+        "index": "result",
+        "raw": "<nesy.NesyDriver: void main(java.lang.String[])>[82@L28] %v51 = invokestatic nesy.Taint.src()/result"
+      },
+      "sink": {
+        "method": "<sun.util.locale.provider.LocaleResources: java.lang.String getDateTimePattern(java.lang.String,int,int,java.lang.String)>",
+        "stmt_index": 62,
+        "line": 419,
+        "stmt": "$5 = invokestatic java.text.MessageFormat.format($8, %v38)",
+        "index": "0",
+        "raw": "<sun.util.locale.provider.LocaleResources: java.lang.String getDateTimePattern(java.lang.String,int,int,java.lang.String)>[62@L419] $5 = invokestatic java.text.MessageFormat.format($8, %v38)/0"
+      }
+    },
+    {
+      "id": "d06c28ee07",
+      "key": "DRIVER => <com.cronutils.StringValidations: java.util.regex.Pattern buildWordsPattern(java.util.Set)>@L73/0",
+      "source": {
+        "method": "<nesy.NesyDriver: void main(java.lang.String[])>",
+        "stmt_index": 88,
+        "line": 29,
+        "stmt": "%v55 = invokestatic nesy.Taint.src()",
+        "index": "result",
+        "raw": "<nesy.NesyDriver: void main(java.lang.String[])>[88@L29] %v55 = invokestatic nesy.Taint.src()/result"
+      },
+      "sink": {
+        "method": "<com.cronutils.StringValidations: java.util.regex.Pattern buildWordsPattern(java.util.Set)>",
+        "stmt_index": 10,
+        "line": 73,
+        "stmt": "%v12 = invokestatic java.util.regex.Pattern.compile(%v11)",
+        "index": "0",
+        "raw": "<com.cronutils.StringValidations: java.util.regex.Pattern buildWordsPattern(java.util.Set)>[10@L73] %v12 = invokestatic java.util.regex.Pattern.compile(%v11)/0"
+      }
+    },
+    {
+      "id": "b82b6c816c",
+      "key": "DRIVER => <com.cronutils.StringValidations: java.util.regex.Pattern buildWordsPattern(java.util.Set)>@L82/0",
+      "source": {
+        "method": "<nesy.NesyDriver: void main(java.lang.String[])>",
+        "stmt_index": 88,
+        "line": 29,
+        "stmt": "%v55 = invokestatic nesy.Taint.src()",
+        "index": "result",
+        "raw": "<nesy.NesyDriver: void main(java.lang.String[])>[88@L29] %v55 = invokestatic nesy.Taint.src()/result"
+      },
+      "sink": {
+        "method": "<com.cronutils.StringValidations: java.util.regex.Pattern buildWordsPattern(java.util.Set)>",
+        "stmt_index": 26,
+        "line": 82,
+        "stmt": "%v21 = invokestatic java.util.regex.Pattern.compile(%v20)",
+        "index": "0",
+        "raw": "<com.cronutils.StringValidations: java.util.regex.Pattern buildWordsPattern(java.util.Set)>[26@L82] %v21 = invokestatic java.util.regex.Pattern.compile(%v20)/0"
+      }
+    },
+    {
+      "id": "e11a53a23a",
+      "key": "DRIVER => <java.text.MessageFormat: java.lang.StringBuffer subformat(java.lang.Object[],java.lang.StringBuffer,java.text.FieldPosition,java.util.List)>@L1270/0",
+      "source": {
+        "method": "<nesy.NesyDriver: void main(java.lang.String[])>",
+        "stmt_index": 88,
+        "line": 29,
+        "stmt": "%v55 = invokestatic nesy.Taint.src()",
+        "index": "result",
+        "raw": "<nesy.NesyDriver: void main(java.lang.String[])>[88@L29] %v55 = invokestatic nesy.Taint.src()/result"
+      },
+      "sink": {
+        "method": "<java.text.MessageFormat: java.lang.StringBuffer subformat(java.lang.Object[],java.lang.StringBuffer,java.text.FieldPosition,java.util.List)>",
+        "stmt_index": 47,
+        "line": 1270,
+        "stmt": "invokespecial %v32.<init>($10, %v33)",
+        "index": "0",
+        "raw": "<java.text.MessageFormat: java.lang.StringBuffer subformat(java.lang.Object[],java.lang.StringBuffer,java.text.FieldPosition,java.util.List)>[47@L1270] invokespecial %v32.<init>($10, %v33)/0"
+      }
+    },
+    {
+      "id": "63702b6456",
+      "key": "DRIVER => <sun.util.locale.provider.LocaleResources: java.lang.String getDateTimePattern(java.lang.String,int,int,java.lang.String)>@L419/0",
+      "source": {
+        "method": "<nesy.NesyDriver: void main(java.lang.String[])>",
+        "stmt_index": 88,
+        "line": 29,
+        "stmt": "%v55 = invokestatic nesy.Taint.src()",
+        "index": "result",
+        "raw": "<nesy.NesyDriver: void main(java.lang.String[])>[88@L29] %v55 = invokestatic nesy.Taint.src()/result"
+      },
+      "sink": {
+        "method": "<sun.util.locale.provider.LocaleResources: java.lang.String getDateTimePattern(java.lang.String,int,int,java.lang.String)>",
+        "stmt_index": 62,
+        "line": 419,
+        "stmt": "$5 = invokestatic java.text.MessageFormat.format($8, %v38)",
+        "index": "0",
+        "raw": "<sun.util.locale.provider.LocaleResources: java.lang.String getDateTimePattern(java.lang.String,int,int,java.lang.String)>[62@L419] $5 = invokestatic java.text.MessageFormat.format($8, %v38)/0"
+      }
+    },
+    {
+      "id": "d06c28ee07",
+      "key": "DRIVER => <com.cronutils.StringValidations: java.util.regex.Pattern buildWordsPattern(java.util.Set)>@L73/0",
+      "source": {
+        "method": "<nesy.NesyDriver: void main(java.lang.String[])>",
+        "stmt_index": 93,
+        "line": 30,
+        "stmt": "%v58 = invokestatic nesy.Taint.src()",
+        "index": "result",
+        "raw": "<nesy.NesyDriver: void main(java.lang.String[])>[93@L30] %v58 = invokestatic nesy.Taint.src()/result"
+      },
+      "sink": {
+        "method": "<com.cronutils.StringValidations: java.util.regex.Pattern buildWordsPattern(java.util.Set)>",
+        "stmt_index": 10,
+        "line": 73,
+        "stmt": "%v12 = invokestatic java.util.regex.Pattern.compile(%v11)",
+        "index": "0",
+        "raw": "<com.cronutils.StringValidations: java.util.regex.Pattern buildWordsPattern(java.util.Set)>[10@L73] %v12 = invokestatic java.util.regex.Pattern.compile(%v11)/0"
+      }
+    },
+    {
+      "id": "b82b6c816c",
+      "key": "DRIVER => <com.cronutils.StringValidations: java.util.regex.Pattern buildWordsPattern(java.util.Set)>@L82/0",
+      "source": {
+        "method": "<nesy.NesyDriver: void main(java.lang.String[])>",
+        "stmt_index": 93,
+        "line": 30,
+        "stmt": "%v58 = invokestatic nesy.Taint.src()",
+        "index": "result",
+        "raw": "<nesy.NesyDriver: void main(java.lang.String[])>[93@L30] %v58 = invokestatic nesy.Taint.src()/result"
+      },
+      "sink": {
+        "method": "<com.cronutils.StringValidations: java.util.regex.Pattern buildWordsPattern(java.util.Set)>",
+        "stmt_index": 26,
+        "line": 82,
+        "stmt": "%v21 = invokestatic java.util.regex.Pattern.compile(%v20)",
+        "index": "0",
+        "raw": "<com.cronutils.StringValidations: java.util.regex.Pattern buildWordsPattern(java.util.Set)>[26@L82] %v21 = invokestatic java.util.regex.Pattern.compile(%v20)/0"
+      }
+    },
+    {
+      "id": "e11a53a23a",
+      "key": "DRIVER => <java.text.MessageFormat: java.lang.StringBuffer subformat(java.lang.Object[],java.lang.StringBuffer,java.text.FieldPosition,java.util.List)>@L1270/0",
+      "source": {
+        "method": "<nesy.NesyDriver: void main(java.lang.String[])>",
+        "stmt_index": 93,
+        "line": 30,
+        "stmt": "%v58 = invokestatic nesy.Taint.src()",
+        "index": "result",
+        "raw": "<nesy.NesyDriver: void main(java.lang.String[])>[93@L30] %v58 = invokestatic nesy.Taint.src()/result"
+      },
+      "sink": {
+        "method": "<java.text.MessageFormat: java.lang.StringBuffer subformat(java.lang.Object[],java.lang.StringBuffer,java.text.FieldPosition,java.util.List)>",
+        "stmt_index": 47,
+        "line": 1270,
+        "stmt": "invokespecial %v32.<init>($10, %v33)",
+        "index": "0",
+        "raw": "<java.text.MessageFormat: java.lang.StringBuffer subformat(java.lang.Object[],java.lang.StringBuffer,java.text.FieldPosition,java.util.List)>[47@L1270] invokespecial %v32.<init>($10, %v33)/0"
+      }
+    },
+    {
+      "id": "63702b6456",
+      "key": "DRIVER => <sun.util.locale.provider.LocaleResources: java.lang.String getDateTimePattern(java.lang.String,int,int,java.lang.String)>@L419/0",
+      "source": {
+        "method": "<nesy.NesyDriver: void main(java.lang.String[])>",
+        "stmt_index": 93,
+        "line": 30,
+        "stmt": "%v58 = invokestatic nesy.Taint.src()",
+        "index": "result",
+        "raw": "<nesy.NesyDriver: void main(java.lang.String[])>[93@L30] %v58 = invokestatic nesy.Taint.src()/result"
+      },
+      "sink": {
+        "method": "<sun.util.locale.provider.LocaleResources: java.lang.String getDateTimePattern(java.lang.String,int,int,java.lang.String)>",
+        "stmt_index": 62,
+        "line": 419,
+        "stmt": "$5 = invokestatic java.text.MessageFormat.format($8, %v38)",
+        "index": "0",
+        "raw": "<sun.util.locale.provider.LocaleResources: java.lang.String getDateTimePattern(java.lang.String,int,int,java.lang.String)>[62@L419] $5 = invokestatic java.text.MessageFormat.format($8, %v38)/0"
+      }
+    },
+    {
+      "id": "d06c28ee07",
+      "key": "DRIVER => <com.cronutils.StringValidations: java.util.regex.Pattern buildWordsPattern(java.util.Set)>@L73/0",
+      "source": {
+        "method": "<nesy.NesyDriver: void main(java.lang.String[])>",
+        "stmt_index": 97,
+        "line": 31,
+        "stmt": "%v60 = invokestatic nesy.Taint.src()",
+        "index": "result",
+        "raw": "<nesy.NesyDriver: void main(java.lang.String[])>[97@L31] %v60 = invokestatic nesy.Taint.src()/result"
+      },
+      "sink": {
+        "method": "<com.cronutils.StringValidations: java.util.regex.Pattern buildWordsPattern(java.util.Set)>",
+        "stmt_index": 10,
+        "line": 73,
+        "stmt": "%v12 = invokestatic java.util.regex.Pattern.compile(%v11)",
+        "index": "0",
+        "raw": "<com.cronutils.StringValidations: java.util.regex.Pattern buildWordsPattern(java.util.Set)>[10@L73] %v12 = invokestatic java.util.regex.Pattern.compile(%v11)/0"
+      }
+    },
+    {
+      "id": "b82b6c816c",
+      "key": "DRIVER => <com.cronutils.StringValidations: java.util.regex.Pattern buildWordsPattern(java.util.Set)>@L82/0",
+      "source": {
+        "method": "<nesy.NesyDriver: void main(java.lang.String[])>",
+        "stmt_index": 97,
+        "line": 31,
+        "stmt": "%v60 = invokestatic nesy.Taint.src()",
+        "index": "result",
+        "raw": "<nesy.NesyDriver: void main(java.lang.String[])>[97@L31] %v60 = invokestatic nesy.Taint.src()/result"
+      },
+      "sink": {
+        "method": "<com.cronutils.StringValidations: java.util.regex.Pattern buildWordsPattern(java.util.Set)>",
+        "stmt_index": 26,
+        "line": 82,
+        "stmt": "%v21 = invokestatic java.util.regex.Pattern.compile(%v20)",
+        "index": "0",
+        "raw": "<com.cronutils.StringValidations: java.util.regex.Pattern buildWordsPattern(java.util.Set)>[26@L82] %v21 = invokestatic java.util.regex.Pattern.compile(%v20)/0"
+      }
+    },
+    {
+      "id": "e11a53a23a",
+      "key": "DRIVER => <java.text.MessageFormat: java.lang.StringBuffer subformat(java.lang.Object[],java.lang.StringBuffer,java.text.FieldPosition,java.util.List)>@L1270/0",
+      "source": {
+        "method": "<nesy.NesyDriver: void main(java.lang.String[])>",
+        "stmt_index": 97,
+        "line": 31,
+        "stmt": "%v60 = invokestatic nesy.Taint.src()",
+        "index": "result",
+        "raw": "<nesy.NesyDriver: void main(java.lang.String[])>[97@L31] %v60 = invokestatic nesy.Taint.src()/result"
+      },
+      "sink": {
+        "method": "<java.text.MessageFormat: java.lang.StringBuffer subformat(java.lang.Object[],java.lang.StringBuffer,java.text.FieldPosition,java.util.List)>",
+        "stmt_index": 47,
+        "line": 1270,
+        "stmt": "invokespecial %v32.<init>($10, %v33)",
+        "index": "0",
+        "raw": "<java.text.MessageFormat: java.lang.StringBuffer subformat(java.lang.Object[],java.lang.StringBuffer,java.text.FieldPosition,java.util.List)>[47@L1270] invokespecial %v32.<init>($10, %v33)/0"
+      }
+    },
+    {
+      "id": "63702b6456",
+      "key": "DRIVER => <sun.util.locale.provider.LocaleResources: java.lang.String getDateTimePattern(java.lang.String,int,int,java.lang.String)>@L419/0",
+      "source": {
+        "method": "<nesy.NesyDriver: void main(java.lang.String[])>",
+        "stmt_index": 97,
+        "line": 31,
+        "stmt": "%v60 = invokestatic nesy.Taint.src()",
+        "index": "result",
+        "raw": "<nesy.NesyDriver: void main(java.lang.String[])>[97@L31] %v60 = invokestatic nesy.Taint.src()/result"
+      },
+      "sink": {
+        "method": "<sun.util.locale.provider.LocaleResources: java.lang.String getDateTimePattern(java.lang.String,int,int,java.lang.String)>",
+        "stmt_index": 62,
+        "line": 419,
+        "stmt": "$5 = invokestatic java.text.MessageFormat.format($8, %v38)",
+        "index": "0",
+        "raw": "<sun.util.locale.provider.LocaleResources: java.lang.String getDateTimePattern(java.lang.String,int,int,java.lang.String)>[62@L419] $5 = invokestatic java.text.MessageFormat.format($8, %v38)/0"
+      }
+    },
+    {
+      "id": "d06c28ee07",
+      "key": "DRIVER => <com.cronutils.StringValidations: java.util.regex.Pattern buildWordsPattern(java.util.Set)>@L73/0",
+      "source": {
+        "method": "<nesy.NesyDriver: void main(java.lang.String[])>",
+        "stmt_index": 99,
+        "line": 31,
+        "stmt": "%v62 = invokestatic nesy.Taint.src()",
+        "index": "result",
+        "raw": "<nesy.NesyDriver: void main(java.lang.String[])>[99@L31] %v62 = invokestatic nesy.Taint.src()/result"
+      },
+      "sink": {
+        "method": "<com.cronutils.StringValidations: java.util.regex.Pattern buildWordsPattern(java.util.Set)>",
+        "stmt_index": 10,
+        "line": 73,
+        "stmt": "%v12 = invokestatic java.util.regex.Pattern.compile(%v11)",
+        "index": "0",
+        "raw": "<com.cronutils.StringValidations: java.util.regex.Pattern buildWordsPattern(java.util.Set)>[10@L73] %v12 = invokestatic java.util.regex.Pattern.compile(%v11)/0"
+      }
+    },
+    {
+      "id": "b82b6c816c",
+      "key": "DRIVER => <com.cronutils.StringValidations: java.util.regex.Pattern buildWordsPattern(java.util.Set)>@L82/0",
+      "source": {
+        "method": "<nesy.NesyDriver: void main(java.lang.String[])>",
+        "stmt_index": 99,
+        "line": 31,
+        "stmt": "%v62 = invokestatic nesy.Taint.src()",
+        "index": "result",
+        "raw": "<nesy.NesyDriver: void main(java.lang.String[])>[99@L31] %v62 = invokestatic nesy.Taint.src()/result"
+      },
+      "sink": {
+        "method": "<com.cronutils.StringValidations: java.util.regex.Pattern buildWordsPattern(java.util.Set)>",
+        "stmt_index": 26,
+        "line": 82,
+        "stmt": "%v21 = invokestatic java.util.regex.Pattern.compile(%v20)",
+        "index": "0",
+        "raw": "<com.cronutils.StringValidations: java.util.regex.Pattern buildWordsPattern(java.util.Set)>[26@L82] %v21 = invokestatic java.util.regex.Pattern.compile(%v20)/0"
+      }
+    },
+    {
+      "id": "e11a53a23a",
+      "key": "DRIVER => <java.text.MessageFormat: java.lang.StringBuffer subformat(java.lang.Object[],java.lang.StringBuffer,java.text.FieldPosition,java.util.List)>@L1270/0",
+      "source": {
+        "method": "<nesy.NesyDriver: void main(java.lang.String[])>",
+        "stmt_index": 99,
+        "line": 31,
+        "stmt": "%v62 = invokestatic nesy.Taint.src()",
+        "index": "result",
+        "raw": "<nesy.NesyDriver: void main(java.lang.String[])>[99@L31] %v62 = invokestatic nesy.Taint.src()/result"
+      },
+      "sink": {
+        "method": "<java.text.MessageFormat: java.lang.StringBuffer subformat(java.lang.Object[],java.lang.StringBuffer,java.text.FieldPosition,java.util.List)>",
+        "stmt_index": 47,
+        "line": 1270,
+        "stmt": "invokespecial %v32.<init>($10, %v33)",
+        "index": "0",
+        "raw": "<java.text.MessageFormat: java.lang.StringBuffer subformat(java.lang.Object[],java.lang.StringBuffer,java.text.FieldPosition,java.util.List)>[47@L1270] invokespecial %v32.<init>($10, %v33)/0"
+      }
+    },
+    {
+      "id": "63702b6456",
+      "key": "DRIVER => <sun.util.locale.provider.LocaleResources: java.lang.String getDateTimePattern(java.lang.String,int,int,java.lang.String)>@L419/0",
+      "source": {
+        "method": "<nesy.NesyDriver: void main(java.lang.String[])>",
+        "stmt_index": 99,
+        "line": 31,
+        "stmt": "%v62 = invokestatic nesy.Taint.src()",
+        "index": "result",
+        "raw": "<nesy.NesyDriver: void main(java.lang.String[])>[99@L31] %v62 = invokestatic nesy.Taint.src()/result"
+      },
+      "sink": {
+        "method": "<sun.util.locale.provider.LocaleResources: java.lang.String getDateTimePattern(java.lang.String,int,int,java.lang.String)>",
+        "stmt_index": 62,
+        "line": 419,
+        "stmt": "$5 = invokestatic java.text.MessageFormat.format($8, %v38)",
+        "index": "0",
+        "raw": "<sun.util.locale.provider.LocaleResources: java.lang.String getDateTimePattern(java.lang.String,int,int,java.lang.String)>[62@L419] $5 = invokestatic java.text.MessageFormat.format($8, %v38)/0"
+      }
+    },
+    {
+      "id": "d06c28ee07",
+      "key": "DRIVER => <com.cronutils.StringValidations: java.util.regex.Pattern buildWordsPattern(java.util.Set)>@L73/0",
+      "source": {
+        "method": "<nesy.NesyDriver: void main(java.lang.String[])>",
+        "stmt_index": 109,
+        "line": 33,
+        "stmt": "%v68 = invokestatic nesy.Taint.src()",
+        "index": "result",
+        "raw": "<nesy.NesyDriver: void main(java.lang.String[])>[109@L33] %v68 = invokestatic nesy.Taint.src()/result"
+      },
+      "sink": {
+        "method": "<com.cronutils.StringValidations: java.util.regex.Pattern buildWordsPattern(java.util.Set)>",
+        "stmt_index": 10,
+        "line": 73,
+        "stmt": "%v12 = invokestatic java.util.regex.Pattern.compile(%v11)",
+        "index": "0",
+        "raw": "<com.cronutils.StringValidations: java.util.regex.Pattern buildWordsPattern(java.util.Set)>[10@L73] %v12 = invokestatic java.util.regex.Pattern.compile(%v11)/0"
+      }
+    },
+    {
+      "id": "b82b6c816c",
+      "key": "DRIVER => <com.cronutils.StringValidations: java.util.regex.Pattern buildWordsPattern(java.util.Set)>@L82/0",
+      "source": {
+        "method": "<nesy.NesyDriver: void main(java.lang.String[])>",
+        "stmt_index": 109,
+        "line": 33,
+        "stmt": "%v68 = invokestatic nesy.Taint.src()",
+        "index": "result",
+        "raw": "<nesy.NesyDriver: void main(java.lang.String[])>[109@L33] %v68 = invokestatic nesy.Taint.src()/result"
+      },
+      "sink": {
+        "method": "<com.cronutils.StringValidations: java.util.regex.Pattern buildWordsPattern(java.util.Set)>",
+        "stmt_index": 26,
+        "line": 82,
+        "stmt": "%v21 = invokestatic java.util.regex.Pattern.compile(%v20)",
+        "index": "0",
+        "raw": "<com.cronutils.StringValidations: java.util.regex.Pattern buildWordsPattern(java.util.Set)>[26@L82] %v21 = invokestatic java.util.regex.Pattern.compile(%v20)/0"
+      }
+    },
+    {
+      "id": "e11a53a23a",
+      "key": "DRIVER => <java.text.MessageFormat: java.lang.StringBuffer subformat(java.lang.Object[],java.lang.StringBuffer,java.text.FieldPosition,java.util.List)>@L1270/0",
+      "source": {
+        "method": "<nesy.NesyDriver: void main(java.lang.String[])>",
+        "stmt_index": 109,
+        "line": 33,
+        "stmt": "%v68 = invokestatic nesy.Taint.src()",
+        "index": "result",
+        "raw": "<nesy.NesyDriver: void main(java.lang.String[])>[109@L33] %v68 = invokestatic nesy.Taint.src()/result"
+      },
+      "sink": {
+        "method": "<java.text.MessageFormat: java.lang.StringBuffer subformat(java.lang.Object[],java.lang.StringBuffer,java.text.FieldPosition,java.util.List)>",
+        "stmt_index": 47,
+        "line": 1270,
+        "stmt": "invokespecial %v32.<init>($10, %v33)",
+        "index": "0",
+        "raw": "<java.text.MessageFormat: java.lang.StringBuffer subformat(java.lang.Object[],java.lang.StringBuffer,java.text.FieldPosition,java.util.List)>[47@L1270] invokespecial %v32.<init>($10, %v33)/0"
+      }
+    },
+    {
+      "id": "63702b6456",
+      "key": "DRIVER => <sun.util.locale.provider.LocaleResources: java.lang.String getDateTimePattern(java.lang.String,int,int,java.lang.String)>@L419/0",
+      "source": {
+        "method": "<nesy.NesyDriver: void main(java.lang.String[])>",
+        "stmt_index": 109,
+        "line": 33,
+        "stmt": "%v68 = invokestatic nesy.Taint.src()",
+        "index": "result",
+        "raw": "<nesy.NesyDriver: void main(java.lang.String[])>[109@L33] %v68 = invokestatic nesy.Taint.src()/result"
+      },
+      "sink": {
+        "method": "<sun.util.locale.provider.LocaleResources: java.lang.String getDateTimePattern(java.lang.String,int,int,java.lang.String)>",
+        "stmt_index": 62,
+        "line": 419,
+        "stmt": "$5 = invokestatic java.text.MessageFormat.format($8, %v38)",
+        "index": "0",
+        "raw": "<sun.util.locale.provider.LocaleResources: java.lang.String getDateTimePattern(java.lang.String,int,int,java.lang.String)>[62@L419] $5 = invokestatic java.text.MessageFormat.format($8, %v38)/0"
+      }
+    },
+    {
+      "id": "d06c28ee07",
+      "key": "DRIVER => <com.cronutils.StringValidations: java.util.regex.Pattern buildWordsPattern(java.util.Set)>@L73/0",
+      "source": {
+        "method": "<nesy.NesyDriver: void main(java.lang.String[])>",
+        "stmt_index": 113,
+        "line": 34,
+        "stmt": "%v70 = invokestatic nesy.Taint.src()",
+        "index": "result",
+        "raw": "<nesy.NesyDriver: void main(java.lang.String[])>[113@L34] %v70 = invokestatic nesy.Taint.src()/result"
+      },
+      "sink": {
+        "method": "<com.cronutils.StringValidations: java.util.regex.Pattern buildWordsPattern(java.util.Set)>",
+        "stmt_index": 10,
+        "line": 73,
+        "stmt": "%v12 = invokestatic java.util.regex.Pattern.compile(%v11)",
+        "index": "0",
+        "raw": "<com.cronutils.StringValidations: java.util.regex.Pattern buildWordsPattern(java.util.Set)>[10@L73] %v12 = invokestatic java.util.regex.Pattern.compile(%v11)/0"
+      }
+    },
+    {
+      "id": "b82b6c816c",
+      "key": "DRIVER => <com.cronutils.StringValidations: java.util.regex.Pattern buildWordsPattern(java.util.Set)>@L82/0",
+      "source": {
+        "method": "<nesy.NesyDriver: void main(java.lang.String[])>",
+        "stmt_index": 113,
+        "line": 34,
+        "stmt": "%v70 = invokestatic nesy.Taint.src()",
+        "index": "result",
+        "raw": "<nesy.NesyDriver: void main(java.lang.String[])>[113@L34] %v70 = invokestatic nesy.Taint.src()/result"
+      },
+      "sink": {
+        "method": "<com.cronutils.StringValidations: java.util.regex.Pattern buildWordsPattern(java.util.Set)>",
+        "stmt_index": 26,
+        "line": 82,
+        "stmt": "%v21 = invokestatic java.util.regex.Pattern.compile(%v20)",
+        "index": "0",
+        "raw": "<com.cronutils.StringValidations: java.util.regex.Pattern buildWordsPattern(java.util.Set)>[26@L82] %v21 = invokestatic java.util.regex.Pattern.compile(%v20)/0"
+      }
+    },
+    {
+      "id": "e11a53a23a",
+      "key": "DRIVER => <java.text.MessageFormat: java.lang.StringBuffer subformat(java.lang.Object[],java.lang.StringBuffer,java.text.FieldPosition,java.util.List)>@L1270/0",
+      "source": {
+        "method": "<nesy.NesyDriver: void main(java.lang.String[])>",
+        "stmt_index": 113,
+        "line": 34,
+        "stmt": "%v70 = invokestatic nesy.Taint.src()",
+        "index": "result",
+        "raw": "<nesy.NesyDriver: void main(java.lang.String[])>[113@L34] %v70 = invokestatic nesy.Taint.src()/result"
+      },
+      "sink": {
+        "method": "<java.text.MessageFormat: java.lang.StringBuffer subformat(java.lang.Object[],java.lang.StringBuffer,java.text.FieldPosition,java.util.List)>",
+        "stmt_index": 47,
+        "line": 1270,
+        "stmt": "invokespecial %v32.<init>($10, %v33)",
+        "index": "0",
+        "raw": "<java.text.MessageFormat: java.lang.StringBuffer subformat(java.lang.Object[],java.lang.StringBuffer,java.text.FieldPosition,java.util.List)>[47@L1270] invokespecial %v32.<init>($10, %v33)/0"
+      }
+    },
+    {
+      "id": "63702b6456",
+      "key": "DRIVER => <sun.util.locale.provider.LocaleResources: java.lang.String getDateTimePattern(java.lang.String,int,int,java.lang.String)>@L419/0",
+      "source": {
+        "method": "<nesy.NesyDriver: void main(java.lang.String[])>",
+        "stmt_index": 113,
+        "line": 34,
+        "stmt": "%v70 = invokestatic nesy.Taint.src()",
+        "index": "result",
+        "raw": "<nesy.NesyDriver: void main(java.lang.String[])>[113@L34] %v70 = invokestatic nesy.Taint.src()/result"
+      },
+      "sink": {
+        "method": "<sun.util.locale.provider.LocaleResources: java.lang.String getDateTimePattern(java.lang.String,int,int,java.lang.String)>",
+        "stmt_index": 62,
+        "line": 419,
+        "stmt": "$5 = invokestatic java.text.MessageFormat.format($8, %v38)",
+        "index": "0",
+        "raw": "<sun.util.locale.provider.LocaleResources: java.lang.String getDateTimePattern(java.lang.String,int,int,java.lang.String)>[62@L419] $5 = invokestatic java.text.MessageFormat.format($8, %v38)/0"
+      }
+    },
+    {
+      "id": "d06c28ee07",
+      "key": "DRIVER => <com.cronutils.StringValidations: java.util.regex.Pattern buildWordsPattern(java.util.Set)>@L73/0",
+      "source": {
+        "method": "<nesy.NesyDriver: void main(java.lang.String[])>",
+        "stmt_index": 117,
+        "line": 35,
+        "stmt": "%v72 = invokestatic nesy.Taint.src()",
+        "index": "result",
+        "raw": "<nesy.NesyDriver: void main(java.lang.String[])>[117@L35] %v72 = invokestatic nesy.Taint.src()/result"
+      },
+      "sink": {
+        "method": "<com.cronutils.StringValidations: java.util.regex.Pattern buildWordsPattern(java.util.Set)>",
+        "stmt_index": 10,
+        "line": 73,
+        "stmt": "%v12 = invokestatic java.util.regex.Pattern.compile(%v11)",
+        "index": "0",
+        "raw": "<com.cronutils.StringValidations: java.util.regex.Pattern buildWordsPattern(java.util.Set)>[10@L73] %v12 = invokestatic java.util.regex.Pattern.compile(%v11)/0"
+      }
+    },
+    {
+      "id": "b82b6c816c",
+      "key": "DRIVER => <com.cronutils.StringValidations: java.util.regex.Pattern buildWordsPattern(java.util.Set)>@L82/0",
+      "source": {
+        "method": "<nesy.NesyDriver: void main(java.lang.String[])>",
+        "stmt_index": 117,
+        "line": 35,
+        "stmt": "%v72 = invokestatic nesy.Taint.src()",
+        "index": "result",
+        "raw": "<nesy.NesyDriver: void main(java.lang.String[])>[117@L35] %v72 = invokestatic nesy.Taint.src()/result"
+      },
+      "sink": {
+        "method": "<com.cronutils.StringValidations: java.util.regex.Pattern buildWordsPattern(java.util.Set)>",
+        "stmt_index": 26,
+        "line": 82,
+        "stmt": "%v21 = invokestatic java.util.regex.Pattern.compile(%v20)",
+        "index": "0",
+        "raw": "<com.cronutils.StringValidations: java.util.regex.Pattern buildWordsPattern(java.util.Set)>[26@L82] %v21 = invokestatic java.util.regex.Pattern.compile(%v20)/0"
+      }
+    },
+    {
+      "id": "e11a53a23a",
+      "key": "DRIVER => <java.text.MessageFormat: java.lang.StringBuffer subformat(java.lang.Object[],java.lang.StringBuffer,java.text.FieldPosition,java.util.List)>@L1270/0",
+      "source": {
+        "method": "<nesy.NesyDriver: void main(java.lang.String[])>",
+        "stmt_index": 117,
+        "line": 35,
+        "stmt": "%v72 = invokestatic nesy.Taint.src()",
+        "index": "result",
+        "raw": "<nesy.NesyDriver: void main(java.lang.String[])>[117@L35] %v72 = invokestatic nesy.Taint.src()/result"
+      },
+      "sink": {
+        "method": "<java.text.MessageFormat: java.lang.StringBuffer subformat(java.lang.Object[],java.lang.StringBuffer,java.text.FieldPosition,java.util.List)>",
+        "stmt_index": 47,
+        "line": 1270,
+        "stmt": "invokespecial %v32.<init>($10, %v33)",
+        "index": "0",
+        "raw": "<java.text.MessageFormat: java.lang.StringBuffer subformat(java.lang.Object[],java.lang.StringBuffer,java.text.FieldPosition,java.util.List)>[47@L1270] invokespecial %v32.<init>($10, %v33)/0"
+      }
+    },
+    {
+      "id": "63702b6456",
+      "key": "DRIVER => <sun.util.locale.provider.LocaleResources: java.lang.String getDateTimePattern(java.lang.String,int,int,java.lang.String)>@L419/0",
+      "source": {
+        "method": "<nesy.NesyDriver: void main(java.lang.String[])>",
+        "stmt_index": 117,
+        "line": 35,
+        "stmt": "%v72 = invokestatic nesy.Taint.src()",
+        "index": "result",
+        "raw": "<nesy.NesyDriver: void main(java.lang.String[])>[117@L35] %v72 = invokestatic nesy.Taint.src()/result"
+      },
+      "sink": {
+        "method": "<sun.util.locale.provider.LocaleResources: java.lang.String getDateTimePattern(java.lang.String,int,int,java.lang.String)>",
+        "stmt_index": 62,
+        "line": 419,
+        "stmt": "$5 = invokestatic java.text.MessageFormat.format($8, %v38)",
+        "index": "0",
+        "raw": "<sun.util.locale.provider.LocaleResources: java.lang.String getDateTimePattern(java.lang.String,int,int,java.lang.String)>[62@L419] $5 = invokestatic java.text.MessageFormat.format($8, %v38)/0"
+      }
+    },
+    {
+      "id": "d06c28ee07",
+      "key": "DRIVER => <com.cronutils.StringValidations: java.util.regex.Pattern buildWordsPattern(java.util.Set)>@L73/0",
+      "source": {
+        "method": "<nesy.NesyDriver: void main(java.lang.String[])>",
+        "stmt_index": 121,
+        "line": 36,
+        "stmt": "%v74 = invokestatic nesy.Taint.src()",
+        "index": "result",
+        "raw": "<nesy.NesyDriver: void main(java.lang.String[])>[121@L36] %v74 = invokestatic nesy.Taint.src()/result"
+      },
+      "sink": {
+        "method": "<com.cronutils.StringValidations: java.util.regex.Pattern buildWordsPattern(java.util.Set)>",
+        "stmt_index": 10,
+        "line": 73,
+        "stmt": "%v12 = invokestatic java.util.regex.Pattern.compile(%v11)",
+        "index": "0",
+        "raw": "<com.cronutils.StringValidations: java.util.regex.Pattern buildWordsPattern(java.util.Set)>[10@L73] %v12 = invokestatic java.util.regex.Pattern.compile(%v11)/0"
+      }
+    },
+    {
+      "id": "b82b6c816c",
+      "key": "DRIVER => <com.cronutils.StringValidations: java.util.regex.Pattern buildWordsPattern(java.util.Set)>@L82/0",
+      "source": {
+        "method": "<nesy.NesyDriver: void main(java.lang.String[])>",
+        "stmt_index": 121,
+        "line": 36,
+        "stmt": "%v74 = invokestatic nesy.Taint.src()",
+        "index": "result",
+        "raw": "<nesy.NesyDriver: void main(java.lang.String[])>[121@L36] %v74 = invokestatic nesy.Taint.src()/result"
+      },
+      "sink": {
+        "method": "<com.cronutils.StringValidations: java.util.regex.Pattern buildWordsPattern(java.util.Set)>",
+        "stmt_index": 26,
+        "line": 82,
+        "stmt": "%v21 = invokestatic java.util.regex.Pattern.compile(%v20)",
+        "index": "0",
+        "raw": "<com.cronutils.StringValidations: java.util.regex.Pattern buildWordsPattern(java.util.Set)>[26@L82] %v21 = invokestatic java.util.regex.Pattern.compile(%v20)/0"
+      }
+    },
+    {
+      "id": "e11a53a23a",
+      "key": "DRIVER => <java.text.MessageFormat: java.lang.StringBuffer subformat(java.lang.Object[],java.lang.StringBuffer,java.text.FieldPosition,java.util.List)>@L1270/0",
+      "source": {
+        "method": "<nesy.NesyDriver: void main(java.lang.String[])>",
+        "stmt_index": 121,
+        "line": 36,
+        "stmt": "%v74 = invokestatic nesy.Taint.src()",
+        "index": "result",
+        "raw": "<nesy.NesyDriver: void main(java.lang.String[])>[121@L36] %v74 = invokestatic nesy.Taint.src()/result"
+      },
+      "sink": {
+        "method": "<java.text.MessageFormat: java.lang.StringBuffer subformat(java.lang.Object[],java.lang.StringBuffer,java.text.FieldPosition,java.util.List)>",
+        "stmt_index": 47,
+        "line": 1270,
+        "stmt": "invokespecial %v32.<init>($10, %v33)",
+        "index": "0",
+        "raw": "<java.text.MessageFormat: java.lang.StringBuffer subformat(java.lang.Object[],java.lang.StringBuffer,java.text.FieldPosition,java.util.List)>[47@L1270] invokespecial %v32.<init>($10, %v33)/0"
+      }
+    },
+    {
+      "id": "63702b6456",
+      "key": "DRIVER => <sun.util.locale.provider.LocaleResources: java.lang.String getDateTimePattern(java.lang.String,int,int,java.lang.String)>@L419/0",
+      "source": {
+        "method": "<nesy.NesyDriver: void main(java.lang.String[])>",
+        "stmt_index": 121,
+        "line": 36,
+        "stmt": "%v74 = invokestatic nesy.Taint.src()",
+        "index": "result",
+        "raw": "<nesy.NesyDriver: void main(java.lang.String[])>[121@L36] %v74 = invokestatic nesy.Taint.src()/result"
+      },
+      "sink": {
+        "method": "<sun.util.locale.provider.LocaleResources: java.lang.String getDateTimePattern(java.lang.String,int,int,java.lang.String)>",
+        "stmt_index": 62,
+        "line": 419,
+        "stmt": "$5 = invokestatic java.text.MessageFormat.format($8, %v38)",
+        "index": "0",
+        "raw": "<sun.util.locale.provider.LocaleResources: java.lang.String getDateTimePattern(java.lang.String,int,int,java.lang.String)>[62@L419] $5 = invokestatic java.text.MessageFormat.format($8, %v38)/0"
+      }
+    },
+    {
+      "id": "d06c28ee07",
+      "key": "DRIVER => <com.cronutils.StringValidations: java.util.regex.Pattern buildWordsPattern(java.util.Set)>@L73/0",
+      "source": {
+        "method": "<nesy.NesyDriver: void main(java.lang.String[])>",
+        "stmt_index": 129,
+        "line": 38,
+        "stmt": "%v78 = invokestatic nesy.Taint.src()",
+        "index": "result",
+        "raw": "<nesy.NesyDriver: void main(java.lang.String[])>[129@L38] %v78 = invokestatic nesy.Taint.src()/result"
+      },
+      "sink": {
+        "method": "<com.cronutils.StringValidations: java.util.regex.Pattern buildWordsPattern(java.util.Set)>",
+        "stmt_index": 10,
+        "line": 73,
+        "stmt": "%v12 = invokestatic java.util.regex.Pattern.compile(%v11)",
+        "index": "0",
+        "raw": "<com.cronutils.StringValidations: java.util.regex.Pattern buildWordsPattern(java.util.Set)>[10@L73] %v12 = invokestatic java.util.regex.Pattern.compile(%v11)/0"
+      }
+    },
+    {
+      "id": "b82b6c816c",
+      "key": "DRIVER => <com.cronutils.StringValidations: java.util.regex.Pattern buildWordsPattern(java.util.Set)>@L82/0",
+      "source": {
+        "method": "<nesy.NesyDriver: void main(java.lang.String[])>",
+        "stmt_index": 129,
+        "line": 38,
+        "stmt": "%v78 = invokestatic nesy.Taint.src()",
+        "index": "result",
+        "raw": "<nesy.NesyDriver: void main(java.lang.String[])>[129@L38] %v78 = invokestatic nesy.Taint.src()/result"
+      },
+      "sink": {
+        "method": "<com.cronutils.StringValidations: java.util.regex.Pattern buildWordsPattern(java.util.Set)>",
+        "stmt_index": 26,
+        "line": 82,
+        "stmt": "%v21 = invokestatic java.util.regex.Pattern.compile(%v20)",
+        "index": "0",
+        "raw": "<com.cronutils.StringValidations: java.util.regex.Pattern buildWordsPattern(java.util.Set)>[26@L82] %v21 = invokestatic java.util.regex.Pattern.compile(%v20)/0"
+      }
+    },
+    {
+      "id": "e11a53a23a",
+      "key": "DRIVER => <java.text.MessageFormat: java.lang.StringBuffer subformat(java.lang.Object[],java.lang.StringBuffer,java.text.FieldPosition,java.util.List)>@L1270/0",
+      "source": {
+        "method": "<nesy.NesyDriver: void main(java.lang.String[])>",
+        "stmt_index": 129,
+        "line": 38,
+        "stmt": "%v78 = invokestatic nesy.Taint.src()",
+        "index": "result",
+        "raw": "<nesy.NesyDriver: void main(java.lang.String[])>[129@L38] %v78 = invokestatic nesy.Taint.src()/result"
+      },
+      "sink": {
+        "method": "<java.text.MessageFormat: java.lang.StringBuffer subformat(java.lang.Object[],java.lang.StringBuffer,java.text.FieldPosition,java.util.List)>",
+        "stmt_index": 47,
+        "line": 1270,
+        "stmt": "invokespecial %v32.<init>($10, %v33)",
+        "index": "0",
+        "raw": "<java.text.MessageFormat: java.lang.StringBuffer subformat(java.lang.Object[],java.lang.StringBuffer,java.text.FieldPosition,java.util.List)>[47@L1270] invokespecial %v32.<init>($10, %v33)/0"
+      }
+    },
+    {
+      "id": "63702b6456",
+      "key": "DRIVER => <sun.util.locale.provider.LocaleResources: java.lang.String getDateTimePattern(java.lang.String,int,int,java.lang.String)>@L419/0",
+      "source": {
+        "method": "<nesy.NesyDriver: void main(java.lang.String[])>",
+        "stmt_index": 129,
+        "line": 38,
+        "stmt": "%v78 = invokestatic nesy.Taint.src()",
+        "index": "result",
+        "raw": "<nesy.NesyDriver: void main(java.lang.String[])>[129@L38] %v78 = invokestatic nesy.Taint.src()/result"
+      },
+      "sink": {
+        "method": "<sun.util.locale.provider.LocaleResources: java.lang.String getDateTimePattern(java.lang.String,int,int,java.lang.String)>",
+        "stmt_index": 62,
+        "line": 419,
+        "stmt": "$5 = invokestatic java.text.MessageFormat.format($8, %v38)",
+        "index": "0",
+        "raw": "<sun.util.locale.provider.LocaleResources: java.lang.String getDateTimePattern(java.lang.String,int,int,java.lang.String)>[62@L419] $5 = invokestatic java.text.MessageFormat.format($8, %v38)/0"
+      }
+    },
+    {
+      "id": "d06c28ee07",
+      "key": "DRIVER => <com.cronutils.StringValidations: java.util.regex.Pattern buildWordsPattern(java.util.Set)>@L73/0",
+      "source": {
+        "method": "<nesy.NesyDriver: void main(java.lang.String[])>",
+        "stmt_index": 133,
+        "line": 39,
+        "stmt": "%v80 = invokestatic nesy.Taint.src()",
+        "index": "result",
+        "raw": "<nesy.NesyDriver: void main(java.lang.String[])>[133@L39] %v80 = invokestatic nesy.Taint.src()/result"
+      },
+      "sink": {
+        "method": "<com.cronutils.StringValidations: java.util.regex.Pattern buildWordsPattern(java.util.Set)>",
+        "stmt_index": 10,
+        "line": 73,
+        "stmt": "%v12 = invokestatic java.util.regex.Pattern.compile(%v11)",
+        "index": "0",
+        "raw": "<com.cronutils.StringValidations: java.util.regex.Pattern buildWordsPattern(java.util.Set)>[10@L73] %v12 = invokestatic java.util.regex.Pattern.compile(%v11)/0"
+      }
+    },
+    {
+      "id": "b82b6c816c",
+      "key": "DRIVER => <com.cronutils.StringValidations: java.util.regex.Pattern buildWordsPattern(java.util.Set)>@L82/0",
+      "source": {
+        "method": "<nesy.NesyDriver: void main(java.lang.String[])>",
+        "stmt_index": 133,
+        "line": 39,
+        "stmt": "%v80 = invokestatic nesy.Taint.src()",
+        "index": "result",
+        "raw": "<nesy.NesyDriver: void main(java.lang.String[])>[133@L39] %v80 = invokestatic nesy.Taint.src()/result"
+      },
+      "sink": {
+        "method": "<com.cronutils.StringValidations: java.util.regex.Pattern buildWordsPattern(java.util.Set)>",
+        "stmt_index": 26,
+        "line": 82,
+        "stmt": "%v21 = invokestatic java.util.regex.Pattern.compile(%v20)",
+        "index": "0",
+        "raw": "<com.cronutils.StringValidations: java.util.regex.Pattern buildWordsPattern(java.util.Set)>[26@L82] %v21 = invokestatic java.util.regex.Pattern.compile(%v20)/0"
+      }
+    },
+    {
+      "id": "e11a53a23a",
+      "key": "DRIVER => <java.text.MessageFormat: java.lang.StringBuffer subformat(java.lang.Object[],java.lang.StringBuffer,java.text.FieldPosition,java.util.List)>@L1270/0",
+      "source": {
+        "method": "<nesy.NesyDriver: void main(java.lang.String[])>",
+        "stmt_index": 133,
+        "line": 39,
+        "stmt": "%v80 = invokestatic nesy.Taint.src()",
+        "index": "result",
+        "raw": "<nesy.NesyDriver: void main(java.lang.String[])>[133@L39] %v80 = invokestatic nesy.Taint.src()/result"
+      },
+      "sink": {
+        "method": "<java.text.MessageFormat: java.lang.StringBuffer subformat(java.lang.Object[],java.lang.StringBuffer,java.text.FieldPosition,java.util.List)>",
+        "stmt_index": 47,
+        "line": 1270,
+        "stmt": "invokespecial %v32.<init>($10, %v33)",
+        "index": "0",
+        "raw": "<java.text.MessageFormat: java.lang.StringBuffer subformat(java.lang.Object[],java.lang.StringBuffer,java.text.FieldPosition,java.util.List)>[47@L1270] invokespecial %v32.<init>($10, %v33)/0"
+      }
+    },
+    {
+      "id": "63702b6456",
+      "key": "DRIVER => <sun.util.locale.provider.LocaleResources: java.lang.String getDateTimePattern(java.lang.String,int,int,java.lang.String)>@L419/0",
+      "source": {
+        "method": "<nesy.NesyDriver: void main(java.lang.String[])>",
+        "stmt_index": 133,
+        "line": 39,
+        "stmt": "%v80 = invokestatic nesy.Taint.src()",
+        "index": "result",
+        "raw": "<nesy.NesyDriver: void main(java.lang.String[])>[133@L39] %v80 = invokestatic nesy.Taint.src()/result"
+      },
+      "sink": {
+        "method": "<sun.util.locale.provider.LocaleResources: java.lang.String getDateTimePattern(java.lang.String,int,int,java.lang.String)>",
+        "stmt_index": 62,
+        "line": 419,
+        "stmt": "$5 = invokestatic java.text.MessageFormat.format($8, %v38)",
+        "index": "0",
+        "raw": "<sun.util.locale.provider.LocaleResources: java.lang.String getDateTimePattern(java.lang.String,int,int,java.lang.String)>[62@L419] $5 = invokestatic java.text.MessageFormat.format($8, %v38)/0"
+      }
+    },
+    {
+      "id": "d06c28ee07",
+      "key": "DRIVER => <com.cronutils.StringValidations: java.util.regex.Pattern buildWordsPattern(java.util.Set)>@L73/0",
+      "source": {
+        "method": "<nesy.NesyDriver: void main(java.lang.String[])>",
+        "stmt_index": 138,
+        "line": 40,
+        "stmt": "%v83 = invokestatic nesy.Taint.src()",
+        "index": "result",
+        "raw": "<nesy.NesyDriver: void main(java.lang.String[])>[138@L40] %v83 = invokestatic nesy.Taint.src()/result"
+      },
+      "sink": {
+        "method": "<com.cronutils.StringValidations: java.util.regex.Pattern buildWordsPattern(java.util.Set)>",
+        "stmt_index": 10,
+        "line": 73,
+        "stmt": "%v12 = invokestatic java.util.regex.Pattern.compile(%v11)",
+        "index": "0",
+        "raw": "<com.cronutils.StringValidations: java.util.regex.Pattern buildWordsPattern(java.util.Set)>[10@L73] %v12 = invokestatic java.util.regex.Pattern.compile(%v11)/0"
+      }
+    },
+    {
+      "id": "b82b6c816c",
+      "key": "DRIVER => <com.cronutils.StringValidations: java.util.regex.Pattern buildWordsPattern(java.util.Set)>@L82/0",
+      "source": {
+        "method": "<nesy.NesyDriver: void main(java.lang.String[])>",
+        "stmt_index": 138,
+        "line": 40,
+        "stmt": "%v83 = invokestatic nesy.Taint.src()",
+        "index": "result",
+        "raw": "<nesy.NesyDriver: void main(java.lang.String[])>[138@L40] %v83 = invokestatic nesy.Taint.src()/result"
+      },
+      "sink": {
+        "method": "<com.cronutils.StringValidations: java.util.regex.Pattern buildWordsPattern(java.util.Set)>",
+        "stmt_index": 26,
+        "line": 82,
+        "stmt": "%v21 = invokestatic java.util.regex.Pattern.compile(%v20)",
+        "index": "0",
+        "raw": "<com.cronutils.StringValidations: java.util.regex.Pattern buildWordsPattern(java.util.Set)>[26@L82] %v21 = invokestatic java.util.regex.Pattern.compile(%v20)/0"
+      }
+    },
+    {
+      "id": "e11a53a23a",
+      "key": "DRIVER => <java.text.MessageFormat: java.lang.StringBuffer subformat(java.lang.Object[],java.lang.StringBuffer,java.text.FieldPosition,java.util.List)>@L1270/0",
+      "source": {
+        "method": "<nesy.NesyDriver: void main(java.lang.String[])>",
+        "stmt_index": 138,
+        "line": 40,
+        "stmt": "%v83 = invokestatic nesy.Taint.src()",
+        "index": "result",
+        "raw": "<nesy.NesyDriver: void main(java.lang.String[])>[138@L40] %v83 = invokestatic nesy.Taint.src()/result"
+      },
+      "sink": {
+        "method": "<java.text.MessageFormat: java.lang.StringBuffer subformat(java.lang.Object[],java.lang.StringBuffer,java.text.FieldPosition,java.util.List)>",
+        "stmt_index": 47,
+        "line": 1270,
+        "stmt": "invokespecial %v32.<init>($10, %v33)",
+        "index": "0",
+        "raw": "<java.text.MessageFormat: java.lang.StringBuffer subformat(java.lang.Object[],java.lang.StringBuffer,java.text.FieldPosition,java.util.List)>[47@L1270] invokespecial %v32.<init>($10, %v33)/0"
+      }
+    },
+    {
+      "id": "63702b6456",
+      "key": "DRIVER => <sun.util.locale.provider.LocaleResources: java.lang.String getDateTimePattern(java.lang.String,int,int,java.lang.String)>@L419/0",
+      "source": {
+        "method": "<nesy.NesyDriver: void main(java.lang.String[])>",
+        "stmt_index": 138,
+        "line": 40,
+        "stmt": "%v83 = invokestatic nesy.Taint.src()",
+        "index": "result",
+        "raw": "<nesy.NesyDriver: void main(java.lang.String[])>[138@L40] %v83 = invokestatic nesy.Taint.src()/result"
+      },
+      "sink": {
+        "method": "<sun.util.locale.provider.LocaleResources: java.lang.String getDateTimePattern(java.lang.String,int,int,java.lang.String)>",
+        "stmt_index": 62,
+        "line": 419,
+        "stmt": "$5 = invokestatic java.text.MessageFormat.format($8, %v38)",
+        "index": "0",
+        "raw": "<sun.util.locale.provider.LocaleResources: java.lang.String getDateTimePattern(java.lang.String,int,int,java.lang.String)>[62@L419] $5 = invokestatic java.text.MessageFormat.format($8, %v38)/0"
+      }
+    },
+    {
+      "id": "d06c28ee07",
+      "key": "DRIVER => <com.cronutils.StringValidations: java.util.regex.Pattern buildWordsPattern(java.util.Set)>@L73/0",
+      "source": {
+        "method": "<nesy.NesyDriver: void main(java.lang.String[])>",
+        "stmt_index": 142,
+        "line": 41,
+        "stmt": "%v85 = invokestatic nesy.Taint.src()",
+        "index": "result",
+        "raw": "<nesy.NesyDriver: void main(java.lang.String[])>[142@L41] %v85 = invokestatic nesy.Taint.src()/result"
+      },
+      "sink": {
+        "method": "<com.cronutils.StringValidations: java.util.regex.Pattern buildWordsPattern(java.util.Set)>",
+        "stmt_index": 10,
+        "line": 73,
+        "stmt": "%v12 = invokestatic java.util.regex.Pattern.compile(%v11)",
+        "index": "0",
+        "raw": "<com.cronutils.StringValidations: java.util.regex.Pattern buildWordsPattern(java.util.Set)>[10@L73] %v12 = invokestatic java.util.regex.Pattern.compile(%v11)/0"
+      }
+    },
+    {
+      "id": "b82b6c816c",
+      "key": "DRIVER => <com.cronutils.StringValidations: java.util.regex.Pattern buildWordsPattern(java.util.Set)>@L82/0",
+      "source": {
+        "method": "<nesy.NesyDriver: void main(java.lang.String[])>",
+        "stmt_index": 142,
+        "line": 41,
+        "stmt": "%v85 = invokestatic nesy.Taint.src()",
+        "index": "result",
+        "raw": "<nesy.NesyDriver: void main(java.lang.String[])>[142@L41] %v85 = invokestatic nesy.Taint.src()/result"
+      },
+      "sink": {
+        "method": "<com.cronutils.StringValidations: java.util.regex.Pattern buildWordsPattern(java.util.Set)>",
+        "stmt_index": 26,
+        "line": 82,
+        "stmt": "%v21 = invokestatic java.util.regex.Pattern.compile(%v20)",
+        "index": "0",
+        "raw": "<com.cronutils.StringValidations: java.util.regex.Pattern buildWordsPattern(java.util.Set)>[26@L82] %v21 = invokestatic java.util.regex.Pattern.compile(%v20)/0"
+      }
+    },
+    {
+      "id": "e11a53a23a",
+      "key": "DRIVER => <java.text.MessageFormat: java.lang.StringBuffer subformat(java.lang.Object[],java.lang.StringBuffer,java.text.FieldPosition,java.util.List)>@L1270/0",
+      "source": {
+        "method": "<nesy.NesyDriver: void main(java.lang.String[])>",
+        "stmt_index": 142,
+        "line": 41,
+        "stmt": "%v85 = invokestatic nesy.Taint.src()",
+        "index": "result",
+        "raw": "<nesy.NesyDriver: void main(java.lang.String[])>[142@L41] %v85 = invokestatic nesy.Taint.src()/result"
+      },
+      "sink": {
+        "method": "<java.text.MessageFormat: java.lang.StringBuffer subformat(java.lang.Object[],java.lang.StringBuffer,java.text.FieldPosition,java.util.List)>",
+        "stmt_index": 47,
+        "line": 1270,
+        "stmt": "invokespecial %v32.<init>($10, %v33)",
+        "index": "0",
+        "raw": "<java.text.MessageFormat: java.lang.StringBuffer subformat(java.lang.Object[],java.lang.StringBuffer,java.text.FieldPosition,java.util.List)>[47@L1270] invokespecial %v32.<init>($10, %v33)/0"
+      }
+    },
+    {
+      "id": "63702b6456",
+      "key": "DRIVER => <sun.util.locale.provider.LocaleResources: java.lang.String getDateTimePattern(java.lang.String,int,int,java.lang.String)>@L419/0",
+      "source": {
+        "method": "<nesy.NesyDriver: void main(java.lang.String[])>",
+        "stmt_index": 142,
+        "line": 41,
+        "stmt": "%v85 = invokestatic nesy.Taint.src()",
+        "index": "result",
+        "raw": "<nesy.NesyDriver: void main(java.lang.String[])>[142@L41] %v85 = invokestatic nesy.Taint.src()/result"
+      },
+      "sink": {
+        "method": "<sun.util.locale.provider.LocaleResources: java.lang.String getDateTimePattern(java.lang.String,int,int,java.lang.String)>",
+        "stmt_index": 62,
+        "line": 419,
+        "stmt": "$5 = invokestatic java.text.MessageFormat.format($8, %v38)",
+        "index": "0",
+        "raw": "<sun.util.locale.provider.LocaleResources: java.lang.String getDateTimePattern(java.lang.String,int,int,java.lang.String)>[62@L419] $5 = invokestatic java.text.MessageFormat.format($8, %v38)/0"
+      }
+    },
+    {
+      "id": "d06c28ee07",
+      "key": "DRIVER => <com.cronutils.StringValidations: java.util.regex.Pattern buildWordsPattern(java.util.Set)>@L73/0",
+      "source": {
+        "method": "<nesy.NesyDriver: void main(java.lang.String[])>",
+        "stmt_index": 156,
+        "line": 44,
+        "stmt": "%v93 = invokestatic nesy.Taint.src()",
+        "index": "result",
+        "raw": "<nesy.NesyDriver: void main(java.lang.String[])>[156@L44] %v93 = invokestatic nesy.Taint.src()/result"
+      },
+      "sink": {
+        "method": "<com.cronutils.StringValidations: java.util.regex.Pattern buildWordsPattern(java.util.Set)>",
+        "stmt_index": 10,
+        "line": 73,
+        "stmt": "%v12 = invokestatic java.util.regex.Pattern.compile(%v11)",
+        "index": "0",
+        "raw": "<com.cronutils.StringValidations: java.util.regex.Pattern buildWordsPattern(java.util.Set)>[10@L73] %v12 = invokestatic java.util.regex.Pattern.compile(%v11)/0"
+      }
+    },
+    {
+      "id": "b82b6c816c",
+      "key": "DRIVER => <com.cronutils.StringValidations: java.util.regex.Pattern buildWordsPattern(java.util.Set)>@L82/0",
+      "source": {
+        "method": "<nesy.NesyDriver: void main(java.lang.String[])>",
+        "stmt_index": 156,
+        "line": 44,
+        "stmt": "%v93 = invokestatic nesy.Taint.src()",
+        "index": "result",
+        "raw": "<nesy.NesyDriver: void main(java.lang.String[])>[156@L44] %v93 = invokestatic nesy.Taint.src()/result"
+      },
+      "sink": {
+        "method": "<com.cronutils.StringValidations: java.util.regex.Pattern buildWordsPattern(java.util.Set)>",
+        "stmt_index": 26,
+        "line": 82,
+        "stmt": "%v21 = invokestatic java.util.regex.Pattern.compile(%v20)",
+        "index": "0",
+        "raw": "<com.cronutils.StringValidations: java.util.regex.Pattern buildWordsPattern(java.util.Set)>[26@L82] %v21 = invokestatic java.util.regex.Pattern.compile(%v20)/0"
+      }
+    },
+    {
+      "id": "e11a53a23a",
+      "key": "DRIVER => <java.text.MessageFormat: java.lang.StringBuffer subformat(java.lang.Object[],java.lang.StringBuffer,java.text.FieldPosition,java.util.List)>@L1270/0",
+      "source": {
+        "method": "<nesy.NesyDriver: void main(java.lang.String[])>",
+        "stmt_index": 156,
+        "line": 44,
+        "stmt": "%v93 = invokestatic nesy.Taint.src()",
+        "index": "result",
+        "raw": "<nesy.NesyDriver: void main(java.lang.String[])>[156@L44] %v93 = invokestatic nesy.Taint.src()/result"
+      },
+      "sink": {
+        "method": "<java.text.MessageFormat: java.lang.StringBuffer subformat(java.lang.Object[],java.lang.StringBuffer,java.text.FieldPosition,java.util.List)>",
+        "stmt_index": 47,
+        "line": 1270,
+        "stmt": "invokespecial %v32.<init>($10, %v33)",
+        "index": "0",
+        "raw": "<java.text.MessageFormat: java.lang.StringBuffer subformat(java.lang.Object[],java.lang.StringBuffer,java.text.FieldPosition,java.util.List)>[47@L1270] invokespecial %v32.<init>($10, %v33)/0"
+      }
+    },
+    {
+      "id": "63702b6456",
+      "key": "DRIVER => <sun.util.locale.provider.LocaleResources: java.lang.String getDateTimePattern(java.lang.String,int,int,java.lang.String)>@L419/0",
+      "source": {
+        "method": "<nesy.NesyDriver: void main(java.lang.String[])>",
+        "stmt_index": 156,
+        "line": 44,
+        "stmt": "%v93 = invokestatic nesy.Taint.src()",
+        "index": "result",
+        "raw": "<nesy.NesyDriver: void main(java.lang.String[])>[156@L44] %v93 = invokestatic nesy.Taint.src()/result"
+      },
+      "sink": {
+        "method": "<sun.util.locale.provider.LocaleResources: java.lang.String getDateTimePattern(java.lang.String,int,int,java.lang.String)>",
+        "stmt_index": 62,
+        "line": 419,
+        "stmt": "$5 = invokestatic java.text.MessageFormat.format($8, %v38)",
+        "index": "0",
+        "raw": "<sun.util.locale.provider.LocaleResources: java.lang.String getDateTimePattern(java.lang.String,int,int,java.lang.String)>[62@L419] $5 = invokestatic java.text.MessageFormat.format($8, %v38)/0"
+      }
+    },
+    {
+      "id": "d06c28ee07",
+      "key": "DRIVER => <com.cronutils.StringValidations: java.util.regex.Pattern buildWordsPattern(java.util.Set)>@L73/0",
+      "source": {
+        "method": "<nesy.NesyDriver: void main(java.lang.String[])>",
+        "stmt_index": 160,
+        "line": 45,
+        "stmt": "%v95 = invokestatic nesy.Taint.src()",
+        "index": "result",
+        "raw": "<nesy.NesyDriver: void main(java.lang.String[])>[160@L45] %v95 = invokestatic nesy.Taint.src()/result"
+      },
+      "sink": {
+        "method": "<com.cronutils.StringValidations: java.util.regex.Pattern buildWordsPattern(java.util.Set)>",
+        "stmt_index": 10,
+        "line": 73,
+        "stmt": "%v12 = invokestatic java.util.regex.Pattern.compile(%v11)",
+        "index": "0",
+        "raw": "<com.cronutils.StringValidations: java.util.regex.Pattern buildWordsPattern(java.util.Set)>[10@L73] %v12 = invokestatic java.util.regex.Pattern.compile(%v11)/0"
+      }
+    },
+    {
+      "id": "b82b6c816c",
+      "key": "DRIVER => <com.cronutils.StringValidations: java.util.regex.Pattern buildWordsPattern(java.util.Set)>@L82/0",
+      "source": {
+        "method": "<nesy.NesyDriver: void main(java.lang.String[])>",
+        "stmt_index": 160,
+        "line": 45,
+        "stmt": "%v95 = invokestatic nesy.Taint.src()",
+        "index": "result",
+        "raw": "<nesy.NesyDriver: void main(java.lang.String[])>[160@L45] %v95 = invokestatic nesy.Taint.src()/result"
+      },
+      "sink": {
+        "method": "<com.cronutils.StringValidations: java.util.regex.Pattern buildWordsPattern(java.util.Set)>",
+        "stmt_index": 26,
+        "line": 82,
+        "stmt": "%v21 = invokestatic java.util.regex.Pattern.compile(%v20)",
+        "index": "0",
+        "raw": "<com.cronutils.StringValidations: java.util.regex.Pattern buildWordsPattern(java.util.Set)>[26@L82] %v21 = invokestatic java.util.regex.Pattern.compile(%v20)/0"
+      }
+    },
+    {
+      "id": "e11a53a23a",
+      "key": "DRIVER => <java.text.MessageFormat: java.lang.StringBuffer subformat(java.lang.Object[],java.lang.StringBuffer,java.text.FieldPosition,java.util.List)>@L1270/0",
+      "source": {
+        "method": "<nesy.NesyDriver: void main(java.lang.String[])>",
+        "stmt_index": 160,
+        "line": 45,
+        "stmt": "%v95 = invokestatic nesy.Taint.src()",
+        "index": "result",
+        "raw": "<nesy.NesyDriver: void main(java.lang.String[])>[160@L45] %v95 = invokestatic nesy.Taint.src()/result"
+      },
+      "sink": {
+        "method": "<java.text.MessageFormat: java.lang.StringBuffer subformat(java.lang.Object[],java.lang.StringBuffer,java.text.FieldPosition,java.util.List)>",
+        "stmt_index": 47,
+        "line": 1270,
+        "stmt": "invokespecial %v32.<init>($10, %v33)",
+        "index": "0",
+        "raw": "<java.text.MessageFormat: java.lang.StringBuffer subformat(java.lang.Object[],java.lang.StringBuffer,java.text.FieldPosition,java.util.List)>[47@L1270] invokespecial %v32.<init>($10, %v33)/0"
+      }
+    },
+    {
+      "id": "63702b6456",
+      "key": "DRIVER => <sun.util.locale.provider.LocaleResources: java.lang.String getDateTimePattern(java.lang.String,int,int,java.lang.String)>@L419/0",
+      "source": {
+        "method": "<nesy.NesyDriver: void main(java.lang.String[])>",
+        "stmt_index": 160,
+        "line": 45,
+        "stmt": "%v95 = invokestatic nesy.Taint.src()",
+        "index": "result",
+        "raw": "<nesy.NesyDriver: void main(java.lang.String[])>[160@L45] %v95 = invokestatic nesy.Taint.src()/result"
+      },
+      "sink": {
+        "method": "<sun.util.locale.provider.LocaleResources: java.lang.String getDateTimePattern(java.lang.String,int,int,java.lang.String)>",
+        "stmt_index": 62,
+        "line": 419,
+        "stmt": "$5 = invokestatic java.text.MessageFormat.format($8, %v38)",
+        "index": "0",
+        "raw": "<sun.util.locale.provider.LocaleResources: java.lang.String getDateTimePattern(java.lang.String,int,int,java.lang.String)>[62@L419] $5 = invokestatic java.text.MessageFormat.format($8, %v38)/0"
+      }
+    },
+    {
+      "id": "7bf6160aba",
+      "key": "<sun.misc.JarIndex: void read(java.io.InputStream)>@L312/result => <com.cronutils.StringValidations: java.util.regex.Pattern buildWordsPattern(java.util.Set)>@L73/0",
+      "source": {
+        "method": "<sun.misc.JarIndex: void read(java.io.InputStream)>",
+        "stmt_index": 9,
+        "line": 312,
+        "stmt": "%v11 = invokevirtual %v7.readLine()",
+        "index": "result",
+        "raw": "<sun.misc.JarIndex: void read(java.io.InputStream)>[9@L312] %v11 = invokevirtual %v7.readLine()/result"
+      },
+      "sink": {
+        "method": "<com.cronutils.StringValidations: java.util.regex.Pattern buildWordsPattern(java.util.Set)>",
+        "stmt_index": 10,
+        "line": 73,
+        "stmt": "%v12 = invokestatic java.util.regex.Pattern.compile(%v11)",
+        "index": "0",
+        "raw": "<com.cronutils.StringValidations: java.util.regex.Pattern buildWordsPattern(java.util.Set)>[10@L73] %v12 = invokestatic java.util.regex.Pattern.compile(%v11)/0"
+      }
+    },
+    {
+      "id": "b8b51d3195",
+      "key": "<sun.misc.JarIndex: void read(java.io.InputStream)>@L312/result => <com.cronutils.StringValidations: java.util.regex.Pattern buildWordsPattern(java.util.Set)>@L82/0",
+      "source": {
+        "method": "<sun.misc.JarIndex: void read(java.io.InputStream)>",
+        "stmt_index": 9,
+        "line": 312,
+        "stmt": "%v11 = invokevirtual %v7.readLine()",
+        "index": "result",
+        "raw": "<sun.misc.JarIndex: void read(java.io.InputStream)>[9@L312] %v11 = invokevirtual %v7.readLine()/result"
+      },
+      "sink": {
+        "method": "<com.cronutils.StringValidations: java.util.regex.Pattern buildWordsPattern(java.util.Set)>",
+        "stmt_index": 26,
+        "line": 82,
+        "stmt": "%v21 = invokestatic java.util.regex.Pattern.compile(%v20)",
+        "index": "0",
+        "raw": "<com.cronutils.StringValidations: java.util.regex.Pattern buildWordsPattern(java.util.Set)>[26@L82] %v21 = invokestatic java.util.regex.Pattern.compile(%v20)/0"
+      }
+    },
+    {
+      "id": "6b00dfb054",
+      "key": "<sun.misc.JarIndex: void read(java.io.InputStream)>@L312/result => <java.text.MessageFormat: java.lang.StringBuffer subformat(java.lang.Object[],java.lang.StringBuffer,java.text.FieldPosition,java.util.List)>@L1270/0",
+      "source": {
+        "method": "<sun.misc.JarIndex: void read(java.io.InputStream)>",
+        "stmt_index": 9,
+        "line": 312,
+        "stmt": "%v11 = invokevirtual %v7.readLine()",
+        "index": "result",
+        "raw": "<sun.misc.JarIndex: void read(java.io.InputStream)>[9@L312] %v11 = invokevirtual %v7.readLine()/result"
+      },
+      "sink": {
+        "method": "<java.text.MessageFormat: java.lang.StringBuffer subformat(java.lang.Object[],java.lang.StringBuffer,java.text.FieldPosition,java.util.List)>",
+        "stmt_index": 47,
+        "line": 1270,
+        "stmt": "invokespecial %v32.<init>($10, %v33)",
+        "index": "0",
+        "raw": "<java.text.MessageFormat: java.lang.StringBuffer subformat(java.lang.Object[],java.lang.StringBuffer,java.text.FieldPosition,java.util.List)>[47@L1270] invokespecial %v32.<init>($10, %v33)/0"
+      }
+    },
+    {
+      "id": "7dfc3ff102",
+      "key": "<sun.misc.JarIndex: void read(java.io.InputStream)>@L312/result => <sun.util.locale.provider.LocaleResources: java.lang.String getDateTimePattern(java.lang.String,int,int,java.lang.String)>@L419/0",
+      "source": {
+        "method": "<sun.misc.JarIndex: void read(java.io.InputStream)>",
+        "stmt_index": 9,
+        "line": 312,
+        "stmt": "%v11 = invokevirtual %v7.readLine()",
+        "index": "result",
+        "raw": "<sun.misc.JarIndex: void read(java.io.InputStream)>[9@L312] %v11 = invokevirtual %v7.readLine()/result"
+      },
+      "sink": {
+        "method": "<sun.util.locale.provider.LocaleResources: java.lang.String getDateTimePattern(java.lang.String,int,int,java.lang.String)>",
+        "stmt_index": 62,
+        "line": 419,
+        "stmt": "$5 = invokestatic java.text.MessageFormat.format($8, %v38)",
+        "index": "0",
+        "raw": "<sun.util.locale.provider.LocaleResources: java.lang.String getDateTimePattern(java.lang.String,int,int,java.lang.String)>[62@L419] $5 = invokestatic java.text.MessageFormat.format($8, %v38)/0"
+      }
+    },
+    {
+      "id": "91b2e1f356",
+      "key": "<sun.misc.JarIndex: void read(java.io.InputStream)>@L314/result => <com.cronutils.StringValidations: java.util.regex.Pattern buildWordsPattern(java.util.Set)>@L73/0",
+      "source": {
+        "method": "<sun.misc.JarIndex: void read(java.io.InputStream)>",
+        "stmt_index": 28,
+        "line": 314,
+        "stmt": "$3 = invokevirtual %v7.readLine()",
+        "index": "result",
+        "raw": "<sun.misc.JarIndex: void read(java.io.InputStream)>[28@L314] $3 = invokevirtual %v7.readLine()/result"
+      },
+      "sink": {
+        "method": "<com.cronutils.StringValidations: java.util.regex.Pattern buildWordsPattern(java.util.Set)>",
+        "stmt_index": 10,
+        "line": 73,
+        "stmt": "%v12 = invokestatic java.util.regex.Pattern.compile(%v11)",
+        "index": "0",
+        "raw": "<com.cronutils.StringValidations: java.util.regex.Pattern buildWordsPattern(java.util.Set)>[10@L73] %v12 = invokestatic java.util.regex.Pattern.compile(%v11)/0"
+      }
+    },
+    {
+      "id": "70366cb231",
+      "key": "<sun.misc.JarIndex: void read(java.io.InputStream)>@L314/result => <com.cronutils.StringValidations: java.util.regex.Pattern buildWordsPattern(java.util.Set)>@L82/0",
+      "source": {
+        "method": "<sun.misc.JarIndex: void read(java.io.InputStream)>",
+        "stmt_index": 28,
+        "line": 314,
+        "stmt": "$3 = invokevirtual %v7.readLine()",
+        "index": "result",
+        "raw": "<sun.misc.JarIndex: void read(java.io.InputStream)>[28@L314] $3 = invokevirtual %v7.readLine()/result"
+      },
+      "sink": {
+        "method": "<com.cronutils.StringValidations: java.util.regex.Pattern buildWordsPattern(java.util.Set)>",
+        "stmt_index": 26,
+        "line": 82,
+        "stmt": "%v21 = invokestatic java.util.regex.Pattern.compile(%v20)",
+        "index": "0",
+        "raw": "<com.cronutils.StringValidations: java.util.regex.Pattern buildWordsPattern(java.util.Set)>[26@L82] %v21 = invokestatic java.util.regex.Pattern.compile(%v20)/0"
+      }
+    },
+    {
+      "id": "b210e35a61",
+      "key": "<sun.misc.JarIndex: void read(java.io.InputStream)>@L314/result => <java.text.MessageFormat: java.lang.StringBuffer subformat(java.lang.Object[],java.lang.StringBuffer,java.text.FieldPosition,java.util.List)>@L1270/0",
+      "source": {
+        "method": "<sun.misc.JarIndex: void read(java.io.InputStream)>",
+        "stmt_index": 28,
+        "line": 314,
+        "stmt": "$3 = invokevirtual %v7.readLine()",
+        "index": "result",
+        "raw": "<sun.misc.JarIndex: void read(java.io.InputStream)>[28@L314] $3 = invokevirtual %v7.readLine()/result"
+      },
+      "sink": {
+        "method": "<java.text.MessageFormat: java.lang.StringBuffer subformat(java.lang.Object[],java.lang.StringBuffer,java.text.FieldPosition,java.util.List)>",
+        "stmt_index": 47,
+        "line": 1270,
+        "stmt": "invokespecial %v32.<init>($10, %v33)",
+        "index": "0",
+        "raw": "<java.text.MessageFormat: java.lang.StringBuffer subformat(java.lang.Object[],java.lang.StringBuffer,java.text.FieldPosition,java.util.List)>[47@L1270] invokespecial %v32.<init>($10, %v33)/0"
+      }
+    },
+    {
+      "id": "d54d723533",
+      "key": "<sun.misc.JarIndex: void read(java.io.InputStream)>@L314/result => <sun.util.locale.provider.LocaleResources: java.lang.String getDateTimePattern(java.lang.String,int,int,java.lang.String)>@L419/0",
+      "source": {
+        "method": "<sun.misc.JarIndex: void read(java.io.InputStream)>",
+        "stmt_index": 28,
+        "line": 314,
+        "stmt": "$3 = invokevirtual %v7.readLine()",
+        "index": "result",
+        "raw": "<sun.misc.JarIndex: void read(java.io.InputStream)>[28@L314] $3 = invokevirtual %v7.readLine()/result"
+      },
+      "sink": {
+        "method": "<sun.util.locale.provider.LocaleResources: java.lang.String getDateTimePattern(java.lang.String,int,int,java.lang.String)>",
+        "stmt_index": 62,
+        "line": 419,
+        "stmt": "$5 = invokestatic java.text.MessageFormat.format($8, %v38)",
+        "index": "0",
+        "raw": "<sun.util.locale.provider.LocaleResources: java.lang.String getDateTimePattern(java.lang.String,int,int,java.lang.String)>[62@L419] $5 = invokestatic java.text.MessageFormat.format($8, %v38)/0"
+      }
+    },
+    {
+      "id": "a3234ee91c",
+      "key": "<sun.misc.MetaIndex: void registerDirectory(java.io.File)>@L183/result => <com.cronutils.StringValidations: java.util.regex.Pattern buildWordsPattern(java.util.Set)>@L73/0",
+      "source": {
+        "method": "<sun.misc.MetaIndex: void registerDirectory(java.io.File)>",
+        "stmt_index": 25,
+        "line": 183,
+        "stmt": "%v21 = invokevirtual %v12.readLine()",
+        "index": "result",
+        "raw": "<sun.misc.MetaIndex: void registerDirectory(java.io.File)>[25@L183] %v21 = invokevirtual %v12.readLine()/result"
+      },
+      "sink": {
+        "method": "<com.cronutils.StringValidations: java.util.regex.Pattern buildWordsPattern(java.util.Set)>",
+        "stmt_index": 10,
+        "line": 73,
+        "stmt": "%v12 = invokestatic java.util.regex.Pattern.compile(%v11)",
+        "index": "0",
+        "raw": "<com.cronutils.StringValidations: java.util.regex.Pattern buildWordsPattern(java.util.Set)>[10@L73] %v12 = invokestatic java.util.regex.Pattern.compile(%v11)/0"
+      }
+    },
+    {
+      "id": "5d0e64974f",
+      "key": "<sun.misc.MetaIndex: void registerDirectory(java.io.File)>@L183/result => <com.cronutils.StringValidations: java.util.regex.Pattern buildWordsPattern(java.util.Set)>@L82/0",
+      "source": {
+        "method": "<sun.misc.MetaIndex: void registerDirectory(java.io.File)>",
+        "stmt_index": 25,
+        "line": 183,
+        "stmt": "%v21 = invokevirtual %v12.readLine()",
+        "index": "result",
+        "raw": "<sun.misc.MetaIndex: void registerDirectory(java.io.File)>[25@L183] %v21 = invokevirtual %v12.readLine()/result"
+      },
+      "sink": {
+        "method": "<com.cronutils.StringValidations: java.util.regex.Pattern buildWordsPattern(java.util.Set)>",
+        "stmt_index": 26,
+        "line": 82,
+        "stmt": "%v21 = invokestatic java.util.regex.Pattern.compile(%v20)",
+        "index": "0",
+        "raw": "<com.cronutils.StringValidations: java.util.regex.Pattern buildWordsPattern(java.util.Set)>[26@L82] %v21 = invokestatic java.util.regex.Pattern.compile(%v20)/0"
+      }
+    },
+    {
+      "id": "e5368b34ce",
+      "key": "<sun.misc.MetaIndex: void registerDirectory(java.io.File)>@L183/result => <java.text.MessageFormat: java.lang.StringBuffer subformat(java.lang.Object[],java.lang.StringBuffer,java.text.FieldPosition,java.util.List)>@L1270/0",
+      "source": {
+        "method": "<sun.misc.MetaIndex: void registerDirectory(java.io.File)>",
+        "stmt_index": 25,
+        "line": 183,
+        "stmt": "%v21 = invokevirtual %v12.readLine()",
+        "index": "result",
+        "raw": "<sun.misc.MetaIndex: void registerDirectory(java.io.File)>[25@L183] %v21 = invokevirtual %v12.readLine()/result"
+      },
+      "sink": {
+        "method": "<java.text.MessageFormat: java.lang.StringBuffer subformat(java.lang.Object[],java.lang.StringBuffer,java.text.FieldPosition,java.util.List)>",
+        "stmt_index": 47,
+        "line": 1270,
+        "stmt": "invokespecial %v32.<init>($10, %v33)",
+        "index": "0",
+        "raw": "<java.text.MessageFormat: java.lang.StringBuffer subformat(java.lang.Object[],java.lang.StringBuffer,java.text.FieldPosition,java.util.List)>[47@L1270] invokespecial %v32.<init>($10, %v33)/0"
+      }
+    },
+    {
+      "id": "edc1a05226",
+      "key": "<sun.misc.MetaIndex: void registerDirectory(java.io.File)>@L183/result => <sun.util.locale.provider.LocaleResources: java.lang.String getDateTimePattern(java.lang.String,int,int,java.lang.String)>@L419/0",
+      "source": {
+        "method": "<sun.misc.MetaIndex: void registerDirectory(java.io.File)>",
+        "stmt_index": 25,
+        "line": 183,
+        "stmt": "%v21 = invokevirtual %v12.readLine()",
+        "index": "result",
+        "raw": "<sun.misc.MetaIndex: void registerDirectory(java.io.File)>[25@L183] %v21 = invokevirtual %v12.readLine()/result"
+      },
+      "sink": {
+        "method": "<sun.util.locale.provider.LocaleResources: java.lang.String getDateTimePattern(java.lang.String,int,int,java.lang.String)>",
+        "stmt_index": 62,
+        "line": 419,
+        "stmt": "$5 = invokestatic java.text.MessageFormat.format($8, %v38)",
+        "index": "0",
+        "raw": "<sun.util.locale.provider.LocaleResources: java.lang.String getDateTimePattern(java.lang.String,int,int,java.lang.String)>[62@L419] $5 = invokestatic java.text.MessageFormat.format($8, %v38)/0"
+      }
+    },
+    {
+      "id": "425ac93c8f",
+      "key": "<sun.util.calendar.ZoneInfoFile: void load(java.io.DataInputStream)>@L305/result => <com.cronutils.StringValidations: java.util.regex.Pattern buildWordsPattern(java.util.Set)>@L73/0",
+      "source": {
+        "method": "<sun.util.calendar.ZoneInfoFile: void load(java.io.DataInputStream)>",
+        "stmt_index": 19,
+        "line": 305,
+        "stmt": "%v24 = invokevirtual $0.readUTF()",
+        "index": "result",
+        "raw": "<sun.util.calendar.ZoneInfoFile: void load(java.io.DataInputStream)>[19@L305] %v24 = invokevirtual $0.readUTF()/result"
+      },
+      "sink": {
+        "method": "<com.cronutils.StringValidations: java.util.regex.Pattern buildWordsPattern(java.util.Set)>",
+        "stmt_index": 10,
+        "line": 73,
+        "stmt": "%v12 = invokestatic java.util.regex.Pattern.compile(%v11)",
+        "index": "0",
+        "raw": "<com.cronutils.StringValidations: java.util.regex.Pattern buildWordsPattern(java.util.Set)>[10@L73] %v12 = invokestatic java.util.regex.Pattern.compile(%v11)/0"
+      }
+    },
+    {
+      "id": "366eed37d2",
+      "key": "<sun.util.calendar.ZoneInfoFile: void load(java.io.DataInputStream)>@L305/result => <com.cronutils.StringValidations: java.util.regex.Pattern buildWordsPattern(java.util.Set)>@L82/0",
+      "source": {
+        "method": "<sun.util.calendar.ZoneInfoFile: void load(java.io.DataInputStream)>",
+        "stmt_index": 19,
+        "line": 305,
+        "stmt": "%v24 = invokevirtual $0.readUTF()",
+        "index": "result",
+        "raw": "<sun.util.calendar.ZoneInfoFile: void load(java.io.DataInputStream)>[19@L305] %v24 = invokevirtual $0.readUTF()/result"
+      },
+      "sink": {
+        "method": "<com.cronutils.StringValidations: java.util.regex.Pattern buildWordsPattern(java.util.Set)>",
+        "stmt_index": 26,
+        "line": 82,
+        "stmt": "%v21 = invokestatic java.util.regex.Pattern.compile(%v20)",
+        "index": "0",
+        "raw": "<com.cronutils.StringValidations: java.util.regex.Pattern buildWordsPattern(java.util.Set)>[26@L82] %v21 = invokestatic java.util.regex.Pattern.compile(%v20)/0"
+      }
+    },
+    {
+      "id": "d05fc31c9e",
+      "key": "<sun.util.calendar.ZoneInfoFile: void load(java.io.DataInputStream)>@L305/result => <java.text.MessageFormat: java.lang.StringBuffer subformat(java.lang.Object[],java.lang.StringBuffer,java.text.FieldPosition,java.util.List)>@L1270/0",
+      "source": {
+        "method": "<sun.util.calendar.ZoneInfoFile: void load(java.io.DataInputStream)>",
+        "stmt_index": 19,
+        "line": 305,
+        "stmt": "%v24 = invokevirtual $0.readUTF()",
+        "index": "result",
+        "raw": "<sun.util.calendar.ZoneInfoFile: void load(java.io.DataInputStream)>[19@L305] %v24 = invokevirtual $0.readUTF()/result"
+      },
+      "sink": {
+        "method": "<java.text.MessageFormat: java.lang.StringBuffer subformat(java.lang.Object[],java.lang.StringBuffer,java.text.FieldPosition,java.util.List)>",
+        "stmt_index": 47,
+        "line": 1270,
+        "stmt": "invokespecial %v32.<init>($10, %v33)",
+        "index": "0",
+        "raw": "<java.text.MessageFormat: java.lang.StringBuffer subformat(java.lang.Object[],java.lang.StringBuffer,java.text.FieldPosition,java.util.List)>[47@L1270] invokespecial %v32.<init>($10, %v33)/0"
+      }
+    },
+    {
+      "id": "9ddd81707e",
+      "key": "<sun.util.calendar.ZoneInfoFile: void load(java.io.DataInputStream)>@L305/result => <sun.util.locale.provider.LocaleResources: java.lang.String getDateTimePattern(java.lang.String,int,int,java.lang.String)>@L419/0",
+      "source": {
+        "method": "<sun.util.calendar.ZoneInfoFile: void load(java.io.DataInputStream)>",
+        "stmt_index": 19,
+        "line": 305,
+        "stmt": "%v24 = invokevirtual $0.readUTF()",
+        "index": "result",
+        "raw": "<sun.util.calendar.ZoneInfoFile: void load(java.io.DataInputStream)>[19@L305] %v24 = invokevirtual $0.readUTF()/result"
+      },
+      "sink": {
+        "method": "<sun.util.locale.provider.LocaleResources: java.lang.String getDateTimePattern(java.lang.String,int,int,java.lang.String)>",
+        "stmt_index": 62,
+        "line": 419,
+        "stmt": "$5 = invokestatic java.text.MessageFormat.format($8, %v38)",
+        "index": "0",
+        "raw": "<sun.util.locale.provider.LocaleResources: java.lang.String getDateTimePattern(java.lang.String,int,int,java.lang.String)>[62@L419] $5 = invokestatic java.text.MessageFormat.format($8, %v38)/0"
+      }
+    },
+    {
+      "id": "e52f31a84b",
+      "key": "<sun.util.calendar.ZoneInfoFile: void load(java.io.DataInputStream)>@L312/result => <com.cronutils.StringValidations: java.util.regex.Pattern buildWordsPattern(java.util.Set)>@L73/0",
+      "source": {
+        "method": "<sun.util.calendar.ZoneInfoFile: void load(java.io.DataInputStream)>",
+        "stmt_index": 27,
+        "line": 312,
+        "stmt": "%v27 = invokevirtual $0.readUTF()",
+        "index": "result",
+        "raw": "<sun.util.calendar.ZoneInfoFile: void load(java.io.DataInputStream)>[27@L312] %v27 = invokevirtual $0.readUTF()/result"
+      },
+      "sink": {
+        "method": "<com.cronutils.StringValidations: java.util.regex.Pattern buildWordsPattern(java.util.Set)>",
+        "stmt_index": 10,
+        "line": 73,
+        "stmt": "%v12 = invokestatic java.util.regex.Pattern.compile(%v11)",
+        "index": "0",
+        "raw": "<com.cronutils.StringValidations: java.util.regex.Pattern buildWordsPattern(java.util.Set)>[10@L73] %v12 = invokestatic java.util.regex.Pattern.compile(%v11)/0"
+      }
+    },
+    {
+      "id": "80d7240165",
+      "key": "<sun.util.calendar.ZoneInfoFile: void load(java.io.DataInputStream)>@L312/result => <com.cronutils.StringValidations: java.util.regex.Pattern buildWordsPattern(java.util.Set)>@L82/0",
+      "source": {
+        "method": "<sun.util.calendar.ZoneInfoFile: void load(java.io.DataInputStream)>",
+        "stmt_index": 27,
+        "line": 312,
+        "stmt": "%v27 = invokevirtual $0.readUTF()",
+        "index": "result",
+        "raw": "<sun.util.calendar.ZoneInfoFile: void load(java.io.DataInputStream)>[27@L312] %v27 = invokevirtual $0.readUTF()/result"
+      },
+      "sink": {
+        "method": "<com.cronutils.StringValidations: java.util.regex.Pattern buildWordsPattern(java.util.Set)>",
+        "stmt_index": 26,
+        "line": 82,
+        "stmt": "%v21 = invokestatic java.util.regex.Pattern.compile(%v20)",
+        "index": "0",
+        "raw": "<com.cronutils.StringValidations: java.util.regex.Pattern buildWordsPattern(java.util.Set)>[26@L82] %v21 = invokestatic java.util.regex.Pattern.compile(%v20)/0"
+      }
+    },
+    {
+      "id": "9e5ef57ad1",
+      "key": "<sun.util.calendar.ZoneInfoFile: void load(java.io.DataInputStream)>@L312/result => <java.text.MessageFormat: java.lang.StringBuffer subformat(java.lang.Object[],java.lang.StringBuffer,java.text.FieldPosition,java.util.List)>@L1270/0",
+      "source": {
+        "method": "<sun.util.calendar.ZoneInfoFile: void load(java.io.DataInputStream)>",
+        "stmt_index": 27,
+        "line": 312,
+        "stmt": "%v27 = invokevirtual $0.readUTF()",
+        "index": "result",
+        "raw": "<sun.util.calendar.ZoneInfoFile: void load(java.io.DataInputStream)>[27@L312] %v27 = invokevirtual $0.readUTF()/result"
+      },
+      "sink": {
+        "method": "<java.text.MessageFormat: java.lang.StringBuffer subformat(java.lang.Object[],java.lang.StringBuffer,java.text.FieldPosition,java.util.List)>",
+        "stmt_index": 47,
+        "line": 1270,
+        "stmt": "invokespecial %v32.<init>($10, %v33)",
+        "index": "0",
+        "raw": "<java.text.MessageFormat: java.lang.StringBuffer subformat(java.lang.Object[],java.lang.StringBuffer,java.text.FieldPosition,java.util.List)>[47@L1270] invokespecial %v32.<init>($10, %v33)/0"
+      }
+    },
+    {
+      "id": "9ba0269c3b",
+      "key": "<sun.util.calendar.ZoneInfoFile: void load(java.io.DataInputStream)>@L312/result => <sun.util.locale.provider.LocaleResources: java.lang.String getDateTimePattern(java.lang.String,int,int,java.lang.String)>@L419/0",
+      "source": {
+        "method": "<sun.util.calendar.ZoneInfoFile: void load(java.io.DataInputStream)>",
+        "stmt_index": 27,
+        "line": 312,
+        "stmt": "%v27 = invokevirtual $0.readUTF()",
+        "index": "result",
+        "raw": "<sun.util.calendar.ZoneInfoFile: void load(java.io.DataInputStream)>[27@L312] %v27 = invokevirtual $0.readUTF()/result"
+      },
+      "sink": {
+        "method": "<sun.util.locale.provider.LocaleResources: java.lang.String getDateTimePattern(java.lang.String,int,int,java.lang.String)>",
+        "stmt_index": 62,
+        "line": 419,
+        "stmt": "$5 = invokestatic java.text.MessageFormat.format($8, %v38)",
+        "index": "0",
+        "raw": "<sun.util.locale.provider.LocaleResources: java.lang.String getDateTimePattern(java.lang.String,int,int,java.lang.String)>[62@L419] $5 = invokestatic java.text.MessageFormat.format($8, %v38)/0"
+      }
+    }
+  ],
+  "command": [
+    "/Library/Java/JavaVirtualMachines/jdk-17.jdk/Contents/Home/bin/java",
+    "-Xmx6g",
+    "-jar",
+    "/Users/jiayulim/Documents/GitHub/CS6215_Neurosymbolic_Program_Analysis/tools/tai-e-all-0.5.4.jar",
+    "-java",
+    "8",
+    "-acp",
+    "/Users/jiayulim/Documents/GitHub/CS6215_Neurosymbolic_Program_Analysis/work/subjects/cron-utils/fixed/target/classes",
+    "-acp",
+    "/Users/jiayulim/Documents/GitHub/CS6215_Neurosymbolic_Program_Analysis/work/runs/cron-utils/fixed/template-driver/classes",
+    "-cp",
+    "/Users/jiayulim/.m2/repository/org/slf4j/slf4j-api/1.7.30/slf4j-api-1.7.30.jar",
+    "-cp",
+    "/Users/jiayulim/.m2/repository/javax/validation/validation-api/2.0.1.Final/validation-api-2.0.1.Final.jar",
+    "-cp",
+    "/Users/jiayulim/.m2/repository/org/slf4j/slf4j-simple/1.7.30/slf4j-simple-1.7.30.jar",
+    "-cp",
+    "/Users/jiayulim/.m2/repository/junit/junit/4.13.1/junit-4.13.1.jar",
+    "-cp",
+    "/Users/jiayulim/.m2/repository/org/hamcrest/hamcrest-core/1.3/hamcrest-core-1.3.jar",
+    "-cp",
+    "/Users/jiayulim/.m2/repository/org/mockito/mockito-core/3.5.13/mockito-core-3.5.13.jar",
+    "-cp",
+    "/Users/jiayulim/.m2/repository/net/bytebuddy/byte-buddy/1.10.15/byte-buddy-1.10.15.jar",
+    "-cp",
+    "/Users/jiayulim/.m2/repository/net/bytebuddy/byte-buddy-agent/1.10.15/byte-buddy-agent-1.10.15.jar",
+    "-cp",
+    "/Users/jiayulim/.m2/repository/org/objenesis/objenesis/3.1/objenesis-3.1.jar",
+    "-cp",
+    "/Users/jiayulim/.m2/repository/org/powermock/powermock-module-junit4/2.0.7/powermock-module-junit4-2.0.7.jar",
+    "-cp",
+    "/Users/jiayulim/.m2/repository/org/powermock/powermock-module-junit4-common/2.0.7/powermock-module-junit4-common-2.0.7.jar",
+    "-cp",
+    "/Users/jiayulim/.m2/repository/org/powermock/powermock-reflect/2.0.7/powermock-reflect-2.0.7.jar",
+    "-cp",
+    "/Users/jiayulim/.m2/repository/org/powermock/powermock-core/2.0.7/powermock-core-2.0.7.jar",
+    "-cp",
+    "/Users/jiayulim/.m2/repository/org/javassist/javassist/3.27.0-GA/javassist-3.27.0-GA.jar",
+    "-cp",
+    "/Users/jiayulim/.m2/repository/org/powermock/powermock-api-mockito2/2.0.7/powermock-api-mockito2-2.0.7.jar",
+    "-cp",
+    "/Users/jiayulim/.m2/repository/org/powermock/powermock-api-support/2.0.7/powermock-api-support-2.0.7.jar",
+    "-cp",
+    "/Users/jiayulim/.m2/repository/org/quartz-scheduler/quartz/2.3.2/quartz-2.3.2.jar",
+    "-cp",
+    "/Users/jiayulim/.m2/repository/com/mchange/c3p0/0.9.5.4/c3p0-0.9.5.4.jar",
+    "-cp",
+    "/Users/jiayulim/.m2/repository/com/mchange/mchange-commons-java/0.2.15/mchange-commons-java-0.2.15.jar",
+    "-cp",
+    "/Users/jiayulim/.m2/repository/com/zaxxer/HikariCP-java7/2.4.13/HikariCP-java7-2.4.13.jar",
+    "-cp",
+    "/Users/jiayulim/.m2/repository/org/apache/bval/bval-jsr/1.1.2/bval-jsr-1.1.2.jar",
+    "-cp",
+    "/Users/jiayulim/.m2/repository/org/apache/bval/bval-core/1.1.2/bval-core-1.1.2.jar",
+    "-cp",
+    "/Users/jiayulim/.m2/repository/org/apache/commons/commons-lang3/3.5/commons-lang3-3.5.jar",
+    "-cp",
+    "/Users/jiayulim/.m2/repository/org/springframework/spring-context/5.3.1/spring-context-5.3.1.jar",
+    "-cp",
+    "/Users/jiayulim/.m2/repository/org/springframework/spring-aop/5.3.1/spring-aop-5.3.1.jar",
+    "-cp",
+    "/Users/jiayulim/.m2/repository/org/springframework/spring-beans/5.3.1/spring-beans-5.3.1.jar",
+    "-cp",
+    "/Users/jiayulim/.m2/repository/org/springframework/spring-core/5.3.1/spring-core-5.3.1.jar",
+    "-cp",
+    "/Users/jiayulim/.m2/repository/org/springframework/spring-jcl/5.3.1/spring-jcl-5.3.1.jar",
+    "-cp",
+    "/Users/jiayulim/.m2/repository/org/springframework/spring-expression/5.3.1/spring-expression-5.3.1.jar",
+    "-cp",
+    "/Users/jiayulim/.m2/repository/javax/el/javax.el-api/3.0.0/javax.el-api-3.0.0.jar",
+    "-cp",
+    "/Users/jiayulim/.m2/repository/org/glassfish/javax.el/3.0.0/javax.el-3.0.0.jar",
+    "-cp",
+    "/Users/jiayulim/.m2/repository/org/projectlombok/lombok/1.18.14/lombok-1.18.14.jar",
+    "-m",
+    "nesy.NesyDriver",
+    "--output-dir",
+    "/Users/jiayulim/Documents/GitHub/CS6215_Neurosymbolic_Program_Analysis/work/runs/cron-utils/fixed/taie/c2c495ea05074ef4",
+    "-a",
+    "pta=cs:1-call;only-app:false;taint-config:/Users/jiayulim/Documents/GitHub/CS6215_Neurosymbolic_Program_Analysis/work/runs/cron-utils/fixed/configs/v1/run2/taint-config;time-limit:1800;"
+  ],
+  "reachable_methods": 10599,
+  "error": ""
+}

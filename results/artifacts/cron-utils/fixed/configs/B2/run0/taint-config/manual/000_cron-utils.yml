@@ -1,0 +1,37 @@
+# B2 manual taint specification for cron-utils (CVE-2021-41269).
+# Added on top of the B1 base configuration (Tai-e commonly-used config for CWE-094).
+#
+# PROVENANCE (report this): written by Claude (AI assistant) on date omitted at the student's request,
+# one pass per subject, time box 30 min (actual times in docs/TODO.md). Inputs: the candidate list
+# work/manual-candidates/cron-utils.md (the same API list N2 receives) and the buggy-version source.
+# Not opened: CVE advisory, fix commit/diff, ground truth (fix_info.csv). Caveats: the author (an LLM)
+# may know these public CVEs, and B1 output of some subjects was seen while debugging the pipeline
+# (docs/iterations.md I-19). Each entry says why it was added. Pristine templates: work/b2-original/.
+#
+# Format: "<pkg.Cls: retType name(argType1,argType2)>"; index = result | base | 0,1,... | "N[*]" (array elements).
+
+# Thinking as a Tai-e user hunting code/expression injection in a cron-expression library that ships
+# a Bean Validation validator (javax.validation ConstraintValidator):
+# * Untrusted input is the cron expression string (public parse/validate API; tainted by the driver).
+# * In Bean Validation the message TEMPLATE passed to buildConstraintViolationWithTemplate is
+#   interpolated by the provider (e.g. Hibernate Validator evaluates ${...} expression language), so
+#   user data inside a template is an expression-injection sink. Interface method: needs call-site
+#   mode, which is on (I-14).
+# * MessageFormat.format with a user-influenced pattern is a weaker formatting sink; it is modelled
+#   only as a transfer (its result is a string that may reach the real sink).
+sources: []
+
+sinks:
+  - { method: "<javax.validation.ConstraintValidatorContext: javax.validation.ConstraintValidatorContext$ConstraintViolationBuilder buildConstraintViolationWithTemplate(java.lang.String)>", index: 0 }
+
+transfers:
+  # error messages are assembled with formatting/joining helpers
+  - { method: "<java.text.MessageFormat: java.lang.String format(java.lang.String,java.lang.Object[])>", from: 0, to: result }
+  - { method: "<java.text.MessageFormat: java.lang.String format(java.lang.String,java.lang.Object[])>", from: "1[*]", to: result }
+  - { method: "<java.util.StringJoiner: java.util.StringJoiner add(java.lang.CharSequence)>", from: 0, to: base }
+  - { method: "<java.util.StringJoiner: java.lang.String toString()>", from: base, to: result }
+  # regex helpers used to normalise/inspect the expression
+  - { method: "<java.util.regex.Pattern: java.util.regex.Matcher matcher(java.lang.CharSequence)>", from: 0, to: result }
+  - { method: "<java.util.regex.Matcher: java.lang.String replaceAll(java.lang.String)>", from: base, to: result }
+
+sanitizers: []

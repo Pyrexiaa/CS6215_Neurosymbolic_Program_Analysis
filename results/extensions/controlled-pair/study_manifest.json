@@ -1,0 +1,13 @@
+{
+  "started_inputs": "/Users/jiayulim/Documents/GitHub/CS6215_Neurosymbolic_Program_Analysis",
+  "fresh_fixed_analyses": 12,
+  "new_llm_calls": 0,
+  "new_triage_calls": 0,
+  "limitations": [
+    "Buggy comparator reuses saved pre-triage Tai-e output, not a new run.",
+    "Inputs are frozen from current buggy v4 artifacts; fixed layouts use their own dependency sets.",
+    "Ground-truth relevance means touching a fix-modified method, not exploitability or confirmed detection.",
+    "No N3 triage; results must not be presented as end-to-end v4.",
+    "Compatibility preflight checks direct driver-to-application method signatures, not all JVM linkage semantics."
+  ]
+}

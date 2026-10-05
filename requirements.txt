@@ -1,0 +1,5 @@
+# Runtime
+openai>=1.30          # OpenAI-compatible client, used for SoCLaaS
+PyYAML>=6.0
+# Tests
+pytest>=7.0

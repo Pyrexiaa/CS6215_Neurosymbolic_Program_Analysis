@@ -1,0 +1,629 @@
+{
+  "prompt_version": "e5fc00c6",
+  "decisions": [
+    {
+      "flow_id": "da2f4c2deb",
+      "flow_key": "DRIVER => <org.slf4j.impl.SimpleLogger: java.io.PrintStream computeTargetStream(java.lang.String)>@L219/0",
+      "verdict": "uncertain",
+      "reason": "insufficient_context",
+      "kept": true,
+      "v3_ok": null,
+      "v3_problems": [],
+      "evidence": [],
+      "explanation": "The provided analysis report explicitly states that there is 'no complete application-code path' and 'no application code available' for the methods involved, with the flow passing through library code. Without access to the source code of `org.slf4j.impl.SimpleLogger.computeTargetStream` or the specific implementation of `nesy.NesyDriver`'s argument handling, it is impossible to verify if path normalization or prefix checks are performed within the library or if the input is properly sanitized before reaching the file system sink.",
+      "samples": [
+        "uncertain"
+      ],
+      "methods_shown": [],
+      "override": ""
+    },
+    {
+      "flow_id": "c43a43deba",
+      "flow_key": "DRIVER => <spark.utils.ResourceUtils: java.io.File getFile(java.net.URL,java.lang.String)>@L219/0",
+      "verdict": "uncertain",
+      "reason": "insufficient_context",
+      "kept": true,
+      "v3_ok": null,
+      "v3_problems": [],
+      "evidence": [
+        {
+          "file": "spark/utils/ResourceUtils.java",
+          "line": 219,
+          "note": "Sink uses new File(String) with URL scheme-specific part"
+        },
+        {
+          "file": "spark/utils/ResourceUtils.java",
+          "line": 222,
+          "note": "Fallback sink uses new File(String) with URL.getFile()"
+        }
+      ],
+      "explanation": "The report indicates the taint flow passes through library code without showing the application code that calls `ResourceUtils.getFile`. It is unclear if the `description` parameter (which is tainted) is used to construct the `URL` object passed to this method, or if the `URL` itself is attacker-controlled. Furthermore, `ResourceUtils.getFile` constructs a `java.io.File` object but does not perform any file system operations (like read/write) itself; the vulnerability would depend on how the caller uses the returned `File` object. Without seeing the caller's usage of the returned `File` object, we cannot confirm if a dangerous sink (like `FileInputStream` or `FileOutputStream`) is reached with the traversed path.",
+      "samples": [
+        "uncertain"
+      ],
+      "methods_shown": [
+        "<spark.utils.ResourceUtils: java.io.File getFile(java.net.URL,java.lang.String)>"
+      ],
+      "override": ""
+    },
+    {
+      "flow_id": "00b5a94768",
+      "flow_key": "DRIVER => <spark.utils.ResourceUtils: java.io.File getFile(java.net.URL,java.lang.String)>@L222/0",
+      "verdict": "uncertain",
+      "reason": "insufficient_context",
+      "kept": true,
+      "v3_ok": null,
+      "v3_problems": [],
+      "evidence": [
+        {
+          "file": "spark/utils/ResourceUtils.java",
+          "line": 219,
+          "note": "Uses toURI().getSchemeSpecificPart() which may normalize path"
+        },
+        {
+          "file": "spark/utils/ResourceUtils.java",
+          "line": 222,
+          "note": "Fallback uses resourceUrl.getFile() directly"
+        }
+      ],
+      "explanation": "The taint flow passes through `ResourceUtils.getFile`, which handles `file:` URLs. While line 222 uses `resourceUrl.getFile()` which might preserve traversal sequences, line 219 uses `toURI().getSchemeSpecificPart()` which typically normalizes paths. Without seeing the implementation of `toURI` or the caller of `getFile` to determine if the URL is attacker-controlled and if the resulting File object is used in a dangerous way (e.g., passed to `new FileInputStream` without further checks), it is uncertain if the traversal is exploitable. The source is modeled as attacker-controlled, but the sanitization behavior of the URI conversion is not visible in the provided snippet.",
+      "samples": [
+        "uncertain"
+      ],
+      "methods_shown": [
+        "<spark.utils.ResourceUtils: java.io.File getFile(java.net.URL,java.lang.String)>"
+      ],
+      "override": ""
+    },
+    {
+      "flow_id": "f4cfd3c44b",
+      "flow_key": "DRIVER => <spark.utils.ResourceUtils: java.io.File getFile(java.net.URI,java.lang.String)>@L258/0",
+      "verdict": "vulnerable",
+      "reason": "exploitable",
+      "kept": true,
+      "v3_ok": null,
+      "v3_problems": [],
+      "evidence": [
+        {
+          "file": "spark/utils/ResourceUtils.java",
+          "line": 258,
+          "note": "File constructor called with raw URI string without path traversal validation"
+        },
+        {
+          "file": "spark/utils/ResourceUtils.java",
+          "line": 252,
+          "note": "Only checks for file protocol, does not validate path content"
+        }
+      ],
+      "explanation": "The sink at ResourceUtils.java:258 constructs a File object using the raw scheme-specific part of the URI without any path normalization or prefix checking. Since the source is modeled as attacker-controlled input, an attacker can supply a URI like 'file:///etc/passwd' or 'file:///../../../etc/passwd' to bypass the protocol check and access arbitrary files, constituting a CWE-022 Path Traversal vulnerability.",
+      "samples": [
+        "vulnerable"
+      ],
+      "methods_shown": [
+        "<spark.utils.ResourceUtils: java.io.File getFile(java.net.URI,java.lang.String)>"
+      ],
+      "override": ""
+    },
+    {
+      "flow_id": "5832b1d98e",
+      "flow_key": "DRIVER => <spark.utils.ResourceUtils: java.io.File getFile(java.lang.String)>@L168/0",
+      "verdict": "vulnerable",
+      "reason": "exploitable",
+      "kept": true,
+      "v3_ok": null,
+      "v3_problems": [],
+      "evidence": [
+        {
+          "file": "spark/utils/ResourceUtils.java",
+          "line": 182,
+          "note": "Direct instantiation of java.io.File with unvalidated input"
+        },
+        {
+          "file": "spark/utils/ResourceUtils.java",
+          "line": 165,
+          "note": "Check only handles classpath prefix, not path traversal"
+        }
+      ],
+      "explanation": "The source `nesy.NesyDriver.main` accepts attacker-controlled input which flows into `ResourceUtils.getFile`. The method `getFile` does not normalize the path or check for traversal sequences (`../`) before passing the string to `new File(resourceLocation)` at line 182. This allows an attacker to specify a path outside the intended directory, leading to a CWE-022 Path Traversal vulnerability.",
+      "samples": [
+        "vulnerable"
+      ],
+      "methods_shown": [
+        "<spark.utils.ResourceUtils: java.io.File getFile(java.lang.String)>"
+      ],
+      "override": ""
+    },
+    {
+      "flow_id": "6d50443088",
+      "flow_key": "DRIVER => <spark.utils.ResourceUtils: java.io.File getFile(java.lang.String)>@L182/0",
+      "verdict": "vulnerable",
+      "reason": "exploitable",
+      "kept": true,
+      "v3_ok": null,
+      "v3_problems": [],
+      "evidence": [
+        {
+          "file": "spark/utils/ResourceUtils.java",
+          "line": 182,
+          "note": "Direct instantiation of File with unvalidated user input"
+        },
+        {
+          "file": "spark/utils/ResourceUtils.java",
+          "line": 165,
+          "note": "Check only handles classpath prefix, not path traversal"
+        }
+      ],
+      "explanation": "The sink at ResourceUtils.java:182 creates a File object directly from the input parameter without any path normalization or validation to ensure it stays within a safe directory. The preceding check at line 165 only handles classpath URLs, leaving the file path branch (line 182) vulnerable to path traversal attacks if the input contains '../' sequences.",
+      "samples": [
+        "vulnerable"
+      ],
+      "methods_shown": [
+        "<spark.utils.ResourceUtils: java.io.File getFile(java.lang.String)>"
+      ],
+      "override": ""
+    },
+    {
+      "flow_id": "702fc07309",
+      "flow_key": "<spark.http.matching.MatcherFilter: java.lang.String getHttpMethodFrom(javax.servlet.http.HttpServletRequest)>@L168/result => <org.slf4j.impl.SimpleLogger: java.io.PrintStream computeTargetStream(java.lang.String)>@L219/0",
+      "verdict": "not_vulnerable",
+      "reason": "not_dangerous_sink",
+      "kept": true,
+      "v3_ok": false,
+      "v3_problems": [
+        "org/slf4j/impl/SimpleLogger.java:219 is not in a file shown for the path",
+        "sink <java.io.FileOutputStream: void <init>(java.lang.String)> is a trusted specification; N3 may not overrule it (trusted-sink rule)"
+      ],
+      "evidence": [
+        {
+          "file": "spark/http/matching/MatcherFilter.java",
+          "line": 168,
+          "note": "Source: HTTP header value (HTTP method override) is extracted."
+        },
+        {
+          "file": "org/slf4j/impl/SimpleLogger.java",
+          "line": 219,
+          "note": "Sink: The value is passed to a constructor for a file stream, but the reported flow connects an HTTP method string to a log file initialization, which is semantically mismatched for a path traversal attack in this context."
+        }
+      ],
+      "explanation": "The reported taint flow connects an HTTP method header (e.g., 'GET', 'POST') to a log file initialization sink. CWE-022 requires attacker-controlled data to be used as a file path component. An HTTP method string is not a file path and cannot be used to traverse directories to access arbitrary files. Furthermore, the sink `SimpleLogger.computeTargetStream` typically uses a fixed configuration for log files, not dynamic user input for the file path itself in this specific method signature context. Even if the value were used in a path, HTTP methods do not contain path traversal sequences like '../'.",
+      "samples": [
+        "not_vulnerable"
+      ],
+      "methods_shown": [
+        "<spark.http.matching.MatcherFilter: java.lang.String getHttpMethodFrom(javax.servlet.http.HttpServletRequest)>"
+      ],
+      "override": "trusted-sink"
+    },
+    {
+      "flow_id": "5c1d84c2ed",
+      "flow_key": "<spark.http.matching.MatcherFilter: java.lang.String getHttpMethodFrom(javax.servlet.http.HttpServletRequest)>@L168/result => <spark.utils.ResourceUtils: java.io.File getFile(java.net.URL,java.lang.String)>@L219/0",
+      "verdict": "not_vulnerable",
+      "reason": "not_dangerous_sink",
+      "kept": true,
+      "v3_ok": false,
+      "v3_problems": [
+        "sink <java.io.File: void <init>(java.lang.String)> is a trusted specification; N3 may not overrule it (trusted-sink rule)"
+      ],
+      "evidence": [
+        {
+          "file": "spark/http/matching/MatcherFilter.java",
+          "line": 168,
+          "note": "Source: HTTP header 'X-HTTP-Method-Override' is read, but this value represents an HTTP method (e.g., GET, POST), not a file path."
+        },
+        {
+          "file": "spark/utils/ResourceUtils.java",
+          "line": 219,
+          "note": "Sink: The method getFile() constructs a File object from a URL's scheme-specific part. The taint flow reported by Tai-e connects the HTTP method string to this sink, which is semantically incorrect for a path traversal attack. Even if the HTTP method were used as a path component, it would be a string like 'POST', not a path traversal sequence."
+        }
+      ],
+      "explanation": "The reported taint flow is semantically invalid for CWE-022. The source is an HTTP method header (e.g., 'GET', 'POST'), which cannot constitute a file path traversal attack. The sink `ResourceUtils.getFile` expects a URL and description, and the connection between the HTTP method and file path construction is a false positive in the static analysis report. There is no actual path traversal vulnerability demonstrated by this specific flow.",
+      "samples": [
+        "not_vulnerable"
+      ],
+      "methods_shown": [
+        "<spark.http.matching.MatcherFilter: java.lang.String getHttpMethodFrom(javax.servlet.http.HttpServletRequest)>",
+        "<spark.utils.ResourceUtils: java.io.File getFile(java.net.URL,java.lang.String)>"
+      ],
+      "override": "trusted-sink"
+    },
+    {
+      "flow_id": "5eb2d9f8a2",
+      "flow_key": "<spark.http.matching.MatcherFilter: java.lang.String getHttpMethodFrom(javax.servlet.http.HttpServletRequest)>@L168/result => <spark.utils.ResourceUtils: java.io.File getFile(java.net.URL,java.lang.String)>@L222/0",
+      "verdict": "not_vulnerable",
+      "reason": "not_dangerous_sink",
+      "kept": true,
+      "v3_ok": false,
+      "v3_problems": [
+        "sink <java.io.File: void <init>(java.lang.String)> is a trusted specification; N3 may not overrule it (trusted-sink rule)"
+      ],
+      "evidence": [
+        {
+          "file": "spark/http/matching/MatcherFilter.java",
+          "line": 168,
+          "note": "Source: HTTP header 'X-HTTP-Method-Override' is read, but this value represents an HTTP method (e.g., 'PUT', 'DELETE'), not a file path."
+        },
+        {
+          "file": "spark/utils/ResourceUtils.java",
+          "line": 222,
+          "note": "Sink: The method getFile() constructs a File object from a URL's file component. The taint flow connects an HTTP method string to a file path construction, which is semantically incorrect and functionally infeasible for path traversal."
+        }
+      ],
+      "explanation": "The reported taint flow is infeasible because the source (`getHttpMethodFrom`) extracts an HTTP method header (e.g., 'GET', 'POST'), which is not a file path. The sink (`ResourceUtils.getFile`) expects a URL or file path string. Even if the taint analysis incorrectly links these, an HTTP method string cannot be used to traverse directories because it lacks path separators and is not interpreted as a file system path by the underlying `new File()` constructor in a way that allows escaping a base directory. The data types and semantic meanings are incompatible for a path traversal attack.",
+      "samples": [
+        "not_vulnerable"
+      ],
+      "methods_shown": [
+        "<spark.http.matching.MatcherFilter: java.lang.String getHttpMethodFrom(javax.servlet.http.HttpServletRequest)>",
+        "<spark.utils.ResourceUtils: java.io.File getFile(java.net.URL,java.lang.String)>"
+      ],
+      "override": "trusted-sink"
+    },
+    {
+      "flow_id": "ab4442bb9d",
+      "flow_key": "<spark.http.matching.MatcherFilter: java.lang.String getHttpMethodFrom(javax.servlet.http.HttpServletRequest)>@L168/result => <spark.utils.ResourceUtils: java.io.File getFile(java.net.URI,java.lang.String)>@L258/0",
+      "verdict": "not_vulnerable",
+      "reason": "not_dangerous_sink",
+      "kept": true,
+      "v3_ok": false,
+      "v3_problems": [
+        "sink <java.io.File: void <init>(java.lang.String)> is a trusted specification; N3 may not overrule it (trusted-sink rule)"
+      ],
+      "evidence": [
+        {
+          "file": "spark/http/matching/MatcherFilter.java",
+          "line": 168,
+          "note": "Source: HTTP header 'X-Http-Method-Override' is read into a String variable."
+        },
+        {
+          "file": "spark/utils/ResourceUtils.java",
+          "line": 258,
+          "note": "Sink: A File object is constructed using resourceUri.getSchemeSpecificPart(), not the tainted string from the source."
+        }
+      ],
+      "explanation": "The reported taint flow is infeasible because the source (HTTP method header) and the sink (File construction in ResourceUtils) operate on completely different data types and contexts. The source extracts an HTTP method string (e.g., 'GET', 'POST'), while the sink constructs a file path from a URI's scheme-specific part. There is no logical connection where an HTTP method string would be used as a file path argument in this specific call chain, making the path traversal exploit impossible via this flow.",
+      "samples": [
+        "not_vulnerable"
+      ],
+      "methods_shown": [
+        "<spark.http.matching.MatcherFilter: java.lang.String getHttpMethodFrom(javax.servlet.http.HttpServletRequest)>",
+        "<spark.utils.ResourceUtils: java.io.File getFile(java.net.URI,java.lang.String)>"
+      ],
+      "override": "trusted-sink"
+    },
+    {
+      "flow_id": "834d87688f",
+      "flow_key": "<spark.servlet.FilterTools: java.lang.String getRelativePath(javax.servlet.http.HttpServletRequest,java.lang.String)>@L34/result => <org.slf4j.impl.SimpleLogger: java.io.PrintStream computeTargetStream(java.lang.String)>@L219/0",
+      "verdict": "vulnerable",
+      "reason": "exploitable",
+      "kept": true,
+      "v3_ok": null,
+      "v3_problems": [],
+      "evidence": [
+        {
+          "file": "spark/servlet/FilterTools.java",
+          "line": 34,
+          "note": "Source: request.getRequestURI() is attacker-controlled input from the HTTP request."
+        },
+        {
+          "file": "spark/servlet/FilterTools.java",
+          "line": 55,
+          "note": "Decoding: URLDecoder.decode is applied, but this does not normalize path traversal sequences like '../'."
+        },
+        {
+          "file": "spark/servlet/FilterTools.java",
+          "line": 47,
+          "note": "Lack of Sanitizer: The method strips a filter prefix but does not validate that the resulting path stays within a specific directory or resolve canonical paths to prevent traversal."
+        }
+      ],
+      "explanation": "The source `request.getRequestURI()` is directly attacker-controlled. The method `getRelativePath` performs URL decoding but fails to normalize the path or check if the resulting string escapes the intended directory context (e.g., via `../` sequences). Since the report indicates this output flows to a file sink (via library code not shown but implied by the taint graph), the lack of path validation makes this a real CWE-022 vulnerability.",
+      "samples": [
+        "vulnerable"
+      ],
+      "methods_shown": [
+        "<spark.servlet.FilterTools: java.lang.String getRelativePath(javax.servlet.http.HttpServletRequest,java.lang.String)>"
+      ],
+      "override": ""
+    },
+    {
+      "flow_id": "180c31a8ef",
+      "flow_key": "<spark.servlet.FilterTools: java.lang.String getRelativePath(javax.servlet.http.HttpServletRequest,java.lang.String)>@L34/result => <spark.utils.ResourceUtils: java.io.File getFile(java.net.URL,java.lang.String)>@L219/0",
+      "verdict": "vulnerable",
+      "reason": "exploitable",
+      "kept": true,
+      "v3_ok": null,
+      "v3_problems": [],
+      "evidence": [
+        {
+          "file": "spark/servlet/FilterTools.java",
+          "line": 34,
+          "note": "Source: request.getRequestURI() is attacker-controlled input."
+        },
+        {
+          "file": "spark/servlet/FilterTools.java",
+          "line": 55,
+          "note": "URL decoding occurs, but no path traversal normalization (e.g., canonicalization) or prefix validation is performed."
+        },
+        {
+          "file": "spark/utils/ResourceUtils.java",
+          "line": 219,
+          "note": "Sink: new File(...) constructs a file object from the tainted path string without checking if it escapes the intended resource directory."
+        }
+      ],
+      "explanation": "The source `request.getRequestURI()` provides attacker-controlled input that is URL-decoded but never normalized or validated against a base directory prefix. The sink `new File(...)` in `ResourceUtils.getFile` uses this unvalidated path directly, allowing an attacker to use `../` sequences to access files outside the intended resource directory.",
+      "samples": [
+        "vulnerable"
+      ],
+      "methods_shown": [
+        "<spark.servlet.FilterTools: java.lang.String getRelativePath(javax.servlet.http.HttpServletRequest,java.lang.String)>",
+        "<spark.utils.ResourceUtils: java.io.File getFile(java.net.URL,java.lang.String)>"
+      ],
+      "override": ""
+    },
+    {
+      "flow_id": "372ac6f207",
+      "flow_key": "<spark.servlet.FilterTools: java.lang.String getRelativePath(javax.servlet.http.HttpServletRequest,java.lang.String)>@L34/result => <spark.utils.ResourceUtils: java.io.File getFile(java.net.URL,java.lang.String)>@L222/0",
+      "verdict": "vulnerable",
+      "reason": "exploitable",
+      "kept": true,
+      "v3_ok": null,
+      "v3_problems": [],
+      "evidence": [
+        {
+          "file": "spark/servlet/FilterTools.java",
+          "line": 34,
+          "note": "Source: request.getRequestURI() is attacker-controlled input."
+        },
+        {
+          "file": "spark/servlet/FilterTools.java",
+          "line": 55,
+          "note": "Decoding occurs after substring operations, but no canonicalization or prefix check is performed to ensure the path stays within a base directory."
+        },
+        {
+          "file": "spark/utils/ResourceUtils.java",
+          "line": 222,
+          "note": "Sink: new File(resourceUrl.getFile()) constructs a file object from the URL path, which may contain traversal sequences like '../' if not sanitized."
+        }
+      ],
+      "explanation": "The source `request.getRequestURI()` is directly attacker-controlled. The `getRelativePath` method performs substring manipulations and URL decoding but fails to normalize the path or verify that the resulting path remains within a safe base directory (e.g., using `canonicalPath.startsWith(baseDir)`). Consequently, an attacker can supply a URI containing `../` sequences that bypass the filter logic and reach the `ResourceUtils.getFile` sink, potentially allowing access to files outside the intended directory.",
+      "samples": [
+        "vulnerable"
+      ],
+      "methods_shown": [
+        "<spark.servlet.FilterTools: java.lang.String getRelativePath(javax.servlet.http.HttpServletRequest,java.lang.String)>",
+        "<spark.utils.ResourceUtils: java.io.File getFile(java.net.URL,java.lang.String)>"
+      ],
+      "override": ""
+    },
+    {
+      "flow_id": "ef16108f02",
+      "flow_key": "<spark.servlet.FilterTools: java.lang.String getRelativePath(javax.servlet.http.HttpServletRequest,java.lang.String)>@L34/result => <spark.utils.ResourceUtils: java.io.File getFile(java.net.URI,java.lang.String)>@L258/0",
+      "verdict": "vulnerable",
+      "reason": "exploitable",
+      "kept": true,
+      "v3_ok": null,
+      "v3_problems": [],
+      "evidence": [
+        {
+          "file": "spark/servlet/FilterTools.java",
+          "line": 34,
+          "note": "Source: request.getRequestURI() is attacker-controlled input."
+        },
+        {
+          "file": "spark/servlet/FilterTools.java",
+          "line": 55,
+          "note": "URL decoding occurs after substring operations, potentially allowing encoded traversal sequences like %2e%2e to bypass simple substring logic or be interpreted later."
+        },
+        {
+          "file": "spark/utils/ResourceUtils.java",
+          "line": 258,
+          "note": "Sink: new File(resourceUri.getSchemeSpecificPart()) creates a file object from the URI string without validating that the path stays within a specific base directory."
+        }
+      ],
+      "explanation": "The source `request.getRequestURI()` is directly attacker-controlled. The `getRelativePath` method performs substring manipulations and URL decoding but does not validate that the resulting path is within a safe base directory (no canonicalization or prefix check against a root directory). The sink `ResourceUtils.getFile` constructs a `java.io.File` object from the URI's scheme-specific part without ensuring the path does not traverse outside the intended resource directory, allowing an attacker to read arbitrary files via `../` sequences.",
+      "samples": [
+        "vulnerable"
+      ],
+      "methods_shown": [
+        "<spark.servlet.FilterTools: java.lang.String getRelativePath(javax.servlet.http.HttpServletRequest,java.lang.String)>",
+        "<spark.utils.ResourceUtils: java.io.File getFile(java.net.URI,java.lang.String)>"
+      ],
+      "override": ""
+    },
+    {
+      "flow_id": "fe0711973d",
+      "flow_key": "<spark.staticfiles.StaticFilesConfiguration: boolean consume(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)>@L82/result => <org.slf4j.helpers.SubstituteLogger: void warn(java.lang.String)>@L202/0",
+      "verdict": "not_vulnerable",
+      "reason": "not_dangerous_sink",
+      "kept": false,
+      "v3_ok": true,
+      "v3_problems": [],
+      "evidence": [
+        {
+          "file": "spark/staticfiles/StaticFilesConfiguration.java",
+          "line": 82,
+          "note": "The tainted value from httpRequest.getPathInfo() is concatenated into a log message string passed to LOG.warn()"
+        }
+      ],
+      "explanation": "The sink is a logging method (SLF4J warn), which writes to a log file or console. While CWE-022 typically involves file system operations, logging a path string does not result in arbitrary file read/write or directory traversal execution. The path is not used to construct a file handle or execute a system command in this specific flow.",
+      "samples": [
+        "not_vulnerable"
+      ],
+      "methods_shown": [
+        "<spark.staticfiles.StaticFilesConfiguration: boolean consume(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)>"
+      ],
+      "override": ""
+    },
+    {
+      "flow_id": "129fe9e368",
+      "flow_key": "<spark.staticfiles.StaticFilesConfiguration: boolean consume(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)>@L82/result => <spark.staticfiles.StaticFilesConfiguration: boolean consume(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)>@L81/0",
+      "verdict": "not_vulnerable",
+      "reason": "sanitized",
+      "kept": false,
+      "v3_ok": true,
+      "v3_problems": [],
+      "evidence": [
+        {
+          "file": "spark/staticfiles/StaticFilesConfiguration.java",
+          "line": 73,
+          "note": "consumeWithFileResourceHandlers is called, which likely contains the actual file access logic and path validation."
+        },
+        {
+          "file": "spark/staticfiles/StaticFilesConfiguration.java",
+          "line": 77,
+          "note": "consumeWithJarResourceHandler is called, which likely contains the actual file access logic and path validation."
+        },
+        {
+          "file": "spark/staticfiles/StaticFilesConfiguration.java",
+          "line": 80,
+          "note": "The catch block catches DirectoryTraversalDetection, indicating that the called methods perform traversal checks and throw an exception if a traversal is detected, preventing the dangerous operation."
+        },
+        {
+          "file": "spark/staticfiles/StaticFilesConfiguration.java",
+          "line": 81,
+          "note": "The sink is a LOG.warn call, which is not a dangerous sink for path traversal (it does not execute the path or write to the file system using the untrusted path)."
+        }
+      ],
+      "explanation": "The reported flow identifies a log statement as the sink, which is not a dangerous sink for CWE-022. Furthermore, the code structure shows that the actual file access logic is delegated to helper methods (`consumeWithFileResourceHandlers` and `consumeWithJarResourceHandler`) which are wrapped in a try-catch block that specifically handles `DirectoryTraversalDetection`. This indicates that path traversal checks are performed before any file system access occurs, and if a traversal is detected, an exception is thrown rather than the file being accessed. Therefore, the attacker-controlled path is sanitized before use.",
+      "samples": [
+        "not_vulnerable"
+      ],
+      "methods_shown": [
+        "<spark.staticfiles.StaticFilesConfiguration: boolean consume(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)>"
+      ],
+      "override": ""
+    },
+    {
+      "flow_id": "b2370a1d25",
+      "flow_key": "<spark.staticfiles.StaticFilesConfiguration: boolean consumeWithJarResourceHandler(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)>@L120/result => <org.slf4j.impl.SimpleLogger: java.io.PrintStream computeTargetStream(java.lang.String)>@L219/0",
+      "verdict": "not_vulnerable",
+      "reason": "not_dangerous_sink",
+      "kept": true,
+      "v3_ok": false,
+      "v3_problems": [
+        "sink <java.io.FileOutputStream: void <init>(java.lang.String)> is a trusted specification; N3 may not overrule it (trusted-sink rule)"
+      ],
+      "evidence": [
+        {
+          "file": "spark/staticfiles/StaticFilesConfiguration.java",
+          "line": 117,
+          "note": "InputStream stream = jarResourceHandler.getResource(httpRequest);"
+        },
+        {
+          "file": "spark/staticfiles/StaticFilesConfiguration.java",
+          "line": 120,
+          "note": "httpResponse.setHeader(MimeType.CONTENT_TYPE, MimeType.fromPathInfo(httpRequest.getPathInfo()));"
+        }
+      ],
+      "explanation": "The reported taint flow is incorrect because the sink `SimpleLogger.computeTargetStream` is not reached by the attacker-controlled path info. In the code, `httpRequest.getPathInfo()` is used at line 117 to retrieve a resource from a JAR (via `jarResourceHandler.getResource`) and at line 120 to determine the MIME type. Neither of these operations involves writing to a file system path derived from the input in a way that allows traversal outside a safe directory, as JAR resources are typically accessed via classpath mechanisms, not arbitrary file system paths. The sink mentioned in the report (`SimpleLogger`) is unrelated to the static file serving logic shown.",
+      "samples": [
+        "not_vulnerable"
+      ],
+      "methods_shown": [
+        "<spark.staticfiles.StaticFilesConfiguration: boolean consumeWithJarResourceHandler(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)>"
+      ],
+      "override": "trusted-sink"
+    },
+    {
+      "flow_id": "ac1cb7b5f3",
+      "flow_key": "<spark.staticfiles.StaticFilesConfiguration: boolean consumeWithJarResourceHandler(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)>@L120/result => <spark.utils.ResourceUtils: java.io.File getFile(java.net.URL,java.lang.String)>@L219/0",
+      "verdict": "not_vulnerable",
+      "reason": "not_dangerous_sink",
+      "kept": true,
+      "v3_ok": false,
+      "v3_problems": [
+        "sink <java.io.File: void <init>(java.lang.String)> is a trusted specification; N3 may not overrule it (trusted-sink rule)"
+      ],
+      "evidence": [
+        {
+          "file": "spark/staticfiles/StaticFilesConfiguration.java",
+          "line": 120,
+          "note": "getPathInfo() is used only for MIME type detection, not file path construction"
+        },
+        {
+          "file": "spark/staticfiles/StaticFilesConfiguration.java",
+          "line": 117,
+          "note": "getResource() is called on a pre-configured JarResourceHandler, not using user input directly"
+        },
+        {
+          "file": "spark/utils/ResourceUtils.java",
+          "line": 219,
+          "note": "getFile() constructs a File from a URL, which is not the tainted pathInfo"
+        }
+      ],
+      "explanation": "The reported taint flow is infeasible because the sink `ResourceUtils.getFile` is not reached with the attacker-controlled `pathInfo`. In `StaticFilesConfiguration.consumeWithJarResourceHandler`, `httpRequest.getPathInfo()` is only used to determine the MIME type (line 120), not to construct a file path. The actual resource retrieval happens via `jarResourceHandler.getResource(httpRequest)` (line 117), which relies on internal handler logic and configuration, not on directly passing `pathInfo` to `ResourceUtils.getFile`. The `ResourceUtils.getFile` method shown is for resolving file-system URLs, which is unrelated to the JAR resource handling path where the user input is consumed.",
+      "samples": [
+        "not_vulnerable"
+      ],
+      "methods_shown": [
+        "<spark.staticfiles.StaticFilesConfiguration: boolean consumeWithJarResourceHandler(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)>",
+        "<spark.utils.ResourceUtils: java.io.File getFile(java.net.URL,java.lang.String)>"
+      ],
+      "override": "trusted-sink"
+    },
+    {
+      "flow_id": "29ab07c346",
+      "flow_key": "<spark.staticfiles.StaticFilesConfiguration: boolean consumeWithJarResourceHandler(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)>@L120/result => <spark.utils.ResourceUtils: java.io.File getFile(java.net.URL,java.lang.String)>@L222/0",
+      "verdict": "uncertain",
+      "reason": "insufficient_context",
+      "kept": true,
+      "v3_ok": null,
+      "v3_problems": [],
+      "evidence": [
+        {
+          "file": "spark/staticfiles/StaticFilesConfiguration.java",
+          "line": 117,
+          "note": "Source data httpRequest.getPathInfo() is passed to jarResourceHandler.getResource(), but the implementation of JarResourceHandler is not shown."
+        },
+        {
+          "file": "spark/utils/ResourceUtils.java",
+          "line": 222,
+          "note": "Sink is new File(resourceUrl.getFile()), but the taint flow from the source to this specific sink is not established in the provided code snippet."
+        }
+      ],
+      "explanation": "The reported taint flow claims to go from getPathInfo() to ResourceUtils.getFile(), but the provided code for StaticFilesConfiguration.java shows getPathInfo() being used only for setting headers (line 120) and passing to jarResourceHandler.getResource() (line 117). The implementation of JarResourceHandler is not provided, so we cannot verify if it uses the path to construct a file system path or if it is restricted to JAR resources. Furthermore, ResourceUtils.getFile() is not shown to be called with the tainted data in the provided snippets. Without the implementation of the intermediate handler or the call site connecting the source to the sink, the path is infeasible to validate.",
+      "samples": [
+        "uncertain"
+      ],
+      "methods_shown": [
+        "<spark.staticfiles.StaticFilesConfiguration: boolean consumeWithJarResourceHandler(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)>",
+        "<spark.utils.ResourceUtils: java.io.File getFile(java.net.URL,java.lang.String)>"
+      ],
+      "override": ""
+    },
+    {
+      "flow_id": "d8af25737c",
+      "flow_key": "<spark.staticfiles.StaticFilesConfiguration: boolean consumeWithJarResourceHandler(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)>@L120/result => <spark.utils.ResourceUtils: java.io.File getFile(java.net.URI,java.lang.String)>@L258/0",
+      "verdict": "uncertain",
+      "reason": "insufficient_context",
+      "kept": true,
+      "v3_ok": null,
+      "v3_problems": [],
+      "evidence": [
+        {
+          "file": "spark/staticfiles/StaticFilesConfiguration.java",
+          "line": 117,
+          "note": "Source of data is httpRequest.getPathInfo(), but it is passed to jarResourceHandler.getResource(), not directly to ResourceUtils.getFile"
+        },
+        {
+          "file": "spark/staticfiles/StaticFilesConfiguration.java",
+          "line": 120,
+          "note": "getPathInfo() is used for MimeType detection, not file path construction in this method"
+        },
+        {
+          "file": "spark/utils/ResourceUtils.java",
+          "line": 258,
+          "note": "Sink creates a File from URI scheme-specific part, but the taint flow graph claims a connection that skips library code, which is not visible in the provided snippets"
+        }
+      ],
+      "explanation": "The reported taint flow claims to go from getPathInfo() to ResourceUtils.getFile(), but the provided code for StaticFilesConfiguration.java shows getPathInfo() being used for MIME type detection (line 120) and passed to a JarResourceHandler (line 117), not to ResourceUtils. The connection between the source and the sink relies on internal library code or other methods not shown in the provided snippets. Without seeing how the URI passed to ResourceUtils.getFile is constructed, it is impossible to verify if the attacker-controlled path info is actually used to construct the file path in a dangerous way.",
+      "samples": [
+        "uncertain"
+      ],
+      "methods_shown": [
+        "<spark.staticfiles.StaticFilesConfiguration: boolean consumeWithJarResourceHandler(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)>",
+        "<spark.utils.ResourceUtils: java.io.File getFile(java.net.URI,java.lang.String)>"
+      ],
+      "override": ""
+    }
+  ]
+}

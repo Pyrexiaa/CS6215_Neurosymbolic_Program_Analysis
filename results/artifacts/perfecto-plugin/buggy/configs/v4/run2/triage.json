@@ -1,0 +1,75 @@
+{
+  "prompt_version": "e5fc00c6",
+  "decisions": [
+    {
+      "flow_id": "21ba189d7d",
+      "flow_key": "DRIVER => <io.plugins.perfecto.PerfectoBuildWrapper: java.lang.String getTunnelId(java.lang.String,java.lang.String,java.lang.String,hudson.model.BuildListener)>@L164/0[*]",
+      "verdict": "vulnerable",
+      "reason": "exploitable",
+      "kept": true,
+      "v3_ok": null,
+      "v3_problems": [],
+      "evidence": [
+        {
+          "file": "io/plugins/perfecto/PerfectoBuildWrapper.java",
+          "line": 311,
+          "note": "setPcParameters accepts a String argument directly into the instance field pcParameters without validation."
+        },
+        {
+          "file": "io/plugins/perfecto/PerfectoBuildWrapper.java",
+          "line": 163,
+          "note": "On Windows, pcParameters is concatenated into a single string argument passed to cmd.exe /c, allowing command injection via shell metacharacters."
+        },
+        {
+          "file": "io/plugins/perfecto/PerfectoBuildWrapper.java",
+          "line": 166,
+          "note": "On Linux, pcParameters is concatenated into a bash command string passed to bash -c, allowing command injection via shell metacharacters."
+        }
+      ],
+      "explanation": "The tainted value from the entry point flows into the `pcParameters` field via `setPcParameters` without any sanitization or validation. This value is then directly concatenated into shell commands executed via `ProcessBuilder` (Windows) and `Runtime.exec` (Linux), allowing an attacker to inject arbitrary OS commands.",
+      "samples": [
+        "vulnerable"
+      ],
+      "methods_shown": [
+        "<io.plugins.perfecto.PerfectoBuildWrapper: void setPcParameters(java.lang.String)>",
+        "<io.plugins.perfecto.PerfectoBuildWrapper: java.lang.String getTunnelId(java.lang.String,java.lang.String,java.lang.String,hudson.model.BuildListener)>"
+      ],
+      "override": ""
+    },
+    {
+      "flow_id": "05a565b1c4",
+      "flow_key": "DRIVER => <io.plugins.perfecto.PerfectoBuildWrapper: java.lang.String getTunnelId(java.lang.String,java.lang.String,java.lang.String,hudson.model.BuildListener)>@L167/0[*]",
+      "verdict": "vulnerable",
+      "reason": "exploitable",
+      "kept": true,
+      "v3_ok": null,
+      "v3_problems": [],
+      "evidence": [
+        {
+          "file": "io/plugins/perfecto/PerfectoBuildWrapper.java",
+          "line": 311,
+          "note": "setPcParameters accepts a String argument directly into the instance field pcParameters without validation."
+        },
+        {
+          "file": "io/plugins/perfecto/PerfectoBuildWrapper.java",
+          "line": 163,
+          "note": "On Windows, pcParameters is concatenated into a single string argument passed to cmd.exe /c, allowing command injection via shell metacharacters."
+        },
+        {
+          "file": "io/plugins/perfecto/PerfectoBuildWrapper.java",
+          "line": 166,
+          "note": "On Linux, pcParameters is concatenated into a bash -c command string, allowing command injection via shell metacharacters."
+        }
+      ],
+      "explanation": "The taint flow shows that attacker-controlled input (modeled by NesyDriver) flows into the `pcParameters` field via `setPcParameters` without any sanitization. This tainted value is then directly concatenated into shell commands executed via `ProcessBuilder` (Windows) and `Runtime.exec` (Linux) in `getTunnelId`. Since the input is embedded within a shell command string (`cmd.exe /c ...` and `bash -c ...`), an attacker can inject arbitrary OS commands.",
+      "samples": [
+        "vulnerable"
+      ],
+      "methods_shown": [
+        "<io.plugins.perfecto.PerfectoBuildWrapper: void setPcParameters(java.lang.String)>",
+        "<io.plugins.perfecto.PerfectoBuildWrapper: java.lang.String getTunnelId(java.lang.String,java.lang.String,java.lang.String,hudson.model.BuildListener)>"
+      ],
+      "override": ""
+    }
+  ]
+}

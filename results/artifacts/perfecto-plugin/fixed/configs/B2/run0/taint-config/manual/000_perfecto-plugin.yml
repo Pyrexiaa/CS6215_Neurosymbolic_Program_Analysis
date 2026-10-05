@@ -1,0 +1,34 @@
+# B2 manual taint specification for perfecto-plugin (CVE-2020-2261).
+# Added on top of the B1 base configuration (Tai-e commonly-used config for CWE-078).
+#
+# PROVENANCE (report this): written by Claude (AI assistant) on date omitted at the student's request,
+# one pass per subject, time box 30 min (actual times in docs/TODO.md). Inputs: the candidate list
+# work/manual-candidates/perfecto-plugin.md (the same API list N2 receives) and the buggy-version source.
+# Not opened: CVE advisory, fix commit/diff, ground truth (fix_info.csv). Caveats: the author (an LLM)
+# may know these public CVEs, and B1 output of some subjects was seen while debugging the pipeline
+# (docs/iterations.md I-19). Each entry says why it was added. Pristine templates: work/b2-original/.
+#
+# Format: "<pkg.Cls: retType name(argType1,argType2)>"; index = result | base | 0,1,... | "N[*]" (array elements).
+
+# Thinking as a Tai-e user hunting OS command injection in a Jenkins build-wrapper plugin:
+# * The plugin launches an external program (Perfecto Connect) with a command ARRAY
+#   ({"bash","-c",cmd} / {"cmd.exe","/c",cmd}). The commonly-used config declares these sinks on
+#   index 0 (the array object), which never matches when only an element is tainted (I-18).
+# * Job-configuration fields arrive through the @DataBoundConstructor; the template driver already
+#   taints them, so no extra sources are needed for them.
+# * Credentials (cloud name, API key) are configured by users too and are concatenated into the same
+#   command, so the Secret wrapper must not lose taint.
+sources: []
+
+sinks:
+  # command array elements reach a shell (Linux branch)
+  - { method: "<java.lang.Runtime: java.lang.Process exec(java.lang.String[])>", index: "0[*]" }
+  # command array elements reach cmd.exe (Windows branch)
+  - { method: "<java.lang.ProcessBuilder: void <init>(java.lang.String[])>", index: "0[*]" }
+
+transfers:
+  # Jenkins Secret wraps/unwraps a user-supplied string unchanged
+  - { method: "<hudson.util.Secret: hudson.util.Secret fromString(java.lang.String)>", from: 0, to: result }
+  - { method: "<hudson.util.Secret: java.lang.String getPlainText()>", from: base, to: result }
+
+sanitizers: []

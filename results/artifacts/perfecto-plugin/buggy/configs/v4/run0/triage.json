@@ -1,0 +1,41 @@
+{
+  "prompt_version": "e5fc00c6",
+  "decisions": [
+    {
+      "flow_id": "dde7ff1fc9",
+      "flow_key": "DRIVER => <io.plugins.perfecto.PerfectoBuildWrapper: java.lang.String getTunnelId(java.lang.String,java.lang.String,java.lang.String,hudson.model.BuildListener)>@L180/0",
+      "verdict": "vulnerable",
+      "reason": "exploitable",
+      "kept": true,
+      "v3_ok": null,
+      "v3_problems": [],
+      "evidence": [
+        {
+          "file": "io/plugins/perfecto/PerfectoBuildWrapper.java",
+          "line": 166,
+          "note": "User-controlled variable perfectoConnectLocation is concatenated directly into a shell command string passed to Runtime.exec"
+        },
+        {
+          "file": "io/plugins/perfecto/PerfectoBuildWrapper.java",
+          "line": 167,
+          "note": "Runtime.exec executes the constructed shell command without sanitization"
+        },
+        {
+          "file": "io/plugins/perfecto/PerfectoBuildWrapper.java",
+          "line": 283,
+          "note": "Setter method allows arbitrary string assignment to the tainted field"
+        }
+      ],
+      "explanation": "The variable `perfectoConnectLocation`, which originates from an attacker-controlled source (via the driver/main entry point), is passed to `getTunnelId`. Inside `getTunnelId`, this variable is concatenated directly into a shell command string (`bash -c ...`) at line 166 and executed via `Runtime.exec` at line 167. There are no sanitization checks, allow-lists, or escaping mechanisms applied to `perfectoConnectLocation` before it is used in the command, allowing for arbitrary OS command injection.",
+      "samples": [
+        "vulnerable"
+      ],
+      "methods_shown": [
+        "<io.plugins.perfecto.PerfectoBuildWrapper: void setPerfectoConnectLocation(java.lang.String)>",
+        "<io.plugins.perfecto.PerfectoBuildWrapper: hudson.tasks.BuildWrapper$Environment setUp(hudson.model.AbstractBuild,hudson.Launcher,hudson.model.BuildListener)>",
+        "<io.plugins.perfecto.PerfectoBuildWrapper: java.lang.String getTunnelId(java.lang.String,java.lang.String,java.lang.String,hudson.model.BuildListener)>"
+      ],
+      "override": ""
+    }
+  ]
+}

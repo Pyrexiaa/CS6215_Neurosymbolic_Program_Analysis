@@ -1,0 +1,116 @@
+{
+  "subject": "cron-utils",
+  "slug": "jmrozanec__cron-utils_CVE-2021-41269_9.1.5",
+  "cve": "CVE-2021-41269",
+  "cwe": "CWE-094",
+  "version": "buggy",
+  "config": "B1",
+  "run": 0,
+  "config_def": {
+    "driver": "template",
+    "spec": [
+      "base"
+    ],
+    "triage": false
+  },
+  "model": null,
+  "served_models": [],
+  "prompt_versions": {
+    "n1_driver": "3914024e",
+    "n1_repair": "0393a228",
+    "n2_spec": "647ee643",
+    "n3_triage": "e5fc00c6"
+  },
+  "taie_settings": {
+    "jar": "/Users/jiayulim/Documents/GitHub/CS6215_Neurosymbolic_Program_Analysis/tools/tai-e-all-0.5.4.jar",
+    "java_bin": "/Library/Java/JavaVirtualMachines/jdk-17.jdk/Contents/Home/bin/java",
+    "jre_version": "8",
+    "home": "/Users/jiayulim/Documents/GitHub/CS6215_Neurosymbolic_Program_Analysis/work/taie-home",
+    "cs": "1-call",
+    "only_app": "False",
+    "time_limit_s": "1800",
+    "wall_timeout_s": "3600",
+    "xmx": "6g",
+    "extra_pta_options": "{}"
+  },
+  "facts": {
+    "app_classes": 98,
+    "app_methods": 678,
+    "external_apis": 214,
+    "external_apis_jdk": 209,
+    "entry_candidates": 33,
+    "entry_kinds": {
+      "library-api": 33
+    }
+  },
+  "subject_stats": {
+    "java_files": 84,
+    "non_blank_loc": 7877,
+    "dependency_jars": 32,
+    "modules_analysed": 1
+  },
+  "gt_methods": [
+    "CronParser.parse",
+    "CronValidator.isValid"
+  ],
+  "driver": {
+    "kind": "template",
+    "ok": true,
+    "entries": 24,
+    "attempts": 2,
+    "removed_entries": 8,
+    "app_calls": 32,
+    "taint_calls": 28,
+    "errors": 1,
+    "entry_mismatches": 0
+  },
+  "spec": null,
+  "manual_spec_entries": null,
+  "taie": {
+    "ok": true,
+    "returncode": 0,
+    "elapsed_s": 9.1,
+    "timed_out": false,
+    "detected_raw": 0,
+    "reachable_methods": 10599,
+    "out_dir": "/Users/jiayulim/Documents/GitHub/CS6215_Neurosymbolic_Program_Analysis/work/runs/cron-utils/buggy/taie/b46aa84ea7752ce7",
+    "error": "",
+    "invalid_spec_entries": [],
+    "expected_failure": false
+  },
+  "counts": {
+    "raw": 0,
+    "filtered": 0,
+    "reported": 0,
+    "reported_gt": 0,
+    "reported_gt_weak": 0,
+    "removed_by_triage": 0,
+    "removed_gt_by_triage": 0,
+    "v3_rejected": 0,
+    "trusted_sink_overrides": 0
+  },
+  "detected": false,
+  "usage": {
+    "N1": {},
+    "N2": {},
+    "N3": {},
+    "total": {}
+  },
+  "timings": {
+    "facts_s": 3.81,
+    "driver_s": 0.0,
+    "spec_s": 0.0,
+    "taie_s": 0.0,
+    "triage_s": 0.0,
+    "total_s": 3.82
+  },
+  "flows": [],
+  "result_revision": {
+    "kind": "validator-correction-replay",
+    "original_raw_n1_n2_responses_reused": true,
+    "historical_cache_model_key": "default",
+    "new_api_request_model": "qwen3.6:35b",
+    "spec_vote_version": 2,
+    "v3_exact_visible_lines": true
+  }
+}

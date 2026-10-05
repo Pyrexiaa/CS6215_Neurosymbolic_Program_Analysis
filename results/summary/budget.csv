@@ -1,0 +1,11 @@
+config,runs,llm_calls,tokens_in,tokens_out,fresh_tokens,llm_hours,recorded_stage_fresh_tokens,recorded_stage_llm_hours,cost_semantics,taie_hours,truncated_answers,models
+B1,8,0,0,0,,,0,0.0,mixed-stage-validator-replay; fresh spend: results/provenance,0.03,0,-
+B2,8,0,0,0,,,0,0.0,mixed-stage-validator-replay; fresh spend: results/provenance,0.05,0,-
+iris-like,24,2980,4641828,1437666,,,67735,0.02,mixed-stage-validator-replay; fresh spend: results/provenance,0.13,5,qwen3.6:35b
+v1,24,558,1309833,813739,,,0,0.0,mixed-stage-validator-replay; fresh spend: results/provenance,0.13,5,qwen3.6:35b
+v2,24,604,1423297,915632,,,170134,0.14,mixed-stage-validator-replay; fresh spend: results/provenance,0.05,6,qwen3.6:35b
+v3,24,1689,3283417,1257000,,,170134,0.14,mixed-stage-validator-replay; fresh spend: results/provenance,0.05,6,qwen3.6:35b
+v3-noV2,24,1689,3283417,1254570,,,170134,0.14,mixed-stage-validator-replay; fresh spend: results/provenance,0.05,6,qwen3.6:35b
+v3-noV3,24,1689,3283417,1257000,,,170134,0.14,mixed-stage-validator-replay; fresh spend: results/provenance,0.05,6,qwen3.6:35b
+v3-noval,24,1689,3283417,1254570,,,170134,0.14,mixed-stage-validator-replay; fresh spend: results/provenance,0.05,6,qwen3.6:35b
+v4,24,1947,3576435,1343579,,,80809,0.07,mixed-stage-validator-replay; fresh spend: results/provenance,0.08,6,qwen3.6:35b

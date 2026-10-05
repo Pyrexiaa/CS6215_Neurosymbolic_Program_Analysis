@@ -1,0 +1,11 @@
+{
+  "n": 436,
+  "counts": {
+    "TP": 13,
+    "FP": 423,
+    "UNSURE": 0
+  },
+  "model": "default",
+  "dry_run": false,
+  "note": "Single-LLM-judge decisions. Not human labels. UNSURE and FP/TP are separate from labels/*.csv; metrics may treat UNSURE as unknown (not FP)."
+}

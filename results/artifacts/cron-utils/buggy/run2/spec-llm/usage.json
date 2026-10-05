@@ -1,0 +1,12 @@
+{
+  "N2-spec": {
+    "calls": 24,
+    "cached_calls": 24,
+    "prompt_tokens": 60087,
+    "completion_tokens": 23674,
+    "fresh_prompt_tokens": 0,
+    "fresh_completion_tokens": 0,
+    "latency_s": 0.0,
+    "truncated": 0
+  }
+}

@@ -1,0 +1,35 @@
+# B2 manual taint specification for xxl-job (CVE-2020-29204).
+# Added on top of the B1 base configuration (Tai-e commonly-used config for CWE-079).
+#
+# Prepared from work/manual-candidates/xxl-job.md (the API list shown to N2)
+# and the buggy-version source. Advisories, fix diffs and fix_info.csv were not
+# consulted during preparation. Each entry records its technical rationale.
+# Preparation details and limitations: report/main_revised2.tex.
+#
+# Format: "<pkg.Cls: retType name(argType1,argType2)>"; index = result | base | 0,1,... | "N[*]" (array elements).
+
+# Prepared for the planned held-out set; not evaluated. XSS specification rationale
+# for a Spring MVC and FreeMarker admin console:
+# * Untrusted input: controller parameters (tainted by the driver), request headers, JSON bodies.
+# * Output channels: model attributes rendered by FreeMarker views, ModelAndView objects, HTML
+#   e-mails (setText(..., true)), and ReturnT messages, which the admin UI shows in HTML dialogs.
+# * JSON (de)serialisation keeps taint.
+sources:
+  - { kind: call, method: "<javax.servlet.http.HttpServletRequest: java.lang.String getHeader(java.lang.String)>", index: result }
+
+sinks:
+  - { method: "<org.springframework.ui.Model: org.springframework.ui.Model addAttribute(java.lang.String,java.lang.Object)>", index: 1 }
+  - { method: "<org.springframework.web.servlet.ModelAndView: org.springframework.web.servlet.ModelAndView addObject(java.lang.String,java.lang.Object)>", index: 1 }
+  - { method: "<org.springframework.mail.javamail.MimeMessageHelper: void setText(java.lang.String,boolean)>", index: 0 }
+  - { method: "<com.xxl.job.core.biz.model.ReturnT: void <init>(int,java.lang.String)>", index: 1 }
+  - { method: "<com.xxl.job.core.biz.model.ReturnT: void setMsg(java.lang.String)>", index: 0 }
+
+transfers:
+  - { method: "<com.fasterxml.jackson.databind.ObjectMapper: java.lang.String writeValueAsString(java.lang.Object)>", from: 0, to: result }
+  - { method: "<com.fasterxml.jackson.databind.ObjectMapper: java.lang.Object readValue(java.lang.String,java.lang.Class)>", from: 0, to: result }
+  - { method: "<com.fasterxml.jackson.databind.ObjectMapper: java.lang.Object readValue(java.lang.String,com.fasterxml.jackson.databind.JavaType)>", from: 0, to: result }
+  - { method: "<com.xxl.job.core.util.GsonTool: java.lang.Object fromJson(java.lang.String,java.lang.Class)>", from: 0, to: result }
+  - { method: "<com.xxl.job.core.util.GsonTool: java.lang.Object fromJson(java.lang.String,java.lang.Class,java.lang.Class)>", from: 0, to: result }
+  - { method: "<java.text.MessageFormat: java.lang.String format(java.lang.String,java.lang.Object[])>", from: "1[*]", to: result }
+
+sanitizers: []

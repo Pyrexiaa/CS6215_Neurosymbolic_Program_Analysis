@@ -1,0 +1,77 @@
+{
+  "prompt_version": "e5fc00c6",
+  "decisions": [
+    {
+      "flow_id": "24db402138",
+      "flow_key": "DRIVER => <io.plugins.perfecto.PerfectoBuildWrapper: hudson.tasks.CommandInterpreter getCommandInterpreter(hudson.Launcher,java.lang.String)>@L254/0",
+      "verdict": "vulnerable",
+      "reason": "exploitable",
+      "kept": true,
+      "v3_ok": null,
+      "v3_problems": [],
+      "evidence": [
+        {
+          "file": "io/plugins/perfecto/PerfectoBuildWrapper.java",
+          "line": 316,
+          "note": "setPcParameters accepts a String argument directly into the instance variable pcParameters without validation."
+        },
+        {
+          "file": "io/plugins/perfecto/PerfectoBuildWrapper.java",
+          "line": 179,
+          "note": "pcParameters is concatenated directly into the script string: String script = baseCommand+\" \"+pcParameters.trim();"
+        },
+        {
+          "file": "io/plugins/perfecto/PerfectoBuildWrapper.java",
+          "line": 254,
+          "note": "The constructed script is passed to new Shell(script), which executes the command via the OS shell."
+        }
+      ],
+      "explanation": "The `pcParameters` field is set via `setPcParameters`, which is a standard setter for a configuration parameter likely exposed to the user (attacker) in the Jenkins job configuration. This parameter is concatenated directly into a shell command string at line 179 without any sanitization or escaping. The resulting command is executed by `Shell` at line 254, allowing for OS command injection if the attacker controls `pcParameters`.",
+      "samples": [
+        "vulnerable"
+      ],
+      "methods_shown": [
+        "<io.plugins.perfecto.PerfectoBuildWrapper: hudson.tasks.BuildWrapper$Environment setUp(hudson.model.AbstractBuild,hudson.Launcher,hudson.model.BuildListener)>",
+        "<io.plugins.perfecto.PerfectoBuildWrapper: hudson.tasks.CommandInterpreter getCommandInterpreter(hudson.Launcher,java.lang.String)>",
+        "<io.plugins.perfecto.PerfectoBuildWrapper: void setPcParameters(java.lang.String)>"
+      ],
+      "override": ""
+    },
+    {
+      "flow_id": "f88d0d638a",
+      "flow_key": "DRIVER => <io.plugins.perfecto.PerfectoBuildWrapper: hudson.tasks.CommandInterpreter getCommandInterpreter(hudson.Launcher,java.lang.String)>@L256/0",
+      "verdict": "vulnerable",
+      "reason": "exploitable",
+      "kept": true,
+      "v3_ok": null,
+      "v3_problems": [],
+      "evidence": [
+        {
+          "file": "io/plugins/perfecto/PerfectoBuildWrapper.java",
+          "line": 179,
+          "note": "Attacker-controlled pcParameters is concatenated directly into the script string without sanitization."
+        },
+        {
+          "file": "io/plugins/perfecto/PerfectoBuildWrapper.java",
+          "line": 181,
+          "note": "The tainted script string is passed to getCommandInterpreter."
+        },
+        {
+          "file": "io/plugins/perfecto/PerfectoBuildWrapper.java",
+          "line": 254,
+          "note": "The script is passed to the Shell constructor, which executes it via the OS command interpreter."
+        }
+      ],
+      "explanation": "The variable `pcParameters` is set via `setPcParameters` (line 316) and originates from the entry point modeled as attacker-controlled. In `setUp` (line 179), this parameter is concatenated directly into a shell command string (`baseCommand + \" \" + pcParameters.trim()`) without any validation or escaping. This tainted string is then passed to `getCommandInterpreter` (line 181), which instantiates a `Shell` object (line 254) that executes the command via the OS, resulting in OS command injection.",
+      "samples": [
+        "vulnerable"
+      ],
+      "methods_shown": [
+        "<io.plugins.perfecto.PerfectoBuildWrapper: void setPcParameters(java.lang.String)>",
+        "<io.plugins.perfecto.PerfectoBuildWrapper: hudson.tasks.BuildWrapper$Environment setUp(hudson.model.AbstractBuild,hudson.Launcher,hudson.model.BuildListener)>",
+        "<io.plugins.perfecto.PerfectoBuildWrapper: hudson.tasks.CommandInterpreter getCommandInterpreter(hudson.Launcher,java.lang.String)>"
+      ],
+      "override": ""
+    }
+  ]
+}

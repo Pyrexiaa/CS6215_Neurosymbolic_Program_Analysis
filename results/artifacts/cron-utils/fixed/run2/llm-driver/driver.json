@@ -1,0 +1,270 @@
+{
+  "kind": "llm-fallback-template",
+  "ok": true,
+  "classes_dir": "/Users/jiayulim/Documents/GitHub/CS6215_Neurosymbolic_Program_Analysis/work/runs/cron-utils/fixed/run2/llm-driver/fallback/classes",
+  "source_path": "/Users/jiayulim/Documents/GitHub/CS6215_Neurosymbolic_Program_Analysis/work/runs/cron-utils/fixed/run2/llm-driver/fallback/src/nesy/NesyDriver.java",
+  "entries": [
+    "<com.cronutils.StringValidations: java.lang.String removeValidChars(java.lang.String)>",
+    "<com.cronutils.parser.CronParser: com.cronutils.model.Cron parse(java.lang.String)>",
+    "<com.cronutils.parser.CronParserField: com.cronutils.model.field.CronField parse(java.lang.String)>",
+    "<com.cronutils.parser.FieldParser: com.cronutils.model.field.expression.FieldExpression parse(java.lang.String)>",
+    "<com.cronutils.converter.CronConverter: com.cronutils.converter.CronConverter using(java.lang.String)>",
+    "<com.cronutils.model.field.constraint.FieldConstraints: java.lang.Integer getStringMappingValue(java.lang.String)>",
+    "<com.cronutils.validation.CronValidator: boolean isValid(java.lang.String,javax.validation.ConstraintValidatorContext)>",
+    "<com.cronutils.utils.Preconditions: java.lang.Object checkNotNull(java.lang.Object,java.lang.Object)>",
+    "<com.cronutils.utils.Preconditions: java.lang.String checkNotNullNorEmpty(java.lang.String,java.lang.Object)>",
+    "<com.cronutils.utils.Preconditions: java.util.Collection checkNotNullNorEmpty(java.util.Collection,java.lang.Object)>",
+    "<com.cronutils.utils.StringUtils: boolean containsAny(java.lang.CharSequence,char[])>",
+    "<com.cronutils.model.CronType: com.cronutils.model.CronType valueOf(java.lang.String)>",
+    "<com.cronutils.model.field.CronFieldName: com.cronutils.model.field.CronFieldName valueOf(java.lang.String)>",
+    "<com.cronutils.model.field.expression.Weekdays: com.cronutils.model.field.expression.Weekdays valueOf(java.lang.String)>",
+    "<com.cronutils.model.field.value.SpecialChar: com.cronutils.model.field.value.SpecialChar valueOf(java.lang.String)>",
+    "<com.cronutils.utils.Preconditions: java.lang.Object checkNotNull(java.lang.Object)>",
+    "<com.cronutils.utils.Preconditions: void checkArgument(boolean,java.lang.Object)>",
+    "<com.cronutils.utils.Preconditions: void checkArgument(boolean,java.lang.String,java.lang.Object[])>",
+    "<com.cronutils.utils.Preconditions: void checkPositive(int,java.lang.Object)>",
+    "<com.cronutils.utils.Preconditions: void checkState(boolean,java.lang.String,java.lang.Object[])>",
+    "<com.cronutils.utils.StringUtils: boolean isEmpty(java.lang.CharSequence)>",
+    "<com.cronutils.utils.StringUtils: boolean isNumeric(java.lang.CharSequence)>",
+    "<com.cronutils.utils.StringUtils: java.lang.String join(java.lang.Object[],java.lang.String)>",
+    "<com.cronutils.utils.WeekendPolicy: com.cronutils.utils.WeekendPolicy valueOf(java.lang.String)>"
+  ],
+  "attempts": 4,
+  "errors": [
+    "uilder().build());\n                                                                                                          ^\n/Users/jiayulim/Documents/GitHub/CS6215_Neurosymbolic_Program_Analysis/work/runs/cron-utils/fixed/run2/llm-driver/src/nesy/NesyDriver.java:29: error: cannot find symbol\n            com.cronutils.validation.CronValidator validator = new com.cronutils.validation.CronValidator(new com.cronutils.model.definition.CronDefinitionBuilder().build());\n                                                                                                                                                                    ^\n  symbol:   method build()\n  location: class CronDefinitionBuilder\n/Users/jiayulim/Documents/GitHub/CS6215_Neurosymbolic_Program_Analysis/work/runs/cron-utils/fixed/run2/llm-driver/src/nesy/NesyDriver.java:50: error: non-static method using(String) cannot be referenced from a static context\n            com.cronutils.converter.CronConverter.using(nesy.Taint.src());\n                                                 ^\n/Users/jiayulim/Documents/GitHub/CS6215_Neurosymbolic_Program_Analysis/work/runs/cron-utils/fixed/run2/llm-driver/src/nesy/NesyDriver.java:57: error: incompatible types: Map<FieldExpression,String> cannot be converted to Map<CronFieldName,CronField>\n            descriptor.describeDayOfWeek(dayOfWeekMap, specialCharMap);\n                                         ^\n/Users/jiayulim/Documents/GitHub/CS6215_Neurosymbolic_Program_Analysis/work/runs/cron-utils/fixed/run2/llm-driver/src/nesy/NesyDriver.java:63: error: incompatible types: Map<FieldExpression,String> cannot be converted to Map<CronFieldName,CronField>\n            descriptor.describeDayOfMonth(dayOfMonthMap);\n                                          ^\n/Users/jiayulim/Documents/GitHub/CS6215_Neurosymbolic_Program_Analysis/work/runs/cron-utils/fixed/run2/llm-driver/src/nesy/NesyDriver.java:69: error: incompatible types: Map<FieldExpression,String> cannot be converted to Map<CronFieldName,CronField>\n            descriptor.describeHHmmss(hhmmssMap);\n                                      ^\n/Users/jiayulim/Documents/GitHub/CS6215_Neurosymbolic_Program_Analysis/work/runs/cron-utils/fixed/run2/llm-driver/src/nesy/NesyDriver.java:75: error: incompatible types: Map<FieldExpression,String> cannot be converted to Map<CronFieldName,CronField>\n            descriptor.describeMonth(monthMap);\n                                     ^\n/Users/jiayulim/Documents/GitHub/CS6215_Neurosymbolic_Program_Analysis/work/runs/cron-utils/fixed/run2/llm-driver/src/nesy/NesyDriver.java:81: error: incompatible types: Map<FieldExpression,String> cannot be converted to Map<CronFieldName,CronField>\n            descriptor.describeYear(yearMap);\n                                    ^\n/Users/jiayulim/Documents/GitHub/CS6215_Neurosymbolic_Program_Analysis/work/runs/cron-utils/fixed/run2/llm-driver/src/nesy/NesyDriver.java:115: error: cannot find symbol\n            com.cronutils.utils.DateUtils.workdaysCount(java.time.ZonedDateTime.now(), 1, new ArrayList<>(), com.cronutils.utils.WeekendPolicy.WEEKDAYS);\n                                                                                                                                              ^\n  symbol:   variable WEEKDAYS\n  location: class WeekendPolicy\n/Users/jiayulim/Documents/GitHub/CS6215_Neurosymbolic_Program_Analysis/work/runs/cron-utils/fixed/run2/llm-driver/src/nesy/NesyDriver.java:119: error: cannot find symbol\n            com.cronutils.utils.DateUtils.workdaysCount(java.time.ZonedDateTime.now(), java.time.ZonedDateTime.now(), new ArrayList<>(), com.cronutils.utils.WeekendPolicy.WEEKDAYS);\n                                                                                                                                                                          ^\n  symbol:   variable WEEKDAYS\n  location: class WeekendPolicy\nNote: Some messages have been simplified; recompile with -Xdiags:verbose to get full output\n12 errors",
+    "/Documents/GitHub/CS6215_Neurosymbolic_Program_Analysis/work/runs/cron-utils/fixed/run2/llm-driver/src/nesy/NesyDriver.java:50: error: cannot find symbol\n            com.cronutils.converter.CronConverter converter = new com.cronutils.converter.CronConverter(com.cronutils.model.definition.CronDefinitionBuilder.instanceForDefinition(com.cronutils.model.definition.CronDefinitionBuilder.CronDefinition.QUARTZ).build());\n                                                                                                                                                                                                                                       ^\n  symbol:   variable CronDefinition\n  location: class CronDefinitionBuilder\n/Users/jiayulim/Documents/GitHub/CS6215_Neurosymbolic_Program_Analysis/work/runs/cron-utils/fixed/run2/llm-driver/src/nesy/NesyDriver.java:51: error: cannot find symbol\n            converter.toJava(nesy.Taint.src());\n                     ^\n  symbol:   method toJava(String)\n  location: variable converter of type CronConverter\n/Users/jiayulim/Documents/GitHub/CS6215_Neurosymbolic_Program_Analysis/work/runs/cron-utils/fixed/run2/llm-driver/src/nesy/NesyDriver.java:58: error: incompatible types: Map<FieldExpression,String> cannot be converted to Map<CronFieldName,CronField>\n            descriptor.describeDayOfWeek(dayOfWeekMap, specialCharMap);\n                                         ^\n/Users/jiayulim/Documents/GitHub/CS6215_Neurosymbolic_Program_Analysis/work/runs/cron-utils/fixed/run2/llm-driver/src/nesy/NesyDriver.java:64: error: incompatible types: Map<FieldExpression,String> cannot be converted to Map<CronFieldName,CronField>\n            descriptor.describeDayOfMonth(dayOfMonthMap);\n                                          ^\n/Users/jiayulim/Documents/GitHub/CS6215_Neurosymbolic_Program_Analysis/work/runs/cron-utils/fixed/run2/llm-driver/src/nesy/NesyDriver.java:70: error: incompatible types: Map<FieldExpression,String> cannot be converted to Map<CronFieldName,CronField>\n            descriptor.describeHHmmss(hhmmssMap);\n                                      ^\n/Users/jiayulim/Documents/GitHub/CS6215_Neurosymbolic_Program_Analysis/work/runs/cron-utils/fixed/run2/llm-driver/src/nesy/NesyDriver.java:76: error: incompatible types: Map<FieldExpression,String> cannot be converted to Map<CronFieldName,CronField>\n            descriptor.describeMonth(monthMap);\n                                     ^\n/Users/jiayulim/Documents/GitHub/CS6215_Neurosymbolic_Program_Analysis/work/runs/cron-utils/fixed/run2/llm-driver/src/nesy/NesyDriver.java:82: error: incompatible types: Map<FieldExpression,String> cannot be converted to Map<CronFieldName,CronField>\n            descriptor.describeYear(yearMap);\n                                    ^\n/Users/jiayulim/Documents/GitHub/CS6215_Neurosymbolic_Program_Analysis/work/runs/cron-utils/fixed/run2/llm-driver/src/nesy/NesyDriver.java:116: error: cannot find symbol\n            com.cronutils.utils.DateUtils.workdaysCount(java.time.ZonedDateTime.now(), 1, new ArrayList<>(), com.cronutils.utils.WeekendPolicy.WEEKDAYS);\n                                                                                                                                              ^\n  symbol:   variable WEEKDAYS\n  location: class WeekendPolicy\n/Users/jiayulim/Documents/GitHub/CS6215_Neurosymbolic_Program_Analysis/work/runs/cron-utils/fixed/run2/llm-driver/src/nesy/NesyDriver.java:120: error: cannot find symbol\n            com.cronutils.utils.DateUtils.workdaysCount(java.time.ZonedDateTime.now(), java.time.ZonedDateTime.now(), new ArrayList<>(), com.cronutils.utils.WeekendPolicy.WEEKDAYS);\n                                                                                                                                                                          ^\n  symbol:   variable WEEKDAYS\n  location: class WeekendPolicy\nNote: Some messages have been simplified; recompile with -Xdiags:verbose to get full output\n11 errors",
+    "on: class CronDefinition\n/Users/jiayulim/Documents/GitHub/CS6215_Neurosymbolic_Program_Analysis/work/runs/cron-utils/fixed/run2/llm-driver/src/nesy/NesyDriver.java:50: error: cannot find symbol\n            com.cronutils.converter.CronConverter converter = new com.cronutils.converter.CronConverter(com.cronutils.model.definition.CronDefinitionBuilder.instanceForDefinition(com.cronutils.model.definition.CronDefinition.QUARTZ).build());\n                                                                                                                                                                                                                                ^\n  symbol:   variable QUARTZ\n  location: class CronDefinition\n/Users/jiayulim/Documents/GitHub/CS6215_Neurosymbolic_Program_Analysis/work/runs/cron-utils/fixed/run2/llm-driver/src/nesy/NesyDriver.java:51: error: cannot find symbol\n            converter.toQuartz(nesy.Taint.src());\n                     ^\n  symbol:   method toQuartz(String)\n  location: variable converter of type CronConverter\n/Users/jiayulim/Documents/GitHub/CS6215_Neurosymbolic_Program_Analysis/work/runs/cron-utils/fixed/run2/llm-driver/src/nesy/NesyDriver.java:58: error: incompatible types: Map<FieldExpression,String> cannot be converted to Map<CronFieldName,CronField>\n            descriptor.describeDayOfWeek(dayOfWeekMap, specialCharMap);\n                                         ^\n/Users/jiayulim/Documents/GitHub/CS6215_Neurosymbolic_Program_Analysis/work/runs/cron-utils/fixed/run2/llm-driver/src/nesy/NesyDriver.java:64: error: incompatible types: Map<FieldExpression,String> cannot be converted to Map<CronFieldName,CronField>\n            descriptor.describeDayOfMonth(dayOfMonthMap);\n                                          ^\n/Users/jiayulim/Documents/GitHub/CS6215_Neurosymbolic_Program_Analysis/work/runs/cron-utils/fixed/run2/llm-driver/src/nesy/NesyDriver.java:70: error: incompatible types: Map<FieldExpression,String> cannot be converted to Map<CronFieldName,CronField>\n            descriptor.describeHHmmss(hhmmssMap);\n                                      ^\n/Users/jiayulim/Documents/GitHub/CS6215_Neurosymbolic_Program_Analysis/work/runs/cron-utils/fixed/run2/llm-driver/src/nesy/NesyDriver.java:76: error: incompatible types: Map<FieldExpression,String> cannot be converted to Map<CronFieldName,CronField>\n            descriptor.describeMonth(monthMap);\n                                     ^\n/Users/jiayulim/Documents/GitHub/CS6215_Neurosymbolic_Program_Analysis/work/runs/cron-utils/fixed/run2/llm-driver/src/nesy/NesyDriver.java:82: error: incompatible types: Map<FieldExpression,String> cannot be converted to Map<CronFieldName,CronField>\n            descriptor.describeYear(yearMap);\n                                    ^\n/Users/jiayulim/Documents/GitHub/CS6215_Neurosymbolic_Program_Analysis/work/runs/cron-utils/fixed/run2/llm-driver/src/nesy/NesyDriver.java:116: error: cannot find symbol\n            com.cronutils.utils.DateUtils.workdaysCount(java.time.ZonedDateTime.now(), 1, new ArrayList<>(), com.cronutils.utils.WeekendPolicy.WEEKDAYS);\n                                                                                                                                              ^\n  symbol:   variable WEEKDAYS\n  location: class WeekendPolicy\n/Users/jiayulim/Documents/GitHub/CS6215_Neurosymbolic_Program_Analysis/work/runs/cron-utils/fixed/run2/llm-driver/src/nesy/NesyDriver.java:120: error: cannot find symbol\n            com.cronutils.utils.DateUtils.workdaysCount(java.time.ZonedDateTime.now(), java.time.ZonedDateTime.now(), new ArrayList<>(), com.cronutils.utils.WeekendPolicy.WEEKDAYS);\n                                                                                                                                                                          ^\n  symbol:   variable WEEKDAYS\n  location: class WeekendPolicy\nNote: Some messages have been simplified; recompile with -Xdiags:verbose to get full output\n11 errors",
+    "on: class CronDefinition\n/Users/jiayulim/Documents/GitHub/CS6215_Neurosymbolic_Program_Analysis/work/runs/cron-utils/fixed/run2/llm-driver/src/nesy/NesyDriver.java:50: error: cannot find symbol\n            com.cronutils.converter.CronConverter converter = new com.cronutils.converter.CronConverter(com.cronutils.model.definition.CronDefinitionBuilder.instanceForDefinition(com.cronutils.model.definition.CronDefinition.QUARTZ).build());\n                                                                                                                                                                                                                                ^\n  symbol:   variable QUARTZ\n  location: class CronDefinition\n/Users/jiayulim/Documents/GitHub/CS6215_Neurosymbolic_Program_Analysis/work/runs/cron-utils/fixed/run2/llm-driver/src/nesy/NesyDriver.java:51: error: cannot find symbol\n            converter.toQuartz(nesy.Taint.src());\n                     ^\n  symbol:   method toQuartz(String)\n  location: variable converter of type CronConverter\n/Users/jiayulim/Documents/GitHub/CS6215_Neurosymbolic_Program_Analysis/work/runs/cron-utils/fixed/run2/llm-driver/src/nesy/NesyDriver.java:58: error: incompatible types: Map<FieldExpression,String> cannot be converted to Map<CronFieldName,CronField>\n            descriptor.describeDayOfWeek(dayOfWeekMap, specialCharMap);\n                                         ^\n/Users/jiayulim/Documents/GitHub/CS6215_Neurosymbolic_Program_Analysis/work/runs/cron-utils/fixed/run2/llm-driver/src/nesy/NesyDriver.java:64: error: incompatible types: Map<FieldExpression,String> cannot be converted to Map<CronFieldName,CronField>\n            descriptor.describeDayOfMonth(dayOfMonthMap);\n                                          ^\n/Users/jiayulim/Documents/GitHub/CS6215_Neurosymbolic_Program_Analysis/work/runs/cron-utils/fixed/run2/llm-driver/src/nesy/NesyDriver.java:70: error: incompatible types: Map<FieldExpression,String> cannot be converted to Map<CronFieldName,CronField>\n            descriptor.describeHHmmss(hhmmssMap);\n                                      ^\n/Users/jiayulim/Documents/GitHub/CS6215_Neurosymbolic_Program_Analysis/work/runs/cron-utils/fixed/run2/llm-driver/src/nesy/NesyDriver.java:76: error: incompatible types: Map<FieldExpression,String> cannot be converted to Map<CronFieldName,CronField>\n            descriptor.describeMonth(monthMap);\n                                     ^\n/Users/jiayulim/Documents/GitHub/CS6215_Neurosymbolic_Program_Analysis/work/runs/cron-utils/fixed/run2/llm-driver/src/nesy/NesyDriver.java:82: error: incompatible types: Map<FieldExpression,String> cannot be converted to Map<CronFieldName,CronField>\n            descriptor.describeYear(yearMap);\n                                    ^\n/Users/jiayulim/Documents/GitHub/CS6215_Neurosymbolic_Program_Analysis/work/runs/cron-utils/fixed/run2/llm-driver/src/nesy/NesyDriver.java:116: error: cannot find symbol\n            com.cronutils.utils.DateUtils.workdaysCount(java.time.ZonedDateTime.now(), 1, new ArrayList<>(), com.cronutils.utils.WeekendPolicy.WEEKDAYS);\n                                                                                                                                              ^\n  symbol:   variable WEEKDAYS\n  location: class WeekendPolicy\n/Users/jiayulim/Documents/GitHub/CS6215_Neurosymbolic_Program_Analysis/work/runs/cron-utils/fixed/run2/llm-driver/src/nesy/NesyDriver.java:120: error: cannot find symbol\n            com.cronutils.utils.DateUtils.workdaysCount(java.time.ZonedDateTime.now(), java.time.ZonedDateTime.now(), new ArrayList<>(), com.cronutils.utils.WeekendPolicy.WEEKDAYS);\n                                                                                                                                                                          ^\n  symbol:   variable WEEKDAYS\n  location: class WeekendPolicy\nNote: Some messages have been simplified; recompile with -Xdiags:verbose to get full output\n11 errors"
+  ],
+  "removed_entries": [
+    "<com.cronutils.descriptor.CronDescriptor: java.lang.String describeDayOfWeek(java.util.Map,java.util.Map)>",
+    "<com.cronutils.descriptor.CronDescriptor: java.lang.String describeDayOfMonth(java.util.Map)>",
+    "<com.cronutils.descriptor.CronDescriptor: java.lang.String describeHHmmss(java.util.Map)>",
+    "<com.cronutils.descriptor.CronDescriptor: java.lang.String describeMonth(java.util.Map)>",
+    "<com.cronutils.descriptor.CronDescriptor: java.lang.String describeYear(java.util.Map)>",
+    "<com.cronutils.model.field.expression.FieldExpressionFactory: com.cronutils.model.field.expression.And and(java.util.List)>",
+    "<com.cronutils.utils.DateUtils: int workdaysCount(java.time.ZonedDateTime,int,java.util.List,com.cronutils.utils.WeekendPolicy)>",
+    "<com.cronutils.utils.DateUtils: int workdaysCount(java.time.ZonedDateTime,java.time.ZonedDateTime,java.util.List,com.cronutils.utils.WeekendPolicy)>"
+  ],
+  "app_calls": 32,
+  "taint_calls": 28,
+  "llm_entries": [
+    {
+      "signature": "<com.cronutils.parser.CronParser: com.cronutils.model.Cron parse(java.lang.String)>",
+      "tainted_params": [
+        0
+      ],
+      "why": "CronParser.parse() parses a cron expression string. If the implementation uses regex or string evaluation that could be influenced by crafted input to trigger code execution (e.g. via regex DoS or if it delegates to a script engine, though unlikely for cron, it is the primary parsing entry point for external strings)."
+    },
+    {
+      "signature": "<com.cronutils.parser.FieldParser: com.cronutils.model.field.expression.FieldExpression parse(java.lang.String)>",
+      "tainted_params": [
+        0
+      ],
+      "why": "FieldParser.parse() parses individual cron field expressions. Attacker-controlled input here could potentially trigger injection if the parser evaluates the string in a dangerous way."
+    },
+    {
+      "signature": "<com.cronutils.parser.CronParserField: com.cronutils.model.field.CronField parse(java.lang.String)>",
+      "tainted_params": [
+        0
+      ],
+      "why": "CronParserField.parse() parses a cron field into a CronField object. This is another entry point for attacker-controlled string input into the parsing logic."
+    },
+    {
+      "signature": "<com.cronutils.validation.CronValidator: boolean isValid(java.lang.String,javax.validation.ConstraintValidatorContext)>",
+      "tainted_params": [
+        0
+      ],
+      "why": "CronValidator.isValid() validates a cron string. If validation involves evaluating the string or using it in a context that could lead to code execution (e.g. via message interpolation in validation errors), this is a potential entry point."
+    },
+    {
+      "signature": "<com.cronutils.model.CronType: com.cronutils.model.CronType valueOf(java.lang.String)>",
+      "tainted_params": [
+        0
+      ],
+      "why": "CronType.valueOf() converts a string to an enum. While typically safe, if the string is used in a way that affects subsequent code execution paths or if there's a vulnerability in how the enum is mapped, it could be relevant. However, this is less likely to be a direct code injection point compared to parsers."
+    },
+    {
+      "signature": "<com.cronutils.model.field.CronFieldName: com.cronutils.model.field.CronFieldName valueOf(java.lang.String)>",
+      "tainted_params": [
+        0
+      ],
+      "why": "CronFieldName.valueOf() converts a string to an enum. Similar to CronType, it's a parsing entry point for attacker-controlled strings."
+    },
+    {
+      "signature": "<com.cronutils.model.field.value.SpecialChar: com.cronutils.model.field.value.SpecialChar valueOf(java.lang.String)>",
+      "tainted_params": [
+        0
+      ],
+      "why": "SpecialChar.valueOf() converts a string to an enum. It's a parsing entry point for attacker-controlled strings representing special cron characters."
+    },
+    {
+      "signature": "<com.cronutils.utils.WeekendPolicy: com.cronutils.utils.WeekendPolicy valueOf(java.lang.String)>",
+      "tainted_params": [
+        0
+      ],
+      "why": "WeekendPolicy.valueOf() converts a string to an enum. It's a parsing entry point for attacker-controlled strings."
+    },
+    {
+      "signature": "<com.cronutils.converter.CronConverter: com.cronutils.converter.CronConverter using(java.lang.String)>",
+      "tainted_params": [
+        0
+      ],
+      "why": "CronConverter.using() creates a converter based on a string identifier. If the string is attacker-controlled and used to dynamically load or configure a converter that might execute code, this could be a vulnerability."
+    },
+    {
+      "signature": "<com.cronutils.descriptor.CronDescriptor: java.lang.String describeDayOfWeek(java.util.Map,java.util.Map)>",
+      "tainted_params": [],
+      "why": "CronDescriptor.describeDayOfWeek() generates a human-readable description. If the input maps contain attacker-controlled strings that are interpolated into the description (e.g. via message interpolation), this could be a code injection point."
+    },
+    {
+      "signature": "<com.cronutils.descriptor.CronDescriptor: java.lang.String describeDayOfMonth(java.util.Map)>",
+      "tainted_params": [],
+      "why": "CronDescriptor.describeDayOfMonth() generates a human-readable description. Similar to describeDayOfWeek, if the input map contains attacker-controlled strings that are interpolated, this could be a vulnerability."
+    },
+    {
+      "signature": "<com.cronutils.descriptor.CronDescriptor: java.lang.String describeHHmmss(java.util.Map)>",
+      "tainted_params": [],
+      "why": "CronDescriptor.describeHHmmss() generates a human-readable description. Similar to other describe methods, if the input map contains attacker-controlled strings that are interpolated, this could be a vulnerability."
+    },
+    {
+      "signature": "<com.cronutils.descriptor.CronDescriptor: java.lang.String describeMonth(java.util.Map)>",
+      "tainted_params": [],
+      "why": "CronDescriptor.describeMonth() generates a human-readable description. Similar to other describe methods, if the input map contains attacker-controlled strings that are interpolated, this could be a vulnerability."
+    },
+    {
+      "signature": "<com.cronutils.descriptor.CronDescriptor: java.lang.String describeYear(java.util.Map)>",
+      "tainted_params": [],
+      "why": "CronDescriptor.describeYear() generates a human-readable description. Similar to other describe methods, if the input map contains attacker-controlled strings that are interpolated, this could be a vulnerability."
+    },
+    {
+      "signature": "<com.cronutils.model.field.constraint.FieldConstraints: java.lang.Integer getStringMappingValue(java.lang.String)>",
+      "tainted_params": [
+        0
+      ],
+      "why": "FieldConstraints.getStringMappingValue() retrieves a value from a mapping based on a string key. If the string is attacker-controlled and used in a way that affects code execution, this could be a vulnerability."
+    },
+    {
+      "signature": "<com.cronutils.model.field.expression.Weekdays: com.cronutils.model.field.expression.Weekdays valueOf(java.lang.String)>",
+      "tainted_params": [
+        0
+      ],
+      "why": "Weekdays.valueOf() converts a string to an enum. It's a parsing entry point for attacker-controlled strings."
+    },
+    {
+      "signature": "<com.cronutils.model.field.expression.FieldExpressionFactory: com.cronutils.model.field.expression.FieldExpression and(java.util.List)>",
+      "tainted_params": [
+        0
+      ],
+      "why": "FieldExpressionFactory.and() creates a field expression from a list. If the list contains attacker-controlled strings that are evaluated, this could be a vulnerability."
+    },
+    {
+      "signature": "<com.cronutils.utils.StringUtils: boolean containsAny(java.lang.CharSequence,char[])>",
+      "tainted_params": [
+        0
+      ],
+      "why": "StringUtils.containsAny() checks if a string contains any of the characters. While typically safe, if the string is attacker-controlled and used in a way that affects code execution, this could be a vulnerability."
+    },
+    {
+      "signature": "<com.cronutils.utils.StringUtils: boolean isEmpty(java.lang.CharSequence)>",
+      "tainted_params": [
+        0
+      ],
+      "why": "StringUtils.isEmpty() checks if a string is empty. While typically safe, if the string is attacker-controlled and used in a way that affects code execution, this could be a vulnerability."
+    },
+    {
+      "signature": "<com.cronutils.utils.StringUtils: boolean isNumeric(java.lang.CharSequence)>",
+      "tainted_params": [
+        0
+      ],
+      "why": "StringUtils.isNumeric() checks if a string is numeric. While typically safe, if the string is attacker-controlled and used in a way that affects code execution, this could be a vulnerability."
+    },
+    {
+      "signature": "<com.cronutils.utils.StringUtils: java.lang.String join(java.lang.Object[],java.lang.String)>",
+      "tainted_params": [
+        0
+      ],
+      "why": "StringUtils.join() joins an array of objects into a string. If the array contains attacker-controlled strings that are evaluated, this could be a vulnerability."
+    },
+    {
+      "signature": "<com.cronutils.utils.DateUtils: int workdaysCount(java.time.ZonedDateTime,int,java.util.List,com.cronutils.utils.WeekendPolicy)>",
+      "tainted_params": [
+        2
+      ],
+      "why": "DateUtils.workdaysCount() calculates the number of workdays. If the list contains attacker-controlled strings that are evaluated, this could be a vulnerability."
+    },
+    {
+      "signature": "<com.cronutils.utils.DateUtils: int workdaysCount(java.time.ZonedDateTime,java.time.ZonedDateTime,java.util.List,com.cronutils.utils.WeekendPolicy)>",
+      "tainted_params": [
+        2
+      ],
+      "why": "DateUtils.workdaysCount() calculates the number of workdays. If the list contains attacker-controlled strings that are evaluated, this could be a vulnerability."
+    },
+    {
+      "signature": "<com.cronutils.utils.Preconditions: java.lang.Object checkNotNull(java.lang.Object,java.lang.Object)>",
+      "tainted_params": [
+        0
+      ],
+      "why": "Preconditions.checkNotNull() checks if an object is not null. While typically safe, if the object is attacker-controlled and used in a way that affects code execution, this could be a vulnerability."
+    },
+    {
+      "signature": "<com.cronutils.utils.Preconditions: java.lang.String checkNotNullNorEmpty(java.lang.String,java.lang.Object)>",
+      "tainted_params": [
+        0
+      ],
+      "why": "Preconditions.checkNotNullNorEmpty() checks if a string is not null or empty. While typically safe, if the string is attacker-controlled and used in a way that affects code execution, this could be a vulnerability."
+    },
+    {
+      "signature": "<com.cronutils.utils.Preconditions: java.util.Collection checkNotNullNorEmpty(java.util.Collection,java.lang.Object)>",
+      "tainted_params": [
+        0
+      ],
+      "why": "Preconditions.checkNotNullNorEmpty() checks if a collection is not null or empty. While typically safe, if the collection contains attacker-controlled strings that are evaluated, this could be a vulnerability."
+    },
+    {
+      "signature": "<com.cronutils.utils.Preconditions: void checkArgument(boolean,java.lang.Object)>",
+      "tainted_params": [
+        1
+      ],
+      "why": "Preconditions.checkArgument() checks a boolean argument. If the error message (second parameter) is attacker-controlled and used in a way that affects code execution, this could be a vulnerability."
+    },
+    {
+      "signature": "<com.cronutils.utils.Preconditions: void checkArgument(boolean,java.lang.String,java.lang.Object[])>",
+      "tainted_params": [
+        1,
+        2
+      ],
+      "why": "Preconditions.checkArgument() checks a boolean argument. If the error message or arguments (second and third parameters) are attacker-controlled and used in a way that affects code execution, this could be a vulnerability."
+    },
+    {
+      "signature": "<com.cronutils.utils.Preconditions: void checkPositive(int,java.lang.Object)>",
+      "tainted_params": [
+        1
+      ],
+      "why": "Preconditions.checkPositive() checks if an integer is positive. If the error message (second parameter) is attacker-controlled and used in a way that affects code execution, this could be a vulnerability."
+    },
+    {
+      "signature": "<com.cronutils.utils.Preconditions: void checkState(boolean,java.lang.String,java.lang.Object[])>",
+      "tainted_params": [
+        1,
+        2
+      ],
+      "why": "Preconditions.checkState() checks a boolean state. If the error message or arguments (second and third parameters) are attacker-controlled and used in a way that affects code execution, this could be a vulnerability."
+    },
+    {
+      "signature": "<com.cronutils.utils.Preconditions: java.lang.Object checkNotNull(java.lang.Object)>",
+      "tainted_params": [
+        0
+      ],
+      "why": "Preconditions.checkNotNull() checks if an object is not null. While typically safe, if the object is attacker-controlled and used in a way that affects code execution, this could be a vulnerability."
+    },
+    {
+      "signature": "<com.cronutils.StringValidations: java.lang.String removeValidChars(java.lang.String)>",
+      "tainted_params": [
+        0
+      ],
+      "why": "StringValidations.removeValidChars() removes valid characters from a string. If the string is attacker-controlled and used in a way that affects code execution, this could be a vulnerability."
+    }
+  ],
+  "prompt_version": "3914024e"
+}

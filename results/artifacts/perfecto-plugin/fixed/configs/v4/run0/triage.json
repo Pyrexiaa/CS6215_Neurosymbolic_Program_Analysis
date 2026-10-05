@@ -1,0 +1,92 @@
+{
+  "prompt_version": "e5fc00c6",
+  "decisions": [
+    {
+      "flow_id": "24db402138",
+      "flow_key": "DRIVER => <io.plugins.perfecto.PerfectoBuildWrapper: hudson.tasks.CommandInterpreter getCommandInterpreter(hudson.Launcher,java.lang.String)>@L254/0",
+      "verdict": "vulnerable",
+      "reason": "exploitable",
+      "kept": true,
+      "v3_ok": null,
+      "v3_problems": [],
+      "evidence": [
+        {
+          "file": "io/plugins/perfecto/PerfectoBuildWrapper.java",
+          "line": 288,
+          "note": "setPerfectoConnectLocation accepts user-controlled input without validation"
+        },
+        {
+          "file": "io/plugins/perfecto/PerfectoBuildWrapper.java",
+          "line": 172,
+          "note": "perfectoConnectLocation is used in string concatenation to form a command"
+        },
+        {
+          "file": "io/plugins/perfecto/PerfectoBuildWrapper.java",
+          "line": 177,
+          "note": "baseCommand is constructed by concatenating the tainted location with shell arguments"
+        },
+        {
+          "file": "io/plugins/perfecto/PerfectoBuildWrapper.java",
+          "line": 181,
+          "note": "The constructed script is passed to getCommandInterpreter"
+        },
+        {
+          "file": "io/plugins/perfecto/PerfectoBuildWrapper.java",
+          "line": 254,
+          "note": "Shell constructor is invoked with the tainted script, leading to OS command execution"
+        }
+      ],
+      "explanation": "The `perfectoConnectLocation` field is set via `setPerfectoConnectLocation` (line 288), which is a standard setter likely populated from Jenkins configuration (attacker-controlled if the attacker has admin/configure permissions). This value is concatenated directly into a shell command string at line 177 without sanitization or escaping. The resulting command is passed to `new Shell(script)` at line 254, which executes the command via the OS shell, constituting a clear OS Command Injection vulnerability.",
+      "samples": [
+        "vulnerable"
+      ],
+      "methods_shown": [
+        "<io.plugins.perfecto.PerfectoBuildWrapper: hudson.tasks.BuildWrapper$Environment setUp(hudson.model.AbstractBuild,hudson.Launcher,hudson.model.BuildListener)>",
+        "<io.plugins.perfecto.PerfectoBuildWrapper: hudson.tasks.CommandInterpreter getCommandInterpreter(hudson.Launcher,java.lang.String)>",
+        "<io.plugins.perfecto.PerfectoBuildWrapper: void setPerfectoConnectLocation(java.lang.String)>"
+      ],
+      "override": ""
+    },
+    {
+      "flow_id": "f88d0d638a",
+      "flow_key": "DRIVER => <io.plugins.perfecto.PerfectoBuildWrapper: hudson.tasks.CommandInterpreter getCommandInterpreter(hudson.Launcher,java.lang.String)>@L256/0",
+      "verdict": "vulnerable",
+      "reason": "exploitable",
+      "kept": true,
+      "v3_ok": null,
+      "v3_problems": [],
+      "evidence": [
+        {
+          "file": "io/plugins/perfecto/PerfectoBuildWrapper.java",
+          "line": 172,
+          "note": "Input validation only checks for trailing slashes/backslashes, not command injection characters."
+        },
+        {
+          "file": "io/plugins/perfecto/PerfectoBuildWrapper.java",
+          "line": 177,
+          "note": "Tainted input (perfectoConnectLocation) is concatenated directly into a shell command string."
+        },
+        {
+          "file": "io/plugins/perfecto/PerfectoBuildWrapper.java",
+          "line": 181,
+          "note": "The constructed command string is passed to getCommandInterpreter."
+        },
+        {
+          "file": "io/plugins/perfecto/PerfectoBuildWrapper.java",
+          "line": 254,
+          "note": "Sink: Shell(script) is instantiated, which executes the script via the OS shell."
+        }
+      ],
+      "explanation": "The attacker-controlled input `perfectoConnectLocation` is concatenated directly into a shell command string at line 177 without sanitization or escaping. This tainted string is passed to `Shell` or `BatchFile` constructors at lines 254-256, which execute the command via the operating system shell, allowing for OS command injection.",
+      "samples": [
+        "vulnerable"
+      ],
+      "methods_shown": [
+        "<io.plugins.perfecto.PerfectoBuildWrapper: void setPerfectoConnectLocation(java.lang.String)>",
+        "<io.plugins.perfecto.PerfectoBuildWrapper: hudson.tasks.BuildWrapper$Environment setUp(hudson.model.AbstractBuild,hudson.Launcher,hudson.model.BuildListener)>",
+        "<io.plugins.perfecto.PerfectoBuildWrapper: hudson.tasks.CommandInterpreter getCommandInterpreter(hudson.Launcher,java.lang.String)>"
+      ],
+      "override": ""
+    }
+  ]
+}

@@ -1,0 +1,2473 @@
+{
+  "subject": "zt-zip",
+  "slug": "zeroturnaround__zt-zip_CVE-2018-1002201_1.12",
+  "cve": "CVE-2018-1002201",
+  "cwe": "CWE-022",
+  "version": "fixed",
+  "config": "v3",
+  "run": 1,
+  "config_def": {
+    "driver": "llm",
+    "spec": [
+      "base",
+      "llm"
+    ],
+    "triage": true
+  },
+  "model": "default",
+  "served_models": [
+    "qwen3.6:35b"
+  ],
+  "prompt_versions": {
+    "n1_driver": "3914024e",
+    "n1_repair": "0393a228",
+    "n2_spec": "647ee643",
+    "n3_triage": "e5fc00c6"
+  },
+  "taie_settings": {
+    "jar": "/Users/jiayulim/Documents/GitHub/CS6215_Neurosymbolic_Program_Analysis/tools/tai-e-all-0.5.4.jar",
+    "java_bin": "/Library/Java/JavaVirtualMachines/jdk-17.jdk/Contents/Home/bin/java",
+    "jre_version": "8",
+    "home": "/Users/jiayulim/Documents/GitHub/CS6215_Neurosymbolic_Program_Analysis/work/taie-home",
+    "cs": "1-call",
+    "only_app": "False",
+    "time_limit_s": "1800",
+    "wall_timeout_s": "3600",
+    "xmx": "6g",
+    "extra_pta_options": "{}"
+  },
+  "facts": {
+    "app_classes": 85,
+    "app_methods": 527,
+    "external_apis": 196,
+    "external_apis_jdk": 187,
+    "entry_candidates": 177,
+    "entry_kinds": {
+      "library-api": 177
+    }
+  },
+  "subject_stats": {
+    "java_files": 47,
+    "non_blank_loc": 8551,
+    "dependency_jars": 5,
+    "modules_analysed": 1
+  },
+  "gt_methods": [
+    "Unpacker.process",
+    "Unwraper.getRootName",
+    "Unwraper.process"
+  ],
+  "driver": {
+    "kind": "llm",
+    "ok": true,
+    "entries": 38,
+    "attempts": 1,
+    "removed_entries": 0,
+    "app_calls": 39,
+    "taint_calls": 49,
+    "errors": 0,
+    "entry_mismatches": 0
+  },
+  "spec": {
+    "candidates": 171,
+    "batches": 7,
+    "samples": 3,
+    "accepted": 41,
+    "accepted_by_role": {
+      "sink": 11,
+      "transfer": 27,
+      "source": 3
+    },
+    "rejected": 4,
+    "rejected_by_reason": {
+      "arg-out-of-range": 1,
+      "transfer-to-primitive": 1,
+      "primitive-type": 2
+    },
+    "extra_signatures": 0,
+    "parse_failures": 0,
+    "mean_vote_agreement": 0.899,
+    "validators": true,
+    "vote_version": 2
+  },
+  "manual_spec_entries": null,
+  "taie": {
+    "ok": true,
+    "returncode": 0,
+    "elapsed_s": 10.97,
+    "timed_out": false,
+    "detected_raw": 4368,
+    "reachable_methods": 10611,
+    "out_dir": "/Users/jiayulim/Documents/GitHub/CS6215_Neurosymbolic_Program_Analysis/work/runs/zt-zip/fixed/taie/6a8e4af8b9fc9e15",
+    "error": "",
+    "invalid_spec_entries": [],
+    "expected_failure": false
+  },
+  "counts": {
+    "raw": 4368,
+    "filtered": 115,
+    "reported": 34,
+    "reported_gt": 0,
+    "reported_gt_weak": 0,
+    "removed_by_triage": 81,
+    "removed_gt_by_triage": 46,
+    "v3_rejected": 0,
+    "trusted_sink_overrides": 0
+  },
+  "detected": false,
+  "usage": {
+    "N1": {
+      "calls": 1,
+      "cached_calls": 0,
+      "prompt_tokens": 3480,
+      "completion_tokens": 4639,
+      "fresh_prompt_tokens": 3480,
+      "fresh_completion_tokens": 4639,
+      "latency_s": 32.811,
+      "truncated": 0
+    },
+    "N2": {
+      "calls": 21,
+      "cached_calls": 21,
+      "prompt_tokens": 49761,
+      "completion_tokens": 44833,
+      "fresh_prompt_tokens": 0,
+      "fresh_completion_tokens": 0,
+      "latency_s": 0.0,
+      "truncated": 1
+    },
+    "N3": {
+      "calls": 115,
+      "cached_calls": 115,
+      "prompt_tokens": 260346,
+      "completion_tokens": 35066,
+      "fresh_prompt_tokens": 0,
+      "fresh_completion_tokens": 0,
+      "latency_s": 0.0,
+      "truncated": 0
+    },
+    "total": {
+      "calls": 137,
+      "cached_calls": 136,
+      "prompt_tokens": 313587,
+      "completion_tokens": 84538,
+      "fresh_prompt_tokens": 3480,
+      "fresh_completion_tokens": 4639,
+      "latency_s": 32.811,
+      "truncated": 1
+    }
+  },
+  "timings": {
+    "facts_s": 2.69,
+    "driver_s": 0.0,
+    "spec_s": 0.0,
+    "taie_s": 0.07,
+    "triage_s": 0.07,
+    "total_s": 2.87
+  },
+  "flows": [
+    {
+      "id": "a8c7b6df31",
+      "key": "DRIVER => <org.zeroturnaround.zip.ZipUtil: void pack(java.io.File,java.util.zip.ZipOutputStream,org.zeroturnaround.zip.NameMapper,java.lang.String,boolean)>@L1766/1",
+      "source": "<nesy.NesyDriver: void main(java.lang.String[])>[5@L11] %v4 = invokestatic nesy.Taint.src()/result",
+      "sink": "<org.zeroturnaround.zip.ZipUtil: void pack(java.io.File,java.util.zip.ZipOutputStream,org.zeroturnaround.zip.NameMapper,java.lang.String,boolean)>[47@L1766] invokespecial file.<init>(dir, filename)/1",
+      "sink_method": "<org.zeroturnaround.zip.ZipUtil: void pack(java.io.File,java.util.zip.ZipOutputStream,org.zeroturnaround.zip.NameMapper,java.lang.String,boolean)>",
+      "sink_line": 1766,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": {
+        "verdict": "uncertain",
+        "reason": "insufficient_context",
+        "kept": true,
+        "v3_ok": null,
+        "v3_problems": [],
+        "override": ""
+      }
+    },
+    {
+      "id": "b973b588fa",
+      "key": "DRIVER => <org.zeroturnaround.zip.ZipUtil$BackslashUnpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>@L1223/1",
+      "source": "<nesy.NesyDriver: void main(java.lang.String[])>[5@L11] %v4 = invokestatic nesy.Taint.src()/result",
+      "sink": "<org.zeroturnaround.zip.ZipUtil$BackslashUnpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>[19@L1223] invokespecial file.<init>(parentDirectory, %v22)/1",
+      "sink_method": "<org.zeroturnaround.zip.ZipUtil$BackslashUnpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>",
+      "sink_line": 1223,
+      "gt": [],
+      "gt_weak": [],
+      "reported": false,
+      "triage": {
+        "verdict": "not_vulnerable",
+        "reason": "sanitized",
+        "kept": false,
+        "v3_ok": true,
+        "v3_problems": [],
+        "override": ""
+      }
+    },
+    {
+      "id": "eb94569cba",
+      "key": "DRIVER => <org.zeroturnaround.zip.ZipUtil$BackslashUnpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>@L1229/1",
+      "source": "<nesy.NesyDriver: void main(java.lang.String[])>[5@L11] %v4 = invokestatic nesy.Taint.src()/result",
+      "sink": "<org.zeroturnaround.zip.ZipUtil$BackslashUnpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>[30@L1229] invokespecial destFile.<init>(parentDirectory, %v27)/1",
+      "sink_method": "<org.zeroturnaround.zip.ZipUtil$BackslashUnpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>",
+      "sink_line": 1229,
+      "gt": [],
+      "gt_weak": [],
+      "reported": false,
+      "triage": {
+        "verdict": "not_vulnerable",
+        "reason": "sanitized",
+        "kept": false,
+        "v3_ok": true,
+        "v3_problems": [],
+        "override": ""
+      }
+    },
+    {
+      "id": "2917a7373e",
+      "key": "DRIVER => <org.zeroturnaround.zip.ZipUtil$Unpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>@L1152/1",
+      "source": "<nesy.NesyDriver: void main(java.lang.String[])>[5@L11] %v4 = invokestatic nesy.Taint.src()/result",
+      "sink": "<org.zeroturnaround.zip.ZipUtil$Unpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>[8@L1152] invokespecial file.<init>(%v11, name)/1",
+      "sink_method": "<org.zeroturnaround.zip.ZipUtil$Unpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>",
+      "sink_line": 1152,
+      "gt": [
+        "Unpacker.process"
+      ],
+      "gt_weak": [],
+      "reported": false,
+      "triage": {
+        "verdict": "not_vulnerable",
+        "reason": "sanitized",
+        "kept": false,
+        "v3_ok": true,
+        "v3_problems": [],
+        "override": ""
+      }
+    },
+    {
+      "id": "e1f2b23f19",
+      "key": "DRIVER => <org.zeroturnaround.zip.ZipUtil$Unwraper: void process(java.io.InputStream,java.util.zip.ZipEntry)>@L1287/1",
+      "source": "<nesy.NesyDriver: void main(java.lang.String[])>[5@L11] %v4 = invokestatic nesy.Taint.src()/result",
+      "sink": "<org.zeroturnaround.zip.ZipUtil$Unwraper: void process(java.io.InputStream,java.util.zip.ZipEntry)>[31@L1287] invokespecial file.<init>(%v28, name)/1",
+      "sink_method": "<org.zeroturnaround.zip.ZipUtil$Unwraper: void process(java.io.InputStream,java.util.zip.ZipEntry)>",
+      "sink_line": 1287,
+      "gt": [
+        "Unwraper.process"
+      ],
+      "gt_weak": [],
+      "reported": false,
+      "triage": {
+        "verdict": "not_vulnerable",
+        "reason": "sanitized",
+        "kept": false,
+        "v3_ok": true,
+        "v3_problems": [],
+        "override": ""
+      }
+    },
+    {
+      "id": "dacfa30b19",
+      "key": "DRIVER => <org.zeroturnaround.zip.commons.FileUtils: java.io.File getTempFileFor(java.io.File)>@L75/1",
+      "source": "<nesy.NesyDriver: void main(java.lang.String[])>[5@L11] %v4 = invokestatic nesy.Taint.src()/result",
+      "sink": "<org.zeroturnaround.zip.commons.FileUtils: java.io.File getTempFileFor(java.io.File)>[15@L75] invokespecial result.<init>(parent, %v16)/1",
+      "sink_method": "<org.zeroturnaround.zip.commons.FileUtils: java.io.File getTempFileFor(java.io.File)>",
+      "sink_line": 75,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": {
+        "verdict": "uncertain",
+        "reason": "insufficient_context",
+        "kept": true,
+        "v3_ok": null,
+        "v3_problems": [],
+        "override": ""
+      }
+    },
+    {
+      "id": "1f1b4f8346",
+      "key": "DRIVER => <org.zeroturnaround.zip.commons.FileUtilsV2_2: boolean isSymlink(java.io.File)>@L1081/1",
+      "source": "<nesy.NesyDriver: void main(java.lang.String[])>[5@L11] %v4 = invokestatic nesy.Taint.src()/result",
+      "sink": "<org.zeroturnaround.zip.commons.FileUtilsV2_2: boolean isSymlink(java.io.File)>[18@L1081] invokespecial %v11.<init>(canonicalDir, %v12)/1",
+      "sink_method": "<org.zeroturnaround.zip.commons.FileUtilsV2_2: boolean isSymlink(java.io.File)>",
+      "sink_line": 1081,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": {
+        "verdict": "uncertain",
+        "reason": "insufficient_context",
+        "kept": true,
+        "v3_ok": null,
+        "v3_problems": [],
+        "override": ""
+      }
+    },
+    {
+      "id": "6db049dc40",
+      "key": "DRIVER => <org.zeroturnaround.zip.commons.FileUtilsV2_2: void copyFile(java.io.File,java.io.File,boolean)>@L399/base",
+      "source": "<nesy.NesyDriver: void main(java.lang.String[])>[182@L74] %v116 = invokestatic nesy.Taint.srcFile()/result",
+      "sink": "<org.zeroturnaround.zip.commons.FileUtilsV2_2: void copyFile(java.io.File,java.io.File,boolean)>[57@L399] %v43 = invokevirtual parentFile.mkdirs()/base",
+      "sink_method": "<org.zeroturnaround.zip.commons.FileUtilsV2_2: void copyFile(java.io.File,java.io.File,boolean)>",
+      "sink_line": 399,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": {
+        "verdict": "uncertain",
+        "reason": "insufficient_context",
+        "kept": true,
+        "v3_ok": null,
+        "v3_problems": [],
+        "override": ""
+      }
+    },
+    {
+      "id": "8f0aad4f9e",
+      "key": "DRIVER => <org.zeroturnaround.zip.commons.FileUtilsV2_2: void doCopyFile(java.io.File,java.io.File,boolean)>@L428/0",
+      "source": "<nesy.NesyDriver: void main(java.lang.String[])>[182@L74] %v116 = invokestatic nesy.Taint.srcFile()/result",
+      "sink": "<org.zeroturnaround.zip.commons.FileUtilsV2_2: void doCopyFile(java.io.File,java.io.File,boolean)>[24@L428] invokespecial %v26.<init>(destFile)/0",
+      "sink_method": "<org.zeroturnaround.zip.commons.FileUtilsV2_2: void doCopyFile(java.io.File,java.io.File,boolean)>",
+      "sink_line": 428,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": {
+        "verdict": "uncertain",
+        "reason": "insufficient_context",
+        "kept": true,
+        "v3_ok": null,
+        "v3_problems": [],
+        "override": ""
+      }
+    },
+    {
+      "id": "08beb1afcb",
+      "key": "DRIVER => <org.zeroturnaround.zip.commons.FileUtilsV2_2: void moveFile(java.io.File,java.io.File)>@L1044/0",
+      "source": "<nesy.NesyDriver: void main(java.lang.String[])>[182@L74] %v116 = invokestatic nesy.Taint.srcFile()/result",
+      "sink": "<org.zeroturnaround.zip.commons.FileUtilsV2_2: void moveFile(java.io.File,java.io.File)>[63@L1044] rename = invokevirtual srcFile.renameTo(destFile)/0",
+      "sink_method": "<org.zeroturnaround.zip.commons.FileUtilsV2_2: void moveFile(java.io.File,java.io.File)>",
+      "sink_line": 1044,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": {
+        "verdict": "uncertain",
+        "reason": "insufficient_context",
+        "kept": true,
+        "v3_ok": null,
+        "v3_problems": [],
+        "override": ""
+      }
+    },
+    {
+      "id": "8657db68eb",
+      "key": "DRIVER => <org.zeroturnaround.zip.commons.FileUtilsV2_2: boolean isSymlink(java.io.File)>@L1081/0",
+      "source": "<nesy.NesyDriver: void main(java.lang.String[])>[182@L74] %v116 = invokestatic nesy.Taint.srcFile()/result",
+      "sink": "<org.zeroturnaround.zip.commons.FileUtilsV2_2: boolean isSymlink(java.io.File)>[18@L1081] invokespecial %v11.<init>(canonicalDir, %v12)/0",
+      "sink_method": "<org.zeroturnaround.zip.commons.FileUtilsV2_2: boolean isSymlink(java.io.File)>",
+      "sink_line": 1081,
+      "gt": [],
+      "gt_weak": [],
+      "reported": false,
+      "triage": {
+        "verdict": "not_vulnerable",
+        "reason": "not_dangerous_sink",
+        "kept": false,
+        "v3_ok": true,
+        "v3_problems": [],
+        "override": ""
+      }
+    },
+    {
+      "id": "739dd783a9",
+      "key": "DRIVER => <org.zeroturnaround.zip.ZipUtil$Unpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>@L1152/0",
+      "source": "<nesy.NesyDriver: void main(java.lang.String[])>[187@L77] %v119 = invokestatic nesy.Taint.srcFile()/result",
+      "sink": "<org.zeroturnaround.zip.ZipUtil$Unpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>[8@L1152] invokespecial file.<init>(%v11, name)/0",
+      "sink_method": "<org.zeroturnaround.zip.ZipUtil$Unpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>",
+      "sink_line": 1152,
+      "gt": [
+        "Unpacker.process"
+      ],
+      "gt_weak": [],
+      "reported": false,
+      "triage": {
+        "verdict": "not_vulnerable",
+        "reason": "sanitized",
+        "kept": false,
+        "v3_ok": true,
+        "v3_problems": [],
+        "override": ""
+      }
+    },
+    {
+      "id": "d47709ce50",
+      "key": "DRIVER => <org.zeroturnaround.zip.commons.FileUtils: java.io.File getTempFileFor(java.io.File)>@L75/0",
+      "source": "<nesy.NesyDriver: void main(java.lang.String[])>[187@L77] %v119 = invokestatic nesy.Taint.srcFile()/result",
+      "sink": "<org.zeroturnaround.zip.commons.FileUtils: java.io.File getTempFileFor(java.io.File)>[15@L75] invokespecial result.<init>(parent, %v16)/0",
+      "sink_method": "<org.zeroturnaround.zip.commons.FileUtils: java.io.File getTempFileFor(java.io.File)>",
+      "sink_line": 75,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": {
+        "verdict": "uncertain",
+        "reason": "insufficient_context",
+        "kept": true,
+        "v3_ok": null,
+        "v3_problems": [],
+        "override": ""
+      }
+    },
+    {
+      "id": "2831a93046",
+      "key": "DRIVER => <org.zeroturnaround.zip.commons.FileUtilsV2_2: void doCopyFile(java.io.File,java.io.File,boolean)>@L427/0",
+      "source": "<nesy.NesyDriver: void main(java.lang.String[])>[187@L77] %v119 = invokestatic nesy.Taint.srcFile()/result",
+      "sink": "<org.zeroturnaround.zip.commons.FileUtilsV2_2: void doCopyFile(java.io.File,java.io.File,boolean)>[21@L427] invokespecial %v25.<init>(srcFile)/0",
+      "sink_method": "<org.zeroturnaround.zip.commons.FileUtilsV2_2: void doCopyFile(java.io.File,java.io.File,boolean)>",
+      "sink_line": 427,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": {
+        "verdict": "uncertain",
+        "reason": "insufficient_context",
+        "kept": true,
+        "v3_ok": null,
+        "v3_problems": [],
+        "override": ""
+      }
+    },
+    {
+      "id": "9cc4332244",
+      "key": "DRIVER => <org.zeroturnaround.zip.commons.FileUtilsV2_2: void moveFile(java.io.File,java.io.File)>@L1044/base",
+      "source": "<nesy.NesyDriver: void main(java.lang.String[])>[187@L77] %v119 = invokestatic nesy.Taint.srcFile()/result",
+      "sink": "<org.zeroturnaround.zip.commons.FileUtilsV2_2: void moveFile(java.io.File,java.io.File)>[63@L1044] rename = invokevirtual srcFile.renameTo(destFile)/base",
+      "sink_method": "<org.zeroturnaround.zip.commons.FileUtilsV2_2: void moveFile(java.io.File,java.io.File)>",
+      "sink_line": 1044,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": {
+        "verdict": "uncertain",
+        "reason": "insufficient_context",
+        "kept": true,
+        "v3_ok": null,
+        "v3_problems": [],
+        "override": ""
+      }
+    },
+    {
+      "id": "1da6f1afff",
+      "key": "DRIVER => <org.zeroturnaround.zip.ZipUtil: void pack(java.io.File,java.util.zip.ZipOutputStream,org.zeroturnaround.zip.NameMapper,java.lang.String,boolean)>@L1766/0",
+      "source": "<nesy.NesyDriver: void main(java.lang.String[])>[191@L80] %v121 = invokestatic nesy.Taint.srcFile()/result",
+      "sink": "<org.zeroturnaround.zip.ZipUtil: void pack(java.io.File,java.util.zip.ZipOutputStream,org.zeroturnaround.zip.NameMapper,java.lang.String,boolean)>[47@L1766] invokespecial file.<init>(dir, filename)/0",
+      "sink_method": "<org.zeroturnaround.zip.ZipUtil: void pack(java.io.File,java.util.zip.ZipOutputStream,org.zeroturnaround.zip.NameMapper,java.lang.String,boolean)>",
+      "sink_line": 1766,
+      "gt": [],
+      "gt_weak": [],
+      "reported": false,
+      "triage": {
+        "verdict": "not_vulnerable",
+        "reason": "not_dangerous_sink",
+        "kept": false,
+        "v3_ok": true,
+        "v3_problems": [],
+        "override": ""
+      }
+    },
+    {
+      "id": "b38512e59c",
+      "key": "<org.apache.log4j.Category: void removeAllAppenders()>@L889/result => <org.zeroturnaround.zip.ZipUtil: void pack(java.io.File,java.util.zip.ZipOutputStream,org.zeroturnaround.zip.NameMapper,java.lang.String,boolean)>@L1766/1",
+      "source": "<org.apache.log4j.Category: void removeAllAppenders()>[10@L889] %v10 = invokeinterface iter.nextElement()/result",
+      "sink": "<org.zeroturnaround.zip.ZipUtil: void pack(java.io.File,java.util.zip.ZipOutputStream,org.zeroturnaround.zip.NameMapper,java.lang.String,boolean)>[47@L1766] invokespecial file.<init>(dir, filename)/1",
+      "sink_method": "<org.zeroturnaround.zip.ZipUtil: void pack(java.io.File,java.util.zip.ZipOutputStream,org.zeroturnaround.zip.NameMapper,java.lang.String,boolean)>",
+      "sink_line": 1766,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": {
+        "verdict": "uncertain",
+        "reason": "insufficient_context",
+        "kept": true,
+        "v3_ok": null,
+        "v3_problems": [],
+        "override": ""
+      }
+    },
+    {
+      "id": "79a752de4c",
+      "key": "<org.apache.log4j.Category: void removeAllAppenders()>@L889/result => <org.zeroturnaround.zip.ZipUtil$BackslashUnpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>@L1223/1",
+      "source": "<org.apache.log4j.Category: void removeAllAppenders()>[10@L889] %v10 = invokeinterface iter.nextElement()/result",
+      "sink": "<org.zeroturnaround.zip.ZipUtil$BackslashUnpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>[19@L1223] invokespecial file.<init>(parentDirectory, %v22)/1",
+      "sink_method": "<org.zeroturnaround.zip.ZipUtil$BackslashUnpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>",
+      "sink_line": 1223,
+      "gt": [],
+      "gt_weak": [],
+      "reported": false,
+      "triage": {
+        "verdict": "not_vulnerable",
+        "reason": "sanitized",
+        "kept": false,
+        "v3_ok": true,
+        "v3_problems": [],
+        "override": ""
+      }
+    },
+    {
+      "id": "a99f450c43",
+      "key": "<org.apache.log4j.Category: void removeAllAppenders()>@L889/result => <org.zeroturnaround.zip.ZipUtil$BackslashUnpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>@L1229/1",
+      "source": "<org.apache.log4j.Category: void removeAllAppenders()>[10@L889] %v10 = invokeinterface iter.nextElement()/result",
+      "sink": "<org.zeroturnaround.zip.ZipUtil$BackslashUnpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>[30@L1229] invokespecial destFile.<init>(parentDirectory, %v27)/1",
+      "sink_method": "<org.zeroturnaround.zip.ZipUtil$BackslashUnpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>",
+      "sink_line": 1229,
+      "gt": [],
+      "gt_weak": [],
+      "reported": false,
+      "triage": {
+        "verdict": "not_vulnerable",
+        "reason": "sanitized",
+        "kept": false,
+        "v3_ok": true,
+        "v3_problems": [],
+        "override": ""
+      }
+    },
+    {
+      "id": "af7381f997",
+      "key": "<org.apache.log4j.Category: void removeAllAppenders()>@L889/result => <org.zeroturnaround.zip.ZipUtil$Unpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>@L1152/1",
+      "source": "<org.apache.log4j.Category: void removeAllAppenders()>[10@L889] %v10 = invokeinterface iter.nextElement()/result",
+      "sink": "<org.zeroturnaround.zip.ZipUtil$Unpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>[8@L1152] invokespecial file.<init>(%v11, name)/1",
+      "sink_method": "<org.zeroturnaround.zip.ZipUtil$Unpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>",
+      "sink_line": 1152,
+      "gt": [
+        "Unpacker.process"
+      ],
+      "gt_weak": [],
+      "reported": false,
+      "triage": {
+        "verdict": "not_vulnerable",
+        "reason": "sanitized",
+        "kept": false,
+        "v3_ok": true,
+        "v3_problems": [],
+        "override": ""
+      }
+    },
+    {
+      "id": "93e03ac9fa",
+      "key": "<org.apache.log4j.Category: void removeAllAppenders()>@L889/result => <org.zeroturnaround.zip.ZipUtil$Unwraper: void process(java.io.InputStream,java.util.zip.ZipEntry)>@L1287/1",
+      "source": "<org.apache.log4j.Category: void removeAllAppenders()>[10@L889] %v10 = invokeinterface iter.nextElement()/result",
+      "sink": "<org.zeroturnaround.zip.ZipUtil$Unwraper: void process(java.io.InputStream,java.util.zip.ZipEntry)>[31@L1287] invokespecial file.<init>(%v28, name)/1",
+      "sink_method": "<org.zeroturnaround.zip.ZipUtil$Unwraper: void process(java.io.InputStream,java.util.zip.ZipEntry)>",
+      "sink_line": 1287,
+      "gt": [
+        "Unwraper.process"
+      ],
+      "gt_weak": [],
+      "reported": false,
+      "triage": {
+        "verdict": "not_vulnerable",
+        "reason": "sanitized",
+        "kept": false,
+        "v3_ok": true,
+        "v3_problems": [],
+        "override": ""
+      }
+    },
+    {
+      "id": "69214feb10",
+      "key": "<org.apache.log4j.Category: void removeAllAppenders()>@L889/result => <org.zeroturnaround.zip.commons.FileUtils: java.io.File getTempFileFor(java.io.File)>@L75/1",
+      "source": "<org.apache.log4j.Category: void removeAllAppenders()>[10@L889] %v10 = invokeinterface iter.nextElement()/result",
+      "sink": "<org.zeroturnaround.zip.commons.FileUtils: java.io.File getTempFileFor(java.io.File)>[15@L75] invokespecial result.<init>(parent, %v16)/1",
+      "sink_method": "<org.zeroturnaround.zip.commons.FileUtils: java.io.File getTempFileFor(java.io.File)>",
+      "sink_line": 75,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": {
+        "verdict": "uncertain",
+        "reason": "insufficient_context",
+        "kept": true,
+        "v3_ok": null,
+        "v3_problems": [],
+        "override": ""
+      }
+    },
+    {
+      "id": "d2c8e4e956",
+      "key": "<org.apache.log4j.Category: void removeAllAppenders()>@L889/result => <org.zeroturnaround.zip.commons.FileUtilsV2_2: boolean isSymlink(java.io.File)>@L1081/1",
+      "source": "<org.apache.log4j.Category: void removeAllAppenders()>[10@L889] %v10 = invokeinterface iter.nextElement()/result",
+      "sink": "<org.zeroturnaround.zip.commons.FileUtilsV2_2: boolean isSymlink(java.io.File)>[18@L1081] invokespecial %v11.<init>(canonicalDir, %v12)/1",
+      "sink_method": "<org.zeroturnaround.zip.commons.FileUtilsV2_2: boolean isSymlink(java.io.File)>",
+      "sink_line": 1081,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": {
+        "verdict": "uncertain",
+        "reason": "insufficient_context",
+        "kept": true,
+        "v3_ok": null,
+        "v3_problems": [],
+        "override": ""
+      }
+    },
+    {
+      "id": "8be2ab12c4",
+      "key": "<org.apache.log4j.Hierarchy: java.util.Enumeration getCurrentLoggers()>@L313/result => <org.zeroturnaround.zip.ZipUtil: void pack(java.io.File,java.util.zip.ZipOutputStream,org.zeroturnaround.zip.NameMapper,java.lang.String,boolean)>@L1766/1",
+      "source": "<org.apache.log4j.Hierarchy: java.util.Enumeration getCurrentLoggers()>[9@L313] o = invokeinterface elems.nextElement()/result",
+      "sink": "<org.zeroturnaround.zip.ZipUtil: void pack(java.io.File,java.util.zip.ZipOutputStream,org.zeroturnaround.zip.NameMapper,java.lang.String,boolean)>[47@L1766] invokespecial file.<init>(dir, filename)/1",
+      "sink_method": "<org.zeroturnaround.zip.ZipUtil: void pack(java.io.File,java.util.zip.ZipOutputStream,org.zeroturnaround.zip.NameMapper,java.lang.String,boolean)>",
+      "sink_line": 1766,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": {
+        "verdict": "uncertain",
+        "reason": "insufficient_context",
+        "kept": true,
+        "v3_ok": null,
+        "v3_problems": [],
+        "override": ""
+      }
+    },
+    {
+      "id": "218d2074fc",
+      "key": "<org.apache.log4j.Hierarchy: java.util.Enumeration getCurrentLoggers()>@L313/result => <org.zeroturnaround.zip.ZipUtil$BackslashUnpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>@L1223/1",
+      "source": "<org.apache.log4j.Hierarchy: java.util.Enumeration getCurrentLoggers()>[9@L313] o = invokeinterface elems.nextElement()/result",
+      "sink": "<org.zeroturnaround.zip.ZipUtil$BackslashUnpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>[19@L1223] invokespecial file.<init>(parentDirectory, %v22)/1",
+      "sink_method": "<org.zeroturnaround.zip.ZipUtil$BackslashUnpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>",
+      "sink_line": 1223,
+      "gt": [],
+      "gt_weak": [],
+      "reported": false,
+      "triage": {
+        "verdict": "not_vulnerable",
+        "reason": "sanitized",
+        "kept": false,
+        "v3_ok": true,
+        "v3_problems": [],
+        "override": ""
+      }
+    },
+    {
+      "id": "66c5c38d1e",
+      "key": "<org.apache.log4j.Hierarchy: java.util.Enumeration getCurrentLoggers()>@L313/result => <org.zeroturnaround.zip.ZipUtil$BackslashUnpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>@L1229/1",
+      "source": "<org.apache.log4j.Hierarchy: java.util.Enumeration getCurrentLoggers()>[9@L313] o = invokeinterface elems.nextElement()/result",
+      "sink": "<org.zeroturnaround.zip.ZipUtil$BackslashUnpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>[30@L1229] invokespecial destFile.<init>(parentDirectory, %v27)/1",
+      "sink_method": "<org.zeroturnaround.zip.ZipUtil$BackslashUnpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>",
+      "sink_line": 1229,
+      "gt": [],
+      "gt_weak": [],
+      "reported": false,
+      "triage": {
+        "verdict": "not_vulnerable",
+        "reason": "sanitized",
+        "kept": false,
+        "v3_ok": true,
+        "v3_problems": [],
+        "override": ""
+      }
+    },
+    {
+      "id": "aa2c9fd00c",
+      "key": "<org.apache.log4j.Hierarchy: java.util.Enumeration getCurrentLoggers()>@L313/result => <org.zeroturnaround.zip.ZipUtil$Unpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>@L1152/1",
+      "source": "<org.apache.log4j.Hierarchy: java.util.Enumeration getCurrentLoggers()>[9@L313] o = invokeinterface elems.nextElement()/result",
+      "sink": "<org.zeroturnaround.zip.ZipUtil$Unpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>[8@L1152] invokespecial file.<init>(%v11, name)/1",
+      "sink_method": "<org.zeroturnaround.zip.ZipUtil$Unpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>",
+      "sink_line": 1152,
+      "gt": [
+        "Unpacker.process"
+      ],
+      "gt_weak": [],
+      "reported": false,
+      "triage": {
+        "verdict": "not_vulnerable",
+        "reason": "sanitized",
+        "kept": false,
+        "v3_ok": true,
+        "v3_problems": [],
+        "override": ""
+      }
+    },
+    {
+      "id": "ace06f48d2",
+      "key": "<org.apache.log4j.Hierarchy: java.util.Enumeration getCurrentLoggers()>@L313/result => <org.zeroturnaround.zip.ZipUtil$Unwraper: void process(java.io.InputStream,java.util.zip.ZipEntry)>@L1287/1",
+      "source": "<org.apache.log4j.Hierarchy: java.util.Enumeration getCurrentLoggers()>[9@L313] o = invokeinterface elems.nextElement()/result",
+      "sink": "<org.zeroturnaround.zip.ZipUtil$Unwraper: void process(java.io.InputStream,java.util.zip.ZipEntry)>[31@L1287] invokespecial file.<init>(%v28, name)/1",
+      "sink_method": "<org.zeroturnaround.zip.ZipUtil$Unwraper: void process(java.io.InputStream,java.util.zip.ZipEntry)>",
+      "sink_line": 1287,
+      "gt": [
+        "Unwraper.process"
+      ],
+      "gt_weak": [],
+      "reported": false,
+      "triage": {
+        "verdict": "not_vulnerable",
+        "reason": "sanitized",
+        "kept": false,
+        "v3_ok": true,
+        "v3_problems": [],
+        "override": ""
+      }
+    },
+    {
+      "id": "0d099485b2",
+      "key": "<org.apache.log4j.Hierarchy: java.util.Enumeration getCurrentLoggers()>@L313/result => <org.zeroturnaround.zip.commons.FileUtils: java.io.File getTempFileFor(java.io.File)>@L75/1",
+      "source": "<org.apache.log4j.Hierarchy: java.util.Enumeration getCurrentLoggers()>[9@L313] o = invokeinterface elems.nextElement()/result",
+      "sink": "<org.zeroturnaround.zip.commons.FileUtils: java.io.File getTempFileFor(java.io.File)>[15@L75] invokespecial result.<init>(parent, %v16)/1",
+      "sink_method": "<org.zeroturnaround.zip.commons.FileUtils: java.io.File getTempFileFor(java.io.File)>",
+      "sink_line": 75,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": {
+        "verdict": "uncertain",
+        "reason": "insufficient_context",
+        "kept": true,
+        "v3_ok": null,
+        "v3_problems": [],
+        "override": ""
+      }
+    },
+    {
+      "id": "f6eb672a29",
+      "key": "<org.apache.log4j.Hierarchy: java.util.Enumeration getCurrentLoggers()>@L313/result => <org.zeroturnaround.zip.commons.FileUtilsV2_2: boolean isSymlink(java.io.File)>@L1081/1",
+      "source": "<org.apache.log4j.Hierarchy: java.util.Enumeration getCurrentLoggers()>[9@L313] o = invokeinterface elems.nextElement()/result",
+      "sink": "<org.zeroturnaround.zip.commons.FileUtilsV2_2: boolean isSymlink(java.io.File)>[18@L1081] invokespecial %v11.<init>(canonicalDir, %v12)/1",
+      "sink_method": "<org.zeroturnaround.zip.commons.FileUtilsV2_2: boolean isSymlink(java.io.File)>",
+      "sink_line": 1081,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": {
+        "verdict": "uncertain",
+        "reason": "insufficient_context",
+        "kept": true,
+        "v3_ok": null,
+        "v3_problems": [],
+        "override": ""
+      }
+    },
+    {
+      "id": "476fe4a413",
+      "key": "<org.apache.log4j.helpers.Loader: java.lang.Class loadClass(java.lang.String)>@L182/0 => <org.zeroturnaround.zip.ZipUtil: void pack(java.io.File,java.util.zip.ZipOutputStream,org.zeroturnaround.zip.NameMapper,java.lang.String,boolean)>@L1766/1",
+      "source": "<org.apache.log4j.helpers.Loader: java.lang.Class loadClass(java.lang.String)>[5@L182] %v15 = invokestatic java.lang.Class.forName(clazz)/0",
+      "sink": "<org.zeroturnaround.zip.ZipUtil: void pack(java.io.File,java.util.zip.ZipOutputStream,org.zeroturnaround.zip.NameMapper,java.lang.String,boolean)>[47@L1766] invokespecial file.<init>(dir, filename)/1",
+      "sink_method": "<org.zeroturnaround.zip.ZipUtil: void pack(java.io.File,java.util.zip.ZipOutputStream,org.zeroturnaround.zip.NameMapper,java.lang.String,boolean)>",
+      "sink_line": 1766,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": {
+        "verdict": "uncertain",
+        "reason": "insufficient_context",
+        "kept": true,
+        "v3_ok": null,
+        "v3_problems": [],
+        "override": ""
+      }
+    },
+    {
+      "id": "1eec8baf4d",
+      "key": "<org.apache.log4j.helpers.Loader: java.lang.Class loadClass(java.lang.String)>@L182/0 => <org.zeroturnaround.zip.ZipUtil$BackslashUnpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>@L1223/1",
+      "source": "<org.apache.log4j.helpers.Loader: java.lang.Class loadClass(java.lang.String)>[5@L182] %v15 = invokestatic java.lang.Class.forName(clazz)/0",
+      "sink": "<org.zeroturnaround.zip.ZipUtil$BackslashUnpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>[19@L1223] invokespecial file.<init>(parentDirectory, %v22)/1",
+      "sink_method": "<org.zeroturnaround.zip.ZipUtil$BackslashUnpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>",
+      "sink_line": 1223,
+      "gt": [],
+      "gt_weak": [],
+      "reported": false,
+      "triage": {
+        "verdict": "not_vulnerable",
+        "reason": "sanitized",
+        "kept": false,
+        "v3_ok": true,
+        "v3_problems": [],
+        "override": ""
+      }
+    },
+    {
+      "id": "5f6bed41ca",
+      "key": "<org.apache.log4j.helpers.Loader: java.lang.Class loadClass(java.lang.String)>@L182/0 => <org.zeroturnaround.zip.ZipUtil$BackslashUnpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>@L1229/1",
+      "source": "<org.apache.log4j.helpers.Loader: java.lang.Class loadClass(java.lang.String)>[5@L182] %v15 = invokestatic java.lang.Class.forName(clazz)/0",
+      "sink": "<org.zeroturnaround.zip.ZipUtil$BackslashUnpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>[30@L1229] invokespecial destFile.<init>(parentDirectory, %v27)/1",
+      "sink_method": "<org.zeroturnaround.zip.ZipUtil$BackslashUnpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>",
+      "sink_line": 1229,
+      "gt": [],
+      "gt_weak": [],
+      "reported": false,
+      "triage": {
+        "verdict": "not_vulnerable",
+        "reason": "sanitized",
+        "kept": false,
+        "v3_ok": true,
+        "v3_problems": [],
+        "override": ""
+      }
+    },
+    {
+      "id": "59c2ff44a2",
+      "key": "<org.apache.log4j.helpers.Loader: java.lang.Class loadClass(java.lang.String)>@L182/0 => <org.zeroturnaround.zip.ZipUtil$Unpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>@L1152/1",
+      "source": "<org.apache.log4j.helpers.Loader: java.lang.Class loadClass(java.lang.String)>[5@L182] %v15 = invokestatic java.lang.Class.forName(clazz)/0",
+      "sink": "<org.zeroturnaround.zip.ZipUtil$Unpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>[8@L1152] invokespecial file.<init>(%v11, name)/1",
+      "sink_method": "<org.zeroturnaround.zip.ZipUtil$Unpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>",
+      "sink_line": 1152,
+      "gt": [
+        "Unpacker.process"
+      ],
+      "gt_weak": [],
+      "reported": false,
+      "triage": {
+        "verdict": "not_vulnerable",
+        "reason": "sanitized",
+        "kept": false,
+        "v3_ok": true,
+        "v3_problems": [],
+        "override": ""
+      }
+    },
+    {
+      "id": "3c370b6478",
+      "key": "<org.apache.log4j.helpers.Loader: java.lang.Class loadClass(java.lang.String)>@L182/0 => <org.zeroturnaround.zip.ZipUtil$Unwraper: void process(java.io.InputStream,java.util.zip.ZipEntry)>@L1287/1",
+      "source": "<org.apache.log4j.helpers.Loader: java.lang.Class loadClass(java.lang.String)>[5@L182] %v15 = invokestatic java.lang.Class.forName(clazz)/0",
+      "sink": "<org.zeroturnaround.zip.ZipUtil$Unwraper: void process(java.io.InputStream,java.util.zip.ZipEntry)>[31@L1287] invokespecial file.<init>(%v28, name)/1",
+      "sink_method": "<org.zeroturnaround.zip.ZipUtil$Unwraper: void process(java.io.InputStream,java.util.zip.ZipEntry)>",
+      "sink_line": 1287,
+      "gt": [
+        "Unwraper.process"
+      ],
+      "gt_weak": [],
+      "reported": false,
+      "triage": {
+        "verdict": "not_vulnerable",
+        "reason": "sanitized",
+        "kept": false,
+        "v3_ok": true,
+        "v3_problems": [],
+        "override": ""
+      }
+    },
+    {
+      "id": "a5bf9d551e",
+      "key": "<org.apache.log4j.helpers.Loader: java.lang.Class loadClass(java.lang.String)>@L182/0 => <org.zeroturnaround.zip.commons.FileUtils: java.io.File getTempFileFor(java.io.File)>@L75/1",
+      "source": "<org.apache.log4j.helpers.Loader: java.lang.Class loadClass(java.lang.String)>[5@L182] %v15 = invokestatic java.lang.Class.forName(clazz)/0",
+      "sink": "<org.zeroturnaround.zip.commons.FileUtils: java.io.File getTempFileFor(java.io.File)>[15@L75] invokespecial result.<init>(parent, %v16)/1",
+      "sink_method": "<org.zeroturnaround.zip.commons.FileUtils: java.io.File getTempFileFor(java.io.File)>",
+      "sink_line": 75,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": {
+        "verdict": "uncertain",
+        "reason": "insufficient_context",
+        "kept": true,
+        "v3_ok": null,
+        "v3_problems": [],
+        "override": ""
+      }
+    },
+    {
+      "id": "5cca8ded3d",
+      "key": "<org.apache.log4j.helpers.Loader: java.lang.Class loadClass(java.lang.String)>@L182/0 => <org.zeroturnaround.zip.commons.FileUtilsV2_2: boolean isSymlink(java.io.File)>@L1081/1",
+      "source": "<org.apache.log4j.helpers.Loader: java.lang.Class loadClass(java.lang.String)>[5@L182] %v15 = invokestatic java.lang.Class.forName(clazz)/0",
+      "sink": "<org.zeroturnaround.zip.commons.FileUtilsV2_2: boolean isSymlink(java.io.File)>[18@L1081] invokespecial %v11.<init>(canonicalDir, %v12)/1",
+      "sink_method": "<org.zeroturnaround.zip.commons.FileUtilsV2_2: boolean isSymlink(java.io.File)>",
+      "sink_line": 1081,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": {
+        "verdict": "uncertain",
+        "reason": "insufficient_context",
+        "kept": true,
+        "v3_ok": null,
+        "v3_problems": [],
+        "override": ""
+      }
+    },
+    {
+      "id": "0e481ba70b",
+      "key": "<org.apache.log4j.helpers.Loader: java.lang.Class loadClass(java.lang.String)>@L198/0 => <org.zeroturnaround.zip.ZipUtil: void pack(java.io.File,java.util.zip.ZipOutputStream,org.zeroturnaround.zip.NameMapper,java.lang.String,boolean)>@L1766/1",
+      "source": "<org.apache.log4j.helpers.Loader: java.lang.Class loadClass(java.lang.String)>[21@L198] %v14 = invokestatic java.lang.Class.forName(clazz)/0",
+      "sink": "<org.zeroturnaround.zip.ZipUtil: void pack(java.io.File,java.util.zip.ZipOutputStream,org.zeroturnaround.zip.NameMapper,java.lang.String,boolean)>[47@L1766] invokespecial file.<init>(dir, filename)/1",
+      "sink_method": "<org.zeroturnaround.zip.ZipUtil: void pack(java.io.File,java.util.zip.ZipOutputStream,org.zeroturnaround.zip.NameMapper,java.lang.String,boolean)>",
+      "sink_line": 1766,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": {
+        "verdict": "uncertain",
+        "reason": "insufficient_context",
+        "kept": true,
+        "v3_ok": null,
+        "v3_problems": [],
+        "override": ""
+      }
+    },
+    {
+      "id": "f2ef619062",
+      "key": "<org.apache.log4j.helpers.Loader: java.lang.Class loadClass(java.lang.String)>@L198/0 => <org.zeroturnaround.zip.ZipUtil$BackslashUnpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>@L1223/1",
+      "source": "<org.apache.log4j.helpers.Loader: java.lang.Class loadClass(java.lang.String)>[21@L198] %v14 = invokestatic java.lang.Class.forName(clazz)/0",
+      "sink": "<org.zeroturnaround.zip.ZipUtil$BackslashUnpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>[19@L1223] invokespecial file.<init>(parentDirectory, %v22)/1",
+      "sink_method": "<org.zeroturnaround.zip.ZipUtil$BackslashUnpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>",
+      "sink_line": 1223,
+      "gt": [],
+      "gt_weak": [],
+      "reported": false,
+      "triage": {
+        "verdict": "not_vulnerable",
+        "reason": "sanitized",
+        "kept": false,
+        "v3_ok": true,
+        "v3_problems": [],
+        "override": ""
+      }
+    },
+    {
+      "id": "5b081aaef7",
+      "key": "<org.apache.log4j.helpers.Loader: java.lang.Class loadClass(java.lang.String)>@L198/0 => <org.zeroturnaround.zip.ZipUtil$BackslashUnpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>@L1229/1",
+      "source": "<org.apache.log4j.helpers.Loader: java.lang.Class loadClass(java.lang.String)>[21@L198] %v14 = invokestatic java.lang.Class.forName(clazz)/0",
+      "sink": "<org.zeroturnaround.zip.ZipUtil$BackslashUnpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>[30@L1229] invokespecial destFile.<init>(parentDirectory, %v27)/1",
+      "sink_method": "<org.zeroturnaround.zip.ZipUtil$BackslashUnpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>",
+      "sink_line": 1229,
+      "gt": [],
+      "gt_weak": [],
+      "reported": false,
+      "triage": {
+        "verdict": "not_vulnerable",
+        "reason": "sanitized",
+        "kept": false,
+        "v3_ok": true,
+        "v3_problems": [],
+        "override": ""
+      }
+    },
+    {
+      "id": "dc87503908",
+      "key": "<org.apache.log4j.helpers.Loader: java.lang.Class loadClass(java.lang.String)>@L198/0 => <org.zeroturnaround.zip.ZipUtil$Unpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>@L1152/1",
+      "source": "<org.apache.log4j.helpers.Loader: java.lang.Class loadClass(java.lang.String)>[21@L198] %v14 = invokestatic java.lang.Class.forName(clazz)/0",
+      "sink": "<org.zeroturnaround.zip.ZipUtil$Unpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>[8@L1152] invokespecial file.<init>(%v11, name)/1",
+      "sink_method": "<org.zeroturnaround.zip.ZipUtil$Unpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>",
+      "sink_line": 1152,
+      "gt": [
+        "Unpacker.process"
+      ],
+      "gt_weak": [],
+      "reported": false,
+      "triage": {
+        "verdict": "not_vulnerable",
+        "reason": "sanitized",
+        "kept": false,
+        "v3_ok": true,
+        "v3_problems": [],
+        "override": ""
+      }
+    },
+    {
+      "id": "504c7cc38d",
+      "key": "<org.apache.log4j.helpers.Loader: java.lang.Class loadClass(java.lang.String)>@L198/0 => <org.zeroturnaround.zip.ZipUtil$Unwraper: void process(java.io.InputStream,java.util.zip.ZipEntry)>@L1287/1",
+      "source": "<org.apache.log4j.helpers.Loader: java.lang.Class loadClass(java.lang.String)>[21@L198] %v14 = invokestatic java.lang.Class.forName(clazz)/0",
+      "sink": "<org.zeroturnaround.zip.ZipUtil$Unwraper: void process(java.io.InputStream,java.util.zip.ZipEntry)>[31@L1287] invokespecial file.<init>(%v28, name)/1",
+      "sink_method": "<org.zeroturnaround.zip.ZipUtil$Unwraper: void process(java.io.InputStream,java.util.zip.ZipEntry)>",
+      "sink_line": 1287,
+      "gt": [
+        "Unwraper.process"
+      ],
+      "gt_weak": [],
+      "reported": false,
+      "triage": {
+        "verdict": "not_vulnerable",
+        "reason": "sanitized",
+        "kept": false,
+        "v3_ok": true,
+        "v3_problems": [],
+        "override": ""
+      }
+    },
+    {
+      "id": "e9c788f411",
+      "key": "<org.apache.log4j.helpers.Loader: java.lang.Class loadClass(java.lang.String)>@L198/0 => <org.zeroturnaround.zip.commons.FileUtils: java.io.File getTempFileFor(java.io.File)>@L75/1",
+      "source": "<org.apache.log4j.helpers.Loader: java.lang.Class loadClass(java.lang.String)>[21@L198] %v14 = invokestatic java.lang.Class.forName(clazz)/0",
+      "sink": "<org.zeroturnaround.zip.commons.FileUtils: java.io.File getTempFileFor(java.io.File)>[15@L75] invokespecial result.<init>(parent, %v16)/1",
+      "sink_method": "<org.zeroturnaround.zip.commons.FileUtils: java.io.File getTempFileFor(java.io.File)>",
+      "sink_line": 75,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": {
+        "verdict": "uncertain",
+        "reason": "insufficient_context",
+        "kept": true,
+        "v3_ok": null,
+        "v3_problems": [],
+        "override": ""
+      }
+    },
+    {
+      "id": "d266bed2f5",
+      "key": "<org.apache.log4j.helpers.Loader: java.lang.Class loadClass(java.lang.String)>@L198/0 => <org.zeroturnaround.zip.commons.FileUtilsV2_2: boolean isSymlink(java.io.File)>@L1081/1",
+      "source": "<org.apache.log4j.helpers.Loader: java.lang.Class loadClass(java.lang.String)>[21@L198] %v14 = invokestatic java.lang.Class.forName(clazz)/0",
+      "sink": "<org.zeroturnaround.zip.commons.FileUtilsV2_2: boolean isSymlink(java.io.File)>[18@L1081] invokespecial %v11.<init>(canonicalDir, %v12)/1",
+      "sink_method": "<org.zeroturnaround.zip.commons.FileUtilsV2_2: boolean isSymlink(java.io.File)>",
+      "sink_line": 1081,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": {
+        "verdict": "uncertain",
+        "reason": "insufficient_context",
+        "kept": true,
+        "v3_ok": null,
+        "v3_problems": [],
+        "override": ""
+      }
+    },
+    {
+      "id": "14a81165c7",
+      "key": "<org.zeroturnaround.zip.ZipEntryUtil: java.util.zip.ZipEntry copy(java.util.zip.ZipEntry,java.lang.String)>@L77/result => <org.zeroturnaround.zip.ZipUtil: void pack(java.io.File,java.util.zip.ZipOutputStream,org.zeroturnaround.zip.NameMapper,java.lang.String,boolean)>@L1766/1",
+      "source": "<org.zeroturnaround.zip.ZipEntryUtil: java.util.zip.ZipEntry copy(java.util.zip.ZipEntry,java.lang.String)>[4@L77] %v5 = invokevirtual original.getName()/result",
+      "sink": "<org.zeroturnaround.zip.ZipUtil: void pack(java.io.File,java.util.zip.ZipOutputStream,org.zeroturnaround.zip.NameMapper,java.lang.String,boolean)>[47@L1766] invokespecial file.<init>(dir, filename)/1",
+      "sink_method": "<org.zeroturnaround.zip.ZipUtil: void pack(java.io.File,java.util.zip.ZipOutputStream,org.zeroturnaround.zip.NameMapper,java.lang.String,boolean)>",
+      "sink_line": 1766,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": {
+        "verdict": "uncertain",
+        "reason": "insufficient_context",
+        "kept": true,
+        "v3_ok": null,
+        "v3_problems": [],
+        "override": ""
+      }
+    },
+    {
+      "id": "aabe5587e2",
+      "key": "<org.zeroturnaround.zip.ZipEntryUtil: java.util.zip.ZipEntry copy(java.util.zip.ZipEntry,java.lang.String)>@L77/result => <org.zeroturnaround.zip.ZipUtil$BackslashUnpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>@L1223/1",
+      "source": "<org.zeroturnaround.zip.ZipEntryUtil: java.util.zip.ZipEntry copy(java.util.zip.ZipEntry,java.lang.String)>[4@L77] %v5 = invokevirtual original.getName()/result",
+      "sink": "<org.zeroturnaround.zip.ZipUtil$BackslashUnpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>[19@L1223] invokespecial file.<init>(parentDirectory, %v22)/1",
+      "sink_method": "<org.zeroturnaround.zip.ZipUtil$BackslashUnpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>",
+      "sink_line": 1223,
+      "gt": [],
+      "gt_weak": [],
+      "reported": false,
+      "triage": {
+        "verdict": "not_vulnerable",
+        "reason": "sanitized",
+        "kept": false,
+        "v3_ok": true,
+        "v3_problems": [],
+        "override": ""
+      }
+    },
+    {
+      "id": "d6ef7b95b6",
+      "key": "<org.zeroturnaround.zip.ZipEntryUtil: java.util.zip.ZipEntry copy(java.util.zip.ZipEntry,java.lang.String)>@L77/result => <org.zeroturnaround.zip.ZipUtil$BackslashUnpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>@L1229/1",
+      "source": "<org.zeroturnaround.zip.ZipEntryUtil: java.util.zip.ZipEntry copy(java.util.zip.ZipEntry,java.lang.String)>[4@L77] %v5 = invokevirtual original.getName()/result",
+      "sink": "<org.zeroturnaround.zip.ZipUtil$BackslashUnpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>[30@L1229] invokespecial destFile.<init>(parentDirectory, %v27)/1",
+      "sink_method": "<org.zeroturnaround.zip.ZipUtil$BackslashUnpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>",
+      "sink_line": 1229,
+      "gt": [],
+      "gt_weak": [],
+      "reported": false,
+      "triage": {
+        "verdict": "not_vulnerable",
+        "reason": "sanitized",
+        "kept": false,
+        "v3_ok": true,
+        "v3_problems": [],
+        "override": ""
+      }
+    },
+    {
+      "id": "d1baeffd89",
+      "key": "<org.zeroturnaround.zip.ZipEntryUtil: java.util.zip.ZipEntry copy(java.util.zip.ZipEntry,java.lang.String)>@L77/result => <org.zeroturnaround.zip.ZipUtil$Unpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>@L1152/1",
+      "source": "<org.zeroturnaround.zip.ZipEntryUtil: java.util.zip.ZipEntry copy(java.util.zip.ZipEntry,java.lang.String)>[4@L77] %v5 = invokevirtual original.getName()/result",
+      "sink": "<org.zeroturnaround.zip.ZipUtil$Unpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>[8@L1152] invokespecial file.<init>(%v11, name)/1",
+      "sink_method": "<org.zeroturnaround.zip.ZipUtil$Unpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>",
+      "sink_line": 1152,
+      "gt": [
+        "Unpacker.process"
+      ],
+      "gt_weak": [],
+      "reported": false,
+      "triage": {
+        "verdict": "not_vulnerable",
+        "reason": "sanitized",
+        "kept": false,
+        "v3_ok": true,
+        "v3_problems": [],
+        "override": ""
+      }
+    },
+    {
+      "id": "e78c6f72dd",
+      "key": "<org.zeroturnaround.zip.ZipEntryUtil: java.util.zip.ZipEntry copy(java.util.zip.ZipEntry,java.lang.String)>@L77/result => <org.zeroturnaround.zip.ZipUtil$Unwraper: void process(java.io.InputStream,java.util.zip.ZipEntry)>@L1287/1",
+      "source": "<org.zeroturnaround.zip.ZipEntryUtil: java.util.zip.ZipEntry copy(java.util.zip.ZipEntry,java.lang.String)>[4@L77] %v5 = invokevirtual original.getName()/result",
+      "sink": "<org.zeroturnaround.zip.ZipUtil$Unwraper: void process(java.io.InputStream,java.util.zip.ZipEntry)>[31@L1287] invokespecial file.<init>(%v28, name)/1",
+      "sink_method": "<org.zeroturnaround.zip.ZipUtil$Unwraper: void process(java.io.InputStream,java.util.zip.ZipEntry)>",
+      "sink_line": 1287,
+      "gt": [
+        "Unwraper.process"
+      ],
+      "gt_weak": [],
+      "reported": false,
+      "triage": {
+        "verdict": "not_vulnerable",
+        "reason": "sanitized",
+        "kept": false,
+        "v3_ok": true,
+        "v3_problems": [],
+        "override": ""
+      }
+    },
+    {
+      "id": "4611e3b005",
+      "key": "<org.zeroturnaround.zip.ZipEntryUtil: java.util.zip.ZipEntry copy(java.util.zip.ZipEntry,java.lang.String)>@L77/result => <org.zeroturnaround.zip.commons.FileUtils: java.io.File getTempFileFor(java.io.File)>@L75/1",
+      "source": "<org.zeroturnaround.zip.ZipEntryUtil: java.util.zip.ZipEntry copy(java.util.zip.ZipEntry,java.lang.String)>[4@L77] %v5 = invokevirtual original.getName()/result",
+      "sink": "<org.zeroturnaround.zip.commons.FileUtils: java.io.File getTempFileFor(java.io.File)>[15@L75] invokespecial result.<init>(parent, %v16)/1",
+      "sink_method": "<org.zeroturnaround.zip.commons.FileUtils: java.io.File getTempFileFor(java.io.File)>",
+      "sink_line": 75,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": {
+        "verdict": "uncertain",
+        "reason": "insufficient_context",
+        "kept": true,
+        "v3_ok": null,
+        "v3_problems": [],
+        "override": ""
+      }
+    },
+    {
+      "id": "f1f5a76d36",
+      "key": "<org.zeroturnaround.zip.ZipEntryUtil: java.util.zip.ZipEntry copy(java.util.zip.ZipEntry,java.lang.String)>@L77/result => <org.zeroturnaround.zip.commons.FileUtilsV2_2: boolean isSymlink(java.io.File)>@L1081/1",
+      "source": "<org.zeroturnaround.zip.ZipEntryUtil: java.util.zip.ZipEntry copy(java.util.zip.ZipEntry,java.lang.String)>[4@L77] %v5 = invokevirtual original.getName()/result",
+      "sink": "<org.zeroturnaround.zip.commons.FileUtilsV2_2: boolean isSymlink(java.io.File)>[18@L1081] invokespecial %v11.<init>(canonicalDir, %v12)/1",
+      "sink_method": "<org.zeroturnaround.zip.commons.FileUtilsV2_2: boolean isSymlink(java.io.File)>",
+      "sink_line": 1081,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": {
+        "verdict": "uncertain",
+        "reason": "insufficient_context",
+        "kept": true,
+        "v3_ok": null,
+        "v3_problems": [],
+        "override": ""
+      }
+    },
+    {
+      "id": "a87374e955",
+      "key": "<org.zeroturnaround.zip.ZipUtil: void iterate(java.io.File,org.zeroturnaround.zip.ZipEntryCallback,java.nio.charset.Charset)>@L511/result => <org.zeroturnaround.zip.ZipUtil: void pack(java.io.File,java.util.zip.ZipOutputStream,org.zeroturnaround.zip.NameMapper,java.lang.String,boolean)>@L1766/1",
+      "source": "<org.zeroturnaround.zip.ZipUtil: void iterate(java.io.File,org.zeroturnaround.zip.ZipEntryCallback,java.nio.charset.Charset)>[25@L511] %v24 = invokevirtual e.getName()/result",
+      "sink": "<org.zeroturnaround.zip.ZipUtil: void pack(java.io.File,java.util.zip.ZipOutputStream,org.zeroturnaround.zip.NameMapper,java.lang.String,boolean)>[47@L1766] invokespecial file.<init>(dir, filename)/1",
+      "sink_method": "<org.zeroturnaround.zip.ZipUtil: void pack(java.io.File,java.util.zip.ZipOutputStream,org.zeroturnaround.zip.NameMapper,java.lang.String,boolean)>",
+      "sink_line": 1766,
+      "gt": [],
+      "gt_weak": [],
+      "reported": false,
+      "triage": {
+        "verdict": "not_vulnerable",
+        "reason": "not_dangerous_sink",
+        "kept": false,
+        "v3_ok": true,
+        "v3_problems": [],
+        "override": ""
+      }
+    },
+    {
+      "id": "a1a82c2378",
+      "key": "<org.zeroturnaround.zip.ZipUtil: void iterate(java.io.File,org.zeroturnaround.zip.ZipEntryCallback,java.nio.charset.Charset)>@L511/result => <org.zeroturnaround.zip.ZipUtil$BackslashUnpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>@L1223/1",
+      "source": "<org.zeroturnaround.zip.ZipUtil: void iterate(java.io.File,org.zeroturnaround.zip.ZipEntryCallback,java.nio.charset.Charset)>[25@L511] %v24 = invokevirtual e.getName()/result",
+      "sink": "<org.zeroturnaround.zip.ZipUtil$BackslashUnpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>[19@L1223] invokespecial file.<init>(parentDirectory, %v22)/1",
+      "sink_method": "<org.zeroturnaround.zip.ZipUtil$BackslashUnpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>",
+      "sink_line": 1223,
+      "gt": [],
+      "gt_weak": [],
+      "reported": false,
+      "triage": {
+        "verdict": "not_vulnerable",
+        "reason": "sanitized",
+        "kept": false,
+        "v3_ok": true,
+        "v3_problems": [],
+        "override": ""
+      }
+    },
+    {
+      "id": "83ee6b7285",
+      "key": "<org.zeroturnaround.zip.ZipUtil: void iterate(java.io.File,org.zeroturnaround.zip.ZipEntryCallback,java.nio.charset.Charset)>@L511/result => <org.zeroturnaround.zip.ZipUtil$BackslashUnpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>@L1229/1",
+      "source": "<org.zeroturnaround.zip.ZipUtil: void iterate(java.io.File,org.zeroturnaround.zip.ZipEntryCallback,java.nio.charset.Charset)>[25@L511] %v24 = invokevirtual e.getName()/result",
+      "sink": "<org.zeroturnaround.zip.ZipUtil$BackslashUnpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>[30@L1229] invokespecial destFile.<init>(parentDirectory, %v27)/1",
+      "sink_method": "<org.zeroturnaround.zip.ZipUtil$BackslashUnpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>",
+      "sink_line": 1229,
+      "gt": [],
+      "gt_weak": [],
+      "reported": false,
+      "triage": {
+        "verdict": "not_vulnerable",
+        "reason": "sanitized",
+        "kept": false,
+        "v3_ok": true,
+        "v3_problems": [],
+        "override": ""
+      }
+    },
+    {
+      "id": "eab509712a",
+      "key": "<org.zeroturnaround.zip.ZipUtil: void iterate(java.io.File,org.zeroturnaround.zip.ZipEntryCallback,java.nio.charset.Charset)>@L511/result => <org.zeroturnaround.zip.ZipUtil$Unpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>@L1152/1",
+      "source": "<org.zeroturnaround.zip.ZipUtil: void iterate(java.io.File,org.zeroturnaround.zip.ZipEntryCallback,java.nio.charset.Charset)>[25@L511] %v24 = invokevirtual e.getName()/result",
+      "sink": "<org.zeroturnaround.zip.ZipUtil$Unpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>[8@L1152] invokespecial file.<init>(%v11, name)/1",
+      "sink_method": "<org.zeroturnaround.zip.ZipUtil$Unpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>",
+      "sink_line": 1152,
+      "gt": [
+        "Unpacker.process"
+      ],
+      "gt_weak": [],
+      "reported": false,
+      "triage": {
+        "verdict": "not_vulnerable",
+        "reason": "sanitized",
+        "kept": false,
+        "v3_ok": true,
+        "v3_problems": [],
+        "override": ""
+      }
+    },
+    {
+      "id": "00db1165d6",
+      "key": "<org.zeroturnaround.zip.ZipUtil: void iterate(java.io.File,org.zeroturnaround.zip.ZipEntryCallback,java.nio.charset.Charset)>@L511/result => <org.zeroturnaround.zip.ZipUtil$Unwraper: void process(java.io.InputStream,java.util.zip.ZipEntry)>@L1287/1",
+      "source": "<org.zeroturnaround.zip.ZipUtil: void iterate(java.io.File,org.zeroturnaround.zip.ZipEntryCallback,java.nio.charset.Charset)>[25@L511] %v24 = invokevirtual e.getName()/result",
+      "sink": "<org.zeroturnaround.zip.ZipUtil$Unwraper: void process(java.io.InputStream,java.util.zip.ZipEntry)>[31@L1287] invokespecial file.<init>(%v28, name)/1",
+      "sink_method": "<org.zeroturnaround.zip.ZipUtil$Unwraper: void process(java.io.InputStream,java.util.zip.ZipEntry)>",
+      "sink_line": 1287,
+      "gt": [
+        "Unwraper.process"
+      ],
+      "gt_weak": [],
+      "reported": false,
+      "triage": {
+        "verdict": "not_vulnerable",
+        "reason": "sanitized",
+        "kept": false,
+        "v3_ok": true,
+        "v3_problems": [],
+        "override": ""
+      }
+    },
+    {
+      "id": "083f0a1612",
+      "key": "<org.zeroturnaround.zip.ZipUtil: void iterate(java.io.File,org.zeroturnaround.zip.ZipEntryCallback,java.nio.charset.Charset)>@L511/result => <org.zeroturnaround.zip.commons.FileUtils: java.io.File getTempFileFor(java.io.File)>@L75/1",
+      "source": "<org.zeroturnaround.zip.ZipUtil: void iterate(java.io.File,org.zeroturnaround.zip.ZipEntryCallback,java.nio.charset.Charset)>[25@L511] %v24 = invokevirtual e.getName()/result",
+      "sink": "<org.zeroturnaround.zip.commons.FileUtils: java.io.File getTempFileFor(java.io.File)>[15@L75] invokespecial result.<init>(parent, %v16)/1",
+      "sink_method": "<org.zeroturnaround.zip.commons.FileUtils: java.io.File getTempFileFor(java.io.File)>",
+      "sink_line": 75,
+      "gt": [],
+      "gt_weak": [],
+      "reported": false,
+      "triage": {
+        "verdict": "not_vulnerable",
+        "reason": "not_dangerous_sink",
+        "kept": false,
+        "v3_ok": true,
+        "v3_problems": [],
+        "override": ""
+      }
+    },
+    {
+      "id": "f01e726a79",
+      "key": "<org.zeroturnaround.zip.ZipUtil: void iterate(java.io.File,org.zeroturnaround.zip.ZipEntryCallback,java.nio.charset.Charset)>@L511/result => <org.zeroturnaround.zip.commons.FileUtilsV2_2: boolean isSymlink(java.io.File)>@L1081/1",
+      "source": "<org.zeroturnaround.zip.ZipUtil: void iterate(java.io.File,org.zeroturnaround.zip.ZipEntryCallback,java.nio.charset.Charset)>[25@L511] %v24 = invokevirtual e.getName()/result",
+      "sink": "<org.zeroturnaround.zip.commons.FileUtilsV2_2: boolean isSymlink(java.io.File)>[18@L1081] invokespecial %v11.<init>(canonicalDir, %v12)/1",
+      "sink_method": "<org.zeroturnaround.zip.commons.FileUtilsV2_2: boolean isSymlink(java.io.File)>",
+      "sink_line": 1081,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": {
+        "verdict": "uncertain",
+        "reason": "insufficient_context",
+        "kept": true,
+        "v3_ok": null,
+        "v3_problems": [],
+        "override": ""
+      }
+    },
+    {
+      "id": "2c11612b6b",
+      "key": "<org.zeroturnaround.zip.ZipUtil: void iterate(java.io.InputStream,org.zeroturnaround.zip.ZipEntryCallback,java.nio.charset.Charset)>@L715/result => <org.zeroturnaround.zip.ZipUtil: void pack(java.io.File,java.util.zip.ZipOutputStream,org.zeroturnaround.zip.NameMapper,java.lang.String,boolean)>@L1766/1",
+      "source": "<org.zeroturnaround.zip.ZipUtil: void iterate(java.io.InputStream,org.zeroturnaround.zip.ZipEntryCallback,java.nio.charset.Charset)>[12@L715] %v14 = invokevirtual entry.getName()/result",
+      "sink": "<org.zeroturnaround.zip.ZipUtil: void pack(java.io.File,java.util.zip.ZipOutputStream,org.zeroturnaround.zip.NameMapper,java.lang.String,boolean)>[47@L1766] invokespecial file.<init>(dir, filename)/1",
+      "sink_method": "<org.zeroturnaround.zip.ZipUtil: void pack(java.io.File,java.util.zip.ZipOutputStream,org.zeroturnaround.zip.NameMapper,java.lang.String,boolean)>",
+      "sink_line": 1766,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": {
+        "verdict": "uncertain",
+        "reason": "insufficient_context",
+        "kept": true,
+        "v3_ok": null,
+        "v3_problems": [],
+        "override": ""
+      }
+    },
+    {
+      "id": "c7a72f984b",
+      "key": "<org.zeroturnaround.zip.ZipUtil: void iterate(java.io.InputStream,org.zeroturnaround.zip.ZipEntryCallback,java.nio.charset.Charset)>@L715/result => <org.zeroturnaround.zip.ZipUtil$BackslashUnpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>@L1223/1",
+      "source": "<org.zeroturnaround.zip.ZipUtil: void iterate(java.io.InputStream,org.zeroturnaround.zip.ZipEntryCallback,java.nio.charset.Charset)>[12@L715] %v14 = invokevirtual entry.getName()/result",
+      "sink": "<org.zeroturnaround.zip.ZipUtil$BackslashUnpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>[19@L1223] invokespecial file.<init>(parentDirectory, %v22)/1",
+      "sink_method": "<org.zeroturnaround.zip.ZipUtil$BackslashUnpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>",
+      "sink_line": 1223,
+      "gt": [],
+      "gt_weak": [],
+      "reported": false,
+      "triage": {
+        "verdict": "not_vulnerable",
+        "reason": "sanitized",
+        "kept": false,
+        "v3_ok": true,
+        "v3_problems": [],
+        "override": ""
+      }
+    },
+    {
+      "id": "3f479c0833",
+      "key": "<org.zeroturnaround.zip.ZipUtil: void iterate(java.io.InputStream,org.zeroturnaround.zip.ZipEntryCallback,java.nio.charset.Charset)>@L715/result => <org.zeroturnaround.zip.ZipUtil$BackslashUnpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>@L1229/1",
+      "source": "<org.zeroturnaround.zip.ZipUtil: void iterate(java.io.InputStream,org.zeroturnaround.zip.ZipEntryCallback,java.nio.charset.Charset)>[12@L715] %v14 = invokevirtual entry.getName()/result",
+      "sink": "<org.zeroturnaround.zip.ZipUtil$BackslashUnpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>[30@L1229] invokespecial destFile.<init>(parentDirectory, %v27)/1",
+      "sink_method": "<org.zeroturnaround.zip.ZipUtil$BackslashUnpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>",
+      "sink_line": 1229,
+      "gt": [],
+      "gt_weak": [],
+      "reported": false,
+      "triage": {
+        "verdict": "not_vulnerable",
+        "reason": "sanitized",
+        "kept": false,
+        "v3_ok": true,
+        "v3_problems": [],
+        "override": ""
+      }
+    },
+    {
+      "id": "bb6064cd43",
+      "key": "<org.zeroturnaround.zip.ZipUtil: void iterate(java.io.InputStream,org.zeroturnaround.zip.ZipEntryCallback,java.nio.charset.Charset)>@L715/result => <org.zeroturnaround.zip.ZipUtil$Unpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>@L1152/1",
+      "source": "<org.zeroturnaround.zip.ZipUtil: void iterate(java.io.InputStream,org.zeroturnaround.zip.ZipEntryCallback,java.nio.charset.Charset)>[12@L715] %v14 = invokevirtual entry.getName()/result",
+      "sink": "<org.zeroturnaround.zip.ZipUtil$Unpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>[8@L1152] invokespecial file.<init>(%v11, name)/1",
+      "sink_method": "<org.zeroturnaround.zip.ZipUtil$Unpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>",
+      "sink_line": 1152,
+      "gt": [
+        "Unpacker.process"
+      ],
+      "gt_weak": [],
+      "reported": false,
+      "triage": {
+        "verdict": "not_vulnerable",
+        "reason": "sanitized",
+        "kept": false,
+        "v3_ok": true,
+        "v3_problems": [],
+        "override": ""
+      }
+    },
+    {
+      "id": "843db8c056",
+      "key": "<org.zeroturnaround.zip.ZipUtil: void iterate(java.io.InputStream,org.zeroturnaround.zip.ZipEntryCallback,java.nio.charset.Charset)>@L715/result => <org.zeroturnaround.zip.ZipUtil$Unwraper: void process(java.io.InputStream,java.util.zip.ZipEntry)>@L1287/1",
+      "source": "<org.zeroturnaround.zip.ZipUtil: void iterate(java.io.InputStream,org.zeroturnaround.zip.ZipEntryCallback,java.nio.charset.Charset)>[12@L715] %v14 = invokevirtual entry.getName()/result",
+      "sink": "<org.zeroturnaround.zip.ZipUtil$Unwraper: void process(java.io.InputStream,java.util.zip.ZipEntry)>[31@L1287] invokespecial file.<init>(%v28, name)/1",
+      "sink_method": "<org.zeroturnaround.zip.ZipUtil$Unwraper: void process(java.io.InputStream,java.util.zip.ZipEntry)>",
+      "sink_line": 1287,
+      "gt": [
+        "Unwraper.process"
+      ],
+      "gt_weak": [],
+      "reported": false,
+      "triage": {
+        "verdict": "not_vulnerable",
+        "reason": "sanitized",
+        "kept": false,
+        "v3_ok": true,
+        "v3_problems": [],
+        "override": ""
+      }
+    },
+    {
+      "id": "e439997d33",
+      "key": "<org.zeroturnaround.zip.ZipUtil: void iterate(java.io.InputStream,org.zeroturnaround.zip.ZipEntryCallback,java.nio.charset.Charset)>@L715/result => <org.zeroturnaround.zip.commons.FileUtils: java.io.File getTempFileFor(java.io.File)>@L75/1",
+      "source": "<org.zeroturnaround.zip.ZipUtil: void iterate(java.io.InputStream,org.zeroturnaround.zip.ZipEntryCallback,java.nio.charset.Charset)>[12@L715] %v14 = invokevirtual entry.getName()/result",
+      "sink": "<org.zeroturnaround.zip.commons.FileUtils: java.io.File getTempFileFor(java.io.File)>[15@L75] invokespecial result.<init>(parent, %v16)/1",
+      "sink_method": "<org.zeroturnaround.zip.commons.FileUtils: java.io.File getTempFileFor(java.io.File)>",
+      "sink_line": 75,
+      "gt": [],
+      "gt_weak": [],
+      "reported": false,
+      "triage": {
+        "verdict": "not_vulnerable",
+        "reason": "not_dangerous_sink",
+        "kept": false,
+        "v3_ok": true,
+        "v3_problems": [],
+        "override": ""
+      }
+    },
+    {
+      "id": "f0708d70b4",
+      "key": "<org.zeroturnaround.zip.ZipUtil: void iterate(java.io.InputStream,org.zeroturnaround.zip.ZipEntryCallback,java.nio.charset.Charset)>@L715/result => <org.zeroturnaround.zip.commons.FileUtilsV2_2: boolean isSymlink(java.io.File)>@L1081/1",
+      "source": "<org.zeroturnaround.zip.ZipUtil: void iterate(java.io.InputStream,org.zeroturnaround.zip.ZipEntryCallback,java.nio.charset.Charset)>[12@L715] %v14 = invokevirtual entry.getName()/result",
+      "sink": "<org.zeroturnaround.zip.commons.FileUtilsV2_2: boolean isSymlink(java.io.File)>[18@L1081] invokespecial %v11.<init>(canonicalDir, %v12)/1",
+      "sink_method": "<org.zeroturnaround.zip.commons.FileUtilsV2_2: boolean isSymlink(java.io.File)>",
+      "sink_line": 1081,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": {
+        "verdict": "uncertain",
+        "reason": "insufficient_context",
+        "kept": true,
+        "v3_ok": null,
+        "v3_problems": [],
+        "override": ""
+      }
+    },
+    {
+      "id": "1765a9535c",
+      "key": "<org.zeroturnaround.zip.ZipUtil$17: void process(java.io.InputStream,java.util.zip.ZipEntry)>@L2609/result => <org.zeroturnaround.zip.ZipUtil: void pack(java.io.File,java.util.zip.ZipOutputStream,org.zeroturnaround.zip.NameMapper,java.lang.String,boolean)>@L1766/1",
+      "source": "<org.zeroturnaround.zip.ZipUtil$17: void process(java.io.InputStream,java.util.zip.ZipEntry)>[2@L2609] %v5 = invokevirtual zipEntry.getName()/result",
+      "sink": "<org.zeroturnaround.zip.ZipUtil: void pack(java.io.File,java.util.zip.ZipOutputStream,org.zeroturnaround.zip.NameMapper,java.lang.String,boolean)>[47@L1766] invokespecial file.<init>(dir, filename)/1",
+      "sink_method": "<org.zeroturnaround.zip.ZipUtil: void pack(java.io.File,java.util.zip.ZipOutputStream,org.zeroturnaround.zip.NameMapper,java.lang.String,boolean)>",
+      "sink_line": 1766,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": {
+        "verdict": "uncertain",
+        "reason": "insufficient_context",
+        "kept": true,
+        "v3_ok": null,
+        "v3_problems": [],
+        "override": ""
+      }
+    },
+    {
+      "id": "195b6a00d9",
+      "key": "<org.zeroturnaround.zip.ZipUtil$17: void process(java.io.InputStream,java.util.zip.ZipEntry)>@L2609/result => <org.zeroturnaround.zip.ZipUtil$BackslashUnpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>@L1223/1",
+      "source": "<org.zeroturnaround.zip.ZipUtil$17: void process(java.io.InputStream,java.util.zip.ZipEntry)>[2@L2609] %v5 = invokevirtual zipEntry.getName()/result",
+      "sink": "<org.zeroturnaround.zip.ZipUtil$BackslashUnpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>[19@L1223] invokespecial file.<init>(parentDirectory, %v22)/1",
+      "sink_method": "<org.zeroturnaround.zip.ZipUtil$BackslashUnpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>",
+      "sink_line": 1223,
+      "gt": [],
+      "gt_weak": [],
+      "reported": false,
+      "triage": {
+        "verdict": "not_vulnerable",
+        "reason": "sanitized",
+        "kept": false,
+        "v3_ok": true,
+        "v3_problems": [],
+        "override": ""
+      }
+    },
+    {
+      "id": "a136dea928",
+      "key": "<org.zeroturnaround.zip.ZipUtil$17: void process(java.io.InputStream,java.util.zip.ZipEntry)>@L2609/result => <org.zeroturnaround.zip.ZipUtil$BackslashUnpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>@L1229/1",
+      "source": "<org.zeroturnaround.zip.ZipUtil$17: void process(java.io.InputStream,java.util.zip.ZipEntry)>[2@L2609] %v5 = invokevirtual zipEntry.getName()/result",
+      "sink": "<org.zeroturnaround.zip.ZipUtil$BackslashUnpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>[30@L1229] invokespecial destFile.<init>(parentDirectory, %v27)/1",
+      "sink_method": "<org.zeroturnaround.zip.ZipUtil$BackslashUnpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>",
+      "sink_line": 1229,
+      "gt": [],
+      "gt_weak": [],
+      "reported": false,
+      "triage": {
+        "verdict": "not_vulnerable",
+        "reason": "sanitized",
+        "kept": false,
+        "v3_ok": true,
+        "v3_problems": [],
+        "override": ""
+      }
+    },
+    {
+      "id": "ea8c4bb47f",
+      "key": "<org.zeroturnaround.zip.ZipUtil$17: void process(java.io.InputStream,java.util.zip.ZipEntry)>@L2609/result => <org.zeroturnaround.zip.ZipUtil$Unpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>@L1152/1",
+      "source": "<org.zeroturnaround.zip.ZipUtil$17: void process(java.io.InputStream,java.util.zip.ZipEntry)>[2@L2609] %v5 = invokevirtual zipEntry.getName()/result",
+      "sink": "<org.zeroturnaround.zip.ZipUtil$Unpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>[8@L1152] invokespecial file.<init>(%v11, name)/1",
+      "sink_method": "<org.zeroturnaround.zip.ZipUtil$Unpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>",
+      "sink_line": 1152,
+      "gt": [
+        "Unpacker.process"
+      ],
+      "gt_weak": [],
+      "reported": false,
+      "triage": {
+        "verdict": "not_vulnerable",
+        "reason": "sanitized",
+        "kept": false,
+        "v3_ok": true,
+        "v3_problems": [],
+        "override": ""
+      }
+    },
+    {
+      "id": "78926f1780",
+      "key": "<org.zeroturnaround.zip.ZipUtil$17: void process(java.io.InputStream,java.util.zip.ZipEntry)>@L2609/result => <org.zeroturnaround.zip.ZipUtil$Unwraper: void process(java.io.InputStream,java.util.zip.ZipEntry)>@L1287/1",
+      "source": "<org.zeroturnaround.zip.ZipUtil$17: void process(java.io.InputStream,java.util.zip.ZipEntry)>[2@L2609] %v5 = invokevirtual zipEntry.getName()/result",
+      "sink": "<org.zeroturnaround.zip.ZipUtil$Unwraper: void process(java.io.InputStream,java.util.zip.ZipEntry)>[31@L1287] invokespecial file.<init>(%v28, name)/1",
+      "sink_method": "<org.zeroturnaround.zip.ZipUtil$Unwraper: void process(java.io.InputStream,java.util.zip.ZipEntry)>",
+      "sink_line": 1287,
+      "gt": [
+        "Unwraper.process"
+      ],
+      "gt_weak": [],
+      "reported": false,
+      "triage": {
+        "verdict": "not_vulnerable",
+        "reason": "sanitized",
+        "kept": false,
+        "v3_ok": true,
+        "v3_problems": [],
+        "override": ""
+      }
+    },
+    {
+      "id": "678bff712c",
+      "key": "<org.zeroturnaround.zip.ZipUtil$17: void process(java.io.InputStream,java.util.zip.ZipEntry)>@L2609/result => <org.zeroturnaround.zip.commons.FileUtils: java.io.File getTempFileFor(java.io.File)>@L75/1",
+      "source": "<org.zeroturnaround.zip.ZipUtil$17: void process(java.io.InputStream,java.util.zip.ZipEntry)>[2@L2609] %v5 = invokevirtual zipEntry.getName()/result",
+      "sink": "<org.zeroturnaround.zip.commons.FileUtils: java.io.File getTempFileFor(java.io.File)>[15@L75] invokespecial result.<init>(parent, %v16)/1",
+      "sink_method": "<org.zeroturnaround.zip.commons.FileUtils: java.io.File getTempFileFor(java.io.File)>",
+      "sink_line": 75,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": {
+        "verdict": "uncertain",
+        "reason": "insufficient_context",
+        "kept": true,
+        "v3_ok": null,
+        "v3_problems": [],
+        "override": ""
+      }
+    },
+    {
+      "id": "817bae0ae9",
+      "key": "<org.zeroturnaround.zip.ZipUtil$17: void process(java.io.InputStream,java.util.zip.ZipEntry)>@L2609/result => <org.zeroturnaround.zip.commons.FileUtilsV2_2: boolean isSymlink(java.io.File)>@L1081/1",
+      "source": "<org.zeroturnaround.zip.ZipUtil$17: void process(java.io.InputStream,java.util.zip.ZipEntry)>[2@L2609] %v5 = invokevirtual zipEntry.getName()/result",
+      "sink": "<org.zeroturnaround.zip.commons.FileUtilsV2_2: boolean isSymlink(java.io.File)>[18@L1081] invokespecial %v11.<init>(canonicalDir, %v12)/1",
+      "sink_method": "<org.zeroturnaround.zip.commons.FileUtilsV2_2: boolean isSymlink(java.io.File)>",
+      "sink_line": 1081,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": {
+        "verdict": "uncertain",
+        "reason": "insufficient_context",
+        "kept": true,
+        "v3_ok": null,
+        "v3_problems": [],
+        "override": ""
+      }
+    },
+    {
+      "id": "1ad9208e74",
+      "key": "<org.zeroturnaround.zip.ZipUtil$19: void process(java.io.InputStream,java.util.zip.ZipEntry)>@L2675/result => <org.zeroturnaround.zip.ZipUtil: void pack(java.io.File,java.util.zip.ZipOutputStream,org.zeroturnaround.zip.NameMapper,java.lang.String,boolean)>@L1766/1",
+      "source": "<org.zeroturnaround.zip.ZipUtil$19: void process(java.io.InputStream,java.util.zip.ZipEntry)>[2@L2675] %v5 = invokevirtual zipEntry.getName()/result",
+      "sink": "<org.zeroturnaround.zip.ZipUtil: void pack(java.io.File,java.util.zip.ZipOutputStream,org.zeroturnaround.zip.NameMapper,java.lang.String,boolean)>[47@L1766] invokespecial file.<init>(dir, filename)/1",
+      "sink_method": "<org.zeroturnaround.zip.ZipUtil: void pack(java.io.File,java.util.zip.ZipOutputStream,org.zeroturnaround.zip.NameMapper,java.lang.String,boolean)>",
+      "sink_line": 1766,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": {
+        "verdict": "uncertain",
+        "reason": "insufficient_context",
+        "kept": true,
+        "v3_ok": null,
+        "v3_problems": [],
+        "override": ""
+      }
+    },
+    {
+      "id": "46c111998a",
+      "key": "<org.zeroturnaround.zip.ZipUtil$19: void process(java.io.InputStream,java.util.zip.ZipEntry)>@L2675/result => <org.zeroturnaround.zip.ZipUtil$BackslashUnpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>@L1223/1",
+      "source": "<org.zeroturnaround.zip.ZipUtil$19: void process(java.io.InputStream,java.util.zip.ZipEntry)>[2@L2675] %v5 = invokevirtual zipEntry.getName()/result",
+      "sink": "<org.zeroturnaround.zip.ZipUtil$BackslashUnpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>[19@L1223] invokespecial file.<init>(parentDirectory, %v22)/1",
+      "sink_method": "<org.zeroturnaround.zip.ZipUtil$BackslashUnpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>",
+      "sink_line": 1223,
+      "gt": [],
+      "gt_weak": [],
+      "reported": false,
+      "triage": {
+        "verdict": "not_vulnerable",
+        "reason": "sanitized",
+        "kept": false,
+        "v3_ok": true,
+        "v3_problems": [],
+        "override": ""
+      }
+    },
+    {
+      "id": "b8596bef63",
+      "key": "<org.zeroturnaround.zip.ZipUtil$19: void process(java.io.InputStream,java.util.zip.ZipEntry)>@L2675/result => <org.zeroturnaround.zip.ZipUtil$BackslashUnpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>@L1229/1",
+      "source": "<org.zeroturnaround.zip.ZipUtil$19: void process(java.io.InputStream,java.util.zip.ZipEntry)>[2@L2675] %v5 = invokevirtual zipEntry.getName()/result",
+      "sink": "<org.zeroturnaround.zip.ZipUtil$BackslashUnpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>[30@L1229] invokespecial destFile.<init>(parentDirectory, %v27)/1",
+      "sink_method": "<org.zeroturnaround.zip.ZipUtil$BackslashUnpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>",
+      "sink_line": 1229,
+      "gt": [],
+      "gt_weak": [],
+      "reported": false,
+      "triage": {
+        "verdict": "not_vulnerable",
+        "reason": "sanitized",
+        "kept": false,
+        "v3_ok": true,
+        "v3_problems": [],
+        "override": ""
+      }
+    },
+    {
+      "id": "566455258c",
+      "key": "<org.zeroturnaround.zip.ZipUtil$19: void process(java.io.InputStream,java.util.zip.ZipEntry)>@L2675/result => <org.zeroturnaround.zip.ZipUtil$Unpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>@L1152/1",
+      "source": "<org.zeroturnaround.zip.ZipUtil$19: void process(java.io.InputStream,java.util.zip.ZipEntry)>[2@L2675] %v5 = invokevirtual zipEntry.getName()/result",
+      "sink": "<org.zeroturnaround.zip.ZipUtil$Unpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>[8@L1152] invokespecial file.<init>(%v11, name)/1",
+      "sink_method": "<org.zeroturnaround.zip.ZipUtil$Unpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>",
+      "sink_line": 1152,
+      "gt": [
+        "Unpacker.process"
+      ],
+      "gt_weak": [],
+      "reported": false,
+      "triage": {
+        "verdict": "not_vulnerable",
+        "reason": "sanitized",
+        "kept": false,
+        "v3_ok": true,
+        "v3_problems": [],
+        "override": ""
+      }
+    },
+    {
+      "id": "c1d15798c8",
+      "key": "<org.zeroturnaround.zip.ZipUtil$19: void process(java.io.InputStream,java.util.zip.ZipEntry)>@L2675/result => <org.zeroturnaround.zip.ZipUtil$Unwraper: void process(java.io.InputStream,java.util.zip.ZipEntry)>@L1287/1",
+      "source": "<org.zeroturnaround.zip.ZipUtil$19: void process(java.io.InputStream,java.util.zip.ZipEntry)>[2@L2675] %v5 = invokevirtual zipEntry.getName()/result",
+      "sink": "<org.zeroturnaround.zip.ZipUtil$Unwraper: void process(java.io.InputStream,java.util.zip.ZipEntry)>[31@L1287] invokespecial file.<init>(%v28, name)/1",
+      "sink_method": "<org.zeroturnaround.zip.ZipUtil$Unwraper: void process(java.io.InputStream,java.util.zip.ZipEntry)>",
+      "sink_line": 1287,
+      "gt": [
+        "Unwraper.process"
+      ],
+      "gt_weak": [],
+      "reported": false,
+      "triage": {
+        "verdict": "not_vulnerable",
+        "reason": "sanitized",
+        "kept": false,
+        "v3_ok": true,
+        "v3_problems": [],
+        "override": ""
+      }
+    },
+    {
+      "id": "74cc59b67f",
+      "key": "<org.zeroturnaround.zip.ZipUtil$19: void process(java.io.InputStream,java.util.zip.ZipEntry)>@L2675/result => <org.zeroturnaround.zip.commons.FileUtils: java.io.File getTempFileFor(java.io.File)>@L75/1",
+      "source": "<org.zeroturnaround.zip.ZipUtil$19: void process(java.io.InputStream,java.util.zip.ZipEntry)>[2@L2675] %v5 = invokevirtual zipEntry.getName()/result",
+      "sink": "<org.zeroturnaround.zip.commons.FileUtils: java.io.File getTempFileFor(java.io.File)>[15@L75] invokespecial result.<init>(parent, %v16)/1",
+      "sink_method": "<org.zeroturnaround.zip.commons.FileUtils: java.io.File getTempFileFor(java.io.File)>",
+      "sink_line": 75,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": {
+        "verdict": "uncertain",
+        "reason": "insufficient_context",
+        "kept": true,
+        "v3_ok": null,
+        "v3_problems": [],
+        "override": ""
+      }
+    },
+    {
+      "id": "1e09c56981",
+      "key": "<org.zeroturnaround.zip.ZipUtil$19: void process(java.io.InputStream,java.util.zip.ZipEntry)>@L2675/result => <org.zeroturnaround.zip.commons.FileUtilsV2_2: boolean isSymlink(java.io.File)>@L1081/1",
+      "source": "<org.zeroturnaround.zip.ZipUtil$19: void process(java.io.InputStream,java.util.zip.ZipEntry)>[2@L2675] %v5 = invokevirtual zipEntry.getName()/result",
+      "sink": "<org.zeroturnaround.zip.commons.FileUtilsV2_2: boolean isSymlink(java.io.File)>[18@L1081] invokespecial %v11.<init>(canonicalDir, %v12)/1",
+      "sink_method": "<org.zeroturnaround.zip.commons.FileUtilsV2_2: boolean isSymlink(java.io.File)>",
+      "sink_line": 1081,
+      "gt": [],
+      "gt_weak": [],
+      "reported": false,
+      "triage": {
+        "verdict": "not_vulnerable",
+        "reason": "not_dangerous_sink",
+        "kept": false,
+        "v3_ok": true,
+        "v3_problems": [],
+        "override": ""
+      }
+    },
+    {
+      "id": "e11be066e6",
+      "key": "<org.zeroturnaround.zip.ZipUtil$BackslashUnpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>@L1205/result => <org.zeroturnaround.zip.ZipUtil: void pack(java.io.File,java.util.zip.ZipOutputStream,org.zeroturnaround.zip.NameMapper,java.lang.String,boolean)>@L1766/1",
+      "source": "<org.zeroturnaround.zip.ZipUtil$BackslashUnpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>[4@L1205] %v9 = invokevirtual zipEntry.getName()/result",
+      "sink": "<org.zeroturnaround.zip.ZipUtil: void pack(java.io.File,java.util.zip.ZipOutputStream,org.zeroturnaround.zip.NameMapper,java.lang.String,boolean)>[47@L1766] invokespecial file.<init>(dir, filename)/1",
+      "sink_method": "<org.zeroturnaround.zip.ZipUtil: void pack(java.io.File,java.util.zip.ZipOutputStream,org.zeroturnaround.zip.NameMapper,java.lang.String,boolean)>",
+      "sink_line": 1766,
+      "gt": [],
+      "gt_weak": [
+        "Unpacker.process",
+        "Unwraper.process"
+      ],
+      "reported": false,
+      "triage": {
+        "verdict": "not_vulnerable",
+        "reason": "sanitized",
+        "kept": false,
+        "v3_ok": true,
+        "v3_problems": [],
+        "override": ""
+      }
+    },
+    {
+      "id": "f1cae204e3",
+      "key": "<org.zeroturnaround.zip.ZipUtil$BackslashUnpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>@L1205/result => <org.zeroturnaround.zip.ZipUtil$BackslashUnpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>@L1223/1",
+      "source": "<org.zeroturnaround.zip.ZipUtil$BackslashUnpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>[4@L1205] %v9 = invokevirtual zipEntry.getName()/result",
+      "sink": "<org.zeroturnaround.zip.ZipUtil$BackslashUnpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>[19@L1223] invokespecial file.<init>(parentDirectory, %v22)/1",
+      "sink_method": "<org.zeroturnaround.zip.ZipUtil$BackslashUnpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>",
+      "sink_line": 1223,
+      "gt": [],
+      "gt_weak": [
+        "Unpacker.process",
+        "Unwraper.process"
+      ],
+      "reported": false,
+      "triage": {
+        "verdict": "not_vulnerable",
+        "reason": "sanitized",
+        "kept": false,
+        "v3_ok": true,
+        "v3_problems": [],
+        "override": ""
+      }
+    },
+    {
+      "id": "b0dc5a26e6",
+      "key": "<org.zeroturnaround.zip.ZipUtil$BackslashUnpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>@L1205/result => <org.zeroturnaround.zip.ZipUtil$BackslashUnpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>@L1229/1",
+      "source": "<org.zeroturnaround.zip.ZipUtil$BackslashUnpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>[4@L1205] %v9 = invokevirtual zipEntry.getName()/result",
+      "sink": "<org.zeroturnaround.zip.ZipUtil$BackslashUnpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>[30@L1229] invokespecial destFile.<init>(parentDirectory, %v27)/1",
+      "sink_method": "<org.zeroturnaround.zip.ZipUtil$BackslashUnpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>",
+      "sink_line": 1229,
+      "gt": [],
+      "gt_weak": [
+        "Unpacker.process",
+        "Unwraper.process"
+      ],
+      "reported": false,
+      "triage": {
+        "verdict": "not_vulnerable",
+        "reason": "sanitized",
+        "kept": false,
+        "v3_ok": true,
+        "v3_problems": [],
+        "override": ""
+      }
+    },
+    {
+      "id": "4105e5f7a4",
+      "key": "<org.zeroturnaround.zip.ZipUtil$BackslashUnpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>@L1205/result => <org.zeroturnaround.zip.ZipUtil$BackslashUnpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>@L1243/1",
+      "source": "<org.zeroturnaround.zip.ZipUtil$BackslashUnpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>[4@L1205] %v9 = invokevirtual zipEntry.getName()/result",
+      "sink": "<org.zeroturnaround.zip.ZipUtil$BackslashUnpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>[58@L1243] invokespecial destFile#1.<init>(%v47, name)/1",
+      "sink_method": "<org.zeroturnaround.zip.ZipUtil$BackslashUnpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>",
+      "sink_line": 1243,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": {
+        "verdict": "uncertain",
+        "reason": "",
+        "kept": true,
+        "v3_ok": null,
+        "v3_problems": [],
+        "override": ""
+      }
+    },
+    {
+      "id": "f0304d5532",
+      "key": "<org.zeroturnaround.zip.ZipUtil$BackslashUnpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>@L1205/result => <org.zeroturnaround.zip.ZipUtil$Unpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>@L1152/1",
+      "source": "<org.zeroturnaround.zip.ZipUtil$BackslashUnpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>[4@L1205] %v9 = invokevirtual zipEntry.getName()/result",
+      "sink": "<org.zeroturnaround.zip.ZipUtil$Unpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>[8@L1152] invokespecial file.<init>(%v11, name)/1",
+      "sink_method": "<org.zeroturnaround.zip.ZipUtil$Unpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>",
+      "sink_line": 1152,
+      "gt": [
+        "Unpacker.process"
+      ],
+      "gt_weak": [],
+      "reported": false,
+      "triage": {
+        "verdict": "not_vulnerable",
+        "reason": "sanitized",
+        "kept": false,
+        "v3_ok": true,
+        "v3_problems": [],
+        "override": ""
+      }
+    },
+    {
+      "id": "331bcff3cb",
+      "key": "<org.zeroturnaround.zip.ZipUtil$BackslashUnpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>@L1205/result => <org.zeroturnaround.zip.ZipUtil$Unwraper: void process(java.io.InputStream,java.util.zip.ZipEntry)>@L1287/1",
+      "source": "<org.zeroturnaround.zip.ZipUtil$BackslashUnpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>[4@L1205] %v9 = invokevirtual zipEntry.getName()/result",
+      "sink": "<org.zeroturnaround.zip.ZipUtil$Unwraper: void process(java.io.InputStream,java.util.zip.ZipEntry)>[31@L1287] invokespecial file.<init>(%v28, name)/1",
+      "sink_method": "<org.zeroturnaround.zip.ZipUtil$Unwraper: void process(java.io.InputStream,java.util.zip.ZipEntry)>",
+      "sink_line": 1287,
+      "gt": [
+        "Unwraper.process"
+      ],
+      "gt_weak": [],
+      "reported": false,
+      "triage": {
+        "verdict": "not_vulnerable",
+        "reason": "sanitized",
+        "kept": false,
+        "v3_ok": true,
+        "v3_problems": [],
+        "override": ""
+      }
+    },
+    {
+      "id": "66f70a970b",
+      "key": "<org.zeroturnaround.zip.ZipUtil$BackslashUnpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>@L1205/result => <org.zeroturnaround.zip.commons.FileUtils: java.io.File getTempFileFor(java.io.File)>@L75/1",
+      "source": "<org.zeroturnaround.zip.ZipUtil$BackslashUnpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>[4@L1205] %v9 = invokevirtual zipEntry.getName()/result",
+      "sink": "<org.zeroturnaround.zip.commons.FileUtils: java.io.File getTempFileFor(java.io.File)>[15@L75] invokespecial result.<init>(parent, %v16)/1",
+      "sink_method": "<org.zeroturnaround.zip.commons.FileUtils: java.io.File getTempFileFor(java.io.File)>",
+      "sink_line": 75,
+      "gt": [],
+      "gt_weak": [
+        "Unpacker.process",
+        "Unwraper.process"
+      ],
+      "reported": false,
+      "triage": {
+        "verdict": "not_vulnerable",
+        "reason": "sanitized",
+        "kept": false,
+        "v3_ok": true,
+        "v3_problems": [],
+        "override": ""
+      }
+    },
+    {
+      "id": "064f3842ce",
+      "key": "<org.zeroturnaround.zip.ZipUtil$BackslashUnpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>@L1205/result => <org.zeroturnaround.zip.commons.FileUtilsV2_2: boolean isSymlink(java.io.File)>@L1081/1",
+      "source": "<org.zeroturnaround.zip.ZipUtil$BackslashUnpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>[4@L1205] %v9 = invokevirtual zipEntry.getName()/result",
+      "sink": "<org.zeroturnaround.zip.commons.FileUtilsV2_2: boolean isSymlink(java.io.File)>[18@L1081] invokespecial %v11.<init>(canonicalDir, %v12)/1",
+      "sink_method": "<org.zeroturnaround.zip.commons.FileUtilsV2_2: boolean isSymlink(java.io.File)>",
+      "sink_line": 1081,
+      "gt": [],
+      "gt_weak": [
+        "Unpacker.process",
+        "Unwraper.process"
+      ],
+      "reported": false,
+      "triage": {
+        "verdict": "not_vulnerable",
+        "reason": "sanitized",
+        "kept": false,
+        "v3_ok": true,
+        "v3_problems": [],
+        "override": ""
+      }
+    },
+    {
+      "id": "78083c5888",
+      "key": "<org.zeroturnaround.zip.ZipUtil$TransformerZipEntryCallback: void process(java.io.InputStream,java.util.zip.ZipEntry)>@L2927/result => <org.zeroturnaround.zip.ZipUtil: void pack(java.io.File,java.util.zip.ZipOutputStream,org.zeroturnaround.zip.NameMapper,java.lang.String,boolean)>@L1766/1",
+      "source": "<org.zeroturnaround.zip.ZipUtil$TransformerZipEntryCallback: void process(java.io.InputStream,java.util.zip.ZipEntry)>[2@L2927] %v5 = invokevirtual zipEntry.getName()/result",
+      "sink": "<org.zeroturnaround.zip.ZipUtil: void pack(java.io.File,java.util.zip.ZipOutputStream,org.zeroturnaround.zip.NameMapper,java.lang.String,boolean)>[47@L1766] invokespecial file.<init>(dir, filename)/1",
+      "sink_method": "<org.zeroturnaround.zip.ZipUtil: void pack(java.io.File,java.util.zip.ZipOutputStream,org.zeroturnaround.zip.NameMapper,java.lang.String,boolean)>",
+      "sink_line": 1766,
+      "gt": [],
+      "gt_weak": [],
+      "reported": false,
+      "triage": {
+        "verdict": "not_vulnerable",
+        "reason": "not_dangerous_sink",
+        "kept": false,
+        "v3_ok": true,
+        "v3_problems": [],
+        "override": ""
+      }
+    },
+    {
+      "id": "aeee184ce4",
+      "key": "<org.zeroturnaround.zip.ZipUtil$TransformerZipEntryCallback: void process(java.io.InputStream,java.util.zip.ZipEntry)>@L2927/result => <org.zeroturnaround.zip.ZipUtil$BackslashUnpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>@L1223/1",
+      "source": "<org.zeroturnaround.zip.ZipUtil$TransformerZipEntryCallback: void process(java.io.InputStream,java.util.zip.ZipEntry)>[2@L2927] %v5 = invokevirtual zipEntry.getName()/result",
+      "sink": "<org.zeroturnaround.zip.ZipUtil$BackslashUnpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>[19@L1223] invokespecial file.<init>(parentDirectory, %v22)/1",
+      "sink_method": "<org.zeroturnaround.zip.ZipUtil$BackslashUnpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>",
+      "sink_line": 1223,
+      "gt": [],
+      "gt_weak": [],
+      "reported": false,
+      "triage": {
+        "verdict": "not_vulnerable",
+        "reason": "sanitized",
+        "kept": false,
+        "v3_ok": true,
+        "v3_problems": [],
+        "override": ""
+      }
+    },
+    {
+      "id": "a30bdeed5f",
+      "key": "<org.zeroturnaround.zip.ZipUtil$TransformerZipEntryCallback: void process(java.io.InputStream,java.util.zip.ZipEntry)>@L2927/result => <org.zeroturnaround.zip.ZipUtil$BackslashUnpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>@L1229/1",
+      "source": "<org.zeroturnaround.zip.ZipUtil$TransformerZipEntryCallback: void process(java.io.InputStream,java.util.zip.ZipEntry)>[2@L2927] %v5 = invokevirtual zipEntry.getName()/result",
+      "sink": "<org.zeroturnaround.zip.ZipUtil$BackslashUnpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>[30@L1229] invokespecial destFile.<init>(parentDirectory, %v27)/1",
+      "sink_method": "<org.zeroturnaround.zip.ZipUtil$BackslashUnpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>",
+      "sink_line": 1229,
+      "gt": [],
+      "gt_weak": [],
+      "reported": false,
+      "triage": {
+        "verdict": "not_vulnerable",
+        "reason": "sanitized",
+        "kept": false,
+        "v3_ok": true,
+        "v3_problems": [],
+        "override": ""
+      }
+    },
+    {
+      "id": "217b8cd94d",
+      "key": "<org.zeroturnaround.zip.ZipUtil$TransformerZipEntryCallback: void process(java.io.InputStream,java.util.zip.ZipEntry)>@L2927/result => <org.zeroturnaround.zip.ZipUtil$Unpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>@L1152/1",
+      "source": "<org.zeroturnaround.zip.ZipUtil$TransformerZipEntryCallback: void process(java.io.InputStream,java.util.zip.ZipEntry)>[2@L2927] %v5 = invokevirtual zipEntry.getName()/result",
+      "sink": "<org.zeroturnaround.zip.ZipUtil$Unpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>[8@L1152] invokespecial file.<init>(%v11, name)/1",
+      "sink_method": "<org.zeroturnaround.zip.ZipUtil$Unpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>",
+      "sink_line": 1152,
+      "gt": [
+        "Unpacker.process"
+      ],
+      "gt_weak": [],
+      "reported": false,
+      "triage": {
+        "verdict": "not_vulnerable",
+        "reason": "sanitized",
+        "kept": false,
+        "v3_ok": true,
+        "v3_problems": [],
+        "override": ""
+      }
+    },
+    {
+      "id": "5ff6157a94",
+      "key": "<org.zeroturnaround.zip.ZipUtil$TransformerZipEntryCallback: void process(java.io.InputStream,java.util.zip.ZipEntry)>@L2927/result => <org.zeroturnaround.zip.ZipUtil$Unwraper: void process(java.io.InputStream,java.util.zip.ZipEntry)>@L1287/1",
+      "source": "<org.zeroturnaround.zip.ZipUtil$TransformerZipEntryCallback: void process(java.io.InputStream,java.util.zip.ZipEntry)>[2@L2927] %v5 = invokevirtual zipEntry.getName()/result",
+      "sink": "<org.zeroturnaround.zip.ZipUtil$Unwraper: void process(java.io.InputStream,java.util.zip.ZipEntry)>[31@L1287] invokespecial file.<init>(%v28, name)/1",
+      "sink_method": "<org.zeroturnaround.zip.ZipUtil$Unwraper: void process(java.io.InputStream,java.util.zip.ZipEntry)>",
+      "sink_line": 1287,
+      "gt": [
+        "Unwraper.process"
+      ],
+      "gt_weak": [],
+      "reported": false,
+      "triage": {
+        "verdict": "not_vulnerable",
+        "reason": "sanitized",
+        "kept": false,
+        "v3_ok": true,
+        "v3_problems": [],
+        "override": ""
+      }
+    },
+    {
+      "id": "25f7806247",
+      "key": "<org.zeroturnaround.zip.ZipUtil$TransformerZipEntryCallback: void process(java.io.InputStream,java.util.zip.ZipEntry)>@L2927/result => <org.zeroturnaround.zip.commons.FileUtils: java.io.File getTempFileFor(java.io.File)>@L75/1",
+      "source": "<org.zeroturnaround.zip.ZipUtil$TransformerZipEntryCallback: void process(java.io.InputStream,java.util.zip.ZipEntry)>[2@L2927] %v5 = invokevirtual zipEntry.getName()/result",
+      "sink": "<org.zeroturnaround.zip.commons.FileUtils: java.io.File getTempFileFor(java.io.File)>[15@L75] invokespecial result.<init>(parent, %v16)/1",
+      "sink_method": "<org.zeroturnaround.zip.commons.FileUtils: java.io.File getTempFileFor(java.io.File)>",
+      "sink_line": 75,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": {
+        "verdict": "uncertain",
+        "reason": "insufficient_context",
+        "kept": true,
+        "v3_ok": null,
+        "v3_problems": [],
+        "override": ""
+      }
+    },
+    {
+      "id": "e3d63b673b",
+      "key": "<org.zeroturnaround.zip.ZipUtil$TransformerZipEntryCallback: void process(java.io.InputStream,java.util.zip.ZipEntry)>@L2927/result => <org.zeroturnaround.zip.commons.FileUtilsV2_2: boolean isSymlink(java.io.File)>@L1081/1",
+      "source": "<org.zeroturnaround.zip.ZipUtil$TransformerZipEntryCallback: void process(java.io.InputStream,java.util.zip.ZipEntry)>[2@L2927] %v5 = invokevirtual zipEntry.getName()/result",
+      "sink": "<org.zeroturnaround.zip.commons.FileUtilsV2_2: boolean isSymlink(java.io.File)>[18@L1081] invokespecial %v11.<init>(canonicalDir, %v12)/1",
+      "sink_method": "<org.zeroturnaround.zip.commons.FileUtilsV2_2: boolean isSymlink(java.io.File)>",
+      "sink_line": 1081,
+      "gt": [],
+      "gt_weak": [],
+      "reported": false,
+      "triage": {
+        "verdict": "not_vulnerable",
+        "reason": "not_dangerous_sink",
+        "kept": false,
+        "v3_ok": true,
+        "v3_problems": [],
+        "override": ""
+      }
+    },
+    {
+      "id": "420b96c779",
+      "key": "<org.zeroturnaround.zip.ZipUtil$Unpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>@L1150/result => <org.zeroturnaround.zip.ZipUtil: void pack(java.io.File,java.util.zip.ZipOutputStream,org.zeroturnaround.zip.NameMapper,java.lang.String,boolean)>@L1766/1",
+      "source": "<org.zeroturnaround.zip.ZipUtil$Unpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>[3@L1150] %v7 = invokevirtual zipEntry.getName()/result",
+      "sink": "<org.zeroturnaround.zip.ZipUtil: void pack(java.io.File,java.util.zip.ZipOutputStream,org.zeroturnaround.zip.NameMapper,java.lang.String,boolean)>[47@L1766] invokespecial file.<init>(dir, filename)/1",
+      "sink_method": "<org.zeroturnaround.zip.ZipUtil: void pack(java.io.File,java.util.zip.ZipOutputStream,org.zeroturnaround.zip.NameMapper,java.lang.String,boolean)>",
+      "sink_line": 1766,
+      "gt": [
+        "Unpacker.process"
+      ],
+      "gt_weak": [],
+      "reported": false,
+      "triage": {
+        "verdict": "not_vulnerable",
+        "reason": "sanitized",
+        "kept": false,
+        "v3_ok": true,
+        "v3_problems": [],
+        "override": ""
+      }
+    },
+    {
+      "id": "ff270a482d",
+      "key": "<org.zeroturnaround.zip.ZipUtil$Unpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>@L1150/result => <org.zeroturnaround.zip.ZipUtil$BackslashUnpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>@L1223/1",
+      "source": "<org.zeroturnaround.zip.ZipUtil$Unpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>[3@L1150] %v7 = invokevirtual zipEntry.getName()/result",
+      "sink": "<org.zeroturnaround.zip.ZipUtil$BackslashUnpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>[19@L1223] invokespecial file.<init>(parentDirectory, %v22)/1",
+      "sink_method": "<org.zeroturnaround.zip.ZipUtil$BackslashUnpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>",
+      "sink_line": 1223,
+      "gt": [
+        "Unpacker.process"
+      ],
+      "gt_weak": [],
+      "reported": false,
+      "triage": {
+        "verdict": "not_vulnerable",
+        "reason": "sanitized",
+        "kept": false,
+        "v3_ok": true,
+        "v3_problems": [],
+        "override": ""
+      }
+    },
+    {
+      "id": "6b517d7a89",
+      "key": "<org.zeroturnaround.zip.ZipUtil$Unpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>@L1150/result => <org.zeroturnaround.zip.ZipUtil$BackslashUnpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>@L1229/1",
+      "source": "<org.zeroturnaround.zip.ZipUtil$Unpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>[3@L1150] %v7 = invokevirtual zipEntry.getName()/result",
+      "sink": "<org.zeroturnaround.zip.ZipUtil$BackslashUnpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>[30@L1229] invokespecial destFile.<init>(parentDirectory, %v27)/1",
+      "sink_method": "<org.zeroturnaround.zip.ZipUtil$BackslashUnpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>",
+      "sink_line": 1229,
+      "gt": [
+        "Unpacker.process"
+      ],
+      "gt_weak": [],
+      "reported": false,
+      "triage": {
+        "verdict": "not_vulnerable",
+        "reason": "sanitized",
+        "kept": false,
+        "v3_ok": true,
+        "v3_problems": [],
+        "override": ""
+      }
+    },
+    {
+      "id": "f9585c75c2",
+      "key": "<org.zeroturnaround.zip.ZipUtil$Unpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>@L1150/result => <org.zeroturnaround.zip.ZipUtil$Unpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>@L1152/1",
+      "source": "<org.zeroturnaround.zip.ZipUtil$Unpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>[3@L1150] %v7 = invokevirtual zipEntry.getName()/result",
+      "sink": "<org.zeroturnaround.zip.ZipUtil$Unpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>[8@L1152] invokespecial file.<init>(%v11, name)/1",
+      "sink_method": "<org.zeroturnaround.zip.ZipUtil$Unpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>",
+      "sink_line": 1152,
+      "gt": [
+        "Unpacker.process"
+      ],
+      "gt_weak": [],
+      "reported": false,
+      "triage": {
+        "verdict": "not_vulnerable",
+        "reason": "sanitized",
+        "kept": false,
+        "v3_ok": true,
+        "v3_problems": [],
+        "override": ""
+      }
+    },
+    {
+      "id": "43bfa32676",
+      "key": "<org.zeroturnaround.zip.ZipUtil$Unpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>@L1150/result => <org.zeroturnaround.zip.ZipUtil$Unwraper: void process(java.io.InputStream,java.util.zip.ZipEntry)>@L1287/1",
+      "source": "<org.zeroturnaround.zip.ZipUtil$Unpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>[3@L1150] %v7 = invokevirtual zipEntry.getName()/result",
+      "sink": "<org.zeroturnaround.zip.ZipUtil$Unwraper: void process(java.io.InputStream,java.util.zip.ZipEntry)>[31@L1287] invokespecial file.<init>(%v28, name)/1",
+      "sink_method": "<org.zeroturnaround.zip.ZipUtil$Unwraper: void process(java.io.InputStream,java.util.zip.ZipEntry)>",
+      "sink_line": 1287,
+      "gt": [
+        "Unpacker.process",
+        "Unwraper.process"
+      ],
+      "gt_weak": [],
+      "reported": false,
+      "triage": {
+        "verdict": "not_vulnerable",
+        "reason": "sanitized",
+        "kept": false,
+        "v3_ok": true,
+        "v3_problems": [],
+        "override": ""
+      }
+    },
+    {
+      "id": "48c4911853",
+      "key": "<org.zeroturnaround.zip.ZipUtil$Unpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>@L1150/result => <org.zeroturnaround.zip.commons.FileUtils: java.io.File getTempFileFor(java.io.File)>@L75/1",
+      "source": "<org.zeroturnaround.zip.ZipUtil$Unpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>[3@L1150] %v7 = invokevirtual zipEntry.getName()/result",
+      "sink": "<org.zeroturnaround.zip.commons.FileUtils: java.io.File getTempFileFor(java.io.File)>[15@L75] invokespecial result.<init>(parent, %v16)/1",
+      "sink_method": "<org.zeroturnaround.zip.commons.FileUtils: java.io.File getTempFileFor(java.io.File)>",
+      "sink_line": 75,
+      "gt": [
+        "Unpacker.process"
+      ],
+      "gt_weak": [],
+      "reported": false,
+      "triage": {
+        "verdict": "not_vulnerable",
+        "reason": "sanitized",
+        "kept": false,
+        "v3_ok": true,
+        "v3_problems": [],
+        "override": ""
+      }
+    },
+    {
+      "id": "16d2da9771",
+      "key": "<org.zeroturnaround.zip.ZipUtil$Unpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>@L1150/result => <org.zeroturnaround.zip.commons.FileUtilsV2_2: boolean isSymlink(java.io.File)>@L1081/1",
+      "source": "<org.zeroturnaround.zip.ZipUtil$Unpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>[3@L1150] %v7 = invokevirtual zipEntry.getName()/result",
+      "sink": "<org.zeroturnaround.zip.commons.FileUtilsV2_2: boolean isSymlink(java.io.File)>[18@L1081] invokespecial %v11.<init>(canonicalDir, %v12)/1",
+      "sink_method": "<org.zeroturnaround.zip.commons.FileUtilsV2_2: boolean isSymlink(java.io.File)>",
+      "sink_line": 1081,
+      "gt": [
+        "Unpacker.process"
+      ],
+      "gt_weak": [],
+      "reported": false,
+      "triage": {
+        "verdict": "not_vulnerable",
+        "reason": "sanitized",
+        "kept": false,
+        "v3_ok": true,
+        "v3_problems": [],
+        "override": ""
+      }
+    },
+    {
+      "id": "f63eb4f9ad",
+      "key": "<org.zeroturnaround.zip.ZipUtil$Unwraper: void process(java.io.InputStream,java.util.zip.ZipEntry)>@L1277/result => <org.zeroturnaround.zip.ZipUtil: void pack(java.io.File,java.util.zip.ZipOutputStream,org.zeroturnaround.zip.NameMapper,java.lang.String,boolean)>@L1766/1",
+      "source": "<org.zeroturnaround.zip.ZipUtil$Unwraper: void process(java.io.InputStream,java.util.zip.ZipEntry)>[2@L1277] %v6 = invokevirtual zipEntry.getName()/result",
+      "sink": "<org.zeroturnaround.zip.ZipUtil: void pack(java.io.File,java.util.zip.ZipOutputStream,org.zeroturnaround.zip.NameMapper,java.lang.String,boolean)>[47@L1766] invokespecial file.<init>(dir, filename)/1",
+      "sink_method": "<org.zeroturnaround.zip.ZipUtil: void pack(java.io.File,java.util.zip.ZipOutputStream,org.zeroturnaround.zip.NameMapper,java.lang.String,boolean)>",
+      "sink_line": 1766,
+      "gt": [
+        "Unwraper.process"
+      ],
+      "gt_weak": [],
+      "reported": false,
+      "triage": {
+        "verdict": "not_vulnerable",
+        "reason": "sanitized",
+        "kept": false,
+        "v3_ok": true,
+        "v3_problems": [],
+        "override": ""
+      }
+    },
+    {
+      "id": "7c98daf6cd",
+      "key": "<org.zeroturnaround.zip.ZipUtil$Unwraper: void process(java.io.InputStream,java.util.zip.ZipEntry)>@L1277/result => <org.zeroturnaround.zip.ZipUtil$BackslashUnpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>@L1223/1",
+      "source": "<org.zeroturnaround.zip.ZipUtil$Unwraper: void process(java.io.InputStream,java.util.zip.ZipEntry)>[2@L1277] %v6 = invokevirtual zipEntry.getName()/result",
+      "sink": "<org.zeroturnaround.zip.ZipUtil$BackslashUnpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>[19@L1223] invokespecial file.<init>(parentDirectory, %v22)/1",
+      "sink_method": "<org.zeroturnaround.zip.ZipUtil$BackslashUnpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>",
+      "sink_line": 1223,
+      "gt": [
+        "Unwraper.process"
+      ],
+      "gt_weak": [],
+      "reported": false,
+      "triage": {
+        "verdict": "not_vulnerable",
+        "reason": "sanitized",
+        "kept": false,
+        "v3_ok": true,
+        "v3_problems": [],
+        "override": ""
+      }
+    },
+    {
+      "id": "a42c517c66",
+      "key": "<org.zeroturnaround.zip.ZipUtil$Unwraper: void process(java.io.InputStream,java.util.zip.ZipEntry)>@L1277/result => <org.zeroturnaround.zip.ZipUtil$BackslashUnpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>@L1229/1",
+      "source": "<org.zeroturnaround.zip.ZipUtil$Unwraper: void process(java.io.InputStream,java.util.zip.ZipEntry)>[2@L1277] %v6 = invokevirtual zipEntry.getName()/result",
+      "sink": "<org.zeroturnaround.zip.ZipUtil$BackslashUnpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>[30@L1229] invokespecial destFile.<init>(parentDirectory, %v27)/1",
+      "sink_method": "<org.zeroturnaround.zip.ZipUtil$BackslashUnpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>",
+      "sink_line": 1229,
+      "gt": [
+        "Unwraper.process"
+      ],
+      "gt_weak": [],
+      "reported": false,
+      "triage": {
+        "verdict": "not_vulnerable",
+        "reason": "sanitized",
+        "kept": false,
+        "v3_ok": true,
+        "v3_problems": [],
+        "override": ""
+      }
+    },
+    {
+      "id": "c5af9c7fc9",
+      "key": "<org.zeroturnaround.zip.ZipUtil$Unwraper: void process(java.io.InputStream,java.util.zip.ZipEntry)>@L1277/result => <org.zeroturnaround.zip.ZipUtil$Unpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>@L1152/1",
+      "source": "<org.zeroturnaround.zip.ZipUtil$Unwraper: void process(java.io.InputStream,java.util.zip.ZipEntry)>[2@L1277] %v6 = invokevirtual zipEntry.getName()/result",
+      "sink": "<org.zeroturnaround.zip.ZipUtil$Unpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>[8@L1152] invokespecial file.<init>(%v11, name)/1",
+      "sink_method": "<org.zeroturnaround.zip.ZipUtil$Unpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>",
+      "sink_line": 1152,
+      "gt": [
+        "Unwraper.process",
+        "Unpacker.process"
+      ],
+      "gt_weak": [],
+      "reported": false,
+      "triage": {
+        "verdict": "not_vulnerable",
+        "reason": "sanitized",
+        "kept": false,
+        "v3_ok": true,
+        "v3_problems": [],
+        "override": ""
+      }
+    },
+    {
+      "id": "5b70f47e5f",
+      "key": "<org.zeroturnaround.zip.ZipUtil$Unwraper: void process(java.io.InputStream,java.util.zip.ZipEntry)>@L1277/result => <org.zeroturnaround.zip.ZipUtil$Unwraper: void process(java.io.InputStream,java.util.zip.ZipEntry)>@L1287/1",
+      "source": "<org.zeroturnaround.zip.ZipUtil$Unwraper: void process(java.io.InputStream,java.util.zip.ZipEntry)>[2@L1277] %v6 = invokevirtual zipEntry.getName()/result",
+      "sink": "<org.zeroturnaround.zip.ZipUtil$Unwraper: void process(java.io.InputStream,java.util.zip.ZipEntry)>[31@L1287] invokespecial file.<init>(%v28, name)/1",
+      "sink_method": "<org.zeroturnaround.zip.ZipUtil$Unwraper: void process(java.io.InputStream,java.util.zip.ZipEntry)>",
+      "sink_line": 1287,
+      "gt": [
+        "Unwraper.process"
+      ],
+      "gt_weak": [],
+      "reported": false,
+      "triage": {
+        "verdict": "not_vulnerable",
+        "reason": "sanitized",
+        "kept": false,
+        "v3_ok": true,
+        "v3_problems": [],
+        "override": ""
+      }
+    },
+    {
+      "id": "0f7748a144",
+      "key": "<org.zeroturnaround.zip.ZipUtil$Unwraper: void process(java.io.InputStream,java.util.zip.ZipEntry)>@L1277/result => <org.zeroturnaround.zip.commons.FileUtils: java.io.File getTempFileFor(java.io.File)>@L75/1",
+      "source": "<org.zeroturnaround.zip.ZipUtil$Unwraper: void process(java.io.InputStream,java.util.zip.ZipEntry)>[2@L1277] %v6 = invokevirtual zipEntry.getName()/result",
+      "sink": "<org.zeroturnaround.zip.commons.FileUtils: java.io.File getTempFileFor(java.io.File)>[15@L75] invokespecial result.<init>(parent, %v16)/1",
+      "sink_method": "<org.zeroturnaround.zip.commons.FileUtils: java.io.File getTempFileFor(java.io.File)>",
+      "sink_line": 75,
+      "gt": [
+        "Unwraper.process"
+      ],
+      "gt_weak": [],
+      "reported": false,
+      "triage": {
+        "verdict": "not_vulnerable",
+        "reason": "sanitized",
+        "kept": false,
+        "v3_ok": true,
+        "v3_problems": [],
+        "override": ""
+      }
+    },
+    {
+      "id": "53bb059766",
+      "key": "<org.zeroturnaround.zip.ZipUtil$Unwraper: void process(java.io.InputStream,java.util.zip.ZipEntry)>@L1277/result => <org.zeroturnaround.zip.commons.FileUtilsV2_2: boolean isSymlink(java.io.File)>@L1081/1",
+      "source": "<org.zeroturnaround.zip.ZipUtil$Unwraper: void process(java.io.InputStream,java.util.zip.ZipEntry)>[2@L1277] %v6 = invokevirtual zipEntry.getName()/result",
+      "sink": "<org.zeroturnaround.zip.commons.FileUtilsV2_2: boolean isSymlink(java.io.File)>[18@L1081] invokespecial %v11.<init>(canonicalDir, %v12)/1",
+      "sink_method": "<org.zeroturnaround.zip.commons.FileUtilsV2_2: boolean isSymlink(java.io.File)>",
+      "sink_line": 1081,
+      "gt": [
+        "Unwraper.process"
+      ],
+      "gt_weak": [],
+      "reported": false,
+      "triage": {
+        "verdict": "not_vulnerable",
+        "reason": "sanitized",
+        "kept": false,
+        "v3_ok": true,
+        "v3_problems": [],
+        "override": ""
+      }
+    },
+    {
+      "id": "00ec0f7922",
+      "key": "<org.zeroturnaround.zip.ZipUtil$Unwraper: void process(java.io.InputStream,java.util.zip.ZipEntry)>@L1285/result => <org.zeroturnaround.zip.ZipUtil: void pack(java.io.File,java.util.zip.ZipOutputStream,org.zeroturnaround.zip.NameMapper,java.lang.String,boolean)>@L1766/1",
+      "source": "<org.zeroturnaround.zip.ZipUtil$Unwraper: void process(java.io.InputStream,java.util.zip.ZipEntry)>[25@L1285] %v24 = invokevirtual zipEntry.getName()/result",
+      "sink": "<org.zeroturnaround.zip.ZipUtil: void pack(java.io.File,java.util.zip.ZipOutputStream,org.zeroturnaround.zip.NameMapper,java.lang.String,boolean)>[47@L1766] invokespecial file.<init>(dir, filename)/1",
+      "sink_method": "<org.zeroturnaround.zip.ZipUtil: void pack(java.io.File,java.util.zip.ZipOutputStream,org.zeroturnaround.zip.NameMapper,java.lang.String,boolean)>",
+      "sink_line": 1766,
+      "gt": [
+        "Unwraper.process"
+      ],
+      "gt_weak": [],
+      "reported": false,
+      "triage": {
+        "verdict": "not_vulnerable",
+        "reason": "sanitized",
+        "kept": false,
+        "v3_ok": true,
+        "v3_problems": [],
+        "override": ""
+      }
+    },
+    {
+      "id": "1db230b9c4",
+      "key": "<org.zeroturnaround.zip.ZipUtil$Unwraper: void process(java.io.InputStream,java.util.zip.ZipEntry)>@L1285/result => <org.zeroturnaround.zip.ZipUtil$BackslashUnpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>@L1223/1",
+      "source": "<org.zeroturnaround.zip.ZipUtil$Unwraper: void process(java.io.InputStream,java.util.zip.ZipEntry)>[25@L1285] %v24 = invokevirtual zipEntry.getName()/result",
+      "sink": "<org.zeroturnaround.zip.ZipUtil$BackslashUnpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>[19@L1223] invokespecial file.<init>(parentDirectory, %v22)/1",
+      "sink_method": "<org.zeroturnaround.zip.ZipUtil$BackslashUnpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>",
+      "sink_line": 1223,
+      "gt": [
+        "Unwraper.process"
+      ],
+      "gt_weak": [],
+      "reported": false,
+      "triage": {
+        "verdict": "not_vulnerable",
+        "reason": "sanitized",
+        "kept": false,
+        "v3_ok": true,
+        "v3_problems": [],
+        "override": ""
+      }
+    },
+    {
+      "id": "4e0f931a96",
+      "key": "<org.zeroturnaround.zip.ZipUtil$Unwraper: void process(java.io.InputStream,java.util.zip.ZipEntry)>@L1285/result => <org.zeroturnaround.zip.ZipUtil$BackslashUnpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>@L1229/1",
+      "source": "<org.zeroturnaround.zip.ZipUtil$Unwraper: void process(java.io.InputStream,java.util.zip.ZipEntry)>[25@L1285] %v24 = invokevirtual zipEntry.getName()/result",
+      "sink": "<org.zeroturnaround.zip.ZipUtil$BackslashUnpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>[30@L1229] invokespecial destFile.<init>(parentDirectory, %v27)/1",
+      "sink_method": "<org.zeroturnaround.zip.ZipUtil$BackslashUnpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>",
+      "sink_line": 1229,
+      "gt": [
+        "Unwraper.process"
+      ],
+      "gt_weak": [],
+      "reported": false,
+      "triage": {
+        "verdict": "not_vulnerable",
+        "reason": "sanitized",
+        "kept": false,
+        "v3_ok": true,
+        "v3_problems": [],
+        "override": ""
+      }
+    },
+    {
+      "id": "f3c4a0cf73",
+      "key": "<org.zeroturnaround.zip.ZipUtil$Unwraper: void process(java.io.InputStream,java.util.zip.ZipEntry)>@L1285/result => <org.zeroturnaround.zip.ZipUtil$Unpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>@L1152/1",
+      "source": "<org.zeroturnaround.zip.ZipUtil$Unwraper: void process(java.io.InputStream,java.util.zip.ZipEntry)>[25@L1285] %v24 = invokevirtual zipEntry.getName()/result",
+      "sink": "<org.zeroturnaround.zip.ZipUtil$Unpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>[8@L1152] invokespecial file.<init>(%v11, name)/1",
+      "sink_method": "<org.zeroturnaround.zip.ZipUtil$Unpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>",
+      "sink_line": 1152,
+      "gt": [
+        "Unwraper.process",
+        "Unpacker.process"
+      ],
+      "gt_weak": [],
+      "reported": false,
+      "triage": {
+        "verdict": "not_vulnerable",
+        "reason": "sanitized",
+        "kept": false,
+        "v3_ok": true,
+        "v3_problems": [],
+        "override": ""
+      }
+    },
+    {
+      "id": "752c0fdedd",
+      "key": "<org.zeroturnaround.zip.ZipUtil$Unwraper: void process(java.io.InputStream,java.util.zip.ZipEntry)>@L1285/result => <org.zeroturnaround.zip.ZipUtil$Unwraper: void process(java.io.InputStream,java.util.zip.ZipEntry)>@L1287/1",
+      "source": "<org.zeroturnaround.zip.ZipUtil$Unwraper: void process(java.io.InputStream,java.util.zip.ZipEntry)>[25@L1285] %v24 = invokevirtual zipEntry.getName()/result",
+      "sink": "<org.zeroturnaround.zip.ZipUtil$Unwraper: void process(java.io.InputStream,java.util.zip.ZipEntry)>[31@L1287] invokespecial file.<init>(%v28, name)/1",
+      "sink_method": "<org.zeroturnaround.zip.ZipUtil$Unwraper: void process(java.io.InputStream,java.util.zip.ZipEntry)>",
+      "sink_line": 1287,
+      "gt": [
+        "Unwraper.process"
+      ],
+      "gt_weak": [],
+      "reported": false,
+      "triage": {
+        "verdict": "not_vulnerable",
+        "reason": "sanitized",
+        "kept": false,
+        "v3_ok": true,
+        "v3_problems": [],
+        "override": ""
+      }
+    },
+    {
+      "id": "486017d526",
+      "key": "<org.zeroturnaround.zip.ZipUtil$Unwraper: void process(java.io.InputStream,java.util.zip.ZipEntry)>@L1285/result => <org.zeroturnaround.zip.commons.FileUtils: java.io.File getTempFileFor(java.io.File)>@L75/1",
+      "source": "<org.zeroturnaround.zip.ZipUtil$Unwraper: void process(java.io.InputStream,java.util.zip.ZipEntry)>[25@L1285] %v24 = invokevirtual zipEntry.getName()/result",
+      "sink": "<org.zeroturnaround.zip.commons.FileUtils: java.io.File getTempFileFor(java.io.File)>[15@L75] invokespecial result.<init>(parent, %v16)/1",
+      "sink_method": "<org.zeroturnaround.zip.commons.FileUtils: java.io.File getTempFileFor(java.io.File)>",
+      "sink_line": 75,
+      "gt": [
+        "Unwraper.process"
+      ],
+      "gt_weak": [],
+      "reported": false,
+      "triage": {
+        "verdict": "not_vulnerable",
+        "reason": "sanitized",
+        "kept": false,
+        "v3_ok": true,
+        "v3_problems": [],
+        "override": ""
+      }
+    },
+    {
+      "id": "225ad7f353",
+      "key": "<org.zeroturnaround.zip.ZipUtil$Unwraper: void process(java.io.InputStream,java.util.zip.ZipEntry)>@L1285/result => <org.zeroturnaround.zip.commons.FileUtilsV2_2: boolean isSymlink(java.io.File)>@L1081/1",
+      "source": "<org.zeroturnaround.zip.ZipUtil$Unwraper: void process(java.io.InputStream,java.util.zip.ZipEntry)>[25@L1285] %v24 = invokevirtual zipEntry.getName()/result",
+      "sink": "<org.zeroturnaround.zip.commons.FileUtilsV2_2: boolean isSymlink(java.io.File)>[18@L1081] invokespecial %v11.<init>(canonicalDir, %v12)/1",
+      "sink_method": "<org.zeroturnaround.zip.commons.FileUtilsV2_2: boolean isSymlink(java.io.File)>",
+      "sink_line": 1081,
+      "gt": [
+        "Unwraper.process"
+      ],
+      "gt_weak": [],
+      "reported": false,
+      "triage": {
+        "verdict": "not_vulnerable",
+        "reason": "sanitized",
+        "kept": false,
+        "v3_ok": true,
+        "v3_problems": [],
+        "override": ""
+      }
+    }
+  ],
+  "result_revision": {
+    "kind": "validator-correction-replay",
+    "original_raw_n1_n2_responses_reused": true,
+    "historical_cache_model_key": "default",
+    "new_api_request_model": "qwen3.6:35b",
+    "spec_vote_version": 2,
+    "v3_exact_visible_lines": true
+  }
+}

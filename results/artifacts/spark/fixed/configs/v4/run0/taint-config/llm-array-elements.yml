@@ -1,0 +1,3 @@
+# Array-element sinks added symbolically for accepted N2 array sinks (I-23).
+sinks:
+  - { method: "<java.io.OutputStream: void write(byte[])>", index: "0[*]" }

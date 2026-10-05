@@ -1,0 +1,3120 @@
+{
+  "prompt_version": "e5fc00c6",
+  "decisions": [
+    {
+      "flow_id": "a08e13e26e",
+      "flow_key": "DRIVER => <org.zeroturnaround.zip.ZipEntryUtil: java.util.zip.ZipEntry copy(java.util.zip.ZipEntry,java.lang.String)>@L61/0",
+      "verdict": "uncertain",
+      "reason": "insufficient_context",
+      "kept": true,
+      "v3_ok": null,
+      "v3_problems": [],
+      "evidence": [
+        {
+          "file": "org/zeroturnaround/zip/ZipEntryUtil.java",
+          "line": 61,
+          "note": "Sink is ZipEntry constructor, which stores the name but does not perform file I/O itself."
+        }
+      ],
+      "explanation": "The reported sink is the `ZipEntry` constructor, which merely creates an in-memory object representing a zip entry; it does not write to the file system. CWE-022 requires a file system operation (like `FileInputStream` or `FileOutputStream`) to be exploitable. Without seeing the caller of `ZipEntryUtil.copy` and how the resulting `ZipEntry` is used (e.g., passed to `ZipOutputStream` or `ZipFile`), it is impossible to confirm if the path traversal leads to actual file system access outside the intended directory.",
+      "samples": [
+        "uncertain"
+      ],
+      "methods_shown": [
+        "<org.zeroturnaround.zip.ZipEntryUtil: java.util.zip.ZipEntry copy(java.util.zip.ZipEntry,java.lang.String)>"
+      ],
+      "override": ""
+    },
+    {
+      "flow_id": "9baccd58a1",
+      "flow_key": "DRIVER => <org.zeroturnaround.zip.ZipEntryUtil: java.util.zip.ZipEntry fromFile(java.lang.String,java.io.File)>@L144/0",
+      "verdict": "uncertain",
+      "reason": "insufficient_context",
+      "kept": true,
+      "v3_ok": null,
+      "v3_problems": [],
+      "evidence": [
+        {
+          "file": "org/zeroturnaround/zip/ZipEntryUtil.java",
+          "line": 144,
+          "note": "Sink: ZipEntry constructor accepts the tainted name directly"
+        },
+        {
+          "file": "org/zeroturnaround/zip/FileSource.java",
+          "line": 36,
+          "note": "Source of taint in library: path string is stored without validation"
+        }
+      ],
+      "explanation": "The reported flow identifies a taint path from an attacker-controlled source to the ZipEntry constructor, which is a known sink for path traversal if the entry name is used to extract files. However, the provided code snippets only show the internal library methods (FileSource, ZipEntryUtil) and do not show the application-level code that instantiates these classes (e.g., calls to ZipUtil.replaceEntry or similar). Without seeing the application code that passes the user input into the library, it is impossible to confirm if the tainted data actually reaches the sink via a dangerous operation (like extraction) or if the library is used in a context where the entry name is not used for file system access (e.g., only for listing). Therefore, the context is insufficient to definitively rule in or out the vulnerability.",
+      "samples": [
+        "uncertain"
+      ],
+      "methods_shown": [
+        "<org.zeroturnaround.zip.FileSource: java.util.zip.ZipEntry getEntry()>",
+        "<org.zeroturnaround.zip.FileSource: void <init>(java.lang.String,java.io.File)>",
+        "<org.zeroturnaround.zip.IdentityNameMapper: java.lang.String map(java.lang.String)>",
+        "<org.zeroturnaround.zip.ZipUtil$13: boolean act(java.io.File)>",
+        "<org.zeroturnaround.zip.ZipUtil$13: void <init>(java.io.File,java.lang.String,java.io.File)>",
+        "<org.zeroturnaround.zip.ZipEntryUtil: java.util.zip.ZipEntry fromFile(java.lang.String,java.io.File)>"
+      ],
+      "override": ""
+    },
+    {
+      "flow_id": "3e3b7ee68f",
+      "flow_key": "DRIVER => <org.zeroturnaround.zip.ZipUtil: void pack(java.io.File,java.util.zip.ZipOutputStream,org.zeroturnaround.zip.NameMapper,java.lang.String,boolean)>@L1730/1",
+      "verdict": "uncertain",
+      "reason": "insufficient_context",
+      "kept": true,
+      "v3_ok": null,
+      "v3_problems": [],
+      "evidence": [
+        {
+          "file": "org/zeroturnaround/zip/ZipUtil.java",
+          "line": 1730,
+          "note": "File constructor used with dir and filename"
+        },
+        {
+          "file": "org/zeroturnaround/zip/ZipUtil.java",
+          "line": 1738,
+          "note": "NameMapper.map() is called on the path"
+        }
+      ],
+      "explanation": "The static analysis report identifies a taint flow from an entry point to the ZipUtil.pack method, but the propagation path relies entirely on library code without showing how the attacker-controlled input reaches the 'dir' or 'filename' arguments of this specific method in the application code. Furthermore, the code at line 1738 uses a NameMapper, which is a common mechanism for sanitizing or remapping archive entry names, potentially mitigating traversal risks, but the implementation of this mapper is not provided. Without evidence that the application code passes attacker-controlled paths directly to this library method without prior validation, the vulnerability cannot be confirmed.",
+      "samples": [
+        "uncertain"
+      ],
+      "methods_shown": [
+        "<org.zeroturnaround.zip.ZipUtil: void pack(java.io.File,java.util.zip.ZipOutputStream,org.zeroturnaround.zip.NameMapper,java.lang.String,boolean)>"
+      ],
+      "override": ""
+    },
+    {
+      "flow_id": "2917a7373e",
+      "flow_key": "DRIVER => <org.zeroturnaround.zip.ZipUtil$Unpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>@L1152/1",
+      "verdict": "vulnerable",
+      "reason": "exploitable",
+      "kept": true,
+      "v3_ok": null,
+      "v3_problems": [],
+      "evidence": [
+        {
+          "file": "org/zeroturnaround/zip/IdentityNameMapper.java",
+          "line": 32,
+          "note": "IdentityNameMapper.map() returns the input name unchanged, providing no sanitization or path traversal prevention."
+        },
+        {
+          "file": "org/zeroturnaround/zip/ZipUtil.java",
+          "line": 1152,
+          "note": "ZipUtil$Unpacker.process() constructs a file path using the unsanitized entry name: new File(outputDir, name)."
+        },
+        {
+          "file": "org/zeroturnaround/zip/ZipUtil.java",
+          "line": 1260,
+          "note": "ZipUtil$Unwraper.process() also constructs a file path using the unsanitized entry name: new File(outputDir, name)."
+        }
+      ],
+      "explanation": "The taint flow originates from attacker-controlled data (zip entry names) and passes through IdentityNameMapper, which performs no validation or normalization. The tainted path is then directly used to instantiate a File object in ZipUtil, allowing directory traversal sequences (e.g., '../') to escape the intended output directory and overwrite arbitrary files on the filesystem.",
+      "samples": [
+        "vulnerable"
+      ],
+      "methods_shown": [
+        "<org.zeroturnaround.zip.IdentityNameMapper: java.lang.String map(java.lang.String)>",
+        "<org.zeroturnaround.zip.ZipUtil$Unpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>",
+        "<org.zeroturnaround.zip.ZipUtil$Unwraper: java.lang.String getUnrootedName(java.lang.String,java.lang.String)>",
+        "<org.zeroturnaround.zip.ZipUtil$Unwraper: void process(java.io.InputStream,java.util.zip.ZipEntry)>"
+      ],
+      "override": ""
+    },
+    {
+      "flow_id": "1e5c6ad606",
+      "flow_key": "DRIVER => <org.zeroturnaround.zip.ZipUtil$Unwraper: void process(java.io.InputStream,java.util.zip.ZipEntry)>@L1260/1",
+      "verdict": "vulnerable",
+      "reason": "exploitable",
+      "kept": true,
+      "v3_ok": null,
+      "v3_problems": [],
+      "evidence": [
+        {
+          "file": "org/zeroturnaround/zip/IdentityNameMapper.java",
+          "line": 32,
+          "note": "IdentityNameMapper.map() returns the input name unchanged, providing no sanitization or path traversal prevention."
+        },
+        {
+          "file": "org/zeroturnaround/zip/ZipUtil.java",
+          "line": 1152,
+          "note": "ZipUtil$Unpacker.process() constructs a file path using the unsanitized entry name: new File(outputDir, name)."
+        },
+        {
+          "file": "org/zeroturnaround/zip/ZipUtil.java",
+          "line": 1260,
+          "note": "ZipUtil$Unwraper.process() also constructs a file path using the unsanitized entry name: new File(outputDir, name)."
+        }
+      ],
+      "explanation": "The taint flow originates from attacker-controlled data (zip entry names) and passes through IdentityNameMapper, which performs no normalization or validation. The tainted path is then directly used to instantiate a java.io.File object relative to an output directory without checking if the resulting path escapes the intended base directory, allowing path traversal attacks.",
+      "samples": [
+        "vulnerable"
+      ],
+      "methods_shown": [
+        "<org.zeroturnaround.zip.IdentityNameMapper: java.lang.String map(java.lang.String)>",
+        "<org.zeroturnaround.zip.ZipUtil$Unpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>",
+        "<org.zeroturnaround.zip.ZipUtil$Unwraper: java.lang.String getUnrootedName(java.lang.String,java.lang.String)>",
+        "<org.zeroturnaround.zip.ZipUtil$Unwraper: void process(java.io.InputStream,java.util.zip.ZipEntry)>"
+      ],
+      "override": ""
+    },
+    {
+      "flow_id": "dacfa30b19",
+      "flow_key": "DRIVER => <org.zeroturnaround.zip.commons.FileUtils: java.io.File getTempFileFor(java.io.File)>@L75/1",
+      "verdict": "uncertain",
+      "reason": "insufficient_context",
+      "kept": true,
+      "v3_ok": null,
+      "v3_problems": [],
+      "evidence": [
+        {
+          "file": "org/zeroturnaround/zip/commons/FileUtils.java",
+          "line": 75,
+          "note": "Sink uses new File(parent, name) which is generally safe if parent is trusted, but parent source is unknown"
+        }
+      ],
+      "explanation": "The reported flow indicates the taint originates from the analysis driver's source model but passes through library code without showing the application-level entry point where the `File` object is constructed. Without seeing how the `File` argument passed to `getTempFileFor` is created in the application code (specifically, whether it is constructed from attacker-controlled input or a trusted base directory), it is impossible to determine if the path is attacker-controlled or if a path traversal is possible. The library method itself does not perform path traversal; it merely creates a new file in the parent directory of the input file.",
+      "samples": [
+        "uncertain"
+      ],
+      "methods_shown": [
+        "<org.zeroturnaround.zip.commons.FileUtils: java.io.File getTempFileFor(java.io.File)>"
+      ],
+      "override": ""
+    },
+    {
+      "flow_id": "1f1b4f8346",
+      "flow_key": "DRIVER => <org.zeroturnaround.zip.commons.FileUtilsV2_2: boolean isSymlink(java.io.File)>@L1081/1",
+      "verdict": "uncertain",
+      "reason": "insufficient_context",
+      "kept": true,
+      "v3_ok": null,
+      "v3_problems": [],
+      "evidence": [
+        {
+          "file": "org/zeroturnaround/zip/ZipUtil.java",
+          "line": 1898,
+          "note": "FileUtils.getTempFileFor(dir) is called, but its implementation is not provided in the snippet."
+        },
+        {
+          "file": "org/zeroturnaround/zip/ZipUtil.java",
+          "line": 1904,
+          "note": "FileUtils.deleteDirectory(dir) is called, which leads to the reported sink."
+        },
+        {
+          "file": "org/zeroturnaround/zip/commons/FileUtilsV2_2.java",
+          "line": 1081,
+          "note": "The sink is reached via new File(canonicalDir, file.getName()), which constructs a path."
+        }
+      ],
+      "explanation": "The reported taint flow relies on the behavior of `FileUtils.getTempFileFor(dir)` (line 1898 in ZipUtil.java), which is not shown in the provided code snippets. If this method normalizes the input `dir` or restricts the output to a safe temporary directory, the vulnerability may be mitigated. Without seeing the implementation of `getTempFileFor` or the initial source of the `dir` parameter in the application entry point, it is impossible to confirm if the attacker-controlled data remains un-sanitized when reaching the sink.",
+      "samples": [
+        "uncertain"
+      ],
+      "methods_shown": [
+        "<org.zeroturnaround.zip.ZipUtil: void unexplode(java.io.File)>",
+        "<org.zeroturnaround.zip.ZipUtil: void unexplode(java.io.File,int)>",
+        "<org.zeroturnaround.zip.commons.FileUtilsV2_2: boolean isSymlink(java.io.File)>",
+        "<org.zeroturnaround.zip.commons.FileUtilsV2_2: void deleteDirectory(java.io.File)>"
+      ],
+      "override": ""
+    },
+    {
+      "flow_id": "739dd783a9",
+      "flow_key": "DRIVER => <org.zeroturnaround.zip.ZipUtil$Unpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>@L1152/0",
+      "verdict": "vulnerable",
+      "reason": "exploitable",
+      "kept": true,
+      "v3_ok": null,
+      "v3_problems": [],
+      "evidence": [
+        {
+          "file": "org/zeroturnaround/zip/ZipUtil.java",
+          "line": 1152,
+          "note": "File constructed using attacker-controlled ZipEntry name without path traversal validation"
+        },
+        {
+          "file": "org/zeroturnaround/zip/ZipUtil.java",
+          "line": 1150,
+          "note": "Name derived directly from ZipEntry.getName() passed through mapper"
+        },
+        {
+          "file": "org/zeroturnaround/zip/ZipUtil.java",
+          "line": 996,
+          "note": "Unpacker instantiated with outputDir, propagating tainted context"
+        }
+      ],
+      "explanation": "The code constructs a file path using `new File(outputDir, name)` where `name` comes from `ZipEntry.getName()` (line 1150-1152). There is no normalization or prefix check to ensure the resulting path stays within `outputDir`, allowing `../` sequences in the ZIP entry name to escape the intended directory. The source is modeled as attacker-controlled input, and the sink writes files to the constructed path, making this a real CWE-022 vulnerability.",
+      "samples": [
+        "vulnerable"
+      ],
+      "methods_shown": [
+        "<org.zeroturnaround.zip.ZipUtil: void explode(java.io.File)>",
+        "<org.zeroturnaround.zip.ZipUtil: void unpack(java.io.File,java.io.File)>",
+        "<org.zeroturnaround.zip.ZipUtil: void unpack(java.io.File,java.io.File,org.zeroturnaround.zip.NameMapper)>",
+        "<org.zeroturnaround.zip.ZipUtil$Unpacker: void <init>(java.io.File,org.zeroturnaround.zip.NameMapper)>",
+        "<org.zeroturnaround.zip.ZipUtil$Unpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>"
+      ],
+      "override": ""
+    },
+    {
+      "flow_id": "2831a93046",
+      "flow_key": "DRIVER => <org.zeroturnaround.zip.commons.FileUtilsV2_2: void doCopyFile(java.io.File,java.io.File,boolean)>@L427/0",
+      "verdict": "uncertain",
+      "reason": "insufficient_context",
+      "kept": true,
+      "v3_ok": null,
+      "v3_problems": [],
+      "evidence": [
+        {
+          "file": "org/zeroturnaround/zip/ZipUtil.java",
+          "line": 1310,
+          "note": "The explode method calls unpack(tempFile, zip), but the implementation of unpack is not provided in the context."
+        },
+        {
+          "file": "org/zeroturnaround/zip/commons/FileUtilsV2_2.java",
+          "line": 427,
+          "note": "doCopyFile uses the srcFile path directly, but srcFile originates from the zip archive processing logic which is not fully visible."
+        }
+      ],
+      "explanation": "The provided code shows the taint flow reaching a file copy operation, but the critical step of how the file path is extracted from the ZIP archive (inside the missing `unpack` method) is not shown. Without seeing how entry names are processed (e.g., whether they are validated against path traversal sequences like '../' before being used to construct `File` objects), it is impossible to determine if the source is effectively attacker-controlled in a way that bypasses directory boundaries. The library code shown (`explode`, `moveFile`, `copyFile`) handles file I/O but does not inherently sanitize ZIP entry names.",
+      "samples": [
+        "uncertain"
+      ],
+      "methods_shown": [
+        "<org.zeroturnaround.zip.ZipUtil: void explode(java.io.File)>",
+        "<org.zeroturnaround.zip.commons.FileUtilsV2_2: void moveFile(java.io.File,java.io.File)>",
+        "<org.zeroturnaround.zip.commons.FileUtilsV2_2: void copyFile(java.io.File,java.io.File)>",
+        "<org.zeroturnaround.zip.commons.FileUtilsV2_2: void copyFile(java.io.File,java.io.File,boolean)>",
+        "<org.zeroturnaround.zip.commons.FileUtilsV2_2: void doCopyFile(java.io.File,java.io.File,boolean)>"
+      ],
+      "override": ""
+    },
+    {
+      "flow_id": "9cc4332244",
+      "flow_key": "DRIVER => <org.zeroturnaround.zip.commons.FileUtilsV2_2: void moveFile(java.io.File,java.io.File)>@L1044/base",
+      "verdict": "uncertain",
+      "reason": "insufficient_context",
+      "kept": true,
+      "v3_ok": null,
+      "v3_problems": [],
+      "evidence": [
+        {
+          "file": "org/zeroturnaround/zip/ZipUtil.java",
+          "line": 1150,
+          "note": "NameMapper.map() is called on zipEntry.getName(), but the implementation of NameMapper is not provided in the snippet."
+        },
+        {
+          "file": "org/zeroturnaround/zip/ZipUtil.java",
+          "line": 996,
+          "note": "unpack() uses IdentityNameMapper.INSTANCE by default, but the specific mapper used in the vulnerable call chain is not explicitly shown as non-identity."
+        }
+      ],
+      "explanation": "The reported flow relies on the `NameMapper` interface to process the ZIP entry name. While `IdentityNameMapper` (which does no sanitization) is a valid implementation, the provided code snippets do not confirm that the specific `NameMapper` instance used in the vulnerable path is the identity mapper or lacks path traversal checks. Without seeing the implementation of the `NameMapper` passed to `Unpacker`, it is impossible to determine if the attacker-controlled entry name is sanitized or if it passes through unchanged to the file system operations.",
+      "samples": [
+        "uncertain"
+      ],
+      "methods_shown": [
+        "<org.zeroturnaround.zip.ZipUtil$Unpacker: void <init>(java.io.File,org.zeroturnaround.zip.NameMapper)>",
+        "<org.zeroturnaround.zip.ZipUtil$Unpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>",
+        "<org.zeroturnaround.zip.ZipUtil: void explode(java.io.File)>",
+        "<org.zeroturnaround.zip.ZipUtil: void unpack(java.io.File,java.io.File)>",
+        "<org.zeroturnaround.zip.ZipUtil: void unpack(java.io.File,java.io.File,org.zeroturnaround.zip.NameMapper)>",
+        "<org.zeroturnaround.zip.commons.FileUtilsV2_2: void moveFile(java.io.File,java.io.File)>"
+      ],
+      "override": ""
+    },
+    {
+      "flow_id": "8b0b38c3c1",
+      "flow_key": "DRIVER => <org.zeroturnaround.zip.commons.FileUtilsV2_2: void moveFile(java.io.File,java.io.File)>@L1047/base",
+      "verdict": "uncertain",
+      "reason": "insufficient_context",
+      "kept": true,
+      "v3_ok": null,
+      "v3_problems": [],
+      "evidence": [
+        {
+          "file": "org/zeroturnaround/zip/ZipUtil.java",
+          "line": 1310,
+          "note": "The explode method calls unpack(tempFile, zip), but the implementation of unpack is not provided in the context."
+        },
+        {
+          "file": "org/zeroturnaround/zip/ZipUtil.java",
+          "line": 1304,
+          "note": "The source file for moveFile is a tempFile generated by FileUtils.getTempFileFor(zip), not directly the user-controlled zip file path."
+        }
+      ],
+      "explanation": "The reported taint flow identifies the sink as `FileUtils.moveFile`, but the actual dangerous operation for path traversal in ZIP extraction is typically the writing of files during unpacking, not the moving of the archive itself. The code shows `explode` calls `unpack(tempFile, zip)` at line 1310, which is the likely location where attacker-controlled entry names are used to construct file paths. Without seeing the `unpack` method or `FileUtils.getTempFileFor` to verify if the initial zip path is sanitized or if the temp file creation prevents traversal, we cannot confirm if the specific `moveFile` sink is the vulnerability vector or if the real vulnerability lies in the missing `unpack` logic. Furthermore, the source in the report is modeled as `srcFile` from the driver, but in the `explode` method, the argument passed to `moveFile` is a temporary file, not the original user-provided path, making the direct taint flow to `moveFile` less indicative of a traversal vulnerability unless `unpack` is also tainted and vulnerable.",
+      "samples": [
+        "uncertain"
+      ],
+      "methods_shown": [
+        "<org.zeroturnaround.zip.ZipUtil: void explode(java.io.File)>",
+        "<org.zeroturnaround.zip.commons.FileUtilsV2_2: void moveFile(java.io.File,java.io.File)>"
+      ],
+      "override": ""
+    },
+    {
+      "flow_id": "f4602ef5f9",
+      "flow_key": "DRIVER => <org.zeroturnaround.zip.ZipUtil: void pack(java.io.File,java.util.zip.ZipOutputStream,org.zeroturnaround.zip.NameMapper,java.lang.String,boolean)>@L1730/0",
+      "verdict": "not_vulnerable",
+      "reason": "not_dangerous_sink",
+      "kept": false,
+      "v3_ok": null,
+      "v3_problems": [],
+      "evidence": [
+        {
+          "file": "org/zeroturnaround/zip/ZipUtil.java",
+          "line": 1730,
+          "note": "File object constructed from directory and filename"
+        },
+        {
+          "file": "org/zeroturnaround/zip/ZipUtil.java",
+          "line": 1732,
+          "note": "Path string constructed for ZIP entry name, not file system access"
+        },
+        {
+          "file": "org/zeroturnaround/zip/ZipUtil.java",
+          "line": 1740,
+          "note": "ZipEntry created using the mapped path string"
+        }
+      ],
+      "explanation": "The sink `ZipUtil.pack` constructs `java.io.File` objects (line 1730) and `ZipEntry` objects (line 1740) using the tainted filename. However, these operations are used to read files from the source directory (`dir`) and write them into a ZIP archive. The `File` constructor with two arguments (`dir`, `filename`) resolves the path relative to `dir`, preventing traversal outside the intended directory. The `ZipEntry` creation uses the path string for the entry name within the archive, which does not result in arbitrary file system writes or reads outside the controlled directory structure. Therefore, this is not a path traversal vulnerability leading to unauthorized file system access.",
+      "samples": [
+        "not_vulnerable"
+      ],
+      "methods_shown": [
+        "<org.zeroturnaround.zip.ZipUtil: void unexplode(java.io.File)>",
+        "<org.zeroturnaround.zip.ZipUtil: void unexplode(java.io.File,int)>",
+        "<org.zeroturnaround.zip.ZipUtil: void pack(java.io.File,java.io.File,int)>",
+        "<org.zeroturnaround.zip.ZipUtil: void pack(java.io.File,java.io.File,org.zeroturnaround.zip.NameMapper,int)>",
+        "<org.zeroturnaround.zip.ZipUtil: void pack(java.io.File,java.util.zip.ZipOutputStream,org.zeroturnaround.zip.NameMapper,java.lang.String,boolean)>"
+      ],
+      "override": ""
+    },
+    {
+      "flow_id": "8f0aad4f9e",
+      "flow_key": "DRIVER => <org.zeroturnaround.zip.commons.FileUtilsV2_2: void doCopyFile(java.io.File,java.io.File,boolean)>@L428/0",
+      "verdict": "uncertain",
+      "reason": "insufficient_context",
+      "kept": true,
+      "v3_ok": null,
+      "v3_problems": [],
+      "evidence": [
+        {
+          "file": "org/zeroturnaround/zip/ZipUtil.java",
+          "line": 1877,
+          "note": "Source of taint is 'dir' parameter in unexplode(File dir)"
+        },
+        {
+          "file": "org/zeroturnaround/zip/ZipUtil.java",
+          "line": 1898,
+          "note": "Temp file created in same directory as dir"
+        },
+        {
+          "file": "org/zeroturnaround/zip/commons/FileUtilsV2_2.java",
+          "line": 1046,
+          "note": "Fallback copy if rename fails"
+        },
+        {
+          "file": "org/zeroturnaround/zip/commons/FileUtilsV2_2.java",
+          "line": 394,
+          "note": "Canonical path check prevents source=dest, but not traversal"
+        }
+      ],
+      "explanation": "The analysis shows a taint flow from an entry point to a file copy operation, but the code snippets provided are from the library 'org.zeroturnaround.zip', not the application code that calls it. We cannot see how the 'dir' parameter in ZipUtil.unexplode is constructed in the application layer (NesyDriver). If the application passes a user-controlled path directly to unexplode, it is vulnerable. However, if the application sanitizes the path before calling unexplode, it is not. Since the application code handling the user input is not shown, we cannot determine if the source is truly attacker-controlled in a dangerous way.",
+      "samples": [
+        "uncertain"
+      ],
+      "methods_shown": [
+        "<org.zeroturnaround.zip.ZipUtil: void unexplode(java.io.File)>",
+        "<org.zeroturnaround.zip.ZipUtil: void unexplode(java.io.File,int)>",
+        "<org.zeroturnaround.zip.commons.FileUtilsV2_2: void moveFile(java.io.File,java.io.File)>",
+        "<org.zeroturnaround.zip.commons.FileUtilsV2_2: void copyFile(java.io.File,java.io.File)>",
+        "<org.zeroturnaround.zip.commons.FileUtilsV2_2: void copyFile(java.io.File,java.io.File,boolean)>",
+        "<org.zeroturnaround.zip.commons.FileUtilsV2_2: void doCopyFile(java.io.File,java.io.File,boolean)>"
+      ],
+      "override": ""
+    },
+    {
+      "flow_id": "2eb12f2157",
+      "flow_key": "DRIVER => <org.zeroturnaround.zip.commons.FileUtilsV2_2: void deleteDirectory(java.io.File)>@L655/base",
+      "verdict": "uncertain",
+      "reason": "insufficient_context",
+      "kept": true,
+      "v3_ok": null,
+      "v3_problems": [],
+      "evidence": [
+        {
+          "file": "org/zeroturnaround/zip/ZipUtil.java",
+          "line": 1877,
+          "note": "Source of taint is ZipUtil.unexplode(File dir)"
+        },
+        {
+          "file": "org/zeroturnaround/zip/ZipUtil.java",
+          "line": 1895,
+          "note": "Overloaded unexplode method calls deleteDirectory(dir)"
+        },
+        {
+          "file": "org/zeroturnaround/zip/commons/FileUtilsV2_2.java",
+          "line": 646,
+          "note": "Sink is deleteDirectory(File directory)"
+        }
+      ],
+      "explanation": "The analysis report identifies a taint flow from an entry point to a file deletion sink. However, the provided code snippets only show the internal logic of the library methods (ZipUtil and FileUtils). To determine if this is a real CWE-022 vulnerability, we must know if the `dir` parameter passed to `ZipUtil.unexplode` is derived from an attacker-controlled source (e.g., a user-uploaded zip file name or a path extracted from a request) and if that path is validated before being passed to `unexplode`. The report's source is `NesyDriver`, which models attacker input, but the link between the external input and the specific `ZipUtil.unexplode` call is not shown in the provided code. Without seeing the caller of `ZipUtil.unexplode` and how it constructs the `File` object, we cannot confirm if the path traversal is exploitable or if there are missing sanitization steps in the calling code.",
+      "samples": [
+        "uncertain"
+      ],
+      "methods_shown": [
+        "<org.zeroturnaround.zip.ZipUtil: void unexplode(java.io.File)>",
+        "<org.zeroturnaround.zip.ZipUtil: void unexplode(java.io.File,int)>",
+        "<org.zeroturnaround.zip.commons.FileUtilsV2_2: void deleteDirectory(java.io.File)>"
+      ],
+      "override": ""
+    },
+    {
+      "flow_id": "3d4c7875a7",
+      "flow_key": "DRIVER => <org.zeroturnaround.zip.commons.FileUtilsV2_2: boolean deleteQuietly(java.io.File)>@L689/base",
+      "verdict": "uncertain",
+      "reason": "insufficient_context",
+      "kept": true,
+      "v3_ok": null,
+      "v3_problems": [],
+      "evidence": [
+        {
+          "file": "org/zeroturnaround/zip/ZipUtil.java",
+          "line": 1877,
+          "note": "Source of taint is 'dir' parameter in unexplode(File dir)"
+        },
+        {
+          "file": "org/zeroturnaround/zip/ZipUtil.java",
+          "line": 1895,
+          "note": "Taint propagates to 'dir' in unexplode(File dir, int compressionLevel)"
+        },
+        {
+          "file": "org/zeroturnaround/zip/commons/FileUtilsV2_2.java",
+          "line": 1048,
+          "note": "Sink deleteQuietly is called with destFile, which originates from srcFile/dir flow"
+        }
+      ],
+      "explanation": "The analysis shows taint flowing from an entry point into ZipUtil.unexplode, which then calls FileUtils.moveFile and potentially deleteQuietly. However, the provided code snippets do not show how the initial 'dir' argument in ZipUtil.unexplode is constructed or validated. Without seeing the caller of ZipUtil.unexplode or any path normalization/sanitization logic applied to the 'dir' parameter before it enters the library methods, it is impossible to determine if the path is attacker-controlled or if it is constrained to a safe directory. The library code itself does not appear to perform path traversal checks on the input File objects.",
+      "samples": [
+        "uncertain"
+      ],
+      "methods_shown": [
+        "<org.zeroturnaround.zip.ZipUtil: void unexplode(java.io.File)>",
+        "<org.zeroturnaround.zip.ZipUtil: void unexplode(java.io.File,int)>",
+        "<org.zeroturnaround.zip.commons.FileUtilsV2_2: void moveFile(java.io.File,java.io.File)>",
+        "<org.zeroturnaround.zip.commons.FileUtilsV2_2: boolean deleteQuietly(java.io.File)>"
+      ],
+      "override": ""
+    },
+    {
+      "flow_id": "08beb1afcb",
+      "flow_key": "DRIVER => <org.zeroturnaround.zip.commons.FileUtilsV2_2: void moveFile(java.io.File,java.io.File)>@L1044/0",
+      "verdict": "uncertain",
+      "reason": "insufficient_context",
+      "kept": true,
+      "v3_ok": null,
+      "v3_problems": [],
+      "evidence": [
+        {
+          "file": "org/zeroturnaround/zip/ZipUtil.java",
+          "line": 1877,
+          "note": "Source of taint is 'dir' parameter in unexplode(File dir)"
+        },
+        {
+          "file": "org/zeroturnaround/zip/ZipUtil.java",
+          "line": 1907,
+          "note": "Taint flows to FileUtils.moveFile(zip, dir)"
+        },
+        {
+          "file": "org/zeroturnaround/zip/commons/FileUtilsV2_2.java",
+          "line": 1044,
+          "note": "Sink is srcFile.renameTo(destFile)"
+        }
+      ],
+      "explanation": "The analysis report identifies a taint flow from the application entry point to a file operation, but it fails to show how the attacker-controlled input reaches the 'dir' parameter of ZipUtil.unexplode(). Without code showing the caller of unexplode() and how it constructs the File object from user input, it is impossible to verify if the path is attacker-controlled or if sanitization occurs upstream. The sink (renameTo) is dangerous if the destination path is attacker-controlled, but the propagation path from the source to this specific sink instance is not fully demonstrated in the provided snippets.",
+      "samples": [
+        "uncertain"
+      ],
+      "methods_shown": [
+        "<org.zeroturnaround.zip.ZipUtil: void unexplode(java.io.File)>",
+        "<org.zeroturnaround.zip.ZipUtil: void unexplode(java.io.File,int)>",
+        "<org.zeroturnaround.zip.commons.FileUtilsV2_2: void moveFile(java.io.File,java.io.File)>"
+      ],
+      "override": ""
+    },
+    {
+      "flow_id": "0494bb22b5",
+      "flow_key": "DRIVER => <org.zeroturnaround.zip.ByteSource: java.util.zip.ZipEntry getEntry()>@L62/0",
+      "verdict": "uncertain",
+      "reason": "insufficient_context",
+      "kept": true,
+      "v3_ok": null,
+      "v3_problems": [],
+      "evidence": [
+        {
+          "file": "org/zeroturnaround/zip/ZipUtil.java",
+          "line": 2490,
+          "note": "Tainted path passed to ByteSource constructor"
+        },
+        {
+          "file": "org/zeroturnaround/zip/ByteSource.java",
+          "line": 62,
+          "note": "Tainted path used to construct ZipEntry"
+        }
+      ],
+      "explanation": "The static analysis report identifies a taint flow from the application driver to the ZipEntry constructor, but it does not show the code where the ZipUtil.replaceEntry method is called. To determine if this is a real CWE-022 vulnerability, we must verify if the 'path' argument passed to replaceEntry originates from an attacker-controlled source (e.g., user input) or if it is internally generated/sanitized by the application code calling this library method. Without seeing the caller of ZipUtil.replaceEntry, we cannot confirm if the source is truly attacker-controlled or if there are sanitization steps in the application layer.",
+      "samples": [
+        "uncertain"
+      ],
+      "methods_shown": [
+        "<org.zeroturnaround.zip.ZipUtil: boolean replaceEntry(java.io.File,java.lang.String,byte[])>",
+        "<org.zeroturnaround.zip.ZipUtil$14: void <init>(java.io.File,java.lang.String,byte[])>",
+        "<org.zeroturnaround.zip.ZipUtil$14: boolean act(java.io.File)>",
+        "<org.zeroturnaround.zip.ByteSource: void <init>(java.lang.String,byte[])>",
+        "<org.zeroturnaround.zip.ByteSource: void <init>(java.lang.String,byte[],long)>",
+        "<org.zeroturnaround.zip.ByteSource: java.util.zip.ZipEntry getEntry()>"
+      ],
+      "override": ""
+    },
+    {
+      "flow_id": "b70e33a85d",
+      "flow_key": "<org.apache.log4j.Category: void removeAllAppenders()>@L889/result => <org.zeroturnaround.zip.ZipEntryUtil: java.util.zip.ZipEntry copy(java.util.zip.ZipEntry,java.lang.String)>@L61/0",
+      "verdict": "uncertain",
+      "reason": "insufficient_context",
+      "kept": true,
+      "v3_ok": null,
+      "v3_problems": [],
+      "evidence": [
+        {
+          "file": "org/zeroturnaround/zip/ZipEntryUtil.java",
+          "line": 61,
+          "note": "Sink uses newName directly in ZipEntry constructor without visible sanitization"
+        }
+      ],
+      "explanation": "The provided code shows the sink method accepting a String parameter 'newName' and passing it to the ZipEntry constructor without any path normalization or prefix checks. However, the source of the taint is identified as an internal library method (log4j) iterating over elements, and the report explicitly states there is 'no complete application-code path in the taint flow graph'. Without seeing the caller of `ZipEntryUtil.copy` or the origin of the 'newName' string in the application context, it is impossible to confirm if the input is attacker-controlled or if other sanitization occurs upstream. Therefore, the context is insufficient to validate the vulnerability.",
+      "samples": [
+        "uncertain"
+      ],
+      "methods_shown": [
+        "<org.zeroturnaround.zip.ZipEntryUtil: java.util.zip.ZipEntry copy(java.util.zip.ZipEntry,java.lang.String)>"
+      ],
+      "override": ""
+    },
+    {
+      "flow_id": "0cda3ff039",
+      "flow_key": "<org.apache.log4j.Category: void removeAllAppenders()>@L889/result => <org.zeroturnaround.zip.ZipEntryUtil: java.util.zip.ZipEntry fromFile(java.lang.String,java.io.File)>@L144/0",
+      "verdict": "uncertain",
+      "reason": "insufficient_context",
+      "kept": true,
+      "v3_ok": null,
+      "v3_problems": [],
+      "evidence": [
+        {
+          "file": "org/zeroturnaround/zip/ZipUtil.java",
+          "line": 2454,
+          "note": "Source of taint is the 'path' parameter passed to FileSource constructor"
+        },
+        {
+          "file": "org/zeroturnaround/zip/FileSource.java",
+          "line": 36,
+          "note": "Path is stored directly without sanitization"
+        },
+        {
+          "file": "org/zeroturnaround/zip/ZipEntryUtil.java",
+          "line": 144,
+          "note": "Path is used to construct ZipEntry"
+        }
+      ],
+      "explanation": "The provided code shows that the 'path' string flows from a method parameter into the ZipEntry constructor without normalization or validation. However, the source of this 'path' string is not shown in the provided snippets; it originates from the caller of ZipUtil.replaceEntry or similar methods. Without seeing the application code that calls these library methods and provides the 'path' argument, it is impossible to determine if the input is attacker-controlled (e.g., from a user upload or URL parameter). Therefore, the vulnerability status cannot be confirmed as vulnerable or not vulnerable based solely on the provided library code.",
+      "samples": [
+        "uncertain"
+      ],
+      "methods_shown": [
+        "<org.zeroturnaround.zip.FileSource: java.util.zip.ZipEntry getEntry()>",
+        "<org.zeroturnaround.zip.FileSource: void <init>(java.lang.String,java.io.File)>",
+        "<org.zeroturnaround.zip.IdentityNameMapper: java.lang.String map(java.lang.String)>",
+        "<org.zeroturnaround.zip.ZipUtil$13: boolean act(java.io.File)>",
+        "<org.zeroturnaround.zip.ZipUtil$13: void <init>(java.io.File,java.lang.String,java.io.File)>",
+        "<org.zeroturnaround.zip.ZipEntryUtil: java.util.zip.ZipEntry fromFile(java.lang.String,java.io.File)>"
+      ],
+      "override": ""
+    },
+    {
+      "flow_id": "629672900e",
+      "flow_key": "<org.apache.log4j.Category: void removeAllAppenders()>@L889/result => <org.zeroturnaround.zip.ZipUtil: void pack(java.io.File,java.util.zip.ZipOutputStream,org.zeroturnaround.zip.NameMapper,java.lang.String,boolean)>@L1730/1",
+      "verdict": "uncertain",
+      "reason": "insufficient_context",
+      "kept": true,
+      "v3_ok": null,
+      "v3_problems": [],
+      "evidence": [
+        {
+          "file": "org/zeroturnaround/zip/ZipUtil.java",
+          "line": 1730,
+          "note": "File constructed from dir and filename"
+        },
+        {
+          "file": "org/zeroturnaround/zip/ZipUtil.java",
+          "line": 1738,
+          "note": "NameMapper applied to path"
+        }
+      ],
+      "explanation": "The static analysis report identifies a taint flow through library code (ZipUtil) but fails to provide the application-level source where the attacker-controlled data enters the system. Without seeing the caller of ZipUtil.pack, it is impossible to verify if the 'dir' or 'filename' arguments are derived from untrusted input. Additionally, the use of a NameMapper (line 1738) could potentially sanitize the path, but its implementation is not shown, leaving the exploitability uncertain.",
+      "samples": [
+        "uncertain"
+      ],
+      "methods_shown": [
+        "<org.zeroturnaround.zip.ZipUtil: void pack(java.io.File,java.util.zip.ZipOutputStream,org.zeroturnaround.zip.NameMapper,java.lang.String,boolean)>"
+      ],
+      "override": ""
+    },
+    {
+      "flow_id": "af7381f997",
+      "flow_key": "<org.apache.log4j.Category: void removeAllAppenders()>@L889/result => <org.zeroturnaround.zip.ZipUtil$Unpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>@L1152/1",
+      "verdict": "vulnerable",
+      "reason": "exploitable",
+      "kept": true,
+      "v3_ok": null,
+      "v3_problems": [],
+      "evidence": [
+        {
+          "file": "org/zeroturnaround/zip/ZipUtil.java",
+          "line": 1150,
+          "note": "IdentityNameMapper.map returns the zip entry name without modification"
+        },
+        {
+          "file": "org/zeroturnaround/zip/ZipUtil.java",
+          "line": 1152,
+          "note": "File constructed using attacker-controlled zip entry name relative to outputDir"
+        },
+        {
+          "file": "org/zeroturnaround/zip/ZipUtil.java",
+          "line": 1258,
+          "note": "Unwraper also uses mapper.map on the name, which is IdentityNameMapper by default"
+        },
+        {
+          "file": "org/zeroturnaround/zip/ZipUtil.java",
+          "line": 1260,
+          "note": "File constructed using potentially malicious name"
+        }
+      ],
+      "explanation": "The taint flow originates from ZipEntry names, which are attacker-controlled when processing untrusted zip files. The IdentityNameMapper (lines 31-33) returns the name unchanged, providing no sanitization. The resulting name is used directly in File constructors (lines 1152, 1260) without checking for path traversal sequences like '../', allowing files to be written outside the intended output directory.",
+      "samples": [
+        "vulnerable"
+      ],
+      "methods_shown": [
+        "<org.zeroturnaround.zip.IdentityNameMapper: java.lang.String map(java.lang.String)>",
+        "<org.zeroturnaround.zip.ZipUtil$Unpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>",
+        "<org.zeroturnaround.zip.ZipUtil$Unwraper: java.lang.String getUnrootedName(java.lang.String,java.lang.String)>",
+        "<org.zeroturnaround.zip.ZipUtil$Unwraper: void process(java.io.InputStream,java.util.zip.ZipEntry)>"
+      ],
+      "override": ""
+    },
+    {
+      "flow_id": "4edb4721ee",
+      "flow_key": "<org.apache.log4j.Category: void removeAllAppenders()>@L889/result => <org.zeroturnaround.zip.ZipUtil$Unwraper: void process(java.io.InputStream,java.util.zip.ZipEntry)>@L1260/1",
+      "verdict": "vulnerable",
+      "reason": "exploitable",
+      "kept": true,
+      "v3_ok": null,
+      "v3_problems": [],
+      "evidence": [
+        {
+          "file": "org/zeroturnaround/zip/ZipUtil.java",
+          "line": 1250,
+          "note": "ZipEntry name is extracted directly from the archive without validation"
+        },
+        {
+          "file": "org/zeroturnaround/zip/ZipUtil.java",
+          "line": 1258,
+          "note": "IdentityNameMapper.map returns the name unchanged, providing no sanitization"
+        },
+        {
+          "file": "org/zeroturnaround/zip/ZipUtil.java",
+          "line": 1260,
+          "note": "File is constructed using the unsanitized name relative to outputDir, allowing path traversal"
+        }
+      ],
+      "explanation": "The code extracts the file name from a ZipEntry (which can be attacker-controlled if the zip file is uploaded) and passes it through IdentityNameMapper, which returns the name unchanged. The resulting path is used to create a File object relative to an output directory without checking for '../' sequences or canonicalizing the path to ensure it remains within the intended directory, leading to a path traversal vulnerability.",
+      "samples": [
+        "vulnerable"
+      ],
+      "methods_shown": [
+        "<org.zeroturnaround.zip.IdentityNameMapper: java.lang.String map(java.lang.String)>",
+        "<org.zeroturnaround.zip.ZipUtil$Unpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>",
+        "<org.zeroturnaround.zip.ZipUtil$Unwraper: java.lang.String getUnrootedName(java.lang.String,java.lang.String)>",
+        "<org.zeroturnaround.zip.ZipUtil$Unwraper: void process(java.io.InputStream,java.util.zip.ZipEntry)>"
+      ],
+      "override": ""
+    },
+    {
+      "flow_id": "69214feb10",
+      "flow_key": "<org.apache.log4j.Category: void removeAllAppenders()>@L889/result => <org.zeroturnaround.zip.commons.FileUtils: java.io.File getTempFileFor(java.io.File)>@L75/1",
+      "verdict": "uncertain",
+      "reason": "insufficient_context",
+      "kept": true,
+      "v3_ok": null,
+      "v3_problems": [],
+      "evidence": [
+        {
+          "file": "org/zeroturnaround/zip/commons/FileUtils.java",
+          "line": 75,
+          "note": "Sink uses new File(parent, name) which is vulnerable to traversal if parent/name are attacker-controlled"
+        },
+        {
+          "file": "org/apache/log4j/Category.java",
+          "line": 889,
+          "note": "Source identified by Tai-e, but context of how this method is triggered and if data flows from an external request is missing"
+        }
+      ],
+      "explanation": "The reported flow relies on library code (FileUtils) and a Log4j method, but the taint flow graph explicitly states there is no complete application-code path connecting an attacker-controlled source to this sink. Without evidence that the `File` object passed to `getTempFileFor` originates from an untrusted source (e.g., a user-uploaded archive entry name or request parameter) within the application's control flow, it is impossible to confirm if the data is attacker-controlled. The Log4j method `removeAllAppenders` is typically an administrative cleanup function and unlikely to be directly triggered by untrusted input in a way that propagates taint to file system operations without intermediate application logic.",
+      "samples": [
+        "uncertain"
+      ],
+      "methods_shown": [
+        "<org.zeroturnaround.zip.commons.FileUtils: java.io.File getTempFileFor(java.io.File)>"
+      ],
+      "override": ""
+    },
+    {
+      "flow_id": "d2c8e4e956",
+      "flow_key": "<org.apache.log4j.Category: void removeAllAppenders()>@L889/result => <org.zeroturnaround.zip.commons.FileUtilsV2_2: boolean isSymlink(java.io.File)>@L1081/1",
+      "verdict": "uncertain",
+      "reason": "insufficient_context",
+      "kept": true,
+      "v3_ok": null,
+      "v3_problems": [],
+      "evidence": [
+        {
+          "file": "org/zeroturnaround/zip/ZipUtil.java",
+          "line": 1877,
+          "note": "Entry point method unexplode(File dir) accepts a File object, but the source of this File object (attacker-controlled input) is not shown in the provided code snippet."
+        },
+        {
+          "file": "org/zeroturnaround/zip/commons/FileUtilsV2_2.java",
+          "line": 1081,
+          "note": "The sink uses new File(canonicalDir, file.getName()) which constructs a path. While canonicalDir is resolved, the safety depends on whether the original 'file' parameter was validated against a base directory before reaching this method."
+        }
+      ],
+      "explanation": "The provided code shows the internal logic of the library methods but does not show the application code that calls `ZipUtil.unexplode` or how the initial `File` object is constructed from user input. Without seeing the source of the `File` argument (e.g., if it comes directly from a request parameter or archive entry name without prior validation), it is impossible to confirm if the data is attacker-controlled or if a path traversal check exists upstream. The library code itself performs canonicalization in `isSymlink`, but this is a symlink check, not a directory containment check for the entire operation.",
+      "samples": [
+        "uncertain"
+      ],
+      "methods_shown": [
+        "<org.zeroturnaround.zip.ZipUtil: void unexplode(java.io.File)>",
+        "<org.zeroturnaround.zip.ZipUtil: void unexplode(java.io.File,int)>",
+        "<org.zeroturnaround.zip.commons.FileUtilsV2_2: boolean isSymlink(java.io.File)>",
+        "<org.zeroturnaround.zip.commons.FileUtilsV2_2: void deleteDirectory(java.io.File)>"
+      ],
+      "override": ""
+    },
+    {
+      "flow_id": "19eeaf5bac",
+      "flow_key": "<org.apache.log4j.Hierarchy: java.util.Enumeration getCurrentLoggers()>@L313/result => <org.zeroturnaround.zip.ZipEntryUtil: java.util.zip.ZipEntry copy(java.util.zip.ZipEntry,java.lang.String)>@L61/0",
+      "verdict": "uncertain",
+      "reason": "insufficient_context",
+      "kept": true,
+      "v3_ok": null,
+      "v3_problems": [],
+      "evidence": [
+        {
+          "file": "org/zeroturnaround/zip/ZipEntryUtil.java",
+          "line": 61,
+          "note": "Sink uses newName directly in ZipEntry constructor without visible sanitization"
+        }
+      ],
+      "explanation": "The provided code shows the sink method `ZipEntryUtil.copy` accepting a `newName` string and passing it to the `ZipEntry` constructor without any path normalization or prefix checks. However, the taint flow originates from `org.apache.log4j.Hierarchy.getCurrentLoggers()`, which returns logger names. Logger names are typically internal identifiers and not directly derived from attacker-controlled file paths or archive entry names in a way that would allow path traversal. Without evidence that the `newName` parameter in `ZipEntryUtil.copy` is actually populated by attacker-controlled data (e.g., from a zip entry name in a file upload scenario) rather than internal logger names, the exploitability is uncertain. The reported flow seems to conflate unrelated library functionalities.",
+      "samples": [
+        "uncertain"
+      ],
+      "methods_shown": [
+        "<org.zeroturnaround.zip.ZipEntryUtil: java.util.zip.ZipEntry copy(java.util.zip.ZipEntry,java.lang.String)>"
+      ],
+      "override": ""
+    },
+    {
+      "flow_id": "6b6c4c1822",
+      "flow_key": "<org.apache.log4j.Hierarchy: java.util.Enumeration getCurrentLoggers()>@L313/result => <org.zeroturnaround.zip.ZipEntryUtil: java.util.zip.ZipEntry fromFile(java.lang.String,java.io.File)>@L144/0",
+      "verdict": "uncertain",
+      "reason": "insufficient_context",
+      "kept": true,
+      "v3_ok": null,
+      "v3_problems": [],
+      "evidence": [
+        {
+          "file": "org/zeroturnaround/zip/ZipUtil.java",
+          "line": 2454,
+          "note": "User-controlled path passed to FileSource constructor"
+        },
+        {
+          "file": "org/zeroturnaround/zip/FileSource.java",
+          "line": 36,
+          "note": "Path stored in field"
+        },
+        {
+          "file": "org/zeroturnaround/zip/ZipEntryUtil.java",
+          "line": 144,
+          "note": "Path used to create ZipEntry"
+        }
+      ],
+      "explanation": "The provided code shows that a user-controlled path is passed through the library without explicit sanitization or prefix checking in the visible methods. However, the source of the data is identified as `org.apache.log4j.Hierarchy`, which is unrelated to the `zeroturnaround` zip library's typical usage (processing archive entries). The taint flow graph indicates the path passes through library code, but the specific entry point where the attacker-controlled data enters the `zeroturnaround` library (e.g., via a public API like `ZipUtil.replaceEntry`) is not shown in the provided code snippets. Without evidence that the `log4j` source is actually connected to the `zeroturnaround` sink in a realistic deployment context (which seems unlikely given the disparate domains), or that the `zeroturnaround` library itself is the entry point for user input, the vulnerability cannot be confirmed as real. The report likely contains a false positive due to incorrect source identification or a disconnected taint path.",
+      "samples": [
+        "uncertain"
+      ],
+      "methods_shown": [
+        "<org.zeroturnaround.zip.FileSource: java.util.zip.ZipEntry getEntry()>",
+        "<org.zeroturnaround.zip.FileSource: void <init>(java.lang.String,java.io.File)>",
+        "<org.zeroturnaround.zip.IdentityNameMapper: java.lang.String map(java.lang.String)>",
+        "<org.zeroturnaround.zip.ZipUtil$13: boolean act(java.io.File)>",
+        "<org.zeroturnaround.zip.ZipUtil$13: void <init>(java.io.File,java.lang.String,java.io.File)>",
+        "<org.zeroturnaround.zip.ZipEntryUtil: java.util.zip.ZipEntry fromFile(java.lang.String,java.io.File)>"
+      ],
+      "override": ""
+    },
+    {
+      "flow_id": "76936cc3b2",
+      "flow_key": "<org.apache.log4j.Hierarchy: java.util.Enumeration getCurrentLoggers()>@L313/result => <org.zeroturnaround.zip.ZipUtil: void pack(java.io.File,java.util.zip.ZipOutputStream,org.zeroturnaround.zip.NameMapper,java.lang.String,boolean)>@L1730/1",
+      "verdict": "uncertain",
+      "reason": "insufficient_context",
+      "kept": true,
+      "v3_ok": null,
+      "v3_problems": [],
+      "evidence": [
+        {
+          "file": "org/zeroturnaround/zip/ZipUtil.java",
+          "line": 1730,
+          "note": "File constructed from directory and filename"
+        },
+        {
+          "file": "org/zeroturnaround/zip/ZipUtil.java",
+          "line": 1738,
+          "note": "NameMapper applied to path"
+        }
+      ],
+      "explanation": "The static analysis report identifies a taint flow from a library source (log4j) to a library sink (ZipUtil) without showing the application code that bridges them. While ZipUtil.java constructs file paths from directory listings (line 1730), it is unclear if the initial input controlling the directory or filenames is attacker-controlled in this specific deployment context. Furthermore, the use of a NameMapper (line 1738) might sanitize or restrict paths, but its implementation is not provided. Without the application code connecting the source to this library method, it is impossible to verify if the data is truly attacker-controlled or if sanitization occurs upstream.",
+      "samples": [
+        "uncertain"
+      ],
+      "methods_shown": [
+        "<org.zeroturnaround.zip.ZipUtil: void pack(java.io.File,java.util.zip.ZipOutputStream,org.zeroturnaround.zip.NameMapper,java.lang.String,boolean)>"
+      ],
+      "override": ""
+    },
+    {
+      "flow_id": "aa2c9fd00c",
+      "flow_key": "<org.apache.log4j.Hierarchy: java.util.Enumeration getCurrentLoggers()>@L313/result => <org.zeroturnaround.zip.ZipUtil$Unpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>@L1152/1",
+      "verdict": "uncertain",
+      "reason": "insufficient_context",
+      "kept": true,
+      "v3_ok": null,
+      "v3_problems": [],
+      "evidence": [
+        {
+          "file": "org/zeroturnaround/zip/ZipUtil.java",
+          "line": 1150,
+          "note": "IdentityNameMapper.map returns the name unchanged, offering no sanitization."
+        },
+        {
+          "file": "org/zeroturnaround/zip/ZipUtil.java",
+          "line": 1152,
+          "note": "File is constructed using outputDir and the potentially tainted name."
+        },
+        {
+          "file": "org/zeroturnaround/zip/ZipUtil.java",
+          "line": 1258,
+          "note": "Unwraper also uses mapper.map on the unrooted name, which is passed to File constructor."
+        }
+      ],
+      "explanation": "The static analysis report identifies a taint flow from ZipEntry names to file creation sinks in the zeroturnaround-zip library. However, the report explicitly states there is 'no complete application-code path' and the flow passes through library code. To determine if the source (ZipEntry name) is attacker-controlled, we need to see how the ZipFile/InputStream is created in the application code (e.g., is it from an uploaded file or a trusted internal resource?). Without the application code that invokes ZipUtil, we cannot confirm if the ZipEntry names originate from an untrusted source. Additionally, while IdentityNameMapper does not sanitize, other mappers might, and the specific usage context (Unpacker vs Unwraper) matters, but the primary blocker is the missing application-level context.",
+      "samples": [
+        "uncertain"
+      ],
+      "methods_shown": [
+        "<org.zeroturnaround.zip.IdentityNameMapper: java.lang.String map(java.lang.String)>",
+        "<org.zeroturnaround.zip.ZipUtil$Unpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>",
+        "<org.zeroturnaround.zip.ZipUtil$Unwraper: java.lang.String getUnrootedName(java.lang.String,java.lang.String)>",
+        "<org.zeroturnaround.zip.ZipUtil$Unwraper: void process(java.io.InputStream,java.util.zip.ZipEntry)>"
+      ],
+      "override": ""
+    },
+    {
+      "flow_id": "4a0d1a809e",
+      "flow_key": "<org.apache.log4j.Hierarchy: java.util.Enumeration getCurrentLoggers()>@L313/result => <org.zeroturnaround.zip.ZipUtil$Unwraper: void process(java.io.InputStream,java.util.zip.ZipEntry)>@L1260/1",
+      "verdict": "vulnerable",
+      "reason": "exploitable",
+      "kept": true,
+      "v3_ok": null,
+      "v3_problems": [],
+      "evidence": [
+        {
+          "file": "org/zeroturnaround/zip/IdentityNameMapper.java",
+          "line": 32,
+          "note": "IdentityNameMapper.map returns the input name unchanged, providing no sanitization or path traversal prevention."
+        },
+        {
+          "file": "org/zeroturnaround/zip/ZipUtil.java",
+          "line": 1152,
+          "note": "ZipUtil$Unpacker.process constructs a file path using the unsanitized entry name: new File(outputDir, name)."
+        },
+        {
+          "file": "org/zeroturnaround/zip/ZipUtil.java",
+          "line": 1260,
+          "note": "ZipUtil$Unwraper.process also constructs a file path using the unsanitized entry name: new File(outputDir, name)."
+        }
+      ],
+      "explanation": "The taint flow originates from ZipEntry names, which are attacker-controlled in the context of processing untrusted zip archives. The IdentityNameMapper provides no sanitization, and the ZipUtil classes directly use these names to construct file paths without validating that they remain within the intended output directory, allowing path traversal attacks.",
+      "samples": [
+        "vulnerable"
+      ],
+      "methods_shown": [
+        "<org.zeroturnaround.zip.IdentityNameMapper: java.lang.String map(java.lang.String)>",
+        "<org.zeroturnaround.zip.ZipUtil$Unpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>",
+        "<org.zeroturnaround.zip.ZipUtil$Unwraper: java.lang.String getUnrootedName(java.lang.String,java.lang.String)>",
+        "<org.zeroturnaround.zip.ZipUtil$Unwraper: void process(java.io.InputStream,java.util.zip.ZipEntry)>"
+      ],
+      "override": ""
+    },
+    {
+      "flow_id": "0d099485b2",
+      "flow_key": "<org.apache.log4j.Hierarchy: java.util.Enumeration getCurrentLoggers()>@L313/result => <org.zeroturnaround.zip.commons.FileUtils: java.io.File getTempFileFor(java.io.File)>@L75/1",
+      "verdict": "uncertain",
+      "reason": "insufficient_context",
+      "kept": true,
+      "v3_ok": null,
+      "v3_problems": [],
+      "evidence": [
+        {
+          "file": "org/zeroturnaround/zip/commons/FileUtils.java",
+          "line": 75,
+          "note": "Sink uses File(parent, name) which is susceptible to traversal if parent/name are attacker-controlled"
+        },
+        {
+          "file": "org/apache/log4j/Hierarchy.java",
+          "line": 313,
+          "note": "Source is getCurrentLoggers() returning logger names, which are typically internal identifiers, not direct user input"
+        }
+      ],
+      "explanation": "The reported flow connects Log4j's internal logger enumeration to a file utility, but the source (logger names) is unlikely to be directly attacker-controlled in a way that allows path traversal injection. Furthermore, the taint flow graph indicates no complete application-code path, making it impossible to verify if user input reaches the source or if sanitization occurs upstream. Without evidence of user-controlled data reaching the sink via this path, the vulnerability cannot be confirmed.",
+      "samples": [
+        "uncertain"
+      ],
+      "methods_shown": [
+        "<org.zeroturnaround.zip.commons.FileUtils: java.io.File getTempFileFor(java.io.File)>"
+      ],
+      "override": ""
+    },
+    {
+      "flow_id": "f6eb672a29",
+      "flow_key": "<org.apache.log4j.Hierarchy: java.util.Enumeration getCurrentLoggers()>@L313/result => <org.zeroturnaround.zip.commons.FileUtilsV2_2: boolean isSymlink(java.io.File)>@L1081/1",
+      "verdict": "uncertain",
+      "reason": "insufficient_context",
+      "kept": true,
+      "v3_ok": null,
+      "v3_problems": [],
+      "evidence": [
+        {
+          "file": "org/zeroturnaround/zip/ZipUtil.java",
+          "line": 1877,
+          "note": "Source of taint is the parameter 'dir' passed to unexplode, but the caller is not shown."
+        },
+        {
+          "file": "org/zeroturnaround/zip/commons/FileUtilsV2_2.java",
+          "line": 1081,
+          "note": "Path construction uses canonical parent, which mitigates traversal, but the initial entry name validation is missing from the provided snippet."
+        }
+      ],
+      "explanation": "The provided code shows the sink methods within the library, but the taint source is identified as a parameter to `ZipUtil.unexplode`. Without the application code or the specific `unexplode` overload that processes zip entries (which typically iterates over `ZipEntry` names), it is impossible to verify if the attacker-controlled entry name is passed directly to these file operations without prior validation. The library code itself uses canonical paths in `isSymlink`, which is a mitigation, but the critical check for path traversal usually happens before file creation/deletion in the extraction loop, which is not fully visible here.",
+      "samples": [
+        "uncertain"
+      ],
+      "methods_shown": [
+        "<org.zeroturnaround.zip.ZipUtil: void unexplode(java.io.File)>",
+        "<org.zeroturnaround.zip.ZipUtil: void unexplode(java.io.File,int)>",
+        "<org.zeroturnaround.zip.commons.FileUtilsV2_2: boolean isSymlink(java.io.File)>",
+        "<org.zeroturnaround.zip.commons.FileUtilsV2_2: void deleteDirectory(java.io.File)>"
+      ],
+      "override": ""
+    },
+    {
+      "flow_id": "5d054d3d33",
+      "flow_key": "<org.zeroturnaround.zip.ZipEntryUtil: java.util.zip.ZipEntry copy(java.util.zip.ZipEntry,java.lang.String)>@L77/result => <org.zeroturnaround.zip.ZipEntryUtil: java.util.zip.ZipEntry copy(java.util.zip.ZipEntry,java.lang.String)>@L61/0",
+      "verdict": "uncertain",
+      "reason": "insufficient_context",
+      "kept": true,
+      "v3_ok": null,
+      "v3_problems": [],
+      "evidence": [
+        {
+          "file": "org/zeroturnaround/zip/ZipEntryUtil.java",
+          "line": 61,
+          "note": "Sink: ZipEntry constructor accepts newName directly without validation"
+        },
+        {
+          "file": "org/zeroturnaround/zip/ZipEntryUtil.java",
+          "line": 61,
+          "note": "Source: newName is passed as a parameter to the copy method"
+        }
+      ],
+      "explanation": "The reported flow identifies a potential path traversal vulnerability within the `ZipEntryUtil.copy` method, where a filename (`newName`) is passed directly to the `ZipEntry` constructor without sanitization. However, the static analysis report only provides the internal library code and does not show the call sites where `ZipEntryUtil.copy` is invoked. To confirm CWE-022, we must verify if the `newName` argument originates from an attacker-controlled source (e.g., an uploaded zip file's entry name) and if the resulting `ZipEntry` is subsequently used to extract files to a directory without proper path validation (e.g., checking for `../` or resolving to a path outside the target directory). Without the calling context, it is impossible to determine if the tainted data actually reaches a dangerous sink in the application logic.",
+      "samples": [
+        "uncertain"
+      ],
+      "methods_shown": [
+        "<org.zeroturnaround.zip.ZipEntryUtil: java.util.zip.ZipEntry copy(java.util.zip.ZipEntry,java.lang.String)>"
+      ],
+      "override": ""
+    },
+    {
+      "flow_id": "2499d62bd9",
+      "flow_key": "<org.zeroturnaround.zip.ZipEntryUtil: java.util.zip.ZipEntry copy(java.util.zip.ZipEntry,java.lang.String)>@L77/result => <org.zeroturnaround.zip.ZipEntryUtil: java.util.zip.ZipEntry fromFile(java.lang.String,java.io.File)>@L144/0",
+      "verdict": "uncertain",
+      "reason": "insufficient_context",
+      "kept": true,
+      "v3_ok": null,
+      "v3_problems": [],
+      "evidence": [
+        {
+          "file": "org/zeroturnaround/zip/ZipUtil.java",
+          "line": 2454,
+          "note": "Source of path is `path` parameter passed to `replaceEntry`"
+        },
+        {
+          "file": "org/zeroturnaround/zip/FileSource.java",
+          "line": 36,
+          "note": "Path is stored in `FileSource`"
+        },
+        {
+          "file": "org/zeroturnaround/zip/ZipEntryUtil.java",
+          "line": 144,
+          "note": "Path is used to construct `ZipEntry`"
+        }
+      ],
+      "explanation": "The provided code shows that the `path` parameter flows into a `ZipEntry` constructor, which is a potential sink for path traversal if the entry name is later used to extract files. However, the report does not show the code where this `ZipEntry` is actually used to write to the file system (e.g., inside `ZipOutputStream` or similar extraction logic). Without seeing the sink where the file is written, it is impossible to confirm if the traversal leads to arbitrary file write. Additionally, the source `path` in `ZipUtil.replaceEntry` is an internal API parameter, not directly attacker-controlled from a network request in the shown snippets.",
+      "samples": [
+        "uncertain"
+      ],
+      "methods_shown": [
+        "<org.zeroturnaround.zip.FileSource: java.util.zip.ZipEntry getEntry()>",
+        "<org.zeroturnaround.zip.FileSource: void <init>(java.lang.String,java.io.File)>",
+        "<org.zeroturnaround.zip.IdentityNameMapper: java.lang.String map(java.lang.String)>",
+        "<org.zeroturnaround.zip.ZipEntryUtil: java.util.zip.ZipEntry copy(java.util.zip.ZipEntry,java.lang.String)>",
+        "<org.zeroturnaround.zip.ZipUtil$13: boolean act(java.io.File)>",
+        "<org.zeroturnaround.zip.ZipEntryUtil: java.util.zip.ZipEntry fromFile(java.lang.String,java.io.File)>"
+      ],
+      "override": ""
+    },
+    {
+      "flow_id": "9ff02e1779",
+      "flow_key": "<org.zeroturnaround.zip.ZipEntryUtil: java.util.zip.ZipEntry copy(java.util.zip.ZipEntry,java.lang.String)>@L77/result => <org.zeroturnaround.zip.ZipUtil: void pack(java.io.File,java.util.zip.ZipOutputStream,org.zeroturnaround.zip.NameMapper,java.lang.String,boolean)>@L1730/1",
+      "verdict": "uncertain",
+      "reason": "insufficient_context",
+      "kept": true,
+      "v3_ok": null,
+      "v3_problems": [],
+      "evidence": [
+        {
+          "file": "org/zeroturnaround/zip/ZipUtil.java",
+          "line": 1730,
+          "note": "File constructed from directory and filename"
+        },
+        {
+          "file": "org/zeroturnaround/zip/ZipUtil.java",
+          "line": 1738,
+          "note": "NameMapper applied to path"
+        },
+        {
+          "file": "org/zeroturnaround/zip/ZipEntryUtil.java",
+          "line": 61,
+          "note": "ZipEntry created with name"
+        }
+      ],
+      "explanation": "The reported flow involves library code (zeroturnaround) without showing the application-level entry points where the ZipUtil methods are invoked. It is unclear if the 'filename' or 'pathPrefix' arguments originate from attacker-controlled input (e.g., user-uploaded ZIP entries or request parameters) or are derived from safe internal sources. Additionally, the 'NameMapper' at line 1738 could potentially sanitize or validate the path, but its implementation is not provided, making it impossible to verify if path traversal is prevented.",
+      "samples": [
+        "uncertain"
+      ],
+      "methods_shown": [
+        "<org.zeroturnaround.zip.ZipEntryUtil: java.util.zip.ZipEntry copy(java.util.zip.ZipEntry,java.lang.String)>",
+        "<org.zeroturnaround.zip.ZipUtil: void pack(java.io.File,java.util.zip.ZipOutputStream,org.zeroturnaround.zip.NameMapper,java.lang.String,boolean)>"
+      ],
+      "override": ""
+    },
+    {
+      "flow_id": "d1baeffd89",
+      "flow_key": "<org.zeroturnaround.zip.ZipEntryUtil: java.util.zip.ZipEntry copy(java.util.zip.ZipEntry,java.lang.String)>@L77/result => <org.zeroturnaround.zip.ZipUtil$Unpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>@L1152/1",
+      "verdict": "vulnerable",
+      "reason": "exploitable",
+      "kept": true,
+      "v3_ok": null,
+      "v3_problems": [],
+      "evidence": [
+        {
+          "file": "org/zeroturnaround/zip/ZipUtil.java",
+          "line": 1150,
+          "note": "Source of taint: zipEntry.getName() is passed to mapper.map()"
+        },
+        {
+          "file": "org/zeroturnaround/zip/IdentityNameMapper.java",
+          "line": 32,
+          "note": "Sanitizer check: IdentityNameMapper.map() returns the input name unchanged, providing no normalization or validation"
+        },
+        {
+          "file": "org/zeroturnaround/zip/ZipUtil.java",
+          "line": 1152,
+          "note": "Dangerous sink: new File(outputDir, name) constructs a file path using the unvalidated name"
+        },
+        {
+          "file": "org/zeroturnaround/zip/ZipUtil.java",
+          "line": 1163,
+          "note": "Execution: FileUtils.copy(in, file) writes data to the constructed path, allowing path traversal if name contains '../'"
+        }
+      ],
+      "explanation": "The taint flow originates from the zip entry name, which is attacker-controlled in a realistic deployment where an attacker provides a malicious zip file. The IdentityNameMapper provides no sanitization, simply returning the raw entry name. This name is then used directly to construct a File object relative to the output directory without checking for path traversal sequences like '../', allowing an attacker to write files outside the intended directory.",
+      "samples": [
+        "vulnerable"
+      ],
+      "methods_shown": [
+        "<org.zeroturnaround.zip.IdentityNameMapper: java.lang.String map(java.lang.String)>",
+        "<org.zeroturnaround.zip.ZipEntryUtil: java.util.zip.ZipEntry copy(java.util.zip.ZipEntry,java.lang.String)>",
+        "<org.zeroturnaround.zip.ZipUtil$Unpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>",
+        "<org.zeroturnaround.zip.ZipUtil$Unwraper: java.lang.String getUnrootedName(java.lang.String,java.lang.String)>",
+        "<org.zeroturnaround.zip.ZipUtil$Unwraper: void process(java.io.InputStream,java.util.zip.ZipEntry)>"
+      ],
+      "override": ""
+    },
+    {
+      "flow_id": "d89f0c8e11",
+      "flow_key": "<org.zeroturnaround.zip.ZipEntryUtil: java.util.zip.ZipEntry copy(java.util.zip.ZipEntry,java.lang.String)>@L77/result => <org.zeroturnaround.zip.ZipUtil$Unwraper: void process(java.io.InputStream,java.util.zip.ZipEntry)>@L1260/1",
+      "verdict": "vulnerable",
+      "reason": "exploitable",
+      "kept": true,
+      "v3_ok": null,
+      "v3_problems": [],
+      "evidence": [
+        {
+          "file": "org/zeroturnaround/zip/ZipUtil.java",
+          "line": 1150,
+          "note": "Source of taint: mapper.map(zipEntry.getName()) returns the entry name directly if IdentityNameMapper is used."
+        },
+        {
+          "file": "org/zeroturnaround/zip/IdentityNameMapper.java",
+          "line": 32,
+          "note": "IdentityNameMapper.map() returns the input string unchanged, providing no sanitization."
+        },
+        {
+          "file": "org/zeroturnaround/zip/ZipUtil.java",
+          "line": 1152,
+          "note": "Sink: new File(outputDir, name) constructs a file path using the unsanitized entry name."
+        },
+        {
+          "file": "org/zeroturnaround/zip/ZipUtil.java",
+          "line": 1163,
+          "note": "Dangerous operation: FileUtils.copy(in, file) writes data to the constructed path."
+        },
+        {
+          "file": "org/zeroturnaround/zip/ZipUtil.java",
+          "line": 1260,
+          "note": "Alternative Sink: new File(outputDir, name) in Unwraper.process() also uses unsanitized name."
+        }
+      ],
+      "explanation": "The taint flow originates from the zip entry name, which is attacker-controlled in a realistic deployment where an attacker provides a malicious zip file. The IdentityNameMapper performs no normalization or validation, allowing '../' sequences to escape the intended output directory. The sink constructs a File object and writes to it without checking if the resulting path remains within the base directory, enabling path traversal.",
+      "samples": [
+        "vulnerable"
+      ],
+      "methods_shown": [
+        "<org.zeroturnaround.zip.IdentityNameMapper: java.lang.String map(java.lang.String)>",
+        "<org.zeroturnaround.zip.ZipEntryUtil: java.util.zip.ZipEntry copy(java.util.zip.ZipEntry,java.lang.String)>",
+        "<org.zeroturnaround.zip.ZipUtil$Unpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>",
+        "<org.zeroturnaround.zip.ZipUtil$Unwraper: java.lang.String getUnrootedName(java.lang.String,java.lang.String)>",
+        "<org.zeroturnaround.zip.ZipUtil$Unwraper: void process(java.io.InputStream,java.util.zip.ZipEntry)>"
+      ],
+      "override": ""
+    },
+    {
+      "flow_id": "4611e3b005",
+      "flow_key": "<org.zeroturnaround.zip.ZipEntryUtil: java.util.zip.ZipEntry copy(java.util.zip.ZipEntry,java.lang.String)>@L77/result => <org.zeroturnaround.zip.commons.FileUtils: java.io.File getTempFileFor(java.io.File)>@L75/1",
+      "verdict": "uncertain",
+      "reason": "insufficient_context",
+      "kept": true,
+      "v3_ok": null,
+      "v3_problems": [],
+      "evidence": [
+        {
+          "file": "org/zeroturnaround/zip/ZipEntryUtil.java",
+          "line": 61,
+          "note": "Source: ZipEntry name is used to create a new ZipEntry"
+        },
+        {
+          "file": "org/zeroturnaround/zip/commons/FileUtils.java",
+          "line": 75,
+          "note": "Sink: File object created using parent and name"
+        }
+      ],
+      "explanation": "The provided code shows a taint flow from a ZipEntry name to a File object construction, but it lacks the context of how the ZipEntry name was originally obtained (e.g., from a user-uploaded zip file vs. internal generation). Without knowing if the ZipEntry name is attacker-controlled, we cannot confirm exploitation. Additionally, the sink `getTempFileFor` creates a file in the same directory as the input file, which might be safe if the input file is already constrained, but this constraint is not visible in the snippet.",
+      "samples": [
+        "uncertain"
+      ],
+      "methods_shown": [
+        "<org.zeroturnaround.zip.ZipEntryUtil: java.util.zip.ZipEntry copy(java.util.zip.ZipEntry,java.lang.String)>",
+        "<org.zeroturnaround.zip.commons.FileUtils: java.io.File getTempFileFor(java.io.File)>"
+      ],
+      "override": ""
+    },
+    {
+      "flow_id": "f1f5a76d36",
+      "flow_key": "<org.zeroturnaround.zip.ZipEntryUtil: java.util.zip.ZipEntry copy(java.util.zip.ZipEntry,java.lang.String)>@L77/result => <org.zeroturnaround.zip.commons.FileUtilsV2_2: boolean isSymlink(java.io.File)>@L1081/1",
+      "verdict": "uncertain",
+      "reason": "insufficient_context",
+      "kept": true,
+      "v3_ok": null,
+      "v3_problems": [],
+      "evidence": [
+        {
+          "file": "org/zeroturnaround/zip/ZipEntryUtil.java",
+          "line": 61,
+          "note": "Source: ZipEntry name is used to construct a new ZipEntry"
+        },
+        {
+          "file": "org/zeroturnaround/zip/commons/FileUtilsV2_2.java",
+          "line": 1081,
+          "note": "Sink context: File constructed from canonical parent and entry name"
+        }
+      ],
+      "explanation": "The reported flow involves library code (zeroturnaround) without showing the application-level entry point where the ZipEntry names originate. While the sink in FileUtilsV2_2 uses getCanonicalFile() which mitigates simple traversal, the source (ZipEntry name) might be attacker-controlled if the application extracts untrusted archives. However, without seeing the application code that calls these library methods, it is impossible to confirm if the input is attacker-controlled or if other sanitization occurs upstream. Therefore, the context is insufficient to definitively rule in or out the vulnerability.",
+      "samples": [
+        "uncertain"
+      ],
+      "methods_shown": [
+        "<org.zeroturnaround.zip.ZipEntryUtil: java.util.zip.ZipEntry copy(java.util.zip.ZipEntry,java.lang.String)>",
+        "<org.zeroturnaround.zip.ZipUtil: void unexplode(java.io.File)>",
+        "<org.zeroturnaround.zip.ZipUtil: void unexplode(java.io.File,int)>",
+        "<org.zeroturnaround.zip.commons.FileUtilsV2_2: boolean isSymlink(java.io.File)>",
+        "<org.zeroturnaround.zip.commons.FileUtilsV2_2: void deleteDirectory(java.io.File)>"
+      ],
+      "override": ""
+    },
+    {
+      "flow_id": "dd6b719f27",
+      "flow_key": "<org.zeroturnaround.zip.ZipUtil: void iterate(java.io.File,org.zeroturnaround.zip.ZipEntryCallback,java.nio.charset.Charset)>@L511/result => <org.zeroturnaround.zip.ZipEntryUtil: java.util.zip.ZipEntry copy(java.util.zip.ZipEntry,java.lang.String)>@L61/0",
+      "verdict": "not_vulnerable",
+      "reason": "not_dangerous_sink",
+      "kept": false,
+      "v3_ok": null,
+      "v3_problems": [],
+      "evidence": [
+        {
+          "file": "org/zeroturnaround/zip/ZipUtil.java",
+          "line": 511,
+          "note": "e.getName() is used in an exception message string, not for file system operations"
+        },
+        {
+          "file": "org/zeroturnaround/zip/ZipEntryUtil.java",
+          "line": 61,
+          "note": "ZipEntry constructor accepts a name string but does not perform file system access; it only creates an in-memory object"
+        }
+      ],
+      "explanation": "The reported flow identifies `e.getName()` from a ZIP entry as a source, but the sink is the `ZipEntry` constructor which creates an in-memory object, not a file system path. The value is subsequently used in an error message (line 511), which is not a dangerous sink for path traversal. There is no code shown that uses the entry name to construct a file path for reading or writing.",
+      "samples": [
+        "not_vulnerable"
+      ],
+      "methods_shown": [
+        "<org.zeroturnaround.zip.ZipEntryUtil: java.util.zip.ZipEntry copy(java.util.zip.ZipEntry,java.lang.String)>",
+        "<org.zeroturnaround.zip.ZipUtil: void iterate(java.io.File,org.zeroturnaround.zip.ZipEntryCallback,java.nio.charset.Charset)>"
+      ],
+      "override": ""
+    },
+    {
+      "flow_id": "340ea1d5a7",
+      "flow_key": "<org.zeroturnaround.zip.ZipUtil: void iterate(java.io.File,org.zeroturnaround.zip.ZipEntryCallback,java.nio.charset.Charset)>@L511/result => <org.zeroturnaround.zip.ZipEntryUtil: java.util.zip.ZipEntry fromFile(java.lang.String,java.io.File)>@L144/0",
+      "verdict": "uncertain",
+      "reason": "insufficient_context",
+      "kept": true,
+      "v3_ok": null,
+      "v3_problems": [],
+      "evidence": [
+        {
+          "file": "org/zeroturnaround/zip/ZipUtil.java",
+          "line": 2454,
+          "note": "Source of taint is the 'path' parameter passed to FileSource constructor"
+        },
+        {
+          "file": "org/zeroturnaround/zip/FileSource.java",
+          "line": 36,
+          "note": "Path is stored directly without sanitization"
+        },
+        {
+          "file": "org/zeroturnaround/zip/ZipEntryUtil.java",
+          "line": 144,
+          "note": "Sink: ZipEntry created with unsanitized path"
+        }
+      ],
+      "explanation": "The reported flow shows that a string parameter 'path' is passed through to the ZipEntry constructor without normalization. However, the provided code snippets are from the library itself (zeroturnaround/zip) and do not show the application-level entry point where this library method is called. Without seeing the caller code, it is impossible to determine if the 'path' argument is attacker-controlled (e.g., from a user upload or request parameter) or if it is derived from a trusted source. Therefore, the vulnerability status cannot be confirmed.",
+      "samples": [
+        "uncertain"
+      ],
+      "methods_shown": [
+        "<org.zeroturnaround.zip.FileSource: java.util.zip.ZipEntry getEntry()>",
+        "<org.zeroturnaround.zip.FileSource: void <init>(java.lang.String,java.io.File)>",
+        "<org.zeroturnaround.zip.IdentityNameMapper: java.lang.String map(java.lang.String)>",
+        "<org.zeroturnaround.zip.ZipUtil$13: boolean act(java.io.File)>",
+        "<org.zeroturnaround.zip.ZipUtil$13: void <init>(java.io.File,java.lang.String,java.io.File)>",
+        "<org.zeroturnaround.zip.ZipEntryUtil: java.util.zip.ZipEntry fromFile(java.lang.String,java.io.File)>"
+      ],
+      "override": ""
+    },
+    {
+      "flow_id": "24943b92db",
+      "flow_key": "<org.zeroturnaround.zip.ZipUtil: void iterate(java.io.File,org.zeroturnaround.zip.ZipEntryCallback,java.nio.charset.Charset)>@L511/result => <org.zeroturnaround.zip.ZipUtil: void pack(java.io.File,java.util.zip.ZipOutputStream,org.zeroturnaround.zip.NameMapper,java.lang.String,boolean)>@L1730/1",
+      "verdict": "not_vulnerable",
+      "reason": "not_attacker_controlled",
+      "kept": false,
+      "v3_ok": null,
+      "v3_problems": [],
+      "evidence": [
+        {
+          "file": "org/zeroturnaround/zip/ZipUtil.java",
+          "line": 511,
+          "note": "Source is e.getName() used in an exception message, not a file path operation."
+        },
+        {
+          "file": "org/zeroturnaround/zip/ZipUtil.java",
+          "line": 1730,
+          "note": "Sink uses dir.list() which returns filenames from the local filesystem, not attacker input."
+        }
+      ],
+      "explanation": "The reported taint flow is a false positive. The source identified (ZipEntry name) is only used in an error message (line 511) and does not propagate to the sink. The sink (line 1730) constructs file paths using filenames obtained from the local directory listing (dir.list()), which are controlled by the file system administrator, not the attacker. There is no path from attacker-controlled input to the file system operations in the provided code.",
+      "samples": [
+        "not_vulnerable"
+      ],
+      "methods_shown": [
+        "<org.zeroturnaround.zip.ZipUtil: void iterate(java.io.File,org.zeroturnaround.zip.ZipEntryCallback,java.nio.charset.Charset)>",
+        "<org.zeroturnaround.zip.ZipUtil: void pack(java.io.File,java.util.zip.ZipOutputStream,org.zeroturnaround.zip.NameMapper,java.lang.String,boolean)>"
+      ],
+      "override": ""
+    },
+    {
+      "flow_id": "eab509712a",
+      "flow_key": "<org.zeroturnaround.zip.ZipUtil: void iterate(java.io.File,org.zeroturnaround.zip.ZipEntryCallback,java.nio.charset.Charset)>@L511/result => <org.zeroturnaround.zip.ZipUtil$Unpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>@L1152/1",
+      "verdict": "vulnerable",
+      "reason": "exploitable",
+      "kept": true,
+      "v3_ok": null,
+      "v3_problems": [],
+      "evidence": [
+        {
+          "file": "org/zeroturnaround/zip/ZipUtil.java",
+          "line": 508,
+          "note": "Source: ZipEntry name from untrusted ZIP file is passed to callback"
+        },
+        {
+          "file": "org/zeroturnaround/zip/ZipUtil.java",
+          "line": 1150,
+          "note": "IdentityNameMapper.map returns the name unchanged, no sanitization"
+        },
+        {
+          "file": "org/zeroturnaround/zip/ZipUtil.java",
+          "line": 1152,
+          "note": "Sink: File constructed with unvalidated name relative to outputDir"
+        },
+        {
+          "file": "org/zeroturnaround/zip/ZipUtil.java",
+          "line": 1258,
+          "note": "Unwraper path: getUnrootedName strips root but does not validate against traversal"
+        },
+        {
+          "file": "org/zeroturnaround/zip/ZipUtil.java",
+          "line": 1260,
+          "note": "Sink: File constructed with potentially traversing name"
+        }
+      ],
+      "explanation": "The source (ZipEntry name) is attacker-controlled via the contents of a ZIP file. The IdentityNameMapper performs no normalization or validation, and the Unwraper only strips a root prefix without checking for '../' sequences. The sink constructs a File object using this unvalidated name relative to an output directory, allowing path traversal to write files outside the intended directory.",
+      "samples": [
+        "vulnerable"
+      ],
+      "methods_shown": [
+        "<org.zeroturnaround.zip.IdentityNameMapper: java.lang.String map(java.lang.String)>",
+        "<org.zeroturnaround.zip.ZipUtil$Unpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>",
+        "<org.zeroturnaround.zip.ZipUtil$Unwraper: java.lang.String getUnrootedName(java.lang.String,java.lang.String)>",
+        "<org.zeroturnaround.zip.ZipUtil$Unwraper: void process(java.io.InputStream,java.util.zip.ZipEntry)>",
+        "<org.zeroturnaround.zip.ZipUtil: void iterate(java.io.File,org.zeroturnaround.zip.ZipEntryCallback,java.nio.charset.Charset)>"
+      ],
+      "override": ""
+    },
+    {
+      "flow_id": "babb2444b9",
+      "flow_key": "<org.zeroturnaround.zip.ZipUtil: void iterate(java.io.File,org.zeroturnaround.zip.ZipEntryCallback,java.nio.charset.Charset)>@L511/result => <org.zeroturnaround.zip.ZipUtil$Unwraper: void process(java.io.InputStream,java.util.zip.ZipEntry)>@L1260/1",
+      "verdict": "vulnerable",
+      "reason": "exploitable",
+      "kept": true,
+      "v3_ok": null,
+      "v3_problems": [],
+      "evidence": [
+        {
+          "file": "org/zeroturnaround/zip/ZipUtil.java",
+          "line": 504,
+          "note": "ZipEntry e is obtained from the ZIP file entries, which are attacker-controlled if the ZIP file is uploaded by an attacker."
+        },
+        {
+          "file": "org/zeroturnaround/zip/ZipUtil.java",
+          "line": 508,
+          "note": "The ZipEntry object (containing the entry name) is passed to the callback action.process()."
+        },
+        {
+          "file": "org/zeroturnaround/zip/ZipUtil.java",
+          "line": 1150,
+          "note": "In Unpacker.process(), zipEntry.getName() is passed to mapper.map()."
+        },
+        {
+          "file": "org/zeroturnaround/zip/IdentityNameMapper.java",
+          "line": 32,
+          "note": "IdentityNameMapper.map() returns the name unchanged, providing no sanitization or path traversal prevention."
+        },
+        {
+          "file": "org/zeroturnaround/zip/ZipUtil.java",
+          "line": 1152,
+          "note": "The unsanitized name is used to construct a File object: new File(outputDir, name)."
+        },
+        {
+          "file": "org/zeroturnaround/zip/ZipUtil.java",
+          "line": 1163,
+          "note": "FileUtils.copy(in, file) writes the input stream to the constructed file path, allowing arbitrary file write if '../' is in the name."
+        }
+      ],
+      "explanation": "The source of the taint is the ZIP entry name, which is controlled by the content of the ZIP file. If an attacker provides a malicious ZIP file with entries containing '../' sequences, the IdentityNameMapper does not sanitize these paths. The unsanitized path is then used to create a File object relative to the output directory, and the content is written to that file, leading to a path traversal vulnerability.",
+      "samples": [
+        "vulnerable"
+      ],
+      "methods_shown": [
+        "<org.zeroturnaround.zip.IdentityNameMapper: java.lang.String map(java.lang.String)>",
+        "<org.zeroturnaround.zip.ZipUtil$Unpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>",
+        "<org.zeroturnaround.zip.ZipUtil$Unwraper: java.lang.String getUnrootedName(java.lang.String,java.lang.String)>",
+        "<org.zeroturnaround.zip.ZipUtil$Unwraper: void process(java.io.InputStream,java.util.zip.ZipEntry)>",
+        "<org.zeroturnaround.zip.ZipUtil: void iterate(java.io.File,org.zeroturnaround.zip.ZipEntryCallback,java.nio.charset.Charset)>"
+      ],
+      "override": ""
+    },
+    {
+      "flow_id": "083f0a1612",
+      "flow_key": "<org.zeroturnaround.zip.ZipUtil: void iterate(java.io.File,org.zeroturnaround.zip.ZipEntryCallback,java.nio.charset.Charset)>@L511/result => <org.zeroturnaround.zip.commons.FileUtils: java.io.File getTempFileFor(java.io.File)>@L75/1",
+      "verdict": "not_vulnerable",
+      "reason": "not_dangerous_sink",
+      "kept": false,
+      "v3_ok": null,
+      "v3_problems": [],
+      "evidence": [
+        {
+          "file": "org/zeroturnaround/zip/ZipUtil.java",
+          "line": 511,
+          "note": "e.getName() is used in a string concatenation for an exception message, not for file system operations."
+        },
+        {
+          "file": "org/zeroturnaround/zip/commons/FileUtils.java",
+          "line": 75,
+          "note": "getTempFileFor creates a file in the same directory as the input file, using the input file's name as a prefix. It does not use the entry name from the zip archive to determine the output path."
+        }
+      ],
+      "explanation": "The reported taint flow is incorrect because the source `e.getName()` (the zip entry name) is only used in an error message at line 511 of ZipUtil.java, not passed to any file creation or access method. The sink `getTempFileFor` operates on a `java.io.File` object representing the extracted content's location, which is determined by the extraction logic (not shown in the snippet but implied to be safe or separate from the entry name taint in this specific call chain). The entry name itself does not traverse into the file system path construction in the provided code.",
+      "samples": [
+        "not_vulnerable"
+      ],
+      "methods_shown": [
+        "<org.zeroturnaround.zip.ZipUtil: void iterate(java.io.File,org.zeroturnaround.zip.ZipEntryCallback,java.nio.charset.Charset)>",
+        "<org.zeroturnaround.zip.commons.FileUtils: java.io.File getTempFileFor(java.io.File)>"
+      ],
+      "override": ""
+    },
+    {
+      "flow_id": "f01e726a79",
+      "flow_key": "<org.zeroturnaround.zip.ZipUtil: void iterate(java.io.File,org.zeroturnaround.zip.ZipEntryCallback,java.nio.charset.Charset)>@L511/result => <org.zeroturnaround.zip.commons.FileUtilsV2_2: boolean isSymlink(java.io.File)>@L1081/1",
+      "verdict": "not_vulnerable",
+      "reason": "not_dangerous_sink",
+      "kept": false,
+      "v3_ok": null,
+      "v3_problems": [],
+      "evidence": [
+        {
+          "file": "org/zeroturnaround/zip/commons/FileUtilsV2_2.java",
+          "line": 1081,
+          "note": "File constructed using canonical parent directory and entry name"
+        },
+        {
+          "file": "org/zeroturnaround/zip/commons/FileUtilsV2_2.java",
+          "line": 1084,
+          "note": "Symlink check compares canonical path against absolute path"
+        },
+        {
+          "file": "org/zeroturnaround/zip/ZipUtil.java",
+          "line": 511,
+          "note": "e.getName() used only in error message string, not for file operations"
+        }
+      ],
+      "explanation": "The reported flow is incorrect because the source `e.getName()` in `ZipUtil.iterate` is only used to construct an error message string (line 511), not passed to file system operations. The actual file path construction occurs in `FileUtilsV2_2.isSymlink` (line 1081), where the entry name is combined with a `canonicalDir` (the canonical parent of the extraction target), which inherently prevents path traversal outside the intended directory. Furthermore, the sink `isSymlink` performs a security check (canonical vs absolute path equality) rather than performing a dangerous operation like writing or executing based on the path.",
+      "samples": [
+        "not_vulnerable"
+      ],
+      "methods_shown": [
+        "<org.zeroturnaround.zip.ZipUtil: void iterate(java.io.File,org.zeroturnaround.zip.ZipEntryCallback,java.nio.charset.Charset)>",
+        "<org.zeroturnaround.zip.ZipUtil: void unexplode(java.io.File)>",
+        "<org.zeroturnaround.zip.ZipUtil: void unexplode(java.io.File,int)>",
+        "<org.zeroturnaround.zip.commons.FileUtilsV2_2: boolean isSymlink(java.io.File)>",
+        "<org.zeroturnaround.zip.commons.FileUtilsV2_2: void deleteDirectory(java.io.File)>"
+      ],
+      "override": ""
+    },
+    {
+      "flow_id": "db09f3e7f9",
+      "flow_key": "<org.zeroturnaround.zip.ZipUtil: void iterate(java.io.InputStream,org.zeroturnaround.zip.ZipEntryCallback,java.nio.charset.Charset)>@L715/result => <org.zeroturnaround.zip.ZipEntryUtil: java.util.zip.ZipEntry copy(java.util.zip.ZipEntry,java.lang.String)>@L61/0",
+      "verdict": "uncertain",
+      "reason": "insufficient_context",
+      "kept": true,
+      "v3_ok": null,
+      "v3_problems": [],
+      "evidence": [
+        {
+          "file": "org/zeroturnaround/zip/ZipUtil.java",
+          "line": 712,
+          "note": "Source of taint is entry.getName() passed to user-defined callback"
+        },
+        {
+          "file": "org/zeroturnaround/zip/ZipEntryUtil.java",
+          "line": 61,
+          "note": "Sink is ZipEntry constructor, which does not write to filesystem directly"
+        }
+      ],
+      "explanation": "The reported flow identifies `entry.getName()` as a source and `ZipEntry` construction as a sink. However, `ZipEntry` is a metadata object and does not perform file system operations; it merely stores the name. The actual file system access (extraction) happens elsewhere in the library or application code, which is not shown in the provided snippet. Without seeing where the `ZipEntry` object is used to write files to disk, it is impossible to determine if the path is validated or if the sink is dangerous.",
+      "samples": [
+        "uncertain"
+      ],
+      "methods_shown": [
+        "<org.zeroturnaround.zip.ZipEntryUtil: java.util.zip.ZipEntry copy(java.util.zip.ZipEntry,java.lang.String)>",
+        "<org.zeroturnaround.zip.ZipUtil: void iterate(java.io.InputStream,org.zeroturnaround.zip.ZipEntryCallback,java.nio.charset.Charset)>"
+      ],
+      "override": ""
+    },
+    {
+      "flow_id": "efe99c1137",
+      "flow_key": "<org.zeroturnaround.zip.ZipUtil: void iterate(java.io.InputStream,org.zeroturnaround.zip.ZipEntryCallback,java.nio.charset.Charset)>@L715/result => <org.zeroturnaround.zip.ZipEntryUtil: java.util.zip.ZipEntry fromFile(java.lang.String,java.io.File)>@L144/0",
+      "verdict": "uncertain",
+      "reason": "insufficient_context",
+      "kept": true,
+      "v3_ok": null,
+      "v3_problems": [],
+      "evidence": [
+        {
+          "file": "org/zeroturnaround/zip/ZipUtil.java",
+          "line": 2451,
+          "note": "Source method replaceEntry takes a String path parameter, but the provided code snippet does not show the caller of this method to determine if the 'path' argument is attacker-controlled."
+        },
+        {
+          "file": "org/zeroturnaround/zip/ZipEntryUtil.java",
+          "line": 144,
+          "note": "Sink creates a ZipEntry with the unvalidated name. While this is a potential traversal vector if the name contains '../', the critical missing link is whether the input to the library's public API originates from an untrusted source in the application code."
+        }
+      ],
+      "explanation": "The reported flow identifies a potential path traversal within the library code where a filename is used to create a ZipEntry without normalization. However, the provided code snippets only cover the library internals and do not show the application-level code that invokes these methods. Without evidence that the 'path' parameter passed to ZipUtil.replaceEntry or similar methods is derived from an attacker-controlled source (e.g., user upload, HTTP request), it is impossible to confirm if the vulnerability is exploitable in the specific deployment context.",
+      "samples": [
+        "uncertain"
+      ],
+      "methods_shown": [
+        "<org.zeroturnaround.zip.FileSource: java.util.zip.ZipEntry getEntry()>",
+        "<org.zeroturnaround.zip.FileSource: void <init>(java.lang.String,java.io.File)>",
+        "<org.zeroturnaround.zip.IdentityNameMapper: java.lang.String map(java.lang.String)>",
+        "<org.zeroturnaround.zip.ZipUtil$13: boolean act(java.io.File)>",
+        "<org.zeroturnaround.zip.ZipUtil$13: void <init>(java.io.File,java.lang.String,java.io.File)>",
+        "<org.zeroturnaround.zip.ZipEntryUtil: java.util.zip.ZipEntry fromFile(java.lang.String,java.io.File)>"
+      ],
+      "override": ""
+    },
+    {
+      "flow_id": "d37428f0ef",
+      "flow_key": "<org.zeroturnaround.zip.ZipUtil: void iterate(java.io.InputStream,org.zeroturnaround.zip.ZipEntryCallback,java.nio.charset.Charset)>@L715/result => <org.zeroturnaround.zip.ZipUtil: void pack(java.io.File,java.util.zip.ZipOutputStream,org.zeroturnaround.zip.NameMapper,java.lang.String,boolean)>@L1730/1",
+      "verdict": "not_vulnerable",
+      "reason": "not_dangerous_sink",
+      "kept": false,
+      "v3_ok": null,
+      "v3_problems": [],
+      "evidence": [
+        {
+          "file": "org/zeroturnaround/zip/ZipUtil.java",
+          "line": 1730,
+          "note": "File object created from directory and filename"
+        },
+        {
+          "file": "org/zeroturnaround/zip/ZipUtil.java",
+          "line": 1740,
+          "note": "ZipEntry created from file path, used for writing to ZipOutputStream"
+        },
+        {
+          "file": "org/zeroturnaround/zip/ZipUtil.java",
+          "line": 715,
+          "note": "entry.getName() used only in error message string concatenation"
+        }
+      ],
+      "explanation": "The reported taint flow is infeasible because the source `entry.getName()` in the `iterate` method is only used to construct an error message string (line 715) and is not propagated to any file system operations. The `pack` method, which performs file system operations, constructs paths from local directory listings (`dir.list()`) and does not accept external input for the filenames being packed. Therefore, there is no path from attacker-controlled input to a dangerous sink.",
+      "samples": [
+        "not_vulnerable"
+      ],
+      "methods_shown": [
+        "<org.zeroturnaround.zip.ZipUtil: void iterate(java.io.InputStream,org.zeroturnaround.zip.ZipEntryCallback,java.nio.charset.Charset)>",
+        "<org.zeroturnaround.zip.ZipUtil: void pack(java.io.File,java.util.zip.ZipOutputStream,org.zeroturnaround.zip.NameMapper,java.lang.String,boolean)>"
+      ],
+      "override": ""
+    },
+    {
+      "flow_id": "bb6064cd43",
+      "flow_key": "<org.zeroturnaround.zip.ZipUtil: void iterate(java.io.InputStream,org.zeroturnaround.zip.ZipEntryCallback,java.nio.charset.Charset)>@L715/result => <org.zeroturnaround.zip.ZipUtil$Unpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>@L1152/1",
+      "verdict": "vulnerable",
+      "reason": "exploitable",
+      "kept": true,
+      "v3_ok": null,
+      "v3_problems": [],
+      "evidence": [
+        {
+          "file": "org/zeroturnaround/zip/ZipUtil.java",
+          "line": 710,
+          "note": "Source: ZipEntry name obtained from untrusted input stream (zip file)"
+        },
+        {
+          "file": "org/zeroturnaround/zip/IdentityNameMapper.java",
+          "line": 32,
+          "note": "Sanitizer: IdentityNameMapper.map() returns the name unchanged, providing no normalization or validation"
+        },
+        {
+          "file": "org/zeroturnaround/zip/ZipUtil.java",
+          "line": 1152,
+          "note": "Sink: File object constructed using attacker-controlled name without checking if it escapes outputDir"
+        }
+      ],
+      "explanation": "The ZipEntry name is derived directly from the input stream (attacker-controlled) and passed through IdentityNameMapper which performs no sanitization. The resulting name is used to construct a File object relative to outputDir without verifying that the resolved path remains within the intended directory, allowing path traversal via '../' sequences.",
+      "samples": [
+        "vulnerable"
+      ],
+      "methods_shown": [
+        "<org.zeroturnaround.zip.IdentityNameMapper: java.lang.String map(java.lang.String)>",
+        "<org.zeroturnaround.zip.ZipUtil$Unpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>",
+        "<org.zeroturnaround.zip.ZipUtil$Unwraper: java.lang.String getUnrootedName(java.lang.String,java.lang.String)>",
+        "<org.zeroturnaround.zip.ZipUtil$Unwraper: void process(java.io.InputStream,java.util.zip.ZipEntry)>",
+        "<org.zeroturnaround.zip.ZipUtil: void iterate(java.io.InputStream,org.zeroturnaround.zip.ZipEntryCallback,java.nio.charset.Charset)>"
+      ],
+      "override": ""
+    },
+    {
+      "flow_id": "d1e6342fe3",
+      "flow_key": "<org.zeroturnaround.zip.ZipUtil: void iterate(java.io.InputStream,org.zeroturnaround.zip.ZipEntryCallback,java.nio.charset.Charset)>@L715/result => <org.zeroturnaround.zip.ZipUtil$Unwraper: void process(java.io.InputStream,java.util.zip.ZipEntry)>@L1260/1",
+      "verdict": "vulnerable",
+      "reason": "exploitable",
+      "kept": true,
+      "v3_ok": null,
+      "v3_problems": [],
+      "evidence": [
+        {
+          "file": "org/zeroturnaround/zip/ZipUtil.java",
+          "line": 710,
+          "note": "Source: ZipEntry name obtained from untrusted ZIP input stream"
+        },
+        {
+          "file": "org/zeroturnaround/zip/IdentityNameMapper.java",
+          "line": 32,
+          "note": "Sanitizer check: IdentityNameMapper.map() returns the name unchanged, providing no normalization or validation"
+        },
+        {
+          "file": "org/zeroturnaround/zip/ZipUtil.java",
+          "line": 1152,
+          "note": "Sink: File object constructed using attacker-controlled name without prefix check against outputDir"
+        },
+        {
+          "file": "org/zeroturnaround/zip/ZipUtil.java",
+          "line": 1260,
+          "note": "Sink: File object constructed using attacker-controlled name without prefix check against outputDir"
+        }
+      ],
+      "explanation": "The ZipEntry name is derived directly from the input ZIP file (attacker-controlled) and passed through IdentityNameMapper which performs no sanitization. The resulting name is used to construct a File object relative to an output directory without verifying that the resolved path remains within that directory, allowing path traversal via '../' sequences.",
+      "samples": [
+        "vulnerable"
+      ],
+      "methods_shown": [
+        "<org.zeroturnaround.zip.IdentityNameMapper: java.lang.String map(java.lang.String)>",
+        "<org.zeroturnaround.zip.ZipUtil$Unpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>",
+        "<org.zeroturnaround.zip.ZipUtil$Unwraper: java.lang.String getUnrootedName(java.lang.String,java.lang.String)>",
+        "<org.zeroturnaround.zip.ZipUtil$Unwraper: void process(java.io.InputStream,java.util.zip.ZipEntry)>",
+        "<org.zeroturnaround.zip.ZipUtil: void iterate(java.io.InputStream,org.zeroturnaround.zip.ZipEntryCallback,java.nio.charset.Charset)>"
+      ],
+      "override": ""
+    },
+    {
+      "flow_id": "e439997d33",
+      "flow_key": "<org.zeroturnaround.zip.ZipUtil: void iterate(java.io.InputStream,org.zeroturnaround.zip.ZipEntryCallback,java.nio.charset.Charset)>@L715/result => <org.zeroturnaround.zip.commons.FileUtils: java.io.File getTempFileFor(java.io.File)>@L75/1",
+      "verdict": "not_vulnerable",
+      "reason": "not_dangerous_sink",
+      "kept": false,
+      "v3_ok": null,
+      "v3_problems": [],
+      "evidence": [
+        {
+          "file": "org/zeroturnaround/zip/ZipUtil.java",
+          "line": 715,
+          "note": "entry.getName() is used in an error message string concatenation, not passed to file system operations."
+        },
+        {
+          "file": "org/zeroturnaround/zip/commons/FileUtils.java",
+          "line": 75,
+          "note": "getTempFileFor creates a file in the same directory as the input file, but the input to this method is not shown to be derived from the tainted entry name in the provided code snippet."
+        }
+      ],
+      "explanation": "The reported taint flow is incorrect because the source `entry.getName()` at line 715 of ZipUtil.java is only used within a string literal for an exception message, not passed to any file system sink. The sink `getTempFileFor` at line 75 of FileUtils.java is not reached with the tainted value in the provided code path; the flow graph indicates the taint does not propagate from the source to the sink in a dangerous manner within the shown application code.",
+      "samples": [
+        "not_vulnerable"
+      ],
+      "methods_shown": [
+        "<org.zeroturnaround.zip.ZipUtil: void iterate(java.io.InputStream,org.zeroturnaround.zip.ZipEntryCallback,java.nio.charset.Charset)>",
+        "<org.zeroturnaround.zip.commons.FileUtils: java.io.File getTempFileFor(java.io.File)>"
+      ],
+      "override": ""
+    },
+    {
+      "flow_id": "f0708d70b4",
+      "flow_key": "<org.zeroturnaround.zip.ZipUtil: void iterate(java.io.InputStream,org.zeroturnaround.zip.ZipEntryCallback,java.nio.charset.Charset)>@L715/result => <org.zeroturnaround.zip.commons.FileUtilsV2_2: boolean isSymlink(java.io.File)>@L1081/1",
+      "verdict": "not_vulnerable",
+      "reason": "not_dangerous_sink",
+      "kept": false,
+      "v3_ok": null,
+      "v3_problems": [],
+      "evidence": [
+        {
+          "file": "org/zeroturnaround/zip/commons/FileUtilsV2_2.java",
+          "line": 1081,
+          "note": "isSymlink constructs a file path using canonicalDir and entry name, but only for symlink detection, not file creation or writing."
+        },
+        {
+          "file": "org/zeroturnaround/zip/commons/FileUtilsV2_2.java",
+          "line": 651,
+          "note": "deleteDirectory calls isSymlink to check if the directory itself is a symlink before deletion; it does not use the entry name to create or write to files outside the intended scope."
+        },
+        {
+          "file": "org/zeroturnaround/zip/ZipUtil.java",
+          "line": 715,
+          "note": "entry.getName() is used only in an error message string, not for file system operations."
+        }
+      ],
+      "explanation": "The reported taint flow ends at isSymlink, which uses the entry name to check if a file is a symlink, but this does not constitute a path traversal vulnerability because no files are created, written, or accessed outside the intended directory based on this flow. The entry name is also only used in an error message in the iterate method, posing no security risk.",
+      "samples": [
+        "not_vulnerable"
+      ],
+      "methods_shown": [
+        "<org.zeroturnaround.zip.ZipUtil: void iterate(java.io.InputStream,org.zeroturnaround.zip.ZipEntryCallback,java.nio.charset.Charset)>",
+        "<org.zeroturnaround.zip.ZipUtil: void unexplode(java.io.File)>",
+        "<org.zeroturnaround.zip.ZipUtil: void unexplode(java.io.File,int)>",
+        "<org.zeroturnaround.zip.commons.FileUtilsV2_2: boolean isSymlink(java.io.File)>",
+        "<org.zeroturnaround.zip.commons.FileUtilsV2_2: void deleteDirectory(java.io.File)>"
+      ],
+      "override": ""
+    },
+    {
+      "flow_id": "6feec5bf70",
+      "flow_key": "<org.zeroturnaround.zip.ZipUtil$17: void process(java.io.InputStream,java.util.zip.ZipEntry)>@L2573/result => <org.zeroturnaround.zip.ZipEntryUtil: java.util.zip.ZipEntry copy(java.util.zip.ZipEntry,java.lang.String)>@L61/0",
+      "verdict": "vulnerable",
+      "reason": "exploitable",
+      "kept": true,
+      "v3_ok": null,
+      "v3_problems": [],
+      "evidence": [
+        {
+          "file": "org/zeroturnaround/zip/ZipUtil.java",
+          "line": 2573,
+          "note": "zipEntry.getName() is used as input for path-based operations (add to set, map lookup) without sanitization"
+        },
+        {
+          "file": "org/zeroturnaround/zip/ZipEntryUtil.java",
+          "line": 61,
+          "note": "ZipEntry constructor accepts newName directly, allowing arbitrary filenames including traversal sequences"
+        }
+      ],
+      "explanation": "The source `zipEntry.getName()` originates from the ZIP archive itself, which is attacker-controlled if the archive is uploaded by a user. The code uses this name to look up entries and potentially write files (via `addEntry` or `copyEntry`), but there is no path normalization or prefix check to prevent directory traversal sequences like `../` from escaping the intended extraction directory. This allows an attacker to write files outside the target directory.",
+      "samples": [
+        "vulnerable"
+      ],
+      "methods_shown": [
+        "<org.zeroturnaround.zip.ZipEntryUtil: java.util.zip.ZipEntry copy(java.util.zip.ZipEntry,java.lang.String)>",
+        "<org.zeroturnaround.zip.ZipUtil$17: void process(java.io.InputStream,java.util.zip.ZipEntry)>"
+      ],
+      "override": ""
+    },
+    {
+      "flow_id": "add9809e70",
+      "flow_key": "<org.zeroturnaround.zip.ZipUtil$17: void process(java.io.InputStream,java.util.zip.ZipEntry)>@L2573/result => <org.zeroturnaround.zip.ZipEntryUtil: java.util.zip.ZipEntry fromFile(java.lang.String,java.io.File)>@L144/0",
+      "verdict": "uncertain",
+      "reason": "insufficient_context",
+      "kept": true,
+      "v3_ok": null,
+      "v3_problems": [],
+      "evidence": [
+        {
+          "file": "org/zeroturnaround/zip/ZipUtil.java",
+          "line": 2454,
+          "note": "Source of taint is the 'path' parameter passed to FileSource constructor"
+        },
+        {
+          "file": "org/zeroturnaround/zip/ZipEntryUtil.java",
+          "line": 144,
+          "note": "Sink where the path is used to create a ZipEntry"
+        }
+      ],
+      "explanation": "The reported flow identifies a potential path traversal vulnerability where an attacker-controlled 'path' string is used to create a ZipEntry. However, the provided code snippets are from the library itself (zeroturnaround/zip) and do not show the application-level code that invokes these methods (e.g., ZipUtil.replaceEntry). Without seeing the caller code, it is impossible to determine if the 'path' argument is derived from an untrusted source (like a user upload or request parameter) or if the application performs its own sanitization before calling the library. Therefore, the context is insufficient to confirm if the source is attacker-controlled in a realistic deployment.",
+      "samples": [
+        "uncertain"
+      ],
+      "methods_shown": [
+        "<org.zeroturnaround.zip.FileSource: java.util.zip.ZipEntry getEntry()>",
+        "<org.zeroturnaround.zip.FileSource: void <init>(java.lang.String,java.io.File)>",
+        "<org.zeroturnaround.zip.IdentityNameMapper: java.lang.String map(java.lang.String)>",
+        "<org.zeroturnaround.zip.ZipUtil$13: boolean act(java.io.File)>",
+        "<org.zeroturnaround.zip.ZipUtil$13: void <init>(java.io.File,java.lang.String,java.io.File)>",
+        "<org.zeroturnaround.zip.ZipEntryUtil: java.util.zip.ZipEntry fromFile(java.lang.String,java.io.File)>"
+      ],
+      "override": ""
+    },
+    {
+      "flow_id": "c3f0b08334",
+      "flow_key": "<org.zeroturnaround.zip.ZipUtil$17: void process(java.io.InputStream,java.util.zip.ZipEntry)>@L2573/result => <org.zeroturnaround.zip.ZipUtil: void pack(java.io.File,java.util.zip.ZipOutputStream,org.zeroturnaround.zip.NameMapper,java.lang.String,boolean)>@L1730/1",
+      "verdict": "uncertain",
+      "reason": "insufficient_context",
+      "kept": true,
+      "v3_ok": null,
+      "v3_problems": [],
+      "evidence": [
+        {
+          "file": "org/zeroturnaround/zip/ZipUtil.java",
+          "line": 2573,
+          "note": "Source: zipEntry.getName() is used, but the origin of the ZipEntry object is not shown in the provided snippet."
+        },
+        {
+          "file": "org/zeroturnaround/zip/ZipUtil.java",
+          "line": 1730,
+          "note": "Sink: new File(dir, filename) constructs a path, but this is inside the 'pack' method which reads from the local filesystem, not writing to an arbitrary location."
+        }
+      ],
+      "explanation": "The provided code snippets show internal library methods for iterating over and packing ZIP entries. The 'source' is `zipEntry.getName()` from an iteration callback, but the code does not show where the ZipInputStream or ZipFile is created or how the entries are populated (e.g., from an attacker-controlled upload). The 'sink' shown is `new File(dir, filename)` within the `pack` method, which is used to read local files to put them into a ZIP, not to write files to the filesystem based on user input. Without evidence of an attacker-controlled ZIP file being processed and the resulting entry names being used to write files to the disk (e.g., in an extraction method like `unpack`), the taint flow to a dangerous sink is not established in the provided context.",
+      "samples": [
+        "uncertain"
+      ],
+      "methods_shown": [
+        "<org.zeroturnaround.zip.ZipUtil$17: void process(java.io.InputStream,java.util.zip.ZipEntry)>",
+        "<org.zeroturnaround.zip.ZipUtil: void pack(java.io.File,java.util.zip.ZipOutputStream,org.zeroturnaround.zip.NameMapper,java.lang.String,boolean)>"
+      ],
+      "override": ""
+    },
+    {
+      "flow_id": "ee08e9f40e",
+      "flow_key": "<org.zeroturnaround.zip.ZipUtil$17: void process(java.io.InputStream,java.util.zip.ZipEntry)>@L2573/result => <org.zeroturnaround.zip.ZipUtil$Unpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>@L1152/1",
+      "verdict": "vulnerable",
+      "reason": "exploitable",
+      "kept": true,
+      "v3_ok": null,
+      "v3_problems": [],
+      "evidence": [
+        {
+          "file": "org/zeroturnaround/zip/ZipUtil.java",
+          "line": 1150,
+          "note": "Source: zipEntry.getName() is passed to mapper.map() without validation"
+        },
+        {
+          "file": "org/zeroturnaround/zip/IdentityNameMapper.java",
+          "line": 32,
+          "note": "Sanitizer check: IdentityNameMapper.map() returns the name unchanged, providing no path traversal protection"
+        },
+        {
+          "file": "org/zeroturnaround/zip/ZipUtil.java",
+          "line": 1152,
+          "note": "Sink: new File(outputDir, name) constructs a file path using the unvalidated entry name"
+        }
+      ],
+      "explanation": "The taint flow originates from ZipEntry.getName(), which is attacker-controlled in the context of processing a malicious ZIP file. The IdentityNameMapper used in the default unpacking path (ZipUtil$Unpacker) performs no normalization or validation, simply returning the raw entry name. This unvalidated name is then directly used to construct a File object relative to the output directory, allowing '../' sequences to escape the intended directory and overwrite arbitrary files on the filesystem.",
+      "samples": [
+        "vulnerable"
+      ],
+      "methods_shown": [
+        "<org.zeroturnaround.zip.IdentityNameMapper: java.lang.String map(java.lang.String)>",
+        "<org.zeroturnaround.zip.ZipUtil$17: void process(java.io.InputStream,java.util.zip.ZipEntry)>",
+        "<org.zeroturnaround.zip.ZipUtil$Unpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>",
+        "<org.zeroturnaround.zip.ZipUtil$Unwraper: java.lang.String getUnrootedName(java.lang.String,java.lang.String)>",
+        "<org.zeroturnaround.zip.ZipUtil$Unwraper: void process(java.io.InputStream,java.util.zip.ZipEntry)>"
+      ],
+      "override": ""
+    },
+    {
+      "flow_id": "fb14f31121",
+      "flow_key": "<org.zeroturnaround.zip.ZipUtil$17: void process(java.io.InputStream,java.util.zip.ZipEntry)>@L2573/result => <org.zeroturnaround.zip.ZipUtil$Unwraper: void process(java.io.InputStream,java.util.zip.ZipEntry)>@L1260/1",
+      "verdict": "vulnerable",
+      "reason": "exploitable",
+      "kept": true,
+      "v3_ok": null,
+      "v3_problems": [],
+      "evidence": [
+        {
+          "file": "org/zeroturnaround/zip/ZipUtil.java",
+          "line": 1150,
+          "note": "Source: zipEntry.getName() is passed to mapper.map() without validation"
+        },
+        {
+          "file": "org/zeroturnaround/zip/IdentityNameMapper.java",
+          "line": 32,
+          "note": "Sanitizer: IdentityNameMapper.map() returns the input string unchanged, providing no path traversal protection"
+        },
+        {
+          "file": "org/zeroturnaround/zip/ZipUtil.java",
+          "line": 1152,
+          "note": "Sink: new File(outputDir, name) constructs a file path using the unvalidated entry name"
+        },
+        {
+          "file": "org/zeroturnaround/zip/ZipUtil.java",
+          "line": 1163,
+          "note": "Dangerous Sink: FileUtils.copy(in, file) writes data to the constructed path, allowing arbitrary file overwrite if name contains '../'"
+        }
+      ],
+      "explanation": "The taint flow originates from ZipEntry.getName(), which is attacker-controlled via the contents of a malicious ZIP file. The IdentityNameMapper provides no sanitization, simply returning the raw entry name. This unvalidated name is then used to construct a File object relative to outputDir (line 1152) and subsequently written to (line 1163), allowing an attacker to traverse directories and overwrite arbitrary files on the filesystem.",
+      "samples": [
+        "vulnerable"
+      ],
+      "methods_shown": [
+        "<org.zeroturnaround.zip.IdentityNameMapper: java.lang.String map(java.lang.String)>",
+        "<org.zeroturnaround.zip.ZipUtil$17: void process(java.io.InputStream,java.util.zip.ZipEntry)>",
+        "<org.zeroturnaround.zip.ZipUtil$Unpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>",
+        "<org.zeroturnaround.zip.ZipUtil$Unwraper: java.lang.String getUnrootedName(java.lang.String,java.lang.String)>",
+        "<org.zeroturnaround.zip.ZipUtil$Unwraper: void process(java.io.InputStream,java.util.zip.ZipEntry)>"
+      ],
+      "override": ""
+    },
+    {
+      "flow_id": "496c57ac3c",
+      "flow_key": "<org.zeroturnaround.zip.ZipUtil$17: void process(java.io.InputStream,java.util.zip.ZipEntry)>@L2573/result => <org.zeroturnaround.zip.commons.FileUtils: java.io.File getTempFileFor(java.io.File)>@L75/1",
+      "verdict": "uncertain",
+      "reason": "insufficient_context",
+      "kept": true,
+      "v3_ok": null,
+      "v3_problems": [],
+      "evidence": [
+        {
+          "file": "org/zeroturnaround/zip/ZipUtil.java",
+          "line": 2573,
+          "note": "Source identified as zipEntry.getName(), but caller context is missing"
+        },
+        {
+          "file": "org/zeroturnaround/zip/ZipUtil.java",
+          "line": 2576,
+          "note": "Sink addEntry is called, but its implementation is not provided to verify if it performs path traversal checks"
+        }
+      ],
+      "explanation": "The provided code shows the internal processing of ZipEntry names within the library, but it does not show the entry point where the Zip file is extracted or how the resulting files are written to the filesystem. Without seeing the code that calls `addEntry` or the final file creation logic, it is impossible to determine if the path is validated against a base directory or if the attacker-controlled entry name leads to arbitrary file write.",
+      "samples": [
+        "uncertain"
+      ],
+      "methods_shown": [
+        "<org.zeroturnaround.zip.ZipUtil$17: void process(java.io.InputStream,java.util.zip.ZipEntry)>",
+        "<org.zeroturnaround.zip.commons.FileUtils: java.io.File getTempFileFor(java.io.File)>"
+      ],
+      "override": ""
+    },
+    {
+      "flow_id": "faff9bc7bd",
+      "flow_key": "<org.zeroturnaround.zip.ZipUtil$17: void process(java.io.InputStream,java.util.zip.ZipEntry)>@L2573/result => <org.zeroturnaround.zip.commons.FileUtilsV2_2: boolean isSymlink(java.io.File)>@L1081/1",
+      "verdict": "uncertain",
+      "reason": "insufficient_context",
+      "kept": true,
+      "v3_ok": null,
+      "v3_problems": [],
+      "evidence": [
+        {
+          "file": "org/zeroturnaround/zip/ZipUtil.java",
+          "line": 2573,
+          "note": "Source: zipEntry.getName() is used, but the entry name comes from the ZipEntry object, not directly from an attacker-controlled request parameter in the shown code."
+        },
+        {
+          "file": "org/zeroturnaround/zip/ZipUtil.java",
+          "line": 1896,
+          "note": "Sink context: unexplode() operates on a local directory 'dir', but the flow from ZipEntry names to this directory is not shown in the provided code snippets."
+        }
+      ],
+      "explanation": "The provided code snippets show library methods (ZipUtil, FileUtils) but do not show the application-level code that invokes these methods with user-controlled input. While ZipEntry names can be attacker-controlled in a zip file upload scenario, the taint flow graph indicates the path passes through library code without a complete application-code path. Without seeing how the ZipUtil methods are called from the application layer (e.g., whether the target directory is user-controlled or fixed), it is impossible to confirm if the sink is reached with an attacker-controlled path in a dangerous way.",
+      "samples": [
+        "uncertain"
+      ],
+      "methods_shown": [
+        "<org.zeroturnaround.zip.ZipUtil$17: void process(java.io.InputStream,java.util.zip.ZipEntry)>",
+        "<org.zeroturnaround.zip.ZipUtil: void unexplode(java.io.File)>",
+        "<org.zeroturnaround.zip.ZipUtil: void unexplode(java.io.File,int)>",
+        "<org.zeroturnaround.zip.commons.FileUtilsV2_2: boolean isSymlink(java.io.File)>",
+        "<org.zeroturnaround.zip.commons.FileUtilsV2_2: void deleteDirectory(java.io.File)>"
+      ],
+      "override": ""
+    },
+    {
+      "flow_id": "0da9a82b76",
+      "flow_key": "<org.zeroturnaround.zip.ZipUtil$TransformerZipEntryCallback: void process(java.io.InputStream,java.util.zip.ZipEntry)>@L2888/result => <org.zeroturnaround.zip.ZipEntryUtil: java.util.zip.ZipEntry copy(java.util.zip.ZipEntry,java.lang.String)>@L61/0",
+      "verdict": "vulnerable",
+      "reason": "exploitable",
+      "kept": true,
+      "v3_ok": null,
+      "v3_problems": [],
+      "evidence": [
+        {
+          "file": "org/zeroturnaround/zip/ZipUtil.java",
+          "line": 2888,
+          "note": "Source: zipEntry.getName() is used directly from the input stream without validation"
+        },
+        {
+          "file": "org/zeroturnaround/zip/ZipEntryUtil.java",
+          "line": 61,
+          "note": "Sink: newName (derived from source) is passed to ZipEntry constructor, which is used to create a file path in subsequent operations (e.g., copyEntry)"
+        }
+      ],
+      "explanation": "The source `zipEntry.getName()` comes from the ZIP archive entry names, which are attacker-controlled if the attacker provides the ZIP file. The code does not normalize the path or check if it stays within the intended extraction directory, allowing `../` sequences to escape the target directory. The sink uses this unvalidated name to create a new ZipEntry, which is subsequently used to write files to the file system, leading to path traversal.",
+      "samples": [
+        "vulnerable"
+      ],
+      "methods_shown": [
+        "<org.zeroturnaround.zip.ZipEntryUtil: java.util.zip.ZipEntry copy(java.util.zip.ZipEntry,java.lang.String)>",
+        "<org.zeroturnaround.zip.ZipUtil$TransformerZipEntryCallback: void process(java.io.InputStream,java.util.zip.ZipEntry)>"
+      ],
+      "override": ""
+    },
+    {
+      "flow_id": "dd409a0ce8",
+      "flow_key": "<org.zeroturnaround.zip.ZipUtil$TransformerZipEntryCallback: void process(java.io.InputStream,java.util.zip.ZipEntry)>@L2888/result => <org.zeroturnaround.zip.ZipEntryUtil: java.util.zip.ZipEntry fromFile(java.lang.String,java.io.File)>@L144/0",
+      "verdict": "uncertain",
+      "reason": "insufficient_context",
+      "kept": true,
+      "v3_ok": null,
+      "v3_problems": [],
+      "evidence": [
+        {
+          "file": "org/zeroturnaround/zip/ZipUtil.java",
+          "line": 2454,
+          "note": "Source of taint is the 'path' parameter passed to FileSource constructor"
+        },
+        {
+          "file": "org/zeroturnaround/zip/ZipEntryUtil.java",
+          "line": 144,
+          "note": "Sink where the path is used to create a ZipEntry"
+        }
+      ],
+      "explanation": "The provided code shows that the 'path' string flows from a method parameter into a ZipEntry constructor without normalization. However, the analysis cannot determine if this 'path' parameter originates from an attacker-controlled source (e.g., user input) or is internally generated by the application. Without knowing the caller of the entry point (e.g., ZipUtil.replaceEntry), it is impossible to confirm if the data is tainted by an external actor.",
+      "samples": [
+        "uncertain"
+      ],
+      "methods_shown": [
+        "<org.zeroturnaround.zip.FileSource: java.util.zip.ZipEntry getEntry()>",
+        "<org.zeroturnaround.zip.FileSource: void <init>(java.lang.String,java.io.File)>",
+        "<org.zeroturnaround.zip.IdentityNameMapper: java.lang.String map(java.lang.String)>",
+        "<org.zeroturnaround.zip.ZipUtil$13: boolean act(java.io.File)>",
+        "<org.zeroturnaround.zip.ZipUtil$13: void <init>(java.io.File,java.lang.String,java.io.File)>",
+        "<org.zeroturnaround.zip.ZipEntryUtil: java.util.zip.ZipEntry fromFile(java.lang.String,java.io.File)>"
+      ],
+      "override": ""
+    },
+    {
+      "flow_id": "5004d85c34",
+      "flow_key": "<org.zeroturnaround.zip.ZipUtil$TransformerZipEntryCallback: void process(java.io.InputStream,java.util.zip.ZipEntry)>@L2888/result => <org.zeroturnaround.zip.ZipUtil: void pack(java.io.File,java.util.zip.ZipOutputStream,org.zeroturnaround.zip.NameMapper,java.lang.String,boolean)>@L1730/1",
+      "verdict": "uncertain",
+      "reason": "",
+      "kept": true,
+      "v3_ok": null,
+      "v3_problems": [],
+      "evidence": [],
+      "explanation": "",
+      "samples": [
+        "uncertain"
+      ],
+      "methods_shown": [
+        "<org.zeroturnaround.zip.ZipUtil$TransformerZipEntryCallback: void process(java.io.InputStream,java.util.zip.ZipEntry)>",
+        "<org.zeroturnaround.zip.ZipUtil: void pack(java.io.File,java.util.zip.ZipOutputStream,org.zeroturnaround.zip.NameMapper,java.lang.String,boolean)>"
+      ],
+      "override": ""
+    },
+    {
+      "flow_id": "7ccd870777",
+      "flow_key": "<org.zeroturnaround.zip.ZipUtil$TransformerZipEntryCallback: void process(java.io.InputStream,java.util.zip.ZipEntry)>@L2888/result => <org.zeroturnaround.zip.ZipUtil$Unpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>@L1152/1",
+      "verdict": "vulnerable",
+      "reason": "exploitable",
+      "kept": true,
+      "v3_ok": null,
+      "v3_problems": [],
+      "evidence": [
+        {
+          "file": "org/zeroturnaround/zip/ZipUtil.java",
+          "line": 1150,
+          "note": "Source: zipEntry.getName() is passed to mapper.map() without validation"
+        },
+        {
+          "file": "org/zeroturnaround/zip/IdentityNameMapper.java",
+          "line": 32,
+          "note": "Sanitizer check: IdentityNameMapper.map() returns the input name unchanged, providing no sanitization"
+        },
+        {
+          "file": "org/zeroturnaround/zip/ZipUtil.java",
+          "line": 1152,
+          "note": "Sink: new File(outputDir, name) constructs a file path using the unsanitized entry name"
+        }
+      ],
+      "explanation": "The taint flow originates from ZipEntry.getName(), which is attacker-controlled in the context of processing a malicious ZIP archive. The IdentityNameMapper provides no sanitization, simply returning the entry name as-is. This unsanitized name is then used directly in the File constructor at line 1152, allowing path traversal sequences (e.g., '../') to escape the intended output directory.",
+      "samples": [
+        "vulnerable"
+      ],
+      "methods_shown": [
+        "<org.zeroturnaround.zip.IdentityNameMapper: java.lang.String map(java.lang.String)>",
+        "<org.zeroturnaround.zip.ZipUtil$TransformerZipEntryCallback: void process(java.io.InputStream,java.util.zip.ZipEntry)>",
+        "<org.zeroturnaround.zip.ZipUtil$Unpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>",
+        "<org.zeroturnaround.zip.ZipUtil$Unwraper: java.lang.String getUnrootedName(java.lang.String,java.lang.String)>",
+        "<org.zeroturnaround.zip.ZipUtil$Unwraper: void process(java.io.InputStream,java.util.zip.ZipEntry)>"
+      ],
+      "override": ""
+    },
+    {
+      "flow_id": "4814d0d133",
+      "flow_key": "<org.zeroturnaround.zip.ZipUtil$TransformerZipEntryCallback: void process(java.io.InputStream,java.util.zip.ZipEntry)>@L2888/result => <org.zeroturnaround.zip.ZipUtil$Unwraper: void process(java.io.InputStream,java.util.zip.ZipEntry)>@L1260/1",
+      "verdict": "vulnerable",
+      "reason": "exploitable",
+      "kept": true,
+      "v3_ok": null,
+      "v3_problems": [],
+      "evidence": [
+        {
+          "file": "org/zeroturnaround/zip/ZipUtil.java",
+          "line": 1150,
+          "note": "Source: ZipEntry name is passed to mapper.map() without validation"
+        },
+        {
+          "file": "org/zeroturnaround/zip/IdentityNameMapper.java",
+          "line": 32,
+          "note": "Sanitizer: IdentityNameMapper.map() returns the input string unchanged, providing no path normalization or traversal prevention"
+        },
+        {
+          "file": "org/zeroturnaround/zip/ZipUtil.java",
+          "line": 1152,
+          "note": "Sink: File object constructed using attacker-controlled name directly with outputDir, allowing path traversal"
+        }
+      ],
+      "explanation": "The ZipEntry name, which is attacker-controlled in a realistic deployment (e.g., via a malicious zip file), flows through IdentityNameMapper which performs no sanitization. The tainted name is then used directly to construct a File path at line 1152 without checking for '../' sequences or ensuring the path remains within the intended output directory, enabling path traversal.",
+      "samples": [
+        "vulnerable"
+      ],
+      "methods_shown": [
+        "<org.zeroturnaround.zip.IdentityNameMapper: java.lang.String map(java.lang.String)>",
+        "<org.zeroturnaround.zip.ZipUtil$TransformerZipEntryCallback: void process(java.io.InputStream,java.util.zip.ZipEntry)>",
+        "<org.zeroturnaround.zip.ZipUtil$Unpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>",
+        "<org.zeroturnaround.zip.ZipUtil$Unwraper: java.lang.String getUnrootedName(java.lang.String,java.lang.String)>",
+        "<org.zeroturnaround.zip.ZipUtil$Unwraper: void process(java.io.InputStream,java.util.zip.ZipEntry)>"
+      ],
+      "override": ""
+    },
+    {
+      "flow_id": "90e4dd2158",
+      "flow_key": "<org.zeroturnaround.zip.ZipUtil$TransformerZipEntryCallback: void process(java.io.InputStream,java.util.zip.ZipEntry)>@L2888/result => <org.zeroturnaround.zip.commons.FileUtils: java.io.File getTempFileFor(java.io.File)>@L75/1",
+      "verdict": "uncertain",
+      "reason": "insufficient_context",
+      "kept": true,
+      "v3_ok": null,
+      "v3_problems": [],
+      "evidence": [
+        {
+          "file": "org/zeroturnaround/zip/ZipUtil.java",
+          "line": 2888,
+          "note": "Source identified as zipEntry.getName(), but caller context not shown"
+        },
+        {
+          "file": "org/zeroturnaround/zip/commons/FileUtils.java",
+          "line": 75,
+          "note": "Sink creates a file using parent and name, but parent origin is unknown"
+        }
+      ],
+      "explanation": "The report identifies a taint flow from ZipEntry.getName() to a File constructor, but the provided code snippets are from library methods (ZipUtil and FileUtils) and do not show the application-level code that invokes them. Without seeing how ZipUtil.process is called (e.g., whether it processes untrusted user-uploaded archives or trusted internal files) and how the resulting File object is subsequently used (e.g., read, written, or deleted), it is impossible to determine if the data is attacker-controlled or if the sink is dangerous in this specific deployment context.",
+      "samples": [
+        "uncertain"
+      ],
+      "methods_shown": [
+        "<org.zeroturnaround.zip.ZipUtil$TransformerZipEntryCallback: void process(java.io.InputStream,java.util.zip.ZipEntry)>",
+        "<org.zeroturnaround.zip.commons.FileUtils: java.io.File getTempFileFor(java.io.File)>"
+      ],
+      "override": ""
+    },
+    {
+      "flow_id": "d8dd620df4",
+      "flow_key": "<org.zeroturnaround.zip.ZipUtil$TransformerZipEntryCallback: void process(java.io.InputStream,java.util.zip.ZipEntry)>@L2888/result => <org.zeroturnaround.zip.commons.FileUtilsV2_2: boolean isSymlink(java.io.File)>@L1081/1",
+      "verdict": "uncertain",
+      "reason": "insufficient_context",
+      "kept": true,
+      "v3_ok": null,
+      "v3_problems": [],
+      "evidence": [
+        {
+          "file": "org/zeroturnaround/zip/ZipUtil.java",
+          "line": 2888,
+          "note": "Source: zipEntry.getName() is used, but the entry is processed via ZipEntryUtil.copyEntry or a transformer, not directly written to a file path constructed from the name in the shown code."
+        },
+        {
+          "file": "org/zeroturnaround/zip/ZipUtil.java",
+          "line": 1904,
+          "note": "Sink context: FileUtils.deleteDirectory is called on a directory object, but the taint flow from the ZipEntry name to this specific File object is not shown in the provided code snippets."
+        }
+      ],
+      "explanation": "The provided code snippets show the internal processing of ZipEntry names and utility functions for file deletion and symlink detection, but they do not show the critical path where the ZipEntry name is used to construct a file system path for writing or reading. Specifically, the method `ZipEntryUtil.copyEntry` (line 2894) is where the actual file creation likely occurs, but its implementation is not provided. Without seeing how the entry name is resolved to a file path in the extraction logic, it is impossible to confirm if path traversal is possible or if sanitization occurs within the library code.",
+      "samples": [
+        "uncertain"
+      ],
+      "methods_shown": [
+        "<org.zeroturnaround.zip.ZipUtil$TransformerZipEntryCallback: void process(java.io.InputStream,java.util.zip.ZipEntry)>",
+        "<org.zeroturnaround.zip.ZipUtil: void unexplode(java.io.File)>",
+        "<org.zeroturnaround.zip.ZipUtil: void unexplode(java.io.File,int)>",
+        "<org.zeroturnaround.zip.commons.FileUtilsV2_2: boolean isSymlink(java.io.File)>",
+        "<org.zeroturnaround.zip.commons.FileUtilsV2_2: void deleteDirectory(java.io.File)>"
+      ],
+      "override": ""
+    },
+    {
+      "flow_id": "6221413a2e",
+      "flow_key": "<org.zeroturnaround.zip.ZipUtil$Unpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>@L1150/result => <org.zeroturnaround.zip.ZipEntryUtil: java.util.zip.ZipEntry copy(java.util.zip.ZipEntry,java.lang.String)>@L61/0",
+      "verdict": "vulnerable",
+      "reason": "exploitable",
+      "kept": true,
+      "v3_ok": null,
+      "v3_problems": [],
+      "evidence": [
+        {
+          "file": "org/zeroturnaround/zip/ZipUtil.java",
+          "line": 1150,
+          "note": "Source: zipEntry.getName() is passed to mapper.map() without validation"
+        },
+        {
+          "file": "org/zeroturnaround/zip/IdentityNameMapper.java",
+          "line": 32,
+          "note": "Sanitizer check: IdentityNameMapper.map() returns the input string unchanged, providing no path normalization or traversal prevention"
+        },
+        {
+          "file": "org/zeroturnaround/zip/ZipUtil.java",
+          "line": 1152,
+          "note": "Sink: new File(outputDir, name) constructs a path using the unvalidated entry name"
+        },
+        {
+          "file": "org/zeroturnaround/zip/ZipUtil.java",
+          "line": 1163,
+          "note": "Dangerous Sink: FileUtils.copy(in, file) writes data to the constructed path, allowing directory traversal if name contains '../'"
+        }
+      ],
+      "explanation": "The taint flow originates from ZipEntry.getName(), which is attacker-controlled when processing untrusted ZIP archives. The IdentityNameMapper provides no sanitization, allowing '../' sequences to pass through. The resulting path is used to create a File object and write data via FileUtils.copy, enabling path traversal outside the intended output directory.",
+      "samples": [
+        "vulnerable"
+      ],
+      "methods_shown": [
+        "<org.zeroturnaround.zip.IdentityNameMapper: java.lang.String map(java.lang.String)>",
+        "<org.zeroturnaround.zip.ZipEntryUtil: java.util.zip.ZipEntry copy(java.util.zip.ZipEntry,java.lang.String)>",
+        "<org.zeroturnaround.zip.ZipEntryUtil: java.util.zip.ZipEntry fromFile(java.lang.String,java.io.File)>",
+        "<org.zeroturnaround.zip.ZipUtil$Unpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>",
+        "<org.zeroturnaround.zip.ZipUtil$Unwraper: void process(java.io.InputStream,java.util.zip.ZipEntry)>",
+        "<org.zeroturnaround.zip.ZipUtil: void pack(java.io.File,java.util.zip.ZipOutputStream,org.zeroturnaround.zip.NameMapper,java.lang.String,boolean)>"
+      ],
+      "override": ""
+    },
+    {
+      "flow_id": "7e923bd2e0",
+      "flow_key": "<org.zeroturnaround.zip.ZipUtil$Unpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>@L1150/result => <org.zeroturnaround.zip.ZipEntryUtil: java.util.zip.ZipEntry fromFile(java.lang.String,java.io.File)>@L144/0",
+      "verdict": "vulnerable",
+      "reason": "exploitable",
+      "kept": true,
+      "v3_ok": null,
+      "v3_problems": [],
+      "evidence": [
+        {
+          "file": "org/zeroturnaround/zip/ZipUtil.java",
+          "line": 1150,
+          "note": "Source: zipEntry.getName() retrieves the entry name from the ZIP archive, which is attacker-controlled input."
+        },
+        {
+          "file": "org/zeroturnaround/zip/IdentityNameMapper.java",
+          "line": 32,
+          "note": "IdentityNameMapper.map() returns the name unchanged, providing no sanitization or normalization."
+        },
+        {
+          "file": "org/zeroturnaround/zip/ZipUtil.java",
+          "line": 1152,
+          "note": "Sink: new File(outputDir, name) constructs a file path using the unvalidated entry name. If outputDir is not strictly validated or if the File constructor does not prevent traversal, '../' sequences in 'name' can escape the intended directory."
+        }
+      ],
+      "explanation": "The source `zipEntry.getName()` provides attacker-controlled data from the ZIP archive. The `IdentityNameMapper` passes this name through without any normalization or validation (line 32). Finally, the name is used to construct a file path at line 1152 (`new File(outputDir, name)`). Without explicit checks ensuring the resulting canonical path remains within `outputDir`, an attacker can use `../` sequences in the ZIP entry name to write files outside the intended directory, constituting a path traversal vulnerability.",
+      "samples": [
+        "vulnerable"
+      ],
+      "methods_shown": [
+        "<org.zeroturnaround.zip.ZipUtil$Unpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>",
+        "<org.zeroturnaround.zip.IdentityNameMapper: java.lang.String map(java.lang.String)>",
+        "<org.zeroturnaround.zip.ZipUtil: void pack(java.io.File,java.util.zip.ZipOutputStream,org.zeroturnaround.zip.NameMapper,java.lang.String,boolean)>",
+        "<org.zeroturnaround.zip.ZipEntryUtil: java.util.zip.ZipEntry fromFile(java.lang.String,java.io.File)>"
+      ],
+      "override": ""
+    },
+    {
+      "flow_id": "f43e958b05",
+      "flow_key": "<org.zeroturnaround.zip.ZipUtil$Unpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>@L1150/result => <org.zeroturnaround.zip.ZipUtil: void pack(java.io.File,java.util.zip.ZipOutputStream,org.zeroturnaround.zip.NameMapper,java.lang.String,boolean)>@L1730/1",
+      "verdict": "vulnerable",
+      "reason": "exploitable",
+      "kept": true,
+      "v3_ok": null,
+      "v3_problems": [],
+      "evidence": [
+        {
+          "file": "org/zeroturnaround/zip/ZipUtil.java",
+          "line": 1150,
+          "note": "Source: ZipEntry name is mapped via IdentityNameMapper which returns the name unchanged."
+        },
+        {
+          "file": "org/zeroturnaround/zip/IdentityNameMapper.java",
+          "line": 32,
+          "note": "Sanitizer check: IdentityNameMapper.map() returns the input string directly without normalization or validation."
+        },
+        {
+          "file": "org/zeroturnaround/zip/ZipUtil.java",
+          "line": 1152,
+          "note": "Sink: File is constructed using the unvalidated name, allowing path traversal if the name contains '../'."
+        }
+      ],
+      "explanation": "The library uses an IdentityNameMapper by default, which passes the ZipEntry name directly to the File constructor without sanitization or path traversal checks. Since ZipEntry names are derived from the archive content, an attacker can craft a malicious ZIP file with entries containing '../' sequences to write files outside the intended output directory.",
+      "samples": [
+        "vulnerable"
+      ],
+      "methods_shown": [
+        "<org.zeroturnaround.zip.IdentityNameMapper: java.lang.String map(java.lang.String)>",
+        "<org.zeroturnaround.zip.ZipEntryUtil: java.util.zip.ZipEntry fromFile(java.lang.String,java.io.File)>",
+        "<org.zeroturnaround.zip.ZipUtil$Unpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>",
+        "<org.zeroturnaround.zip.ZipUtil$Unwraper: void process(java.io.InputStream,java.util.zip.ZipEntry)>",
+        "<org.zeroturnaround.zip.ZipUtil: void pack(java.io.File,java.util.zip.ZipOutputStream,org.zeroturnaround.zip.NameMapper,java.lang.String,boolean)>"
+      ],
+      "override": ""
+    },
+    {
+      "flow_id": "f9585c75c2",
+      "flow_key": "<org.zeroturnaround.zip.ZipUtil$Unpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>@L1150/result => <org.zeroturnaround.zip.ZipUtil$Unpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>@L1152/1",
+      "verdict": "vulnerable",
+      "reason": "exploitable",
+      "kept": true,
+      "v3_ok": null,
+      "v3_problems": [],
+      "evidence": [
+        {
+          "file": "org/zeroturnaround/zip/ZipUtil.java",
+          "line": 1150,
+          "note": "Source: zipEntry.getName() retrieves the entry name from the ZIP archive, which is attacker-controlled input."
+        },
+        {
+          "file": "org/zeroturnaround/zip/IdentityNameMapper.java",
+          "line": 32,
+          "note": "IdentityNameMapper.map() returns the name unchanged, providing no sanitization or normalization."
+        },
+        {
+          "file": "org/zeroturnaround/zip/ZipUtil.java",
+          "line": 1152,
+          "note": "Sink: new File(outputDir, name) constructs a file path using the unvalidated entry name, allowing path traversal via '../' sequences."
+        }
+      ],
+      "explanation": "The ZIP entry name is directly used to construct a file path without normalization or validation to ensure it remains within the intended output directory. The IdentityNameMapper provides no protection, and the File constructor allows '../' sequences to escape the base directory, leading to arbitrary file write.",
+      "samples": [
+        "vulnerable"
+      ],
+      "methods_shown": [
+        "<org.zeroturnaround.zip.ZipUtil$Unpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>",
+        "<org.zeroturnaround.zip.IdentityNameMapper: java.lang.String map(java.lang.String)>"
+      ],
+      "override": ""
+    },
+    {
+      "flow_id": "e6ab69a12f",
+      "flow_key": "<org.zeroturnaround.zip.ZipUtil$Unpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>@L1150/result => <org.zeroturnaround.zip.ZipUtil$Unwraper: void process(java.io.InputStream,java.util.zip.ZipEntry)>@L1260/1",
+      "verdict": "vulnerable",
+      "reason": "exploitable",
+      "kept": true,
+      "v3_ok": null,
+      "v3_problems": [],
+      "evidence": [
+        {
+          "file": "org/zeroturnaround/zip/ZipUtil.java",
+          "line": 1150,
+          "note": "Source: zipEntry.getName() is used directly after mapping."
+        },
+        {
+          "file": "org/zeroturnaround/zip/IdentityNameMapper.java",
+          "line": 32,
+          "note": "Sanitizer check: IdentityNameMapper.map() returns the input string unchanged, providing no normalization or validation."
+        },
+        {
+          "file": "org/zeroturnaround/zip/ZipUtil.java",
+          "line": 1152,
+          "note": "Sink: new File(outputDir, name) constructs a path using the tainted 'name' variable. No check ensures 'name' stays within 'outputDir'."
+        },
+        {
+          "file": "org/zeroturnaround/zip/ZipUtil.java",
+          "line": 1260,
+          "note": "Sink: Similar path construction in Unwraper.process() without path traversal checks."
+        }
+      ],
+      "explanation": "The source `zipEntry.getName()` is attacker-controlled via the contents of a ZIP file. The `IdentityNameMapper` provides no sanitization, allowing `../` sequences to pass through. The sink `new File(outputDir, name)` uses this unvalidated path, allowing an attacker to write files outside the intended `outputDir` directory.",
+      "samples": [
+        "vulnerable"
+      ],
+      "methods_shown": [
+        "<org.zeroturnaround.zip.ZipUtil$Unpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>",
+        "<org.zeroturnaround.zip.IdentityNameMapper: java.lang.String map(java.lang.String)>",
+        "<org.zeroturnaround.zip.ZipUtil$Unwraper: void process(java.io.InputStream,java.util.zip.ZipEntry)>"
+      ],
+      "override": ""
+    },
+    {
+      "flow_id": "48c4911853",
+      "flow_key": "<org.zeroturnaround.zip.ZipUtil$Unpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>@L1150/result => <org.zeroturnaround.zip.commons.FileUtils: java.io.File getTempFileFor(java.io.File)>@L75/1",
+      "verdict": "vulnerable",
+      "reason": "exploitable",
+      "kept": true,
+      "v3_ok": null,
+      "v3_problems": [],
+      "evidence": [
+        {
+          "file": "org/zeroturnaround/zip/IdentityNameMapper.java",
+          "line": 32,
+          "note": "IdentityNameMapper.map() returns the input string unchanged, providing no sanitization of path traversal sequences."
+        },
+        {
+          "file": "org/zeroturnaround/zip/ZipUtil.java",
+          "line": 1150,
+          "note": "Source of taint: zipEntry.getName() retrieves the entry name from the ZIP archive, which is attacker-controlled data."
+        },
+        {
+          "file": "org/zeroturnaround/zip/ZipUtil.java",
+          "line": 1152,
+          "note": "Sink: new File(outputDir, name) constructs a file path using the unsanitized entry name. If 'name' contains '../', it escapes outputDir."
+        },
+        {
+          "file": "org/zeroturnaround/zip/ZipUtil.java",
+          "line": 1163,
+          "note": "Dangerous operation: FileUtils.copy(in, file) writes the archive content to the constructed path, allowing arbitrary file overwrite."
+        }
+      ],
+      "explanation": "The taint flow originates from ZipEntry.getName(), which contains attacker-controlled data from the ZIP archive. This data is passed through IdentityNameMapper, which performs no validation or normalization. The unsanitized path is then used to construct a File object relative to an output directory and write data to it, allowing path traversal attacks to escape the intended directory.",
+      "samples": [
+        "vulnerable"
+      ],
+      "methods_shown": [
+        "<org.zeroturnaround.zip.IdentityNameMapper: java.lang.String map(java.lang.String)>",
+        "<org.zeroturnaround.zip.ZipEntryUtil: java.util.zip.ZipEntry fromFile(java.lang.String,java.io.File)>",
+        "<org.zeroturnaround.zip.ZipUtil$Unpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>",
+        "<org.zeroturnaround.zip.ZipUtil$Unwraper: void process(java.io.InputStream,java.util.zip.ZipEntry)>",
+        "<org.zeroturnaround.zip.ZipUtil: void pack(java.io.File,java.util.zip.ZipOutputStream,org.zeroturnaround.zip.NameMapper,java.lang.String,boolean)>",
+        "<org.zeroturnaround.zip.commons.FileUtils: java.io.File getTempFileFor(java.io.File)>"
+      ],
+      "override": ""
+    },
+    {
+      "flow_id": "16d2da9771",
+      "flow_key": "<org.zeroturnaround.zip.ZipUtil$Unpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>@L1150/result => <org.zeroturnaround.zip.commons.FileUtilsV2_2: boolean isSymlink(java.io.File)>@L1081/1",
+      "verdict": "vulnerable",
+      "reason": "exploitable",
+      "kept": true,
+      "v3_ok": null,
+      "v3_problems": [],
+      "evidence": [
+        {
+          "file": "org/zeroturnaround/zip/ZipUtil.java",
+          "line": 1150,
+          "note": "Source: ZipEntry name (attacker-controlled in archive) is mapped via IdentityNameMapper which returns the name unchanged."
+        },
+        {
+          "file": "org/zeroturnaround/zip/ZipUtil.java",
+          "line": 1152,
+          "note": "Path construction: new File(outputDir, name) uses the unvalidated entry name directly."
+        },
+        {
+          "file": "org/zeroturnaround/zip/ZipUtil.java",
+          "line": 1163,
+          "note": "Sink: FileUtils.copy(in, file) writes data to the constructed path without prior validation that 'name' does not contain '../' sequences escaping outputDir."
+        },
+        {
+          "file": "org/zeroturnaround/zip/IdentityNameMapper.java",
+          "line": 32,
+          "note": "Sanitizer check: IdentityNameMapper.map() returns the input string unchanged, providing no normalization or restriction."
+        }
+      ],
+      "explanation": "The library accepts ZipEntry names from an archive (attacker-controlled) and uses them to construct file paths via `new File(outputDir, name)` without validating for path traversal sequences like `../`. The `IdentityNameMapper` provides no sanitization, allowing an attacker to write files outside the intended `outputDir`.",
+      "samples": [
+        "vulnerable"
+      ],
+      "methods_shown": [
+        "<org.zeroturnaround.zip.IdentityNameMapper: java.lang.String map(java.lang.String)>",
+        "<org.zeroturnaround.zip.ZipEntryUtil: java.util.zip.ZipEntry fromFile(java.lang.String,java.io.File)>",
+        "<org.zeroturnaround.zip.ZipUtil$Unpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>",
+        "<org.zeroturnaround.zip.ZipUtil$Unwraper: void process(java.io.InputStream,java.util.zip.ZipEntry)>",
+        "<org.zeroturnaround.zip.ZipUtil: void pack(java.io.File,java.util.zip.ZipOutputStream,org.zeroturnaround.zip.NameMapper,java.lang.String,boolean)>",
+        "<org.zeroturnaround.zip.commons.FileUtilsV2_2: boolean isSymlink(java.io.File)>"
+      ],
+      "override": ""
+    },
+    {
+      "flow_id": "2c93fcaeda",
+      "flow_key": "<org.zeroturnaround.zip.ZipUtil$Unwraper: void process(java.io.InputStream,java.util.zip.ZipEntry)>@L1250/result => <org.zeroturnaround.zip.ZipEntryUtil: java.util.zip.ZipEntry copy(java.util.zip.ZipEntry,java.lang.String)>@L61/0",
+      "verdict": "vulnerable",
+      "reason": "exploitable",
+      "kept": true,
+      "v3_ok": null,
+      "v3_problems": [],
+      "evidence": [
+        {
+          "file": "org/zeroturnaround/zip/ZipUtil.java",
+          "line": 1250,
+          "note": "Source: zipEntry.getName() retrieves the entry name from the archive, which is attacker-controlled data."
+        },
+        {
+          "file": "org/zeroturnaround/zip/ZipUtil.java",
+          "line": 1258,
+          "note": "Propagation: The name is processed by mapper.map() and getUnrootedName(), but no path traversal sanitization (like canonicalization or prefix checking) is visible in the provided code snippet."
+        },
+        {
+          "file": "org/zeroturnaround/zip/ZipUtil.java",
+          "line": 1260,
+          "note": "Sink: new File(outputDir, name) constructs a file path using the tainted 'name' variable directly."
+        },
+        {
+          "file": "org/zeroturnaround/zip/ZipUtil.java",
+          "line": 1271,
+          "note": "Dangerous Sink: FileUtils.copy(in, file) writes the archive content to the constructed file path, allowing arbitrary file write if '../' sequences are present in the entry name."
+        }
+      ],
+      "explanation": "The source `zipEntry.getName()` at line 1250 of ZipUtil.java uses attacker-controlled data from the ZIP archive. The code at line 1260 constructs a file path using this unvalidated name, and line 1271 writes to it. There is no evidence of path normalization or prefix checking to prevent traversal outside `outputDir`, making this a classic Path Traversal vulnerability.",
+      "samples": [
+        "vulnerable"
+      ],
+      "methods_shown": [
+        "<org.zeroturnaround.zip.ZipEntryUtil: java.util.zip.ZipEntry copy(java.util.zip.ZipEntry,java.lang.String)>",
+        "<org.zeroturnaround.zip.ZipUtil$Unwraper: void process(java.io.InputStream,java.util.zip.ZipEntry)>"
+      ],
+      "override": ""
+    },
+    {
+      "flow_id": "50afbf7366",
+      "flow_key": "<org.zeroturnaround.zip.ZipUtil$Unwraper: void process(java.io.InputStream,java.util.zip.ZipEntry)>@L1250/result => <org.zeroturnaround.zip.ZipEntryUtil: java.util.zip.ZipEntry fromFile(java.lang.String,java.io.File)>@L144/0",
+      "verdict": "uncertain",
+      "reason": "insufficient_context",
+      "kept": true,
+      "v3_ok": null,
+      "v3_problems": [],
+      "evidence": [
+        {
+          "file": "org/zeroturnaround/zip/ZipUtil.java",
+          "line": 2454,
+          "note": "Source of taint is the 'path' parameter passed to FileSource constructor"
+        },
+        {
+          "file": "org/zeroturnaround/zip/ZipEntryUtil.java",
+          "line": 144,
+          "note": "Sink where the path is used to create a ZipEntry"
+        }
+      ],
+      "explanation": "The provided code shows that the 'path' string flows from a method parameter into a ZipEntry constructor without explicit sanitization or path traversal checks (like canonicalization or prefix validation) within the library code itself. However, the report does not show the caller of the vulnerable method (e.g., `ZipUtil.replaceEntry` or similar) to determine if the 'path' argument is attacker-controlled (e.g., from a user upload or HTTP request). Without knowing the source of the 'path' parameter in the application context, it is impossible to confirm if the data is attacker-controlled.",
+      "samples": [
+        "uncertain"
+      ],
+      "methods_shown": [
+        "<org.zeroturnaround.zip.FileSource: java.util.zip.ZipEntry getEntry()>",
+        "<org.zeroturnaround.zip.FileSource: void <init>(java.lang.String,java.io.File)>",
+        "<org.zeroturnaround.zip.IdentityNameMapper: java.lang.String map(java.lang.String)>",
+        "<org.zeroturnaround.zip.ZipUtil$13: boolean act(java.io.File)>",
+        "<org.zeroturnaround.zip.ZipUtil$13: void <init>(java.io.File,java.lang.String,java.io.File)>",
+        "<org.zeroturnaround.zip.ZipEntryUtil: java.util.zip.ZipEntry fromFile(java.lang.String,java.io.File)>"
+      ],
+      "override": ""
+    },
+    {
+      "flow_id": "415eb55af9",
+      "flow_key": "<org.zeroturnaround.zip.ZipUtil$Unwraper: void process(java.io.InputStream,java.util.zip.ZipEntry)>@L1250/result => <org.zeroturnaround.zip.ZipUtil: void pack(java.io.File,java.util.zip.ZipOutputStream,org.zeroturnaround.zip.NameMapper,java.lang.String,boolean)>@L1730/1",
+      "verdict": "vulnerable",
+      "reason": "exploitable",
+      "kept": true,
+      "v3_ok": null,
+      "v3_problems": [],
+      "evidence": [
+        {
+          "file": "org/zeroturnaround/zip/ZipUtil.java",
+          "line": 1250,
+          "note": "Source: zipEntry.getName() retrieves the entry name from the ZIP archive, which is attacker-controlled input."
+        },
+        {
+          "file": "org/zeroturnaround/zip/ZipUtil.java",
+          "line": 1258,
+          "note": "Propagation: The name is processed by mapper.map() and then used to construct a File object."
+        },
+        {
+          "file": "org/zeroturnaround/zip/ZipUtil.java",
+          "line": 1260,
+          "note": "Sink: new File(outputDir, name) creates a file path. If 'name' contains '../', it escapes outputDir."
+        },
+        {
+          "file": "org/zeroturnaround/zip/ZipUtil.java",
+          "line": 1271,
+          "note": "Dangerous Sink: FileUtils.copy(in, file) writes the attacker-controlled stream content to the resolved file path."
+        }
+      ],
+      "explanation": "The source `zipEntry.getName()` at line 1250 uses attacker-controlled data from the ZIP archive. The code at line 1260 constructs a file path using this name directly without normalizing it or checking for path traversal sequences like `../`. Consequently, an attacker can craft a ZIP entry with a name like `../../etc/passwd`, causing `FileUtils.copy` at line 1271 to write data to arbitrary locations outside the intended `outputDir`.",
+      "samples": [
+        "vulnerable"
+      ],
+      "methods_shown": [
+        "<org.zeroturnaround.zip.ZipUtil$Unwraper: void process(java.io.InputStream,java.util.zip.ZipEntry)>",
+        "<org.zeroturnaround.zip.ZipUtil: void pack(java.io.File,java.util.zip.ZipOutputStream,org.zeroturnaround.zip.NameMapper,java.lang.String,boolean)>"
+      ],
+      "override": ""
+    },
+    {
+      "flow_id": "1ea7cfb145",
+      "flow_key": "<org.zeroturnaround.zip.ZipUtil$Unwraper: void process(java.io.InputStream,java.util.zip.ZipEntry)>@L1250/result => <org.zeroturnaround.zip.ZipUtil$Unpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>@L1152/1",
+      "verdict": "vulnerable",
+      "reason": "exploitable",
+      "kept": true,
+      "v3_ok": null,
+      "v3_problems": [],
+      "evidence": [
+        {
+          "file": "org/zeroturnaround/zip/ZipUtil.java",
+          "line": 1150,
+          "note": "Source: zipEntry.getName() is passed to mapper.map() without validation"
+        },
+        {
+          "file": "org/zeroturnaround/zip/IdentityNameMapper.java",
+          "line": 32,
+          "note": "Sanitizer: IdentityNameMapper.map() returns the input string unchanged, providing no normalization or security check"
+        },
+        {
+          "file": "org/zeroturnaround/zip/ZipUtil.java",
+          "line": 1152,
+          "note": "Sink: new File(outputDir, name) constructs a file path using the unvalidated entry name"
+        },
+        {
+          "file": "org/zeroturnaround/zip/ZipUtil.java",
+          "line": 1260,
+          "note": "Sink: Unwraper.process() also uses new File(outputDir, name) with unvalidated name"
+        }
+      ],
+      "explanation": "The taint flow originates from ZipEntry.getName(), which is attacker-controlled in the context of processing untrusted zip archives. The IdentityNameMapper provides no sanitization, simply returning the raw entry name. This unvalidated name is directly used to construct a File object relative to outputDir, allowing path traversal via '../' sequences to escape the intended directory.",
+      "samples": [
+        "vulnerable"
+      ],
+      "methods_shown": [
+        "<org.zeroturnaround.zip.IdentityNameMapper: java.lang.String map(java.lang.String)>",
+        "<org.zeroturnaround.zip.ZipUtil$Unpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>",
+        "<org.zeroturnaround.zip.ZipUtil$Unwraper: java.lang.String getUnrootedName(java.lang.String,java.lang.String)>",
+        "<org.zeroturnaround.zip.ZipUtil$Unwraper: void process(java.io.InputStream,java.util.zip.ZipEntry)>"
+      ],
+      "override": ""
+    },
+    {
+      "flow_id": "d15307a6a1",
+      "flow_key": "<org.zeroturnaround.zip.ZipUtil$Unwraper: void process(java.io.InputStream,java.util.zip.ZipEntry)>@L1250/result => <org.zeroturnaround.zip.ZipUtil$Unwraper: void process(java.io.InputStream,java.util.zip.ZipEntry)>@L1260/1",
+      "verdict": "vulnerable",
+      "reason": "exploitable",
+      "kept": true,
+      "v3_ok": null,
+      "v3_problems": [],
+      "evidence": [
+        {
+          "file": "org/zeroturnaround/zip/ZipUtil.java",
+          "line": 1250,
+          "note": "Source: zipEntry.getName() is used to determine the root, which is attacker-controlled via the zip archive content."
+        },
+        {
+          "file": "org/zeroturnaround/zip/ZipUtil.java",
+          "line": 1258,
+          "note": "Propagation: The name is processed by mapper.map() (IdentityNameMapper returns input unchanged) and getUnrootedName(). No path traversal sanitization occurs here."
+        },
+        {
+          "file": "org/zeroturnaround/zip/ZipUtil.java",
+          "line": 1260,
+          "note": "Sink: new File(outputDir, name) constructs a file path using the tainted 'name' variable directly without checking if it escapes outputDir."
+        }
+      ],
+      "explanation": "The code uses `zipEntry.getName()` directly to construct file paths without normalizing or validating that the resulting path stays within the intended `outputDir`. The `IdentityNameMapper` simply returns the name unchanged, and `getUnrootedName` only strips a prefix, allowing `../` sequences in the zip entry name to traverse outside the target directory. This is a classic path traversal vulnerability.",
+      "samples": [
+        "vulnerable"
+      ],
+      "methods_shown": [
+        "<org.zeroturnaround.zip.IdentityNameMapper: java.lang.String map(java.lang.String)>",
+        "<org.zeroturnaround.zip.ZipUtil$Unpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>",
+        "<org.zeroturnaround.zip.ZipUtil$Unwraper: java.lang.String getUnrootedName(java.lang.String,java.lang.String)>",
+        "<org.zeroturnaround.zip.ZipUtil$Unwraper: void process(java.io.InputStream,java.util.zip.ZipEntry)>"
+      ],
+      "override": ""
+    },
+    {
+      "flow_id": "1a4c6150f3",
+      "flow_key": "<org.zeroturnaround.zip.ZipUtil$Unwraper: void process(java.io.InputStream,java.util.zip.ZipEntry)>@L1250/result => <org.zeroturnaround.zip.commons.FileUtils: java.io.File getTempFileFor(java.io.File)>@L75/1",
+      "verdict": "vulnerable",
+      "reason": "exploitable",
+      "kept": true,
+      "v3_ok": null,
+      "v3_problems": [],
+      "evidence": [
+        {
+          "file": "org/zeroturnaround/zip/ZipUtil.java",
+          "line": 1250,
+          "note": "Source: zipEntry.getName() is used to derive the root name, but the actual file path is constructed using the entry name directly at line 1258/1260."
+        },
+        {
+          "file": "org/zeroturnaround/zip/ZipUtil.java",
+          "line": 1258,
+          "note": "Taint propagation: zipEntry.getName() is processed by mapper.map() and then used to construct the file path."
+        },
+        {
+          "file": "org/zeroturnaround/zip/ZipUtil.java",
+          "line": 1260,
+          "note": "Sink: new File(outputDir, name) creates a file object. If 'name' contains '../', it can escape outputDir."
+        },
+        {
+          "file": "org/zeroturnaround/zip/ZipUtil.java",
+          "line": 1271,
+          "note": "Dangerous Sink: FileUtils.copy(in, file) writes attacker-controlled content from the zip stream to the path constructed in line 1260."
+        }
+      ],
+      "explanation": "The code uses ZipEntry.getName() to determine the file path for extraction. While it attempts to strip a root directory name, it does not normalize the path or validate that the resulting path remains within the intended output directory (outputDir). An attacker can craft a ZIP entry with a name containing '../' sequences to write files outside the target directory, leading to CWE-022 Path Traversal.",
+      "samples": [
+        "vulnerable"
+      ],
+      "methods_shown": [
+        "<org.zeroturnaround.zip.ZipUtil$Unwraper: void process(java.io.InputStream,java.util.zip.ZipEntry)>",
+        "<org.zeroturnaround.zip.commons.FileUtils: java.io.File getTempFileFor(java.io.File)>"
+      ],
+      "override": ""
+    },
+    {
+      "flow_id": "02f3d795d7",
+      "flow_key": "<org.zeroturnaround.zip.ZipUtil$Unwraper: void process(java.io.InputStream,java.util.zip.ZipEntry)>@L1250/result => <org.zeroturnaround.zip.commons.FileUtilsV2_2: boolean isSymlink(java.io.File)>@L1081/1",
+      "verdict": "vulnerable",
+      "reason": "exploitable",
+      "kept": true,
+      "v3_ok": null,
+      "v3_problems": [],
+      "evidence": [
+        {
+          "file": "org/zeroturnaround/zip/ZipUtil.java",
+          "line": 1250,
+          "note": "Source: zipEntry.getName() is used to derive the root name without validation."
+        },
+        {
+          "file": "org/zeroturnaround/zip/ZipUtil.java",
+          "line": 1258,
+          "note": "Taint propagation: zipEntry.getName() is processed by mapper and used to construct the file name."
+        },
+        {
+          "file": "org/zeroturnaround/zip/ZipUtil.java",
+          "line": 1260,
+          "note": "Path construction: new File(outputDir, name) creates a path relative to outputDir using the tainted name."
+        },
+        {
+          "file": "org/zeroturnaround/zip/ZipUtil.java",
+          "line": 1271,
+          "note": "Sink: FileUtils.copy(in, file) writes data to the constructed path."
+        }
+      ],
+      "explanation": "The library processes ZipEntry names directly from the archive without validating that they do not contain '../' sequences or absolute paths. The tainted name is used to construct a File object relative to the output directory (line 1260) and subsequently written to (line 1271). Since there is no canonical path check or prefix validation to ensure the resulting file stays within the intended output directory, an attacker can craft a malicious ZIP archive to write files outside the target directory.",
+      "samples": [
+        "vulnerable"
+      ],
+      "methods_shown": [
+        "<org.zeroturnaround.zip.ZipUtil$Unwraper: void process(java.io.InputStream,java.util.zip.ZipEntry)>",
+        "<org.zeroturnaround.zip.ZipUtil: void unexplode(java.io.File)>",
+        "<org.zeroturnaround.zip.ZipUtil: void unexplode(java.io.File,int)>",
+        "<org.zeroturnaround.zip.commons.FileUtilsV2_2: boolean isSymlink(java.io.File)>",
+        "<org.zeroturnaround.zip.commons.FileUtilsV2_2: void deleteDirectory(java.io.File)>"
+      ],
+      "override": ""
+    },
+    {
+      "flow_id": "48172fd182",
+      "flow_key": "<org.zeroturnaround.zip.ZipUtil$Unwraper: void process(java.io.InputStream,java.util.zip.ZipEntry)>@L1258/result => <org.zeroturnaround.zip.ZipEntryUtil: java.util.zip.ZipEntry copy(java.util.zip.ZipEntry,java.lang.String)>@L61/0",
+      "verdict": "vulnerable",
+      "reason": "exploitable",
+      "kept": true,
+      "v3_ok": null,
+      "v3_problems": [],
+      "evidence": [
+        {
+          "file": "org/zeroturnaround/zip/ZipUtil.java",
+          "line": 1258,
+          "note": "Tainted ZipEntry name is mapped via IdentityNameMapper (identity function) and used to construct a file path"
+        },
+        {
+          "file": "org/zeroturnaround/zip/ZipUtil.java",
+          "line": 1260,
+          "note": "File object created using outputDir and the unvalidated name"
+        },
+        {
+          "file": "org/zeroturnaround/zip/ZipUtil.java",
+          "line": 1271,
+          "note": "File content is copied to the constructed path without checking if it escapes outputDir"
+        },
+        {
+          "file": "org/zeroturnaround/zip/IdentityNameMapper.java",
+          "line": 32,
+          "note": "IdentityNameMapper.map returns the input name unchanged, providing no sanitization"
+        }
+      ],
+      "explanation": "The ZipEntry name, which can be attacker-controlled in a malicious zip file, is passed through IdentityNameMapper which performs no normalization or validation. The resulting name is directly used to construct a file path relative to an output directory (ZipUtil.java:1260) and files are written to this path (ZipUtil.java:1271) without verifying that the resolved path remains within the intended output directory, allowing path traversal attacks.",
+      "samples": [
+        "vulnerable"
+      ],
+      "methods_shown": [
+        "<org.zeroturnaround.zip.IdentityNameMapper: java.lang.String map(java.lang.String)>",
+        "<org.zeroturnaround.zip.ZipEntryUtil: java.util.zip.ZipEntry fromFile(java.lang.String,java.io.File)>",
+        "<org.zeroturnaround.zip.ZipUtil$Unpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>",
+        "<org.zeroturnaround.zip.ZipUtil$Unwraper: java.lang.String getUnrootedName(java.lang.String,java.lang.String)>",
+        "<org.zeroturnaround.zip.ZipUtil$Unwraper: void process(java.io.InputStream,java.util.zip.ZipEntry)>",
+        "<org.zeroturnaround.zip.ZipEntryUtil: java.util.zip.ZipEntry copy(java.util.zip.ZipEntry,java.lang.String)>"
+      ],
+      "override": ""
+    },
+    {
+      "flow_id": "11ff80f2bc",
+      "flow_key": "<org.zeroturnaround.zip.ZipUtil$Unwraper: void process(java.io.InputStream,java.util.zip.ZipEntry)>@L1258/result => <org.zeroturnaround.zip.ZipEntryUtil: java.util.zip.ZipEntry fromFile(java.lang.String,java.io.File)>@L144/0",
+      "verdict": "not_vulnerable",
+      "reason": "not_dangerous_sink",
+      "kept": false,
+      "v3_ok": null,
+      "v3_problems": [],
+      "evidence": [
+        {
+          "file": "org/zeroturnaround/zip/ZipUtil.java",
+          "line": 1258,
+          "note": "Source of taint: zipEntry.getName() from a ZipEntry object"
+        },
+        {
+          "file": "org/zeroturnaround/zip/ZipUtil.java",
+          "line": 1260,
+          "note": "Path construction: new File(outputDir, name)"
+        },
+        {
+          "file": "org/zeroturnaround/zip/ZipEntryUtil.java",
+          "line": 144,
+          "note": "Sink: new ZipEntry(name) - creates a metadata object, does not access the file system"
+        }
+      ],
+      "explanation": "The reported flow ends at the `ZipEntry` constructor, which only creates an in-memory metadata object and does not perform any file system operations (like reading or writing). While the `name` derived from `zipEntry.getName()` is used to construct a `File` object at line 1260 for actual I/O operations, the static analysis report incorrectly identifies the `ZipEntry` constructor as the dangerous sink. The actual file creation happens at line 1260, where `new File(outputDir, name)` is used. Although `outputDir` is a base directory, the code does not explicitly normalize or validate that `name` stays within `outputDir` (e.g., via `getCanonicalPath` checks), which suggests a potential vulnerability in the *actual* file writing logic. However, since the specific sink identified in the report (`ZipEntryUtil.fromFile`) is not a file system access point, the reported taint flow is not exploitable as described. The vulnerability, if any, lies in the unreported path to `FileUtils.copy`.",
+      "samples": [
+        "not_vulnerable"
+      ],
+      "methods_shown": [
+        "<org.zeroturnaround.zip.ZipUtil$Unwraper: void process(java.io.InputStream,java.util.zip.ZipEntry)>",
+        "<org.zeroturnaround.zip.ZipUtil$Unwraper: java.lang.String getUnrootedName(java.lang.String,java.lang.String)>",
+        "<org.zeroturnaround.zip.IdentityNameMapper: java.lang.String map(java.lang.String)>",
+        "<org.zeroturnaround.zip.ZipUtil: void pack(java.io.File,java.util.zip.ZipOutputStream,org.zeroturnaround.zip.NameMapper,java.lang.String,boolean)>",
+        "<org.zeroturnaround.zip.ZipEntryUtil: java.util.zip.ZipEntry fromFile(java.lang.String,java.io.File)>"
+      ],
+      "override": ""
+    },
+    {
+      "flow_id": "99b4e9999c",
+      "flow_key": "<org.zeroturnaround.zip.ZipUtil$Unwraper: void process(java.io.InputStream,java.util.zip.ZipEntry)>@L1258/result => <org.zeroturnaround.zip.ZipUtil: void pack(java.io.File,java.util.zip.ZipOutputStream,org.zeroturnaround.zip.NameMapper,java.lang.String,boolean)>@L1730/1",
+      "verdict": "vulnerable",
+      "reason": "exploitable",
+      "kept": true,
+      "v3_ok": null,
+      "v3_problems": [],
+      "evidence": [
+        {
+          "file": "org/zeroturnaround/zip/ZipUtil.java",
+          "line": 1258,
+          "note": "Source: ZipEntry name is mapped via IdentityNameMapper (no sanitization) and used to construct a file path."
+        },
+        {
+          "file": "org/zeroturnaround/zip/ZipUtil.java",
+          "line": 1260,
+          "note": "Sink: File object constructed using attacker-controlled 'name' relative to 'outputDir' without path traversal checks."
+        },
+        {
+          "file": "org/zeroturnaround/zip/IdentityNameMapper.java",
+          "line": 32,
+          "note": "Sanitizer check: IdentityNameMapper.map() returns the input name unchanged, providing no protection against '../' sequences."
+        }
+      ],
+      "explanation": "The taint flow originates from a ZipEntry name, which is attacker-controlled in the context of processing untrusted ZIP archives. The IdentityNameMapper used in the default configuration returns the entry name unchanged, failing to normalize or validate it. Consequently, the tainted name is directly used to construct a file path relative to the output directory (ZipUtil.java:1260) without any prefix check or normalization, allowing path traversal attacks to write files outside the intended directory.",
+      "samples": [
+        "vulnerable"
+      ],
+      "methods_shown": [
+        "<org.zeroturnaround.zip.IdentityNameMapper: java.lang.String map(java.lang.String)>",
+        "<org.zeroturnaround.zip.ZipEntryUtil: java.util.zip.ZipEntry fromFile(java.lang.String,java.io.File)>",
+        "<org.zeroturnaround.zip.ZipUtil$Unpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>",
+        "<org.zeroturnaround.zip.ZipUtil$Unwraper: java.lang.String getUnrootedName(java.lang.String,java.lang.String)>",
+        "<org.zeroturnaround.zip.ZipUtil$Unwraper: void process(java.io.InputStream,java.util.zip.ZipEntry)>",
+        "<org.zeroturnaround.zip.ZipUtil: void pack(java.io.File,java.util.zip.ZipOutputStream,org.zeroturnaround.zip.NameMapper,java.lang.String,boolean)>"
+      ],
+      "override": ""
+    },
+    {
+      "flow_id": "b113c83345",
+      "flow_key": "<org.zeroturnaround.zip.ZipUtil$Unwraper: void process(java.io.InputStream,java.util.zip.ZipEntry)>@L1258/result => <org.zeroturnaround.zip.ZipUtil$Unpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>@L1152/1",
+      "verdict": "vulnerable",
+      "reason": "exploitable",
+      "kept": true,
+      "v3_ok": null,
+      "v3_problems": [],
+      "evidence": [
+        {
+          "file": "org/zeroturnaround/zip/ZipUtil.java",
+          "line": 1258,
+          "note": "Source: zipEntry.getName() is used to compute the file name without validation"
+        },
+        {
+          "file": "org/zeroturnaround/zip/ZipUtil.java",
+          "line": 1277,
+          "note": "Logic: getUnrootedName strips the root prefix but does not validate against traversal sequences like '../'"
+        },
+        {
+          "file": "org/zeroturnaround/zip/IdentityNameMapper.java",
+          "line": 32,
+          "note": "Mapper: IdentityNameMapper.map() returns the name unchanged, providing no sanitization"
+        },
+        {
+          "file": "org/zeroturnaround/zip/ZipUtil.java",
+          "line": 1260,
+          "note": "Sink: new File(outputDir, name) constructs a path using the tainted name directly"
+        }
+      ],
+      "explanation": "The code extracts the file name from a ZipEntry (attacker-controlled) and uses it to construct a file path relative to an output directory. The 'getUnrootedName' method only strips a root prefix but fails to normalize the path or check for '../' sequences. The IdentityNameMapper passes the name through unchanged. Consequently, an attacker can craft a zip entry with a name like '../../etc/passwd' to write files outside the intended output directory.",
+      "samples": [
+        "vulnerable"
+      ],
+      "methods_shown": [
+        "<org.zeroturnaround.zip.ZipUtil$Unwraper: void process(java.io.InputStream,java.util.zip.ZipEntry)>",
+        "<org.zeroturnaround.zip.ZipUtil$Unwraper: java.lang.String getUnrootedName(java.lang.String,java.lang.String)>",
+        "<org.zeroturnaround.zip.IdentityNameMapper: java.lang.String map(java.lang.String)>",
+        "<org.zeroturnaround.zip.ZipUtil$Unpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>"
+      ],
+      "override": ""
+    },
+    {
+      "flow_id": "b163347c55",
+      "flow_key": "<org.zeroturnaround.zip.ZipUtil$Unwraper: void process(java.io.InputStream,java.util.zip.ZipEntry)>@L1258/result => <org.zeroturnaround.zip.ZipUtil$Unwraper: void process(java.io.InputStream,java.util.zip.ZipEntry)>@L1260/1",
+      "verdict": "vulnerable",
+      "reason": "exploitable",
+      "kept": true,
+      "v3_ok": null,
+      "v3_problems": [],
+      "evidence": [
+        {
+          "file": "org/zeroturnaround/zip/ZipUtil.java",
+          "line": 1258,
+          "note": "Source: zipEntry.getName() is used to compute the output file name."
+        },
+        {
+          "file": "org/zeroturnaround/zip/ZipUtil.java",
+          "line": 1277,
+          "note": "Logic: getUnrootedName strips the root prefix but does not normalize or validate the remaining path segments."
+        },
+        {
+          "file": "org/zeroturnaround/zip/ZipUtil.java",
+          "line": 1260,
+          "note": "Sink: new File(outputDir, name) creates a file object using the potentially malicious name."
+        }
+      ],
+      "explanation": "The source `zipEntry.getName()` is attacker-controlled via the contents of a ZIP archive. The code strips the root directory but fails to normalize the path or check for `../` sequences, allowing an attacker to escape `outputDir`. The sink `new File(outputDir, name)` uses this unvalidated path directly, leading to path traversal.",
+      "samples": [
+        "vulnerable"
+      ],
+      "methods_shown": [
+        "<org.zeroturnaround.zip.ZipUtil$Unwraper: void process(java.io.InputStream,java.util.zip.ZipEntry)>",
+        "<org.zeroturnaround.zip.ZipUtil$Unwraper: java.lang.String getUnrootedName(java.lang.String,java.lang.String)>",
+        "<org.zeroturnaround.zip.IdentityNameMapper: java.lang.String map(java.lang.String)>"
+      ],
+      "override": ""
+    },
+    {
+      "flow_id": "4c37a7a645",
+      "flow_key": "<org.zeroturnaround.zip.ZipUtil$Unwraper: void process(java.io.InputStream,java.util.zip.ZipEntry)>@L1258/result => <org.zeroturnaround.zip.commons.FileUtils: java.io.File getTempFileFor(java.io.File)>@L75/1",
+      "verdict": "vulnerable",
+      "reason": "exploitable",
+      "kept": true,
+      "v3_ok": null,
+      "v3_problems": [],
+      "evidence": [
+        {
+          "file": "org/zeroturnaround/zip/ZipUtil.java",
+          "line": 1258,
+          "note": "Source: ZipEntry name is processed via mapper.map() which returns the name unchanged (IdentityNameMapper)"
+        },
+        {
+          "file": "org/zeroturnaround/zip/ZipUtil.java",
+          "line": 1260,
+          "note": "Sink: File object constructed using attacker-controlled 'name' relative to 'outputDir' without path traversal checks"
+        },
+        {
+          "file": "org/zeroturnaround/zip/IdentityNameMapper.java",
+          "line": 32,
+          "note": "Sanitizer check: IdentityNameMapper.map() returns the input string directly, providing no normalization or validation"
+        }
+      ],
+      "explanation": "The ZipEntry name, which can be controlled by an attacker via a malicious zip file, is passed through IdentityNameMapper which performs no sanitization. The resulting name is used directly to construct a File path relative to the output directory (ZipUtil.java:1260) without checking for '../' sequences or ensuring the path remains within the intended directory, allowing arbitrary file write.",
+      "samples": [
+        "vulnerable"
+      ],
+      "methods_shown": [
+        "<org.zeroturnaround.zip.IdentityNameMapper: java.lang.String map(java.lang.String)>",
+        "<org.zeroturnaround.zip.ZipEntryUtil: java.util.zip.ZipEntry fromFile(java.lang.String,java.io.File)>",
+        "<org.zeroturnaround.zip.ZipUtil$Unpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>",
+        "<org.zeroturnaround.zip.ZipUtil$Unwraper: java.lang.String getUnrootedName(java.lang.String,java.lang.String)>",
+        "<org.zeroturnaround.zip.ZipUtil$Unwraper: void process(java.io.InputStream,java.util.zip.ZipEntry)>",
+        "<org.zeroturnaround.zip.commons.FileUtils: java.io.File getTempFileFor(java.io.File)>"
+      ],
+      "override": ""
+    },
+    {
+      "flow_id": "9e8aa79c33",
+      "flow_key": "<org.zeroturnaround.zip.ZipUtil$Unwraper: void process(java.io.InputStream,java.util.zip.ZipEntry)>@L1258/result => <org.zeroturnaround.zip.commons.FileUtilsV2_2: boolean isSymlink(java.io.File)>@L1081/1",
+      "verdict": "vulnerable",
+      "reason": "exploitable",
+      "kept": true,
+      "v3_ok": null,
+      "v3_problems": [],
+      "evidence": [
+        {
+          "file": "org/zeroturnaround/zip/ZipUtil.java",
+          "line": 1258,
+          "note": "Source: ZipEntry name is mapped via IdentityNameMapper (no sanitization) and used to construct a file path."
+        },
+        {
+          "file": "org/zeroturnaround/zip/ZipUtil.java",
+          "line": 1260,
+          "note": "Sink: File object created using attacker-controlled name relative to outputDir without checking for path traversal."
+        },
+        {
+          "file": "org/zeroturnaround/zip/ZipUtil.java",
+          "line": 1271,
+          "note": "Dangerous Sink: FileUtils.copy writes data to the constructed file path."
+        },
+        {
+          "file": "org/zeroturnaround/zip/IdentityNameMapper.java",
+          "line": 32,
+          "note": "IdentityNameMapper returns the input name unchanged, providing no normalization or validation."
+        }
+      ],
+      "explanation": "The ZipEntry name, which can be controlled by an attacker via a malicious zip file, is passed through IdentityNameMapper which performs no sanitization. This untrusted name is then used directly to construct a File path relative to the output directory (ZipUtil.java:1260) and write data to it (ZipUtil.java:1271). There is no check to ensure the resulting path remains within the intended output directory, allowing path traversal attacks.",
+      "samples": [
+        "vulnerable"
+      ],
+      "methods_shown": [
+        "<org.zeroturnaround.zip.IdentityNameMapper: java.lang.String map(java.lang.String)>",
+        "<org.zeroturnaround.zip.ZipEntryUtil: java.util.zip.ZipEntry fromFile(java.lang.String,java.io.File)>",
+        "<org.zeroturnaround.zip.ZipUtil$Unpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>",
+        "<org.zeroturnaround.zip.ZipUtil$Unwraper: java.lang.String getUnrootedName(java.lang.String,java.lang.String)>",
+        "<org.zeroturnaround.zip.ZipUtil$Unwraper: void process(java.io.InputStream,java.util.zip.ZipEntry)>",
+        "<org.zeroturnaround.zip.commons.FileUtilsV2_2: boolean isSymlink(java.io.File)>"
+      ],
+      "override": ""
+    }
+  ]
+}

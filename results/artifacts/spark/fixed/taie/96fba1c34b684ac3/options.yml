@@ -1,0 +1,65 @@
+optionsFile: null
+printHelp: false
+classPath:
+- ../../../../../.m2/repository/org/slf4j/slf4j-api/1.7.13/slf4j-api-1.7.13.jar
+- ../../../../../.m2/repository/org/slf4j/slf4j-simple/1.7.13/slf4j-simple-1.7.13.jar
+- ../../../../../.m2/repository/org/eclipse/jetty/jetty-server/9.3.6.v20151106/jetty-server-9.3.6.v20151106.jar
+- ../../../../../.m2/repository/javax/servlet/javax.servlet-api/3.1.0/javax.servlet-api-3.1.0.jar
+- ../../../../../.m2/repository/org/eclipse/jetty/jetty-http/9.3.6.v20151106/jetty-http-9.3.6.v20151106.jar
+- ../../../../../.m2/repository/org/eclipse/jetty/jetty-io/9.3.6.v20151106/jetty-io-9.3.6.v20151106.jar
+- ../../../../../.m2/repository/org/eclipse/jetty/jetty-webapp/9.3.6.v20151106/jetty-webapp-9.3.6.v20151106.jar
+- ../../../../../.m2/repository/org/eclipse/jetty/jetty-xml/9.3.6.v20151106/jetty-xml-9.3.6.v20151106.jar
+- ../../../../../.m2/repository/org/eclipse/jetty/jetty-servlet/9.3.6.v20151106/jetty-servlet-9.3.6.v20151106.jar
+- ../../../../../.m2/repository/org/eclipse/jetty/jetty-security/9.3.6.v20151106/jetty-security-9.3.6.v20151106.jar
+- ../../../../../.m2/repository/org/eclipse/jetty/websocket/websocket-server/9.3.6.v20151106/websocket-server-9.3.6.v20151106.jar
+- ../../../../../.m2/repository/org/eclipse/jetty/websocket/websocket-common/9.3.6.v20151106/websocket-common-9.3.6.v20151106.jar
+- ../../../../../.m2/repository/org/eclipse/jetty/websocket/websocket-servlet/9.3.6.v20151106/websocket-servlet-9.3.6.v20151106.jar
+- ../../../../../.m2/repository/org/eclipse/jetty/websocket/websocket-api/9.3.6.v20151106/websocket-api-9.3.6.v20151106.jar
+- ../../../../../.m2/repository/junit/junit/4.12/junit-4.12.jar
+- ../../../../../.m2/repository/org/hamcrest/hamcrest-core/1.3/hamcrest-core-1.3.jar
+- ../../../../../.m2/repository/org/mockito/mockito-core/1.10.19/mockito-core-1.10.19.jar
+- ../../../../../.m2/repository/org/objenesis/objenesis/2.1/objenesis-2.1.jar
+- ../../../../../.m2/repository/org/powermock/powermock-module-junit4/1.6.4/powermock-module-junit4-1.6.4.jar
+- ../../../../../.m2/repository/org/powermock/powermock-module-junit4-common/1.6.4/powermock-module-junit4-common-1.6.4.jar
+- ../../../../../.m2/repository/org/powermock/powermock-reflect/1.6.4/powermock-reflect-1.6.4.jar
+- ../../../../../.m2/repository/org/powermock/powermock-api-mockito/1.6.4/powermock-api-mockito-1.6.4.jar
+- ../../../../../.m2/repository/org/powermock/powermock-api-support/1.6.4/powermock-api-support-1.6.4.jar
+- ../../../../../.m2/repository/org/apache/httpcomponents/httpclient/4.5.1/httpclient-4.5.1.jar
+- ../../../../../.m2/repository/org/apache/httpcomponents/httpcore/4.4.3/httpcore-4.4.3.jar
+- ../../../../../.m2/repository/commons-logging/commons-logging/1.2/commons-logging-1.2.jar
+- ../../../../../.m2/repository/commons-codec/commons-codec/1.9/commons-codec-1.9.jar
+- ../../../../../.m2/repository/org/freemarker/freemarker/2.3.23/freemarker-2.3.23.jar
+- ../../../../../.m2/repository/com/google/code/gson/gson/2.4/gson-2.4.jar
+- ../../../../../.m2/repository/org/eclipse/jetty/websocket/websocket-client/9.3.6.v20151106/websocket-client-9.3.6.v20151106.jar
+- ../../../../../.m2/repository/org/eclipse/jetty/jetty-util/9.3.6.v20151106/jetty-util-9.3.6.v20151106.jar
+- ../../../../../.m2/repository/org/powermock/tests/powermock-tests-utils/1.6.4/powermock-tests-utils-1.6.4.jar
+- ../../../../../.m2/repository/org/powermock/powermock-core/1.6.4/powermock-core-1.6.4.jar
+- ../../../../../.m2/repository/org/javassist/javassist/3.20.0-GA/javassist-3.20.0-GA.jar
+- ../../../../../.m2/repository/javax/servlet/servlet-api/2.5/servlet-api-2.5.jar
+appClassPath:
+- ../subjects/spark/fixed/target/classes
+- ../runs/spark/fixed/run0/llm-driver-entrycheck/classes
+mainClass: nesy.NesyDriver
+inputClasses: []
+javaVersion: 8
+useCurrentJRE: false
+androidMode: false
+androidJars: android-benchmarks/android-platforms
+worldBuilderClass: pascal.taie.frontend.java.JavaWorldBuilder
+outputDir: ../runs/spark/fixed/taie/96fba1c34b684ac3
+preBuildIR: false
+worldCacheMode: false
+scope: APP
+nativeModel: true
+planFile: null
+analyses:
+  pta:
+    cs: 1-call
+    only-app: false
+    taint-config: /Users/jiayulim/Documents/GitHub/CS6215_Neurosymbolic_Program_Analysis/work/runs/spark/fixed/configs/v4/run0/taint-config
+    time-limit: 1800
+onlyGenPlan: false
+keepResult:
+- $KEEP-ALL
+jreDir: null
+ssa: false

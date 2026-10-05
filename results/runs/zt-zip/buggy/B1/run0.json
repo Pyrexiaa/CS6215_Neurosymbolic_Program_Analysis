@@ -1,0 +1,206 @@
+{
+  "subject": "zt-zip",
+  "slug": "zeroturnaround__zt-zip_CVE-2018-1002201_1.12",
+  "cve": "CVE-2018-1002201",
+  "cwe": "CWE-022",
+  "version": "buggy",
+  "config": "B1",
+  "run": 0,
+  "config_def": {
+    "driver": "template",
+    "spec": [
+      "base"
+    ],
+    "triage": false
+  },
+  "model": null,
+  "served_models": [],
+  "prompt_versions": {
+    "n1_driver": "3914024e",
+    "n1_repair": "0393a228",
+    "n2_spec": "647ee643",
+    "n3_triage": "e5fc00c6"
+  },
+  "taie_settings": {
+    "jar": "/Users/jiayulim/Documents/GitHub/CS6215_Neurosymbolic_Program_Analysis/tools/tai-e-all-0.5.4.jar",
+    "java_bin": "/Library/Java/JavaVirtualMachines/jdk-17.jdk/Contents/Home/bin/java",
+    "jre_version": "8",
+    "home": "/Users/jiayulim/Documents/GitHub/CS6215_Neurosymbolic_Program_Analysis/work/taie-home",
+    "cs": "1-call",
+    "only_app": "False",
+    "time_limit_s": "1800",
+    "wall_timeout_s": "3600",
+    "xmx": "6g",
+    "extra_pta_options": "{}"
+  },
+  "facts": {
+    "app_classes": 85,
+    "app_methods": 527,
+    "external_apis": 196,
+    "external_apis_jdk": 187,
+    "entry_candidates": 177,
+    "entry_kinds": {
+      "library-api": 177
+    }
+  },
+  "subject_stats": {
+    "java_files": 47,
+    "non_blank_loc": 8520,
+    "dependency_jars": 5,
+    "modules_analysed": 1
+  },
+  "gt_methods": [
+    "Unpacker.process",
+    "Unwraper.getRootName",
+    "Unwraper.process"
+  ],
+  "driver": {
+    "kind": "template",
+    "ok": true,
+    "entries": 162,
+    "attempts": 2,
+    "removed_entries": 1,
+    "app_calls": 167,
+    "taint_calls": 277,
+    "errors": 1,
+    "entry_mismatches": 0
+  },
+  "spec": null,
+  "manual_spec_entries": null,
+  "taie": {
+    "ok": true,
+    "returncode": 0,
+    "elapsed_s": 10.17,
+    "timed_out": false,
+    "detected_raw": 7416,
+    "reachable_methods": 10767,
+    "out_dir": "/Users/jiayulim/Documents/GitHub/CS6215_Neurosymbolic_Program_Analysis/work/runs/zt-zip/buggy/taie/09c208e54ceb16e2",
+    "error": "",
+    "invalid_spec_entries": [],
+    "expected_failure": false
+  },
+  "counts": {
+    "raw": 7416,
+    "filtered": 7,
+    "reported": 7,
+    "reported_gt": 2,
+    "reported_gt_weak": 0,
+    "removed_by_triage": 0,
+    "removed_gt_by_triage": 0,
+    "v3_rejected": 0,
+    "trusted_sink_overrides": 0
+  },
+  "detected": true,
+  "usage": {
+    "N1": {},
+    "N2": {},
+    "N3": {},
+    "total": {}
+  },
+  "timings": {
+    "facts_s": 4.81,
+    "driver_s": 0.0,
+    "spec_s": 0.0,
+    "taie_s": 0.03,
+    "triage_s": 0.0,
+    "total_s": 4.87
+  },
+  "flows": [
+    {
+      "id": "739dd783a9",
+      "key": "DRIVER => <org.zeroturnaround.zip.ZipUtil$Unpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>@L1152/0",
+      "source": "<nesy.NesyDriver: void main(java.lang.String[])>[165@L41] %v100 = invokestatic nesy.Taint.srcFile()/result",
+      "sink": "<org.zeroturnaround.zip.ZipUtil$Unpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>[7@L1152] invokespecial file.<init>(%v11, name)/0",
+      "sink_method": "<org.zeroturnaround.zip.ZipUtil$Unpacker: void process(java.io.InputStream,java.util.zip.ZipEntry)>",
+      "sink_line": 1152,
+      "gt": [
+        "Unpacker.process"
+      ],
+      "gt_weak": [],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "34f85de0cf",
+      "key": "DRIVER => <org.zeroturnaround.zip.ZipUtil$Unwraper: void process(java.io.InputStream,java.util.zip.ZipEntry)>@L1260/0",
+      "source": "<nesy.NesyDriver: void main(java.lang.String[])>[213@L49] %v132 = invokestatic nesy.Taint.srcFile()/result",
+      "sink": "<org.zeroturnaround.zip.ZipUtil$Unwraper: void process(java.io.InputStream,java.util.zip.ZipEntry)>[30@L1260] invokespecial file.<init>(%v28, name)/0",
+      "sink_method": "<org.zeroturnaround.zip.ZipUtil$Unwraper: void process(java.io.InputStream,java.util.zip.ZipEntry)>",
+      "sink_line": 1260,
+      "gt": [
+        "Unwraper.process"
+      ],
+      "gt_weak": [],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "5ac0fa8b04",
+      "key": "DRIVER => <org.zeroturnaround.zip.commons.FileUtilsV2_2: void copyFileToDirectory(java.io.File,java.io.File,boolean)>@L327/0",
+      "source": "<nesy.NesyDriver: void main(java.lang.String[])>[250@L56] %v155 = invokestatic nesy.Taint.srcFile()/result",
+      "sink": "<org.zeroturnaround.zip.commons.FileUtilsV2_2: void copyFileToDirectory(java.io.File,java.io.File,boolean)>[23@L327] invokespecial destFile.<init>(destDir, %v19)/0",
+      "sink_method": "<org.zeroturnaround.zip.commons.FileUtilsV2_2: void copyFileToDirectory(java.io.File,java.io.File,boolean)>",
+      "sink_line": 327,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "2036eec71b",
+      "key": "DRIVER => <org.zeroturnaround.zip.ZTFileUtil: void innerListFiles(java.io.File,java.util.Collection,java.io.FileFilter)>@L57/0",
+      "source": "<nesy.NesyDriver: void main(java.lang.String[])>[264@L59] %v163 = invokestatic nesy.Taint.srcFile()/result",
+      "sink": "<org.zeroturnaround.zip.ZTFileUtil: void innerListFiles(java.io.File,java.util.Collection,java.io.FileFilter)>[9@L57] invokespecial file.<init>(dir, %v11)/0",
+      "sink_method": "<org.zeroturnaround.zip.ZTFileUtil: void innerListFiles(java.io.File,java.util.Collection,java.io.FileFilter)>",
+      "sink_line": 57,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "f4602ef5f9",
+      "key": "DRIVER => <org.zeroturnaround.zip.ZipUtil: void pack(java.io.File,java.util.zip.ZipOutputStream,org.zeroturnaround.zip.NameMapper,java.lang.String,boolean)>@L1730/0",
+      "source": "<nesy.NesyDriver: void main(java.lang.String[])>[282@L63] %v173 = invokestatic nesy.Taint.srcFile()/result",
+      "sink": "<org.zeroturnaround.zip.ZipUtil: void pack(java.io.File,java.util.zip.ZipOutputStream,org.zeroturnaround.zip.NameMapper,java.lang.String,boolean)>[47@L1730] invokespecial file.<init>(dir, filename)/0",
+      "sink_method": "<org.zeroturnaround.zip.ZipUtil: void pack(java.io.File,java.util.zip.ZipOutputStream,org.zeroturnaround.zip.NameMapper,java.lang.String,boolean)>",
+      "sink_line": 1730,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "ed238c5914",
+      "key": "DRIVER => <org.zeroturnaround.zip.commons.FileUtilsV2_2: void copyDirectory(java.io.File,java.io.File,java.io.FileFilter,boolean)>@L584/0",
+      "source": "<nesy.NesyDriver: void main(java.lang.String[])>[619@L119] %v389 = invokestatic nesy.Taint.srcFile()/result",
+      "sink": "<org.zeroturnaround.zip.commons.FileUtilsV2_2: void copyDirectory(java.io.File,java.io.File,java.io.FileFilter,boolean)>[78@L584] invokespecial copiedFile.<init>(destDir, %v59)/0",
+      "sink_method": "<org.zeroturnaround.zip.commons.FileUtilsV2_2: void copyDirectory(java.io.File,java.io.File,java.io.FileFilter,boolean)>",
+      "sink_line": 584,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "996cfc6f55",
+      "key": "DRIVER => <org.zeroturnaround.zip.commons.FileUtilsV2_2: void doCopyDirectory(java.io.File,java.io.File,java.io.FileFilter,boolean,java.util.List)>@L623/0",
+      "source": "<nesy.NesyDriver: void main(java.lang.String[])>[619@L119] %v389 = invokestatic nesy.Taint.srcFile()/result",
+      "sink": "<org.zeroturnaround.zip.commons.FileUtilsV2_2: void doCopyDirectory(java.io.File,java.io.File,java.io.FileFilter,boolean,java.util.List)>[65@L623] invokespecial dstFile.<init>(destDir, %v52)/0",
+      "sink_method": "<org.zeroturnaround.zip.commons.FileUtilsV2_2: void doCopyDirectory(java.io.File,java.io.File,java.io.FileFilter,boolean,java.util.List)>",
+      "sink_line": 623,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": null
+    }
+  ],
+  "result_revision": {
+    "kind": "validator-correction-replay",
+    "original_raw_n1_n2_responses_reused": true,
+    "historical_cache_model_key": "default",
+    "new_api_request_model": "qwen3.6:35b",
+    "spec_vote_version": 2,
+    "v3_exact_visible_lines": true
+  }
+}

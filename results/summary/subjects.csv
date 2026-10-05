@@ -1,0 +1,9 @@
+subject,version,cve,cwe,java_files,non_blank_loc,dependency_jars,app_classes,app_methods,external_apis,entry_candidates,gt_methods,b1_reachable_methods,b1_taie_s,b1_ok
+cron-utils,buggy,CVE-2021-41269,CWE-094,84,7877,32,98,678,214,33,2,10599,9.1,True
+cron-utils,fixed,CVE-2021-41269,CWE-094,84,7877,32,98,678,214,33,2,10599,8.81,True
+perfecto-plugin,buggy,CVE-2020-2261,CWE-078,4,756,222,10,70,106,23,9,2317,1.9,True
+perfecto-plugin,fixed,CVE-2020-2261,CWE-078,4,759,182,10,69,103,23,9,2355,1.86,True
+spark,buggy,CVE-2016-9177,CWE-022,91,10486,35,111,890,325,218,7,16375,44.49,True
+spark,fixed,CVE-2016-9177,CWE-022,93,10619,35,114,903,326,225,7,16390,33.88,True
+zt-zip,buggy,CVE-2018-1002201,CWE-022,47,8520,5,85,527,196,177,3,10767,10.17,True
+zt-zip,fixed,CVE-2018-1002201,CWE-022,47,8551,5,85,527,196,177,3,10767,10.27,True

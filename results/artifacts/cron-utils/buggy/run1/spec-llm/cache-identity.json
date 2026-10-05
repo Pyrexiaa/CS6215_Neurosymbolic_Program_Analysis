@@ -1,0 +1,46 @@
+{
+  "identity": {
+    "version": 1,
+    "stage": "spec",
+    "settings": {
+      "mode": "full",
+      "batch_size": 25,
+      "samples": 3,
+      "include_jdk_apis": true,
+      "max_call_sites_per_api": 2,
+      "temperature": 0.0,
+      "sample_temperature": 0.7,
+      "max_tokens": 8192,
+      "sample_offset": 1000,
+      "validators": true
+    },
+    "facts_sha256": "e2511691669681302f54c15d50cbcf888fb9dbc1d60602cb95a56ecd194b9ca8",
+    "files_sha256": "0ed521f765e58d7b0512a7b8036ba02f2dc3c6ac145fff918594145e624a4557",
+    "implementation_sha256": "c7e94bc91a08ff36a0df9e9598a2fd15480c8d29278374e4ff24671e05f601bb",
+    "project": {
+      "repo": "https://github.com/jmrozanec/cron-utils.git",
+      "id": "cron-utils"
+    },
+    "cwe_id": "CWE-094",
+    "cwe": {
+      "name": "Code Injection",
+      "description": "Attacker-controlled data is evaluated as code or as an expression language (EL, SpEL, OGNL, script engines, template engines, Bean Validation message interpolation).",
+      "sinks": [
+        "sink/injection/javax/other/el.yml",
+        "sink/injection/javax/other/script-engine.yml",
+        "sink/injection/spring-framework/spel-inejction",
+        "sink/injection/apache-struts/ognl-injection"
+      ]
+    },
+    "prompts": {
+      "n2_spec": "647ee643"
+    },
+    "vote_version": 2,
+    "llm": {
+      "model": "default",
+      "endpoint_sha256": "9932912d077e8e03e5ead10fb3a45323a7e57acbe7c563638f92e8fa3aa5bd4f",
+      "extra_body": {}
+    }
+  },
+  "provenance": "date-omitted validator replay: verified unchanged experiment, prompts and subject builds; historical default alias served qwen3.6:35b from the configured SoCLaaS endpoint with empty extra_body; N1/N2 raw draws frozen, N2 vote_version=2; only newly needed N3 answers regenerated with pinned model. See results/provenance/validator-refresh.json and labels/sampling_manifest.json."
+}

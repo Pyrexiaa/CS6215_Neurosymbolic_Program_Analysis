@@ -1,0 +1,426 @@
+{
+  "subject": "spark",
+  "slug": "perwendel__spark_CVE-2016-9177_2.5.1",
+  "cve": "CVE-2016-9177",
+  "cwe": "CWE-022",
+  "version": "fixed",
+  "config": "v2",
+  "run": 1,
+  "config_def": {
+    "driver": "llm",
+    "spec": [
+      "base",
+      "llm"
+    ],
+    "triage": false
+  },
+  "model": "default",
+  "served_models": [
+    "qwen3.6:35b"
+  ],
+  "prompt_versions": {
+    "n1_driver": "3914024e",
+    "n1_repair": "0393a228",
+    "n2_spec": "647ee643",
+    "n3_triage": "e5fc00c6"
+  },
+  "taie_settings": {
+    "jar": "/Users/jiayulim/Documents/GitHub/CS6215_Neurosymbolic_Program_Analysis/tools/tai-e-all-0.5.4.jar",
+    "java_bin": "/Library/Java/JavaVirtualMachines/jdk-17.jdk/Contents/Home/bin/java",
+    "jre_version": "8",
+    "home": "/Users/jiayulim/Documents/GitHub/CS6215_Neurosymbolic_Program_Analysis/work/taie-home",
+    "cs": "1-call",
+    "only_app": "False",
+    "time_limit_s": "1800",
+    "wall_timeout_s": "3600",
+    "xmx": "6g",
+    "extra_pta_options": "{}"
+  },
+  "facts": {
+    "app_classes": 114,
+    "app_methods": 903,
+    "external_apis": 326,
+    "external_apis_jdk": 281,
+    "entry_candidates": 225,
+    "entry_kinds": {
+      "servlet": 2,
+      "library-api": 223
+    }
+  },
+  "subject_stats": {
+    "java_files": 93,
+    "non_blank_loc": 10619,
+    "dependency_jars": 35,
+    "modules_analysed": 1
+  },
+  "gt_methods": [
+    "ClassPathResourceHandler.getResource",
+    "ExternalResourceHandler.getResource",
+    "StaticFilesConfiguration.consumeWithFileResourceHandlers",
+    "StaticFilesConfiguration.configure",
+    "StaticFilesConfiguration.setExpireTimeSeconds",
+    "StaticFilesConfiguration.configureJarCase",
+    "StringUtils.toString"
+  ],
+  "driver": {
+    "kind": "llm",
+    "ok": true,
+    "entries": 11,
+    "attempts": 2,
+    "removed_entries": 0,
+    "app_calls": 11,
+    "taint_calls": 7,
+    "errors": 2,
+    "entry_mismatches": 0
+  },
+  "spec": {
+    "candidates": 287,
+    "batches": 12,
+    "samples": 3,
+    "accepted": 32,
+    "accepted_by_role": {
+      "sink": 16,
+      "transfer": 5,
+      "source": 11
+    },
+    "rejected": 10,
+    "rejected_by_reason": {
+      "to:base-of-static": 2,
+      "primitive-type": 7,
+      "arg-out-of-range": 1
+    },
+    "extra_signatures": 0,
+    "parse_failures": 0,
+    "mean_vote_agreement": 0.898,
+    "validators": true,
+    "vote_version": 2
+  },
+  "manual_spec_entries": null,
+  "taie": {
+    "ok": true,
+    "returncode": 0,
+    "elapsed_s": 8.89,
+    "timed_out": false,
+    "detected_raw": 1585,
+    "reachable_methods": 9729,
+    "out_dir": "/Users/jiayulim/Documents/GitHub/CS6215_Neurosymbolic_Program_Analysis/work/runs/spark/fixed/taie/6673fb53fe33598c",
+    "error": "",
+    "invalid_spec_entries": [],
+    "expected_failure": false
+  },
+  "counts": {
+    "raw": 1585,
+    "filtered": 21,
+    "reported": 21,
+    "reported_gt": 0,
+    "reported_gt_weak": 0,
+    "removed_by_triage": 0,
+    "removed_gt_by_triage": 0,
+    "v3_rejected": 0,
+    "trusted_sink_overrides": 0
+  },
+  "detected": false,
+  "usage": {
+    "N1": {
+      "calls": 3,
+      "cached_calls": 1,
+      "prompt_tokens": 6968,
+      "completion_tokens": 10524,
+      "fresh_prompt_tokens": 4003,
+      "fresh_completion_tokens": 2332,
+      "latency_s": 17.583,
+      "truncated": 1
+    },
+    "N2": {
+      "calls": 36,
+      "cached_calls": 36,
+      "prompt_tokens": 78033,
+      "completion_tokens": 34079,
+      "fresh_prompt_tokens": 0,
+      "fresh_completion_tokens": 0,
+      "latency_s": 0.0,
+      "truncated": 0
+    },
+    "N3": {},
+    "total": {
+      "calls": 39,
+      "cached_calls": 37,
+      "prompt_tokens": 85001,
+      "completion_tokens": 44603,
+      "fresh_prompt_tokens": 4003,
+      "fresh_completion_tokens": 2332,
+      "latency_s": 17.583,
+      "truncated": 1
+    }
+  },
+  "timings": {
+    "facts_s": 3.17,
+    "driver_s": 0.0,
+    "spec_s": 0.0,
+    "taie_s": 8.94,
+    "triage_s": 0.0,
+    "total_s": 12.13
+  },
+  "flows": [
+    {
+      "id": "da2f4c2deb",
+      "key": "DRIVER => <org.slf4j.impl.SimpleLogger: java.io.PrintStream computeTargetStream(java.lang.String)>@L219/0",
+      "source": "<nesy.NesyDriver: void main(java.lang.String[])>[10@L43] taintedPath = invokestatic nesy.Taint.src()/result",
+      "sink": "<org.slf4j.impl.SimpleLogger: java.io.PrintStream computeTargetStream(java.lang.String)>[12@L219] invokespecial fos.<init>(logFile)/0",
+      "sink_method": "<org.slf4j.impl.SimpleLogger: java.io.PrintStream computeTargetStream(java.lang.String)>",
+      "sink_line": 219,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "c43a43deba",
+      "key": "DRIVER => <spark.utils.ResourceUtils: java.io.File getFile(java.net.URL,java.lang.String)>@L219/0",
+      "source": "<nesy.NesyDriver: void main(java.lang.String[])>[10@L43] taintedPath = invokestatic nesy.Taint.src()/result",
+      "sink": "<spark.utils.ResourceUtils: java.io.File getFile(java.net.URL,java.lang.String)>[20@L219] invokespecial %v15.<init>(%v17)/0",
+      "sink_method": "<spark.utils.ResourceUtils: java.io.File getFile(java.net.URL,java.lang.String)>",
+      "sink_line": 219,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "00b5a94768",
+      "key": "DRIVER => <spark.utils.ResourceUtils: java.io.File getFile(java.net.URL,java.lang.String)>@L222/0",
+      "source": "<nesy.NesyDriver: void main(java.lang.String[])>[10@L43] taintedPath = invokestatic nesy.Taint.src()/result",
+      "sink": "<spark.utils.ResourceUtils: java.io.File getFile(java.net.URL,java.lang.String)>[25@L222] invokespecial %v19.<init>(%v20)/0",
+      "sink_method": "<spark.utils.ResourceUtils: java.io.File getFile(java.net.URL,java.lang.String)>",
+      "sink_line": 222,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "f4cfd3c44b",
+      "key": "DRIVER => <spark.utils.ResourceUtils: java.io.File getFile(java.net.URI,java.lang.String)>@L258/0",
+      "source": "<nesy.NesyDriver: void main(java.lang.String[])>[10@L43] taintedPath = invokestatic nesy.Taint.src()/result",
+      "sink": "<spark.utils.ResourceUtils: java.io.File getFile(java.net.URI,java.lang.String)>[19@L258] invokespecial %v14.<init>(%v15)/0",
+      "sink_method": "<spark.utils.ResourceUtils: java.io.File getFile(java.net.URI,java.lang.String)>",
+      "sink_line": 258,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "5832b1d98e",
+      "key": "DRIVER => <spark.utils.ResourceUtils: java.io.File getFile(java.lang.String)>@L168/0",
+      "source": "<nesy.NesyDriver: void main(java.lang.String[])>[26@L63] taintedPath#2 = invokestatic nesy.Taint.src()/result",
+      "sink": "<spark.utils.ResourceUtils: java.io.File getFile(java.lang.String)>[18@L168] url = invokevirtual %v18.getResource(path)/0",
+      "sink_method": "<spark.utils.ResourceUtils: java.io.File getFile(java.lang.String)>",
+      "sink_line": 168,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "6d50443088",
+      "key": "DRIVER => <spark.utils.ResourceUtils: java.io.File getFile(java.lang.String)>@L182/0",
+      "source": "<nesy.NesyDriver: void main(java.lang.String[])>[26@L63] taintedPath#2 = invokestatic nesy.Taint.src()/result",
+      "sink": "<spark.utils.ResourceUtils: java.io.File getFile(java.lang.String)>[37@L182] invokespecial %v31.<init>(resourceLocation)/0",
+      "sink_method": "<spark.utils.ResourceUtils: java.io.File getFile(java.lang.String)>",
+      "sink_line": 182,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "12ff11f774",
+      "key": "DRIVER => <spark.utils.ResourceUtils: java.io.File getFile(java.net.URL,java.lang.String)>@L222/base",
+      "source": "<nesy.NesyDriver: void main(java.lang.String[])>[26@L63] taintedPath#2 = invokestatic nesy.Taint.src()/result",
+      "sink": "<spark.utils.ResourceUtils: java.io.File getFile(java.net.URL,java.lang.String)>[24@L222] %v20 = invokevirtual resourceUrl.getFile()/base",
+      "sink_method": "<spark.utils.ResourceUtils: java.io.File getFile(java.net.URL,java.lang.String)>",
+      "sink_line": 222,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "834d87688f",
+      "key": "<spark.servlet.FilterTools: java.lang.String getRelativePath(javax.servlet.http.HttpServletRequest,java.lang.String)>@L34/result => <org.slf4j.impl.SimpleLogger: java.io.PrintStream computeTargetStream(java.lang.String)>@L219/0",
+      "source": "<spark.servlet.FilterTools: java.lang.String getRelativePath(javax.servlet.http.HttpServletRequest,java.lang.String)>[2@L34] path = invokeinterface request.getRequestURI()/result",
+      "sink": "<org.slf4j.impl.SimpleLogger: java.io.PrintStream computeTargetStream(java.lang.String)>[12@L219] invokespecial fos.<init>(logFile)/0",
+      "sink_method": "<org.slf4j.impl.SimpleLogger: java.io.PrintStream computeTargetStream(java.lang.String)>",
+      "sink_line": 219,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "180c31a8ef",
+      "key": "<spark.servlet.FilterTools: java.lang.String getRelativePath(javax.servlet.http.HttpServletRequest,java.lang.String)>@L34/result => <spark.utils.ResourceUtils: java.io.File getFile(java.net.URL,java.lang.String)>@L219/0",
+      "source": "<spark.servlet.FilterTools: java.lang.String getRelativePath(javax.servlet.http.HttpServletRequest,java.lang.String)>[2@L34] path = invokeinterface request.getRequestURI()/result",
+      "sink": "<spark.utils.ResourceUtils: java.io.File getFile(java.net.URL,java.lang.String)>[20@L219] invokespecial %v15.<init>(%v17)/0",
+      "sink_method": "<spark.utils.ResourceUtils: java.io.File getFile(java.net.URL,java.lang.String)>",
+      "sink_line": 219,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "372ac6f207",
+      "key": "<spark.servlet.FilterTools: java.lang.String getRelativePath(javax.servlet.http.HttpServletRequest,java.lang.String)>@L34/result => <spark.utils.ResourceUtils: java.io.File getFile(java.net.URL,java.lang.String)>@L222/0",
+      "source": "<spark.servlet.FilterTools: java.lang.String getRelativePath(javax.servlet.http.HttpServletRequest,java.lang.String)>[2@L34] path = invokeinterface request.getRequestURI()/result",
+      "sink": "<spark.utils.ResourceUtils: java.io.File getFile(java.net.URL,java.lang.String)>[25@L222] invokespecial %v19.<init>(%v20)/0",
+      "sink_method": "<spark.utils.ResourceUtils: java.io.File getFile(java.net.URL,java.lang.String)>",
+      "sink_line": 222,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "ef16108f02",
+      "key": "<spark.servlet.FilterTools: java.lang.String getRelativePath(javax.servlet.http.HttpServletRequest,java.lang.String)>@L34/result => <spark.utils.ResourceUtils: java.io.File getFile(java.net.URI,java.lang.String)>@L258/0",
+      "source": "<spark.servlet.FilterTools: java.lang.String getRelativePath(javax.servlet.http.HttpServletRequest,java.lang.String)>[2@L34] path = invokeinterface request.getRequestURI()/result",
+      "sink": "<spark.utils.ResourceUtils: java.io.File getFile(java.net.URI,java.lang.String)>[19@L258] invokespecial %v14.<init>(%v15)/0",
+      "sink_method": "<spark.utils.ResourceUtils: java.io.File getFile(java.net.URI,java.lang.String)>",
+      "sink_line": 258,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "87ebf6a7e0",
+      "key": "<spark.servlet.FilterTools: java.lang.String getRelativePath(javax.servlet.http.HttpServletRequest,java.lang.String)>@L55/result => <org.slf4j.impl.SimpleLogger: java.io.PrintStream computeTargetStream(java.lang.String)>@L219/0",
+      "source": "<spark.servlet.FilterTools: java.lang.String getRelativePath(javax.servlet.http.HttpServletRequest,java.lang.String)>[39@L55] path#1 = invokestatic java.net.URLDecoder.decode(path#1, %c30)/result",
+      "sink": "<org.slf4j.impl.SimpleLogger: java.io.PrintStream computeTargetStream(java.lang.String)>[12@L219] invokespecial fos.<init>(logFile)/0",
+      "sink_method": "<org.slf4j.impl.SimpleLogger: java.io.PrintStream computeTargetStream(java.lang.String)>",
+      "sink_line": 219,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "c565525ede",
+      "key": "<spark.servlet.FilterTools: java.lang.String getRelativePath(javax.servlet.http.HttpServletRequest,java.lang.String)>@L55/result => <spark.utils.ResourceUtils: java.io.File getFile(java.net.URL,java.lang.String)>@L219/0",
+      "source": "<spark.servlet.FilterTools: java.lang.String getRelativePath(javax.servlet.http.HttpServletRequest,java.lang.String)>[39@L55] path#1 = invokestatic java.net.URLDecoder.decode(path#1, %c30)/result",
+      "sink": "<spark.utils.ResourceUtils: java.io.File getFile(java.net.URL,java.lang.String)>[20@L219] invokespecial %v15.<init>(%v17)/0",
+      "sink_method": "<spark.utils.ResourceUtils: java.io.File getFile(java.net.URL,java.lang.String)>",
+      "sink_line": 219,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "75e7902380",
+      "key": "<spark.servlet.FilterTools: java.lang.String getRelativePath(javax.servlet.http.HttpServletRequest,java.lang.String)>@L55/result => <spark.utils.ResourceUtils: java.io.File getFile(java.net.URL,java.lang.String)>@L222/0",
+      "source": "<spark.servlet.FilterTools: java.lang.String getRelativePath(javax.servlet.http.HttpServletRequest,java.lang.String)>[39@L55] path#1 = invokestatic java.net.URLDecoder.decode(path#1, %c30)/result",
+      "sink": "<spark.utils.ResourceUtils: java.io.File getFile(java.net.URL,java.lang.String)>[25@L222] invokespecial %v19.<init>(%v20)/0",
+      "sink_method": "<spark.utils.ResourceUtils: java.io.File getFile(java.net.URL,java.lang.String)>",
+      "sink_line": 222,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "405b06ada9",
+      "key": "<spark.servlet.FilterTools: java.lang.String getRelativePath(javax.servlet.http.HttpServletRequest,java.lang.String)>@L55/result => <spark.utils.ResourceUtils: java.io.File getFile(java.net.URI,java.lang.String)>@L258/0",
+      "source": "<spark.servlet.FilterTools: java.lang.String getRelativePath(javax.servlet.http.HttpServletRequest,java.lang.String)>[39@L55] path#1 = invokestatic java.net.URLDecoder.decode(path#1, %c30)/result",
+      "sink": "<spark.utils.ResourceUtils: java.io.File getFile(java.net.URI,java.lang.String)>[19@L258] invokespecial %v14.<init>(%v15)/0",
+      "sink_method": "<spark.utils.ResourceUtils: java.io.File getFile(java.net.URI,java.lang.String)>",
+      "sink_line": 258,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "fe0711973d",
+      "key": "<spark.staticfiles.StaticFilesConfiguration: boolean consume(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)>@L82/result => <org.slf4j.helpers.SubstituteLogger: void warn(java.lang.String)>@L202/0",
+      "source": "<spark.staticfiles.StaticFilesConfiguration: boolean consume(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)>[17@L82] %v15 = invokeinterface httpRequest.getPathInfo()/result",
+      "sink": "<org.slf4j.helpers.SubstituteLogger: void warn(java.lang.String)>[1@L202] invokeinterface %v2.warn(msg)/0",
+      "sink_method": "<org.slf4j.helpers.SubstituteLogger: void warn(java.lang.String)>",
+      "sink_line": 202,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "129fe9e368",
+      "key": "<spark.staticfiles.StaticFilesConfiguration: boolean consume(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)>@L82/result => <spark.staticfiles.StaticFilesConfiguration: boolean consume(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)>@L81/0",
+      "source": "<spark.staticfiles.StaticFilesConfiguration: boolean consume(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)>[17@L82] %v15 = invokeinterface httpRequest.getPathInfo()/result",
+      "sink": "<spark.staticfiles.StaticFilesConfiguration: boolean consume(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)>[20@L81] invokeinterface %v9.warn(%v17)/0",
+      "sink_method": "<spark.staticfiles.StaticFilesConfiguration: boolean consume(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)>",
+      "sink_line": 81,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "b2370a1d25",
+      "key": "<spark.staticfiles.StaticFilesConfiguration: boolean consumeWithJarResourceHandler(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)>@L120/result => <org.slf4j.impl.SimpleLogger: java.io.PrintStream computeTargetStream(java.lang.String)>@L219/0",
+      "source": "<spark.staticfiles.StaticFilesConfiguration: boolean consumeWithJarResourceHandler(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)>[13@L120] %v16 = invokeinterface httpRequest.getPathInfo()/result",
+      "sink": "<org.slf4j.impl.SimpleLogger: java.io.PrintStream computeTargetStream(java.lang.String)>[12@L219] invokespecial fos.<init>(logFile)/0",
+      "sink_method": "<org.slf4j.impl.SimpleLogger: java.io.PrintStream computeTargetStream(java.lang.String)>",
+      "sink_line": 219,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "ac1cb7b5f3",
+      "key": "<spark.staticfiles.StaticFilesConfiguration: boolean consumeWithJarResourceHandler(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)>@L120/result => <spark.utils.ResourceUtils: java.io.File getFile(java.net.URL,java.lang.String)>@L219/0",
+      "source": "<spark.staticfiles.StaticFilesConfiguration: boolean consumeWithJarResourceHandler(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)>[13@L120] %v16 = invokeinterface httpRequest.getPathInfo()/result",
+      "sink": "<spark.utils.ResourceUtils: java.io.File getFile(java.net.URL,java.lang.String)>[20@L219] invokespecial %v15.<init>(%v17)/0",
+      "sink_method": "<spark.utils.ResourceUtils: java.io.File getFile(java.net.URL,java.lang.String)>",
+      "sink_line": 219,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "29ab07c346",
+      "key": "<spark.staticfiles.StaticFilesConfiguration: boolean consumeWithJarResourceHandler(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)>@L120/result => <spark.utils.ResourceUtils: java.io.File getFile(java.net.URL,java.lang.String)>@L222/0",
+      "source": "<spark.staticfiles.StaticFilesConfiguration: boolean consumeWithJarResourceHandler(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)>[13@L120] %v16 = invokeinterface httpRequest.getPathInfo()/result",
+      "sink": "<spark.utils.ResourceUtils: java.io.File getFile(java.net.URL,java.lang.String)>[25@L222] invokespecial %v19.<init>(%v20)/0",
+      "sink_method": "<spark.utils.ResourceUtils: java.io.File getFile(java.net.URL,java.lang.String)>",
+      "sink_line": 222,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": null
+    },
+    {
+      "id": "d8af25737c",
+      "key": "<spark.staticfiles.StaticFilesConfiguration: boolean consumeWithJarResourceHandler(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)>@L120/result => <spark.utils.ResourceUtils: java.io.File getFile(java.net.URI,java.lang.String)>@L258/0",
+      "source": "<spark.staticfiles.StaticFilesConfiguration: boolean consumeWithJarResourceHandler(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)>[13@L120] %v16 = invokeinterface httpRequest.getPathInfo()/result",
+      "sink": "<spark.utils.ResourceUtils: java.io.File getFile(java.net.URI,java.lang.String)>[19@L258] invokespecial %v14.<init>(%v15)/0",
+      "sink_method": "<spark.utils.ResourceUtils: java.io.File getFile(java.net.URI,java.lang.String)>",
+      "sink_line": 258,
+      "gt": [],
+      "gt_weak": [],
+      "reported": true,
+      "triage": null
+    }
+  ],
+  "result_revision": {
+    "kind": "validator-correction-replay",
+    "original_raw_n1_n2_responses_reused": true,
+    "historical_cache_model_key": "default",
+    "new_api_request_model": "qwen3.6:35b",
+    "spec_vote_version": 2,
+    "v3_exact_visible_lines": true
+  }
+}

@@ -1,0 +1,99 @@
+{
+  "kind": "llm",
+  "ok": true,
+  "classes_dir": "/Users/jiayulim/Documents/GitHub/CS6215_Neurosymbolic_Program_Analysis/work/runs/spark/fixed/run2/llm-driver/classes",
+  "source_path": "/Users/jiayulim/Documents/GitHub/CS6215_Neurosymbolic_Program_Analysis/work/runs/spark/fixed/run2/llm-driver/src/nesy/NesyDriver.java",
+  "entries": [
+    "<spark.http.matching.MatcherFilter: void doFilter(javax.servlet.ServletRequest,javax.servlet.ServletResponse,javax.servlet.FilterChain)>",
+    "<spark.servlet.SparkFilter: void doFilter(javax.servlet.ServletRequest,javax.servlet.ServletResponse,javax.servlet.FilterChain)>",
+    "<spark.utils.ResourceUtils: java.io.File getFile(java.lang.String)>",
+    "<spark.utils.ResourceUtils: java.io.File getFile(java.net.URI)>",
+    "<spark.utils.ResourceUtils: java.io.File getFile(java.net.URL)>",
+    "<spark.utils.ResourceUtils: java.io.File getFile(java.net.URI,java.lang.String)>",
+    "<spark.utils.ResourceUtils: java.io.File getFile(java.net.URL,java.lang.String)>",
+    "<spark.staticfiles.DirectoryTraversal: void protectAgainstInClassPath(java.lang.String)>",
+    "<spark.utils.StringUtils: java.lang.String applyRelativePath(java.lang.String,java.lang.String)>",
+    "<spark.utils.StringUtils: java.lang.String getFilename(java.lang.String)>"
+  ],
+  "attempts": 3,
+  "errors": [
+    "/Users/jiayulim/Documents/GitHub/CS6215_Neurosymbolic_Program_Analysis/work/runs/spark/fixed/run2/llm-driver/src/nesy/NesyDriver.java:15: error: Routes() has protected access in Routes\n                new spark.route.Routes(),\n                ^\n/Users/jiayulim/Documents/GitHub/CS6215_Neurosymbolic_Program_Analysis/work/runs/spark/fixed/run2/llm-driver/src/nesy/NesyDriver.java:17: error: Routes() has protected access in Routes\n                    new spark.route.Routes(),\n                    ^\n/Users/jiayulim/Documents/GitHub/CS6215_Neurosymbolic_Program_Analysis/work/runs/spark/fixed/run2/llm-driver/src/nesy/NesyDriver.java:18: error: cannot find symbol\n                    new spark.staticfiles.StaticFileHandlerConfiguration[]{}\n                                         ^\n  symbol:   class StaticFileHandlerConfiguration\n  location: package spark.staticfiles\n/Users/jiayulim/Documents/GitHub/CS6215_Neurosymbolic_Program_Analysis/work/runs/spark/fixed/run2/llm-driver/src/nesy/NesyDriver.java:23: error: incompatible types: String cannot be converted to ServletRequest\n            instance0.doFilter(nesy.Taint.src(), resp, chain);\n                                             ^\n/Users/jiayulim/Documents/GitHub/CS6215_Neurosymbolic_Program_Analysis/work/runs/spark/fixed/run2/llm-driver/src/nesy/NesyDriver.java:31: error: incompatible types: String cannot be converted to ServletRequest\n            instance1.doFilter(nesy.Taint.src(), resp, chain);\n                                             ^\nNote: Some messages have been simplified; recompile with -Xdiags:verbose to get full output\n5 errors",
+    "/Users/jiayulim/Documents/GitHub/CS6215_Neurosymbolic_Program_Analysis/work/runs/spark/fixed/run2/llm-driver/src/nesy/NesyDriver.java:15: error: incompatible types: String cannot be converted to ServletRequest\n            instance0.doFilter(nesy.Taint.src(), resp, chain);\n                                             ^\n/Users/jiayulim/Documents/GitHub/CS6215_Neurosymbolic_Program_Analysis/work/runs/spark/fixed/run2/llm-driver/src/nesy/NesyDriver.java:23: error: incompatible types: String cannot be converted to ServletRequest\n            instance1.doFilter(nesy.Taint.src(), resp, chain);\n                                             ^\nNote: Some messages have been simplified; recompile with -Xdiags:verbose to get full output\n2 errors"
+  ],
+  "removed_entries": [],
+  "app_calls": 13,
+  "taint_calls": 6,
+  "llm_entries": [
+    {
+      "signature": "<spark.http.matching.MatcherFilter: void doFilter(javax.servlet.ServletRequest,javax.servlet.ServletResponse,javax.servlet.FilterChain)>",
+      "tainted_params": [
+        0
+      ],
+      "why": "Servlet request entry point; attacker controls request path/params which may lead to path traversal in static file serving or route matching."
+    },
+    {
+      "signature": "<spark.servlet.SparkFilter: void doFilter(javax.servlet.ServletRequest,javax.servlet.ServletResponse,javax.servlet.FilterChain)>",
+      "tainted_params": [
+        0
+      ],
+      "why": "Servlet filter entry point; same as above, receives attacker-controlled HTTP request."
+    },
+    {
+      "signature": "<spark.utils.ResourceUtils: java.io.File getFile(java.lang.String)>",
+      "tainted_params": [
+        0
+      ],
+      "why": "Static utility to resolve file from string path; attacker-controlled string could contain '../' to escape intended directory."
+    },
+    {
+      "signature": "<spark.utils.ResourceUtils: java.io.File getFile(java.net.URI)>",
+      "tainted_params": [
+        0
+      ],
+      "why": "Attacker-controlled URI could encode path traversal sequences."
+    },
+    {
+      "signature": "<spark.utils.ResourceUtils: java.io.File getFile(java.net.URL)>",
+      "tainted_params": [
+        0
+      ],
+      "why": "Attacker-controlled URL could encode path traversal sequences."
+    },
+    {
+      "signature": "<spark.utils.ResourceUtils: java.io.File getFile(java.net.URI,java.lang.String)>",
+      "tainted_params": [
+        1
+      ],
+      "why": "Second parameter is a path string appended to URI; attacker-controlled string could contain '../'."
+    },
+    {
+      "signature": "<spark.utils.ResourceUtils: java.io.File getFile(java.net.URL,java.lang.String)>",
+      "tainted_params": [
+        1
+      ],
+      "why": "Second parameter is a path string appended to URL; attacker-controlled string could contain '../'."
+    },
+    {
+      "signature": "<spark.staticfiles.DirectoryTraversal: void protectAgainstInClassPath(java.lang.String)>",
+      "tainted_params": [
+        0
+      ],
+      "why": "This method is designed to check for path traversal; passing attacker-controlled input tests if the protection is bypassed or if the input itself is used unsafely elsewhere."
+    },
+    {
+      "signature": "<spark.utils.StringUtils: java.lang.String applyRelativePath(java.lang.String,java.lang.String)>",
+      "tainted_params": [
+        1
+      ],
+      "why": "Attacker-controlled relative path string could contain '../' to traverse directories."
+    },
+    {
+      "signature": "<spark.utils.StringUtils: java.lang.String getFilename(java.lang.String)>",
+      "tainted_params": [
+        0
+      ],
+      "why": "Attacker-controlled path string could contain traversal sequences; filename extraction might be used unsafely."
+    }
+  ],
+  "prompt_version": "3914024e"
+}

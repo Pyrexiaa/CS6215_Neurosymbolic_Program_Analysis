@@ -1,0 +1,39 @@
+# CWE -> parts of Tai-e's "commonly-used taint config" (config/taint/commonly-used) used as the
+# B1 base specification, plus a short description given to the LLM.
+common:
+  sources: [source/injection]
+  transfers: [transfer]
+  # Lines dropped from the commonly-used files when the base config is assembled.
+  # `getChars(..., char[] dst, ...)` transfers taint the internal char[] of every
+  # StringBuilder inside the JDK (AbstractStringBuilder.append calls String.getChars), and
+  # with the String(char[]) transfer every toString() in the program becomes tainted.
+  # Found by bisection on tests/fixtures/minizip; see docs/design.md.
+  exclude_lines: ["void getChars(int,int,char[],int)>"]
+cwes:
+  CWE-022:
+    name: Path Traversal
+    description: >-
+      Attacker-controlled data (a request parameter, URL path, archive entry name, file name)
+      is used to build a file system path without normalising it and checking that it stays
+      inside an intended directory, so "../" sequences reach files outside it.
+    sinks: [sink/injection/java/path-traversal, sink/injection/spring-framework/file-disclosure,
+            sink/injection/apache-struts/file-disclosure]
+  CWE-078:
+    name: OS Command Injection
+    description: >-
+      Attacker-controlled data reaches an API that starts an operating-system process or shell
+      (Runtime.exec, ProcessBuilder, launcher helpers) without proper neutralisation.
+    sinks: [sink/injection/java/rce]
+  CWE-079:
+    name: Cross-site Scripting
+    description: >-
+      Attacker-controlled data is written into an HTML/HTTP response (or stored and later
+      rendered) without output encoding.
+    sinks: [sink/injection/java/xss, sink/injection/javax/xss]
+  CWE-094:
+    name: Code Injection
+    description: >-
+      Attacker-controlled data is evaluated as code or as an expression language (EL, SpEL,
+      OGNL, script engines, template engines, Bean Validation message interpolation).
+    sinks: [sink/injection/javax/other/el.yml, sink/injection/javax/other/script-engine.yml,
+            sink/injection/spring-framework/spel-inejction, sink/injection/apache-struts/ognl-injection]

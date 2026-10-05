@@ -1,0 +1,585 @@
+{
+  "records": 208,
+  "old_records": 208,
+  "verification_errors": [],
+  "baseline_records": 16,
+  "failed_runs": [
+    {
+      "key": "perfecto-plugin/fixed/v3-noV2/run2.json",
+      "expected": true,
+      "invalid": [
+        "transfers[0] <hudson.util.Secret: hudson.util.Secret fromString(java.lang.String)>: to='base' invalid (base-of-static)"
+      ],
+      "error": "CRASH (uncaught exception in Tai-e's main thread)\nException in thread \"main\" java.lang.ClassCastException: class pascal.taie.ir.exp.InvokeStatic cannot be cast to class pascal.taie.ir.exp.InvokeInstanceExp (pascal.taie.ir.exp.InvokeStatic and pascal.taie.ir.exp.InvokeInstanceExp are in unnamed module of loader 'app')\nCannot resolve class org.apache.mina.core.RuntimeIoException; treating it as phantom class.\nCannot find source method '<org.eclipse.jetty.server.handler.ErrorHandler: boolean handle(org.eclipse.jetty.server.Request,org.eclipse.jetty.server.Response,org.eclipse.jetty.util.Callback)>'"
+    },
+    {
+      "key": "perfecto-plugin/fixed/v3-noV2/run0.json",
+      "expected": true,
+      "invalid": [
+        "transfers[0] <hudson.util.Secret: hudson.util.Secret fromString(java.lang.String)>: to='base' invalid (base-of-static)"
+      ],
+      "error": "CRASH (uncaught exception in Tai-e's main thread)\nException in thread \"main\" java.lang.ClassCastException: class pascal.taie.ir.exp.InvokeStatic cannot be cast to class pascal.taie.ir.exp.InvokeInstanceExp (pascal.taie.ir.exp.InvokeStatic and pascal.taie.ir.exp.InvokeInstanceExp are in unnamed module of loader 'app')\nCannot resolve class org.apache.mina.core.RuntimeIoException; treating it as phantom class.\nCannot find source method '<org.eclipse.jetty.server.handler.ErrorHandler: boolean handle(org.eclipse.jetty.server.Request,org.eclipse.jetty.server.Response,org.eclipse.jetty.util.Callback)>'"
+    },
+    {
+      "key": "perfecto-plugin/fixed/v3-noV2/run1.json",
+      "expected": true,
+      "invalid": [
+        "transfers[0] <hudson.util.Secret: hudson.util.Secret fromString(java.lang.String)>: to='base' invalid (base-of-static)"
+      ],
+      "error": "CRASH (uncaught exception in Tai-e's main thread)\nException in thread \"main\" java.lang.ClassCastException: class pascal.taie.ir.exp.InvokeStatic cannot be cast to class pascal.taie.ir.exp.InvokeInstanceExp (pascal.taie.ir.exp.InvokeStatic and pascal.taie.ir.exp.InvokeInstanceExp are in unnamed module of loader 'app')\nCannot resolve class org.apache.mina.core.RuntimeIoException; treating it as phantom class.\nCannot find source method '<org.eclipse.jetty.server.handler.ErrorHandler: boolean handle(org.eclipse.jetty.server.Request,org.eclipse.jetty.server.Response,org.eclipse.jetty.util.Callback)>'"
+    },
+    {
+      "key": "perfecto-plugin/fixed/v3-noval/run2.json",
+      "expected": true,
+      "invalid": [
+        "transfers[0] <hudson.util.Secret: hudson.util.Secret fromString(java.lang.String)>: to='base' invalid (base-of-static)"
+      ],
+      "error": "CRASH (uncaught exception in Tai-e's main thread)\nException in thread \"main\" java.lang.ClassCastException: class pascal.taie.ir.exp.InvokeStatic cannot be cast to class pascal.taie.ir.exp.InvokeInstanceExp (pascal.taie.ir.exp.InvokeStatic and pascal.taie.ir.exp.InvokeInstanceExp are in unnamed module of loader 'app')\nCannot resolve class org.apache.mina.core.RuntimeIoException; treating it as phantom class.\nCannot find source method '<org.eclipse.jetty.server.handler.ErrorHandler: boolean handle(org.eclipse.jetty.server.Request,org.eclipse.jetty.server.Response,org.eclipse.jetty.util.Callback)>'"
+    },
+    {
+      "key": "perfecto-plugin/fixed/v3-noval/run0.json",
+      "expected": true,
+      "invalid": [
+        "transfers[0] <hudson.util.Secret: hudson.util.Secret fromString(java.lang.String)>: to='base' invalid (base-of-static)"
+      ],
+      "error": "CRASH (uncaught exception in Tai-e's main thread)\nException in thread \"main\" java.lang.ClassCastException: class pascal.taie.ir.exp.InvokeStatic cannot be cast to class pascal.taie.ir.exp.InvokeInstanceExp (pascal.taie.ir.exp.InvokeStatic and pascal.taie.ir.exp.InvokeInstanceExp are in unnamed module of loader 'app')\nCannot resolve class org.apache.mina.core.RuntimeIoException; treating it as phantom class.\nCannot find source method '<org.eclipse.jetty.server.handler.ErrorHandler: boolean handle(org.eclipse.jetty.server.Request,org.eclipse.jetty.server.Response,org.eclipse.jetty.util.Callback)>'"
+    },
+    {
+      "key": "perfecto-plugin/fixed/v3-noval/run1.json",
+      "expected": true,
+      "invalid": [
+        "transfers[0] <hudson.util.Secret: hudson.util.Secret fromString(java.lang.String)>: to='base' invalid (base-of-static)"
+      ],
+      "error": "CRASH (uncaught exception in Tai-e's main thread)\nException in thread \"main\" java.lang.ClassCastException: class pascal.taie.ir.exp.InvokeStatic cannot be cast to class pascal.taie.ir.exp.InvokeInstanceExp (pascal.taie.ir.exp.InvokeStatic and pascal.taie.ir.exp.InvokeInstanceExp are in unnamed module of loader 'app')\nCannot resolve class org.apache.mina.core.RuntimeIoException; treating it as phantom class.\nCannot find source method '<org.eclipse.jetty.server.handler.ErrorHandler: boolean handle(org.eclipse.jetty.server.Request,org.eclipse.jetty.server.Response,org.eclipse.jetty.util.Callback)>'"
+    },
+    {
+      "key": "perfecto-plugin/buggy/v3-noV2/run0.json",
+      "expected": true,
+      "invalid": [
+        "sinks[1] <hudson.model.TaskListener: java.io.PrintStream getLogger()>: index=0 invalid (arg-out-of-range)",
+        "transfers[0] <hudson.util.Secret: hudson.util.Secret fromString(java.lang.String)>: to='base' invalid (base-of-static)"
+      ],
+      "error": "CRASH (uncaught exception in Tai-e's main thread)\nException in thread \"main\" java.lang.ArrayIndexOutOfBoundsException: Index 0 out of bounds for length 0\nCannot resolve class org.apache.mina.core.RuntimeIoException; treating it as phantom class."
+    },
+    {
+      "key": "perfecto-plugin/buggy/v3-noval/run0.json",
+      "expected": true,
+      "invalid": [
+        "sinks[1] <hudson.model.TaskListener: java.io.PrintStream getLogger()>: index=0 invalid (arg-out-of-range)",
+        "transfers[0] <hudson.util.Secret: hudson.util.Secret fromString(java.lang.String)>: to='base' invalid (base-of-static)"
+      ],
+      "error": "CRASH (uncaught exception in Tai-e's main thread)\nException in thread \"main\" java.lang.ArrayIndexOutOfBoundsException: Index 0 out of bounds for length 0\nCannot resolve class org.apache.mina.core.RuntimeIoException; treating it as phantom class."
+    }
+  ],
+  "changed_counts": [
+    {
+      "key": "spark/fixed/v1/run1.json",
+      "old": {
+        "raw": 32286,
+        "filtered": 1956,
+        "reported": 1956,
+        "reported_gt": 168,
+        "removed_by_triage": 0,
+        "removed_gt_by_triage": 0,
+        "v3_rejected": 0,
+        "reported_gt_weak": 428,
+        "trusted_sink_overrides": 0
+      },
+      "new": {
+        "raw": 31422,
+        "filtered": 1822,
+        "reported": 1822,
+        "reported_gt": 168,
+        "reported_gt_weak": 408,
+        "removed_by_triage": 0,
+        "removed_gt_by_triage": 0,
+        "v3_rejected": 0,
+        "trusted_sink_overrides": 0
+      }
+    },
+    {
+      "key": "spark/fixed/iris-like/run1.json",
+      "old": {
+        "raw": 32286,
+        "filtered": 1956,
+        "reported": 1922,
+        "reported_gt": 156,
+        "reported_gt_weak": 428,
+        "removed_by_triage": 34,
+        "removed_gt_by_triage": 12,
+        "v3_rejected": 0,
+        "trusted_sink_overrides": 0
+      },
+      "new": {
+        "raw": 31422,
+        "filtered": 1822,
+        "reported": 1783,
+        "reported_gt": 154,
+        "reported_gt_weak": 408,
+        "removed_by_triage": 39,
+        "removed_gt_by_triage": 14,
+        "v3_rejected": 0,
+        "trusted_sink_overrides": 0
+      }
+    },
+    {
+      "key": "spark/fixed/v4/run1.json",
+      "old": {
+        "raw": 1585,
+        "filtered": 21,
+        "reported": 21,
+        "reported_gt": 0,
+        "reported_gt_weak": 0,
+        "removed_by_triage": 0,
+        "removed_gt_by_triage": 0,
+        "v3_rejected": 4,
+        "trusted_sink_overrides": 4
+      },
+      "new": {
+        "raw": 1585,
+        "filtered": 21,
+        "reported": 19,
+        "reported_gt": 0,
+        "reported_gt_weak": 0,
+        "removed_by_triage": 2,
+        "removed_gt_by_triage": 0,
+        "v3_rejected": 2,
+        "trusted_sink_overrides": 2
+      }
+    },
+    {
+      "key": "zt-zip/fixed/v1/run2.json",
+      "old": {
+        "raw": 18255,
+        "filtered": 400,
+        "reported": 400,
+        "reported_gt": 87,
+        "removed_by_triage": 0,
+        "removed_gt_by_triage": 0,
+        "v3_rejected": 0,
+        "reported_gt_weak": 13,
+        "trusted_sink_overrides": 0
+      },
+      "new": {
+        "raw": 17725,
+        "filtered": 347,
+        "reported": 347,
+        "reported_gt": 81,
+        "reported_gt_weak": 11,
+        "removed_by_triage": 0,
+        "removed_gt_by_triage": 0,
+        "v3_rejected": 0,
+        "trusted_sink_overrides": 0
+      }
+    },
+    {
+      "key": "zt-zip/fixed/iris-like/run2.json",
+      "old": {
+        "raw": 18255,
+        "filtered": 400,
+        "reported": 329,
+        "reported_gt": 65,
+        "reported_gt_weak": 13,
+        "removed_by_triage": 71,
+        "removed_gt_by_triage": 22,
+        "v3_rejected": 0,
+        "trusted_sink_overrides": 0
+      },
+      "new": {
+        "raw": 17725,
+        "filtered": 347,
+        "reported": 270,
+        "reported_gt": 55,
+        "reported_gt_weak": 11,
+        "removed_by_triage": 77,
+        "removed_gt_by_triage": 26,
+        "v3_rejected": 0,
+        "trusted_sink_overrides": 0
+      }
+    },
+    {
+      "key": "zt-zip/fixed/v2/run2.json",
+      "old": {
+        "raw": 3475,
+        "filtered": 76,
+        "reported": 76,
+        "reported_gt": 32,
+        "removed_by_triage": 0,
+        "removed_gt_by_triage": 0,
+        "v3_rejected": 0,
+        "reported_gt_weak": 0,
+        "trusted_sink_overrides": 0
+      },
+      "new": {
+        "raw": 3459,
+        "filtered": 70,
+        "reported": 70,
+        "reported_gt": 32,
+        "reported_gt_weak": 0,
+        "removed_by_triage": 0,
+        "removed_gt_by_triage": 0,
+        "v3_rejected": 0,
+        "trusted_sink_overrides": 0
+      }
+    },
+    {
+      "key": "zt-zip/fixed/v3-noV3/run2.json",
+      "old": {
+        "raw": 3475,
+        "filtered": 76,
+        "reported": 36,
+        "reported_gt": 1,
+        "reported_gt_weak": 0,
+        "removed_by_triage": 40,
+        "removed_gt_by_triage": 31,
+        "v3_rejected": 0,
+        "trusted_sink_overrides": 0
+      },
+      "new": {
+        "raw": 3459,
+        "filtered": 70,
+        "reported": 30,
+        "reported_gt": 1,
+        "reported_gt_weak": 0,
+        "removed_by_triage": 40,
+        "removed_gt_by_triage": 31,
+        "v3_rejected": 0,
+        "trusted_sink_overrides": 0
+      }
+    },
+    {
+      "key": "zt-zip/fixed/v3-noV2/run2.json",
+      "old": {
+        "raw": 3475,
+        "filtered": 76,
+        "reported": 36,
+        "reported_gt": 1,
+        "reported_gt_weak": 0,
+        "removed_by_triage": 40,
+        "removed_gt_by_triage": 31,
+        "v3_rejected": 0,
+        "trusted_sink_overrides": 0
+      },
+      "new": {
+        "raw": 3459,
+        "filtered": 70,
+        "reported": 30,
+        "reported_gt": 1,
+        "reported_gt_weak": 0,
+        "removed_by_triage": 40,
+        "removed_gt_by_triage": 31,
+        "v3_rejected": 0,
+        "trusted_sink_overrides": 0
+      }
+    },
+    {
+      "key": "zt-zip/fixed/v4/run2.json",
+      "old": {
+        "raw": 3475,
+        "filtered": 76,
+        "reported": 44,
+        "reported_gt": 1,
+        "reported_gt_weak": 0,
+        "removed_by_triage": 32,
+        "removed_gt_by_triage": 31,
+        "v3_rejected": 7,
+        "trusted_sink_overrides": 7
+      },
+      "new": {
+        "raw": 3459,
+        "filtered": 70,
+        "reported": 38,
+        "reported_gt": 1,
+        "reported_gt_weak": 0,
+        "removed_by_triage": 32,
+        "removed_gt_by_triage": 31,
+        "v3_rejected": 7,
+        "trusted_sink_overrides": 7
+      }
+    },
+    {
+      "key": "zt-zip/fixed/v3/run2.json",
+      "old": {
+        "raw": 3475,
+        "filtered": 76,
+        "reported": 36,
+        "reported_gt": 1,
+        "reported_gt_weak": 0,
+        "removed_by_triage": 40,
+        "removed_gt_by_triage": 31,
+        "v3_rejected": 0,
+        "trusted_sink_overrides": 0
+      },
+      "new": {
+        "raw": 3459,
+        "filtered": 70,
+        "reported": 30,
+        "reported_gt": 1,
+        "reported_gt_weak": 0,
+        "removed_by_triage": 40,
+        "removed_gt_by_triage": 31,
+        "v3_rejected": 0,
+        "trusted_sink_overrides": 0
+      }
+    },
+    {
+      "key": "zt-zip/fixed/v3-noval/run2.json",
+      "old": {
+        "raw": 3475,
+        "filtered": 76,
+        "reported": 36,
+        "reported_gt": 1,
+        "reported_gt_weak": 0,
+        "removed_by_triage": 40,
+        "removed_gt_by_triage": 31,
+        "v3_rejected": 0,
+        "trusted_sink_overrides": 0
+      },
+      "new": {
+        "raw": 3459,
+        "filtered": 70,
+        "reported": 30,
+        "reported_gt": 1,
+        "reported_gt_weak": 0,
+        "removed_by_triage": 40,
+        "removed_gt_by_triage": 31,
+        "v3_rejected": 0,
+        "trusted_sink_overrides": 0
+      }
+    }
+  ],
+  "configs": {
+    "B1": {
+      "records": 8,
+      "calls": 0,
+      "tokens_min": 0,
+      "tokens_max": 0,
+      "spec_accepted_mean": null,
+      "spec_rejected_mean": null,
+      "agreement_mean": null,
+      "agreement_range": null,
+      "jaccard": null,
+      "removed_sum_over_subjectversions_perrun": 0.0,
+      "removed_gt_sum_over_subjectversions_perrun": 0.0,
+      "v3_rejected_total": 0,
+      "trusted_overrides_total": 0,
+      "unjudged_max": 0
+    },
+    "B2": {
+      "records": 8,
+      "calls": 0,
+      "tokens_min": 0,
+      "tokens_max": 0,
+      "spec_accepted_mean": null,
+      "spec_rejected_mean": null,
+      "agreement_mean": null,
+      "agreement_range": null,
+      "jaccard": null,
+      "removed_sum_over_subjectversions_perrun": 0.0,
+      "removed_gt_sum_over_subjectversions_perrun": 0.0,
+      "v3_rejected_total": 0,
+      "trusted_overrides_total": 0,
+      "unjudged_max": 0
+    },
+    "iris-like": {
+      "records": 24,
+      "calls": 2980,
+      "tokens_min": 41807,
+      "tokens_max": 536455,
+      "spec_accepted_mean": 20.166666666666668,
+      "spec_rejected_mean": 3.4166666666666665,
+      "agreement_mean": 0.926625,
+      "agreement_range": [
+        0.871,
+        0.974
+      ],
+      "jaccard": 0.5641960967947593,
+      "removed_sum_over_subjectversions_perrun": 169.66666666666666,
+      "removed_gt_sum_over_subjectversions_perrun": 40.333333333333336,
+      "v3_rejected_total": 11,
+      "trusted_overrides_total": 0,
+      "unjudged_max": 1622
+    },
+    "v1": {
+      "records": 24,
+      "calls": 558,
+      "tokens_min": 41807,
+      "tokens_max": 143204,
+      "spec_accepted_mean": 20.166666666666668,
+      "spec_rejected_mean": 3.4166666666666665,
+      "agreement_mean": 0.926625,
+      "agreement_range": [
+        0.871,
+        0.974
+      ],
+      "jaccard": 0.6728091850844004,
+      "removed_sum_over_subjectversions_perrun": 0.0,
+      "removed_gt_sum_over_subjectversions_perrun": 0.0,
+      "v3_rejected_total": 0,
+      "trusted_overrides_total": 0,
+      "unjudged_max": 0
+    },
+    "v2": {
+      "records": 24,
+      "calls": 604,
+      "tokens_min": 47441,
+      "tokens_max": 149065,
+      "spec_accepted_mean": 20.166666666666668,
+      "spec_rejected_mean": 3.4166666666666665,
+      "agreement_mean": 0.926625,
+      "agreement_range": [
+        0.871,
+        0.974
+      ],
+      "jaccard": 0.6298956044359297,
+      "removed_sum_over_subjectversions_perrun": 0.0,
+      "removed_gt_sum_over_subjectversions_perrun": 0.0,
+      "v3_rejected_total": 0,
+      "trusted_overrides_total": 0,
+      "unjudged_max": 0
+    },
+    "v3": {
+      "records": 24,
+      "calls": 1689,
+      "tokens_min": 47441,
+      "tokens_max": 511955,
+      "spec_accepted_mean": 20.166666666666668,
+      "spec_rejected_mean": 3.4166666666666665,
+      "agreement_mean": 0.926625,
+      "agreement_range": [
+        0.871,
+        0.974
+      ],
+      "jaccard": 0.5210965712121095,
+      "removed_sum_over_subjectversions_perrun": 96.66666666666667,
+      "removed_gt_sum_over_subjectversions_perrun": 41.333333333333336,
+      "v3_rejected_total": 4,
+      "trusted_overrides_total": 0,
+      "unjudged_max": 119
+    },
+    "v3-noV2": {
+      "records": 24,
+      "calls": 1689,
+      "tokens_min": 47441,
+      "tokens_max": 515641,
+      "spec_accepted_mean": 20.5,
+      "spec_rejected_mean": 0,
+      "agreement_mean": 0.922,
+      "agreement_range": [
+        0.861,
+        0.974
+      ],
+      "jaccard": 0.5209381958462174,
+      "removed_sum_over_subjectversions_perrun": 96.33333333333333,
+      "removed_gt_sum_over_subjectversions_perrun": 41.333333333333336,
+      "v3_rejected_total": 4,
+      "trusted_overrides_total": 0,
+      "unjudged_max": 119
+    },
+    "v3-noV3": {
+      "records": 24,
+      "calls": 1689,
+      "tokens_min": 47441,
+      "tokens_max": 511955,
+      "spec_accepted_mean": 20.166666666666668,
+      "spec_rejected_mean": 3.4166666666666665,
+      "agreement_mean": 0.926625,
+      "agreement_range": [
+        0.871,
+        0.974
+      ],
+      "jaccard": 0.5213886754399273,
+      "removed_sum_over_subjectversions_perrun": 98.0,
+      "removed_gt_sum_over_subjectversions_perrun": 41.333333333333336,
+      "v3_rejected_total": 0,
+      "trusted_overrides_total": 0,
+      "unjudged_max": 119
+    },
+    "v3-noval": {
+      "records": 24,
+      "calls": 1689,
+      "tokens_min": 47441,
+      "tokens_max": 515641,
+      "spec_accepted_mean": 20.5,
+      "spec_rejected_mean": 0,
+      "agreement_mean": 0.922,
+      "agreement_range": [
+        0.861,
+        0.974
+      ],
+      "jaccard": 0.5212271480458481,
+      "removed_sum_over_subjectversions_perrun": 97.66666666666667,
+      "removed_gt_sum_over_subjectversions_perrun": 41.333333333333336,
+      "v3_rejected_total": 0,
+      "trusted_overrides_total": 0,
+      "unjudged_max": 119
+    },
+    "v4": {
+      "records": 24,
+      "calls": 1947,
+      "tokens_min": 61937,
+      "tokens_max": 511963,
+      "spec_accepted_mean": 20.166666666666668,
+      "spec_rejected_mean": 3.4166666666666665,
+      "agreement_mean": 0.926625,
+      "agreement_range": [
+        0.871,
+        0.974
+      ],
+      "jaccard": 0.41063912522866897,
+      "removed_sum_over_subjectversions_perrun": 80.66666666666667,
+      "removed_gt_sum_over_subjectversions_perrun": 40.333333333333336,
+      "v3_rejected_total": 80,
+      "trusted_overrides_total": 78,
+      "unjudged_max": 1341
+    }
+  },
+  "rejections": {
+    "to:base-of-static": 22,
+    "transfer-to-primitive": 8,
+    "arg-out-of-range": 12,
+    "bad-index-format": 1,
+    "primitive-type": 17,
+    "from:array-ref-on-non-array": 2,
+    "to:array-ref-on-non-array": 1,
+    "transfer-to-self": 8,
+    "to:result-of-void": 1,
+    "from:arg-out-of-range": 3,
+    "to:arg-out-of-range": 1,
+    "sanitizer-needs-arg-index": 4,
+    "base-of-static": 1,
+    "from:bad-index-format": 1
+  },
+  "fresh_stages": {
+    "N3-triage": 31
+  },
+  "fresh_models": {
+    "qwen3.6:35b": 31
+  },
+  "ledger_stages": {
+    "N2-spec": 1116,
+    "N3-triage": 8076,
+    "N1-driver": 4,
+    "N1-repair": 12
+  },
+  "unchanged_inputs": {
+    "prompts/n1_driver.md": true,
+    "prompts/n1_repair.md": true,
+    "prompts/n2_spec.md": true,
+    "prompts/n3_triage.md": true,
+    "config/cwe.yaml": true,
+    "config/experiment.yaml": true,
+    "config/subjects.yaml": true,
+    "config/cwe-bench-java/LICENSE-IRIS": true,
+    "config/cwe-bench-java/project_info.csv": true,
+    "config/cwe-bench-java/fix_info.csv": true,
+    "config/cwe-bench-java/build_info.csv": true,
+    "config/cwe-bench-java/build_cmds.csv": true
+  },
+  "taie_time_range": [
+    1.19,
+    63.69
+  ],
+  "taie_time_sum_minutes": 40.07966666666667,
+  "metadata_normalizations_count": 77
+}

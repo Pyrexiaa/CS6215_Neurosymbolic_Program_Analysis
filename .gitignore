@@ -1,0 +1,44 @@
+# secrets
+.env
+
+# tools and large downloads (fetched by scripts/setup_tools.sh)
+tools/*.jar
+tools/apache-maven-*/
+tools/java-benchmarks/
+
+# working directory: cloned subjects, builds, raw Tai-e outputs, LLM cache
+work/
+
+# python
+__pycache__/
+*.pyc
+.pytest_cache/
+*.egg-info/
+.venv/
+venv/
+
+# test build outputs
+tests/fixtures/**/build/
+
+# OS / editors
+.DS_Store
+.idea/
+.vscode/
+results/mock/
+
+# LaTeX build artefacts (report/)
+report/*.aux
+report/*.bbl
+report/*.blg
+report/*.log
+report/*.out
+report/*.fls
+report/*.fdb_latexmk
+report/*.synctex.gz
+docs/*
+!docs/design.md
+!docs/evaluation.md
+!docs/precision-estimation.md
+!docs/labelling-guide.md
+!docs/results-explained.md
+!docs/report-guide.md

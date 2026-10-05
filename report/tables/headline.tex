@@ -1,0 +1,15 @@
+\begin{tabular}{@{}lrrrrrrrr@{}}
+\toprule
+ & \multicolumn{4}{c}{IRIS metrics} & \multicolumn{3}{c}{LLM-judged sample} & \\
+\cmidrule(lr){2-5}\cmidrule(lr){6-8}
+Config & Det. & Rate & FDR & F1 & Conf. & TP & Prec. & Alarms \\
+\midrule
+B1 & 1/4 & 25\% & 0.86 & 0.11 & 0/4 & 1/4 & 0.01 & 496 \\
+B2 & 4/4 & 100\% & 0.44 & 0.59 & 4/4 & 4/4 & 0.51 & 1,511 \\
+IRIS-style & 3/4 & 58\% & 0.68 & 0.20 & 2/4 & 2/4 & 0.01 & 1,865 \\
+v1 & 4/4 & 83\% & 0.62 & 0.37 & 3/4 & 3/4 & 0.06 & 1,918 \\
+v2 & 4/4 & 67\% & 0.59 & 0.32 & 2/4 & 3/4 & 0.10 & 295 \\
+v3 & 2/4 & 42\% & 0.84 & 0.16 & 1/4 & 2/4 & 0.05 & 269 \\
+v4 & 4/4 & 83\% & 0.52 & 0.54 & 3/4 & 4/4 & 0.33 & 289 \\
+\bottomrule
+\end{tabular}

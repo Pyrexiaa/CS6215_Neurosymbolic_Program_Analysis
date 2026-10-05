@@ -1,0 +1,92 @@
+{
+  "prompt_version": "e5fc00c6",
+  "decisions": [
+    {
+      "flow_id": "24db402138",
+      "flow_key": "DRIVER => <io.plugins.perfecto.PerfectoBuildWrapper: hudson.tasks.CommandInterpreter getCommandInterpreter(hudson.Launcher,java.lang.String)>@L254/0",
+      "verdict": "vulnerable",
+      "reason": "exploitable",
+      "kept": true,
+      "v3_ok": null,
+      "v3_problems": [],
+      "evidence": [
+        {
+          "file": "io/plugins/perfecto/PerfectoBuildWrapper.java",
+          "line": 134,
+          "note": "pcParameters is a constructor argument, typically bound from Jenkins UI configuration which is attacker-controlled if the user has configure permission."
+        },
+        {
+          "file": "io/plugins/perfecto/PerfectoBuildWrapper.java",
+          "line": 146,
+          "note": "pcParameters is stored in an instance field without sanitization."
+        },
+        {
+          "file": "io/plugins/perfecto/PerfectoBuildWrapper.java",
+          "line": 179,
+          "note": "pcParameters is concatenated directly into the shell command string 'script'."
+        },
+        {
+          "file": "io/plugins/perfecto/PerfectoBuildWrapper.java",
+          "line": 254,
+          "note": "The tainted 'script' string is passed to new Shell(script), which executes it via the OS shell."
+        }
+      ],
+      "explanation": "The parameter `pcParameters` is user-configurable via the Jenkins UI (attacker-controlled) and is concatenated directly into a shell command string without sanitization or escaping. This tainted string is passed to `Shell(script)`, which executes it via the operating system shell, resulting in OS Command Injection.",
+      "samples": [
+        "vulnerable"
+      ],
+      "methods_shown": [
+        "<io.plugins.perfecto.PerfectoBuildWrapper: hudson.tasks.BuildWrapper$Environment setUp(hudson.model.AbstractBuild,hudson.Launcher,hudson.model.BuildListener)>",
+        "<io.plugins.perfecto.PerfectoBuildWrapper: hudson.tasks.CommandInterpreter getCommandInterpreter(hudson.Launcher,java.lang.String)>",
+        "<io.plugins.perfecto.PerfectoBuildWrapper: void <init>(org.jenkins_ci.plugins.run_condition.RunCondition,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String)>"
+      ],
+      "override": ""
+    },
+    {
+      "flow_id": "f88d0d638a",
+      "flow_key": "DRIVER => <io.plugins.perfecto.PerfectoBuildWrapper: hudson.tasks.CommandInterpreter getCommandInterpreter(hudson.Launcher,java.lang.String)>@L256/0",
+      "verdict": "vulnerable",
+      "reason": "exploitable",
+      "kept": true,
+      "v3_ok": null,
+      "v3_problems": [],
+      "evidence": [
+        {
+          "file": "io/plugins/perfecto/PerfectoBuildWrapper.java",
+          "line": 134,
+          "note": "Constructor parameter pcParameters is directly assigned to instance field without validation"
+        },
+        {
+          "file": "io/plugins/perfecto/PerfectoBuildWrapper.java",
+          "line": 146,
+          "note": "Instance field pcParameters is set from constructor argument"
+        },
+        {
+          "file": "io/plugins/perfecto/PerfectoBuildWrapper.java",
+          "line": 179,
+          "note": "Tainted pcParameters is concatenated into script string: String script = baseCommand+\" \"+pcParameters.trim();"
+        },
+        {
+          "file": "io/plugins/perfecto/PerfectoBuildWrapper.java",
+          "line": 181,
+          "note": "Constructed script is passed to getCommandInterpreter"
+        },
+        {
+          "file": "io/plugins/perfecto/PerfectoBuildWrapper.java",
+          "line": 254,
+          "note": "Script is passed to Shell constructor (Unix) or BatchFile (Windows), which executes it via OS command"
+        }
+      ],
+      "explanation": "The `pcParameters` field is populated directly from a `@DataBoundConstructor` argument, which in Jenkins plugins typically corresponds to user-configurable form fields (attacker-controlled). This value is concatenated into a shell script string at line 179 without any sanitization or validation. The resulting script is then passed to `Shell` or `BatchFile` constructors at line 254/256, which execute the command via the operating system, constituting a clear OS Command Injection vulnerability.",
+      "samples": [
+        "vulnerable"
+      ],
+      "methods_shown": [
+        "<io.plugins.perfecto.PerfectoBuildWrapper: void <init>(org.jenkins_ci.plugins.run_condition.RunCondition,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String)>",
+        "<io.plugins.perfecto.PerfectoBuildWrapper: hudson.tasks.BuildWrapper$Environment setUp(hudson.model.AbstractBuild,hudson.Launcher,hudson.model.BuildListener)>",
+        "<io.plugins.perfecto.PerfectoBuildWrapper: hudson.tasks.CommandInterpreter getCommandInterpreter(hudson.Launcher,java.lang.String)>"
+      ],
+      "override": ""
+    }
+  ]
+}

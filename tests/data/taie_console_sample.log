@@ -1,0 +1,11 @@
+
+[Pointer analysis] elapsed time: 18.00s; CPU usage: start 96.67%, peak 100.00%, end 100.00%; Memory usage: start 132MB, peak 1527MB, end 1527MB
+Detected 692 taint flow(s):
+TaintFlow{<demo.app.Extractor: void extract(java.lang.String,java.lang.String)>[7@L16] name = invokevirtual archive.entryName(i)/result -> <demo.app.Extractor: void extract(java.lang.String,java.lang.String)>[9@L17] invokespecial out.<init>(destDir, name)/1}
+TaintFlow{<nesy.NesyDriver: void main(java.lang.String[])>[3@L4] %v4 = invokestatic nesy.Taint.src()/result -> <demo.app.Extractor: void extract(java.lang.String,java.lang.String)>[9@L17] invokespecial out.<init>(destDir, name)/0}
+TaintFlow{<nesy.NesyDriver: void main(java.lang.String[])>[10@L5] %v8 = invokestatic nesy.Taint.src()/result -> <demo.app.Extractor: void extractSafely(java.lang.String,java.lang.String)>[5@L25] invokespecial %v9.<init>(destDir)/0}
+TaintFlow{<nesy.NesyDriver: void main(java.lang.String[])>[16@L6] %v11 = invokestatic nesy.Taint.src()/result -> <demo.app.Extractor: int runHook(java.lang.String)>[6@L39] %v8 = invokestatic com.acme.util.Shell.run(cmd)/0}
+TaintFlow{<demo.app.Extractor: void extract(java.lang.String,java.lang.String)>[7@L16] name = invokevirtual archive.entryName(i)/result -> <java.io.FileInputStream: void <init>(java.lang.String)>[2@L93] invokespecial %v3.<init>($1)/0}
+TaintFlow{<demo.app.Extractor: void extract(java.lang.String,java.lang.String)>[7@L16] name = invokevirtual archive.entryName(i)/result -> <java.io.FilePermission: void init(int)>[55@L228] invokespecial %v35.<init>(%v33)/0}
+TaintFlow{<demo.app.Extractor: void extract(java.lang.String,java.lang.String)>[7@L16] name = invokevirtual archive.entryName(i)/result -> <java.io.FilePermission$1: java.lang.String run()>[19@L245] invokespecial %v18.<init>(%v17)/0}
+#reachable methods:           9522 (insens) / 5,1266 (sens)
